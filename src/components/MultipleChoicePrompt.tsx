@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { db } from "@/db/dexie";
 import type { Grade, PromptType, Word } from "@/db/schema";
 import { GradeButtons } from "./GradeButtons";
-import { chunky } from "./Button";
+import { AudioButton } from "./AudioButton";
 
 interface Props {
   word: Word;
@@ -38,13 +38,6 @@ export function MultipleChoicePrompt({ word, promptType, onGrade }: Props) {
     return all.sort(() => Math.random() - 0.5);
   }, [word, distractors]);
 
-  function playAudio() {
-    const audio = new Audio(`/audio/${word.audioFile}`);
-    audio.play().catch(() => {
-      /* Audio files ship in Plan 3 — silent fail for MVP */
-    });
-  }
-
   const kicker = KICKER[promptType] ?? "";
 
   return (
@@ -56,15 +49,11 @@ export function MultipleChoicePrompt({ word, promptType, onGrade }: Props) {
       {/* Prompt */}
       <div className="mt-6 mb-10 animate-pop-in">
         {promptType === "audio-to-word" ? (
-          <button
-            type="button"
-            onClick={playAudio}
-            className={chunky("info", "text-xl")}
-            aria-label="Play audio"
-          >
-            <span aria-hidden className="text-2xl">🔊</span>
-            Play
-          </button>
+          <AudioButton
+            audioFile={word.audioFile}
+            fallbackText={word.id}
+            label="Play audio"
+          />
         ) : (
           <div className="mx-auto max-w-md rounded-3xl bg-white border-2 border-b-4 border-gray-200 py-10 px-6">
             <p className="text-2xl sm:text-3xl font-extrabold text-gray-800 leading-snug">
