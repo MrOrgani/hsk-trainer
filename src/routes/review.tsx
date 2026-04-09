@@ -8,6 +8,7 @@ import { useSettings } from "@/state/settings-store";
 import type { Grade, SrsCard, Word } from "@/db/schema";
 import { RecognitionPrompt } from "@/components/RecognitionPrompt";
 import { MultipleChoicePrompt } from "@/components/MultipleChoicePrompt";
+import { WritingPrompt } from "@/components/WritingPrompt";
 import { chunky } from "@/components/Button";
 
 export const Route = createFileRoute("/review")({
@@ -133,6 +134,13 @@ function Review() {
       <section className="mt-12 sm:mt-16 min-h-[24rem]">
         {current.card.promptType === "recognition" ? (
           <RecognitionPrompt word={current.word} onGrade={handleGrade} />
+        ) : current.card.promptType === "audio-to-draw" ||
+          current.card.promptType === "meaning-to-draw" ? (
+          <WritingPrompt
+            word={current.word}
+            promptType={current.card.promptType}
+            onGrade={handleGrade}
+          />
         ) : (
           <MultipleChoicePrompt
             word={current.word}
