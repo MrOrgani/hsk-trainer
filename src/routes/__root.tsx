@@ -6,11 +6,13 @@ export const Route = createRootRoute({
 
 function RootLayout() {
   const { location } = useRouterState();
-  const onReview = location.pathname.startsWith("/review");
+  const onFocused =
+    location.pathname.startsWith("/review") ||
+    location.pathname.startsWith("/study");
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
-      {!onReview && (
+      {!onFocused && (
         <header className="pt-5 pb-3 border-b-2 border-gray-200 bg-white">
           <div className="max-w-5xl mx-auto px-5 flex items-center justify-between gap-4">
             <Link to="/" className="flex items-center gap-2.5">
@@ -32,10 +34,16 @@ function RootLayout() {
                 Home
               </Link>
               <Link
+                to="/study"
+                className="px-3 sm:px-4 py-2 rounded-xl text-sm font-bold uppercase tracking-wider text-gray-500 hover:text-sky-600 hover:bg-sky-50 [&.active]:text-sky-600 [&.active]:bg-sky-50 transition-colors"
+              >
+                Study
+              </Link>
+              <Link
                 to="/review"
                 className="px-3 sm:px-4 py-2 rounded-xl text-sm font-bold uppercase tracking-wider text-gray-500 hover:text-green-600 hover:bg-green-50 [&.active]:text-green-600 [&.active]:bg-green-50 transition-colors"
               >
-                Learn
+                Review
               </Link>
             </nav>
           </div>
