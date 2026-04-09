@@ -5,3 +5,4 @@ dist/
 .superpowers/
 src/routeTree.gen.ts
 public/audio/
+tsconfig.tsbuildinfo
