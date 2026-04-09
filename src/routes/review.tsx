@@ -137,6 +137,7 @@ function Review() {
         ) : current.card.promptType === "audio-to-draw" ||
           current.card.promptType === "meaning-to-draw" ? (
           <WritingPrompt
+            key={current.card.id}
             word={current.word}
             promptType={current.card.promptType}
             onGrade={handleGrade}
