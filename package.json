@@ -1,0 +1,41 @@
+{
+  "name": "hsk-trainer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "build:hsk1": "tsx scripts/build-hsk1.ts"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.97.0",
+    "@tanstack/react-router": "^1.168.10",
+    "dexie": "^4.4.2",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "zustand": "^5.0.12"
+  },
+  "devDependencies": {
+    "@tanstack/router-devtools": "^1.166.11",
+    "@tanstack/router-plugin": "^1.167.12",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "autoprefixer": "^10.4.27",
+    "fake-indexeddb": "^6.2.5",
+    "jsdom": "^27.0.1",
+    "postcss": "^8.5.9",
+    "tailwindcss": "^4.2.2",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.8",
+    "vitest": "^3.2.4"
+  }
+}
