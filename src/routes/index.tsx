@@ -1,14 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { db } from "@/db/dexie";
 import { seedHskLevel } from "@/lib/seed";
-import {
-  getDueCards,
-  introduceNewCard,
-  getTodayState,
-  incrementDailyNew,
-} from "@/engines/srs";
+import { getDueCards, getTodayState } from "@/engines/srs";
 import { useSettings } from "@/state/settings-store";
 import { chunky } from "@/components/Button";
 
@@ -18,7 +12,6 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const settings = useSettings();
-  const queryClient = useQueryClient();
   const [seeded, setSeeded] = useState(false);
 
   useEffect(() => {
@@ -38,21 +31,6 @@ function Home() {
     queryFn: () => getTodayState(Date.now()),
     enabled: seeded,
   });
-
-  async function introduceTenNew() {
-    if (!settings) return;
-    const words = await db.words.where("hskLevel").equals(1).toArray();
-    const existing = new Set((await db.srsCards.toArray()).map((c) => c.wordId));
-    const today = await getTodayState(Date.now());
-    const remaining = Math.max(0, settings.newPerDay - today.newCardsIntroduced);
-    const batch = words.filter((w) => !existing.has(w.id)).slice(0, remaining);
-    for (const w of batch) {
-      await introduceNewCard(w.id, settings, Date.now());
-      await incrementDailyNew(Date.now());
-    }
-    await queryClient.invalidateQueries({ queryKey: ["due"] });
-    await queryClient.invalidateQueries({ queryKey: ["today"] });
-  }
 
   const dueCount = dueQuery.data?.length ?? 0;
   const newToday = todayQuery.data?.newCardsIntroduced ?? 0;
@@ -125,24 +103,19 @@ function Home() {
             <p className="text-gray-600 font-bold mb-5">
               No reviews due. Plant some new characters!
             </p>
-            <button
-              onClick={introduceTenNew}
-              className={chunky("info", "w-full")}
-              disabled={!settings || newToday >= newTarget}
-            >
+            <Link to="/study" className={chunky("info", "w-full")}>
               + Add new characters
-            </button>
+            </Link>
           </>
         )}
 
         {canReview && (
-          <button
-            onClick={introduceTenNew}
-            className="mt-3 w-full text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-sky-500 py-2 transition-colors"
-            disabled={!settings || newToday >= newTarget}
+          <Link
+            to="/study"
+            className="mt-3 block w-full text-center text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-sky-500 py-2 transition-colors"
           >
             + add new characters
-          </button>
+          </Link>
         )}
       </div>
     </div>
