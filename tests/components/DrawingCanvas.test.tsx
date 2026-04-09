@@ -52,4 +52,12 @@ describe("DrawingCanvas", () => {
     expect(fakeWriters).toHaveLength(2);
     expect(fakeWriters[1].character).toBe("好");
   });
+
+  it("does not recreate the writer when onComplete changes", () => {
+    const { rerender } = render(
+      <DrawingCanvas character="我" onComplete={() => {}} />
+    );
+    rerender(<DrawingCanvas character="我" onComplete={() => {}} />);
+    expect(fakeWriters).toHaveLength(1);
+  });
 });

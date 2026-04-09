@@ -18,6 +18,11 @@ interface Props {
  */
 export function DrawingCanvas({ character, onComplete, size = 260 }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  // Keep the latest onComplete without retriggering the effect.
+  const onCompleteRef = useRef(onComplete);
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useEffect(() => {
     const target = containerRef.current;
@@ -44,21 +49,21 @@ export function DrawingCanvas({ character, onComplete, size = 260 }: Props) {
         mistakes += 1;
       },
       onComplete: () => {
-        onComplete({ mistakes });
+        onCompleteRef.current({ mistakes });
       },
     });
 
     return () => {
       writer.cancelQuiz();
     };
-  }, [character, size, onComplete]);
+  }, [character, size]);
 
   return (
     <div
       ref={containerRef}
       aria-label={`Draw the character ${character}`}
       className="mx-auto rounded-2xl bg-white border-2 border-b-4 border-gray-200"
-      style={{ width: size, height: size }}
+      style={{ width: size, height: size, touchAction: "none" }}
     />
   );
 }

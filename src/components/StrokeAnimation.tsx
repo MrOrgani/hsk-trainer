@@ -15,6 +15,11 @@ interface Props {
  */
 export function StrokeAnimation({ character, size = 200, onDone }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  // Keep the latest onDone without retriggering the effect.
+  const onDoneRef = useRef(onDone);
+  useEffect(() => {
+    onDoneRef.current = onDone;
+  }, [onDone]);
 
   useEffect(() => {
     const target = containerRef.current;
@@ -32,12 +37,12 @@ export function StrokeAnimation({ character, size = 200, onDone }: Props) {
       delayBetweenStrokes: 120,
     });
 
-    writer.animateCharacter({ onComplete: () => onDone?.() });
+    writer.animateCharacter({ onComplete: () => onDoneRef.current?.() });
 
     return () => {
       target.replaceChildren();
     };
-  }, [character, size, onDone]);
+  }, [character, size]);
 
   return (
     <div
