@@ -165,7 +165,7 @@ function Study() {
       )}
 
       {phase === "attempt" && (
-        <AttemptPhase word={word} onDone={handleCommitCurrent} />
+        <AttemptPhase key={word.id} word={word} onDone={handleCommitCurrent} />
       )}
     </div>
   );
