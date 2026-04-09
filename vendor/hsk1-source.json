@@ -1,0 +1,12 @@
+[
+  { "id": "你好", "characters": ["你", "好"], "pinyin": "nǐ hǎo", "pinyinNumeric": "ni3hao3", "meaningEn": "hello", "meaningFr": "bonjour", "frequency": 1 },
+  { "id": "谢谢", "characters": ["谢", "谢"], "pinyin": "xiè xiè", "pinyinNumeric": "xie4xie4", "meaningEn": "thank you", "meaningFr": "merci", "frequency": 2 },
+  { "id": "我", "characters": ["我"], "pinyin": "wǒ", "pinyinNumeric": "wo3", "meaningEn": "I / me", "meaningFr": "je / moi", "frequency": 3 },
+  { "id": "你", "characters": ["你"], "pinyin": "nǐ", "pinyinNumeric": "ni3", "meaningEn": "you", "meaningFr": "tu / toi", "frequency": 4 },
+  { "id": "他", "characters": ["他"], "pinyin": "tā", "pinyinNumeric": "ta1", "meaningEn": "he / him", "meaningFr": "il / lui", "frequency": 5 },
+  { "id": "水", "characters": ["水"], "pinyin": "shuǐ", "pinyinNumeric": "shui3", "meaningEn": "water", "meaningFr": "eau", "frequency": 6 },
+  { "id": "是", "characters": ["是"], "pinyin": "shì", "pinyinNumeric": "shi4", "meaningEn": "to be", "meaningFr": "être", "frequency": 7 },
+  { "id": "不", "characters": ["不"], "pinyin": "bù", "pinyinNumeric": "bu4", "meaningEn": "not", "meaningFr": "ne pas", "frequency": 8 },
+  { "id": "在", "characters": ["在"], "pinyin": "zài", "pinyinNumeric": "zai4", "meaningEn": "at / in", "meaningFr": "à / dans", "frequency": 9 },
+  { "id": "有", "characters": ["有"], "pinyin": "yǒu", "pinyinNumeric": "you3", "meaningEn": "to have", "meaningFr": "avoir", "frequency": 10 }
+]
