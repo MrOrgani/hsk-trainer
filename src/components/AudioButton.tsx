@@ -32,9 +32,15 @@ export function AudioButton({
   }
 
   function play() {
+    let fellBack = false;
+    const fallback = () => {
+      if (fellBack) return;
+      fellBack = true;
+      speak();
+    };
     const audio = new Audio(`/audio/${audioFile}`);
-    audio.addEventListener("error", speak, { once: true });
-    audio.play().catch(() => speak());
+    audio.addEventListener("error", fallback, { once: true });
+    audio.play().catch(fallback);
   }
 
   return (
