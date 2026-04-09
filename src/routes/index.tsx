@@ -3,8 +3,14 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { db } from "@/db/dexie";
 import { seedHskLevel } from "@/lib/seed";
-import { getDueCards, introduceNewCard, getTodayState, incrementDailyNew } from "@/engines/srs";
+import {
+  getDueCards,
+  introduceNewCard,
+  getTodayState,
+  incrementDailyNew,
+} from "@/engines/srs";
 import { useSettings } from "@/state/settings-store";
+import { chunky } from "@/components/Button";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -49,35 +55,95 @@ function Home() {
   }
 
   const dueCount = dueQuery.data?.length ?? 0;
+  const newToday = todayQuery.data?.newCardsIntroduced ?? 0;
+  const newTarget = settings?.newPerDay ?? 0;
   const canReview = dueCount > 0;
 
   return (
-    <div className="max-w-md mx-auto space-y-4">
-      <h2 className="text-2xl font-semibold">Today</h2>
-      <p className="text-slate-600">Due cards: <span className="font-mono">{dueCount}</span></p>
-      <p className="text-slate-600">
-        New today: <span className="font-mono">{todayQuery.data?.newCardsIntroduced ?? 0}</span> / {settings?.newPerDay ?? 0}
-      </p>
-
-      <div className="flex flex-col gap-2">
-        {canReview ? (
-          <Link
-            to="/review"
-            className="inline-block rounded bg-sky-600 px-4 py-2 text-white text-center font-medium hover:bg-sky-700"
-          >
-            Start review ({dueCount})
-          </Link>
-        ) : (
-          <span className="inline-block rounded bg-slate-300 px-4 py-2 text-white text-center font-medium cursor-not-allowed">
-            No cards due
+    <div className="max-w-2xl mx-auto px-5 pt-10 sm:pt-16 pb-16">
+      {/* Hero */}
+      <div className="text-center animate-pop-in">
+        <div className="inline-grid place-items-center h-24 w-24 sm:h-28 sm:w-28 rounded-3xl bg-green-500 border-b-[6px] border-green-700 shadow-lg mb-5">
+          <span className="font-hanzi text-white text-5xl sm:text-6xl font-black">
+            學
           </span>
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight">
+          Let's learn Chinese!
+        </h1>
+        <p className="mt-2 text-gray-500 font-semibold">
+          A few minutes a day keeps the characters flowing.
+        </p>
+      </div>
+
+      {/* Stat pills */}
+      <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4">
+        <div className="rounded-2xl bg-white border-2 border-b-4 border-gray-200 p-4 sm:p-5 text-center">
+          <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-gray-400">
+            Due now
+          </p>
+          <p
+            className={`mt-1 text-4xl sm:text-5xl font-black tabular-nums ${
+              dueCount > 0 ? "text-green-500" : "text-gray-300"
+            }`}
+          >
+            {dueCount}
+          </p>
+          <p className="mt-1 text-xs font-bold text-gray-400">
+            {dueCount === 1 ? "character" : "characters"}
+          </p>
+        </div>
+        <div className="rounded-2xl bg-white border-2 border-b-4 border-gray-200 p-4 sm:p-5 text-center">
+          <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-gray-400">
+            New today
+          </p>
+          <p className="mt-1 text-4xl sm:text-5xl font-black tabular-nums text-sky-500">
+            {newToday}
+            <span className="text-2xl sm:text-3xl text-gray-300"> / {newTarget}</span>
+          </p>
+          <p className="mt-1 text-xs font-bold text-gray-400">introduced</p>
+        </div>
+      </div>
+
+      {/* Big CTA card */}
+      <div className="mt-8 rounded-3xl bg-white border-2 border-b-4 border-gray-200 p-6 sm:p-8 text-center">
+        {canReview ? (
+          <>
+            <p className="font-hanzi text-green-500 text-3xl sm:text-4xl font-black mb-2">
+              加油！
+            </p>
+            <p className="text-gray-600 font-bold mb-5">
+              {dueCount} {dueCount === 1 ? "character is" : "characters are"} ready for you.
+            </p>
+            <Link to="/review" className={chunky("primary", "w-full")}>
+              Start lesson →
+            </Link>
+          </>
+        ) : (
+          <>
+            <p className="text-5xl mb-2">🌱</p>
+            <p className="text-gray-600 font-bold mb-5">
+              No reviews due. Plant some new characters!
+            </p>
+            <button
+              onClick={introduceTenNew}
+              className={chunky("info", "w-full")}
+              disabled={!settings || newToday >= newTarget}
+            >
+              + Add new characters
+            </button>
+          </>
         )}
-        <button
-          onClick={introduceTenNew}
-          className="rounded border border-slate-300 px-4 py-2 text-slate-700"
-        >
-          Introduce new words
-        </button>
+
+        {canReview && (
+          <button
+            onClick={introduceTenNew}
+            className="mt-3 w-full text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-sky-500 py-2 transition-colors"
+            disabled={!settings || newToday >= newTarget}
+          >
+            + add new characters
+          </button>
+        )}
       </div>
     </div>
   );
