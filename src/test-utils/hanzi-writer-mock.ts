@@ -1,4 +1,4 @@
-import { vi } from "vitest";
+import { vi, beforeEach } from "vitest";
 
 /**
  * Controllable fake for `hanzi-writer`. Tests can read `lastQuizOptions` to
@@ -38,6 +38,11 @@ export function installHanziWriterMock() {
         loadCharacterData: vi.fn(async () => ({ strokes: [], medians: [] })),
       },
     };
+  });
+  // Safety net: clear the captured writers between every test so stale
+  // instances from a previous test never leak into the next one.
+  beforeEach(() => {
+    fakeWriters.length = 0;
   });
 }
 
