@@ -7,7 +7,7 @@ import {
   getTodayState,
 } from "@/engines/srs";
 import { db } from "@/db/dexie";
-import type { SrsCard } from "@/db/schema";
+import type { PromptType, SrsCard } from "@/db/schema";
 import { DEFAULT_SETTINGS } from "@/db/schema";
 
 const MINUTE = 60 * 1000;
@@ -188,7 +188,7 @@ describe("introduceNewCard", () => {
   });
 
   it("creates one srsCard per enabled prompt type in learning state", async () => {
-    const settings = { ...DEFAULT_SETTINGS, enabledPromptTypes: ["recognition", "audio-to-word"] as const };
+    const settings = { ...DEFAULT_SETTINGS, enabledPromptTypes: ["recognition", "audio-to-word"] as PromptType[] };
     const created = await introduceNewCard("你好", settings, NOW);
 
     expect(created).toHaveLength(2);
