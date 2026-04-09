@@ -1,0 +1,103 @@
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { render, screen, cleanup, waitFor, act } from "@testing-library/react";
+import {
+  createMemoryHistory,
+  createRouter,
+  RouterProvider,
+  createRootRoute,
+  createRoute,
+  Outlet,
+} from "@tanstack/react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { db } from "@/db/dexie";
+import { loadOrInitSettings } from "@/state/settings-store";
+import {
+  installHanziWriterMock,
+  fakeWriters,
+  resetHanziWriterMock,
+} from "@/test-utils/hanzi-writer-mock";
+
+installHanziWriterMock();
+
+import { Route as StudyRoute } from "@/routes/study";
+
+const rootRoute = createRootRoute({ component: () => <Outlet /> });
+const studyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/study",
+  component: StudyRoute.options.component!,
+});
+
+function buildRouter() {
+  const tree = rootRoute.addChildren([studyRoute]);
+  return createRouter({
+    routeTree: tree,
+    history: createMemoryHistory({ initialEntries: ["/study"] }),
+  });
+}
+
+describe("/study route", () => {
+  beforeEach(async () => {
+    resetHanziWriterMock();
+    await db.delete();
+    await db.open();
+    await db.words.bulkAdd([
+      {
+        id: "你",
+        hskLevel: 1,
+        characters: ["你"],
+        pinyin: "nǐ",
+        pinyinNumeric: "ni3",
+        meaningEn: "you",
+        meaningFr: "tu",
+        frequency: 1,
+        audioFile: "ni3.mp3",
+      },
+    ]);
+    await loadOrInitSettings();
+  });
+  afterEach(() => cleanup());
+
+  it("walks a single word through present → animate → attempt → done", async () => {
+    const client = new QueryClient({
+      defaultOptions: { queries: { retry: false } },
+    });
+    const router = buildRouter();
+    render(
+      <QueryClientProvider client={client}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    );
+
+    await waitFor(() =>
+      expect(
+        screen.getByRole("button", { name: /show strokes/i })
+      ).toBeInTheDocument()
+    );
+    await act(async () => {
+      screen.getByRole("button", { name: /show strokes/i }).click();
+    });
+
+    await waitFor(() =>
+      expect(
+        screen.getByRole("button", { name: /try it yourself/i })
+      ).toBeInTheDocument()
+    );
+    await act(async () => {
+      screen.getByRole("button", { name: /try it yourself/i }).click();
+    });
+
+    await waitFor(() => expect(fakeWriters.length).toBeGreaterThan(0));
+    const opts = fakeWriters[fakeWriters.length - 1].lastQuizOptions as {
+      onComplete?: () => void;
+    };
+    await act(async () => opts.onComplete?.());
+
+    await waitFor(() =>
+      expect(screen.getByText(/all done/i)).toBeInTheDocument()
+    );
+    const cards = await db.srsCards.toArray();
+    expect(cards.length).toBeGreaterThan(0);
+    expect(cards[0].wordId).toBe("你");
+  });
+});
