@@ -89,8 +89,8 @@ Flow for each new word:
 1. **Present** — show word + pinyin + meaning; auto-play audio
 2. **Animate** — play stroke animation for each character via `hanzi-writer`
 3. **First attempt** — one writing prompt (audio → draw) using the word's configured leniency
-4. **Commit** — create `srsCard` rows for each enabled `(wordId, promptType)` combination in state `learning` with initial interval from learning-step settings
-5. **Graduate** — after the user has answered correctly at both learning steps (e.g., 1 min, 10 min intra-day), card transitions to `review` state
+4. **Commit** — create `srsCard` rows for each enabled `(wordId, promptType)` combination in state `learning`, `learningStep=0`, `dueDate = now + settings.learningSteps[0]` minutes. `interval` and `easeFactor` are only meaningful once the card reaches `review` state
+5. **Graduate** — after the user answers Good/Easy at every learning step in order (e.g., 1 min, then 10 min), card transitions to `review` state with `interval=1` day and `easeFactor=2.5`. Again at any step resets `learningStep` to 0
 
 ### 4.4 Review (`/review`)
 Pulls due cards from the SRS queue. Each card corresponds to a specific `(wordId, promptType)`.
