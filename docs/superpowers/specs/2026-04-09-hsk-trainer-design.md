@@ -90,7 +90,16 @@ Flow for each new word:
 2. **Animate** — play stroke animation for each character via `hanzi-writer`
 3. **First attempt** — one writing prompt (audio → draw) using the word's configured leniency
 4. **Commit** — create `srsCard` rows for each enabled `(wordId, promptType)` combination in state `learning`, `learningStep=0`, `dueDate = now + settings.learningSteps[0]` minutes. `interval` and `easeFactor` are only meaningful once the card reaches `review` state
-5. **Graduate** — after the user answers Good/Easy at every learning step in order (e.g., 1 min, then 10 min), card transitions to `review` state with `interval=1` day and `easeFactor=2.5`. Again at any step resets `learningStep` to 0
+5. **Graduate** — after the user answers Good/Easy at every learning step in order (e.g., 1 min, then 10 min), card transitions to `review` state with `interval=1` day and `easeFactor=2.5`
+
+**Learning-state grade semantics (complete table):**
+
+| Grade | Behavior in `learning` state |
+|---|---|
+| Again | Reset `learningStep = 0`, reschedule to `now + learningSteps[0]` |
+| Hard | Stay at current `learningStep`, reschedule to `now + learningSteps[current]` (repeat same step) |
+| Good | Advance `learningStep += 1`; if past last step, graduate to `review` (see step 5) |
+| Easy | Skip remaining steps, graduate to `review` immediately with `interval=4` days, `easeFactor=2.5` |
 
 ### 4.4 Review (`/review`)
 Pulls due cards from the SRS queue. Each card corresponds to a specific `(wordId, promptType)`.
@@ -106,7 +115,19 @@ Pulls due cards from the SRS queue. Each card corresponds to a specific `(wordId
 
 After each answer: show correct answer + audio + Again/Hard/Good/Easy buttons → SM-2 updates the card.
 
-**Session builder** composes a queue from due cards, respecting `sessionMix` ratios (recognition vs writing vs audio), capped at `sessionSize`.
+**Session builder** composes a queue from due cards, respecting `sessionMix` ratios, capped at `sessionSize`.
+
+**`sessionMix` bucket mapping** (3 buckets map to 5 prompt types):
+- `recognition` bucket → `recognition` prompt type
+- `audioChoice` bucket → `audio-to-word` + `meaning-to-word` prompt types (split evenly)
+- `writing` bucket → `audio-to-draw` + `meaning-to-draw` prompt types (split evenly)
+
+**Queue composition algorithm:**
+1. Compute target counts per bucket: `target[bucket] = round(sessionSize * sessionMix[bucket])`
+2. For each bucket, pull that many due cards matching the bucket's prompt types, ordered by `dueDate` ascending
+3. **Backfill rule:** if a bucket's due pool is short of target, the shortfall is redistributed proportionally to the other buckets (using their ratios). If all buckets are exhausted, the session runs short — no padding with not-yet-due cards
+4. Interleave the result (instead of running all recognition, then all writing): shuffle within each bucket, then round-robin merge
+5. Prepend up to `newPerDayRemaining` new-card introductions (see §5 `dailyState`)
 
 **Writing verification:** for multi-character words, `hanzi-writer` quiz runs per character. Card's final grade combines per-character strokeAccuracy (average) with user self-grade.
 
@@ -141,7 +162,8 @@ interface Word {
   meaningEn: string;       // "computer"
   meaningFr: string;       // "ordinateur"
   frequency: number;       // usage rank, lower = more common
-  examples: Array<{
+  audioFile: string;       // filename in /audio/, e.g. "diannao.mp3" — slugified from pinyinNumeric to avoid Chinese chars in URLs
+  examples?: Array<{       // optional — deferred to v2
     text: string;
     pinyin: string;
     meaningEn: string;
@@ -201,6 +223,19 @@ interface ReviewLog {
 }
 ```
 
+### `dailyState`
+Tracks per-day counters reset at local midnight. One row per day keyed by ISO date string.
+
+```ts
+interface DailyState {
+  date: string;           // "2026-04-09" (local date, YYYY-MM-DD)
+  newCardsIntroduced: number;  // new wordIds graduated from Study this day
+  reviewsCompleted: number;    // total review answers this day
+}
+```
+
+On Study screen, before introducing a new word: read `dailyState` for today; if `newCardsIntroduced >= settings.newPerDay`, block new intros and show "daily limit reached" message. Increment on commit.
+
 ### `settings`
 Singleton row, id = `"default"`.
 
@@ -224,9 +259,10 @@ interface Settings {
 ```
 
 ### Indexes
-- `srsCards`: by `dueDate`, by `wordId`, by `state`
+- `srsCards`: by `dueDate`, by `wordId`, by `state`, by `promptType`
 - `reviewLog`: by `timestamp`, by `wordId`
 - `words`: by `hskLevel`, by `frequency`
+- `dailyState`: by `date` (primary key)
 
 ## 6. Static Assets & Data Pipeline
 
@@ -242,7 +278,7 @@ public/
       <char>.json     # hanzi-writer data, one per unique character
     missing-chars.json  # validation output, flags chars without stroke data
   audio/
-    <wordId>.mp3      # per-word TTS, natural prosody preserved
+    <slug>.mp3        # per-word TTS, filename = Word.audioFile (ASCII slug from pinyinNumeric, e.g. "dian4nao3.mp3")
   locales/
     fr.json
     en.json
@@ -255,11 +291,11 @@ public/
 2. **Merge** with CC-CEDICT for pinyin + English meanings; fall back to source list for gaps
 3. **Translate** English glosses to French via a one-shot LLM pass, manually spot-checked; committed as part of the dataset
 4. **Split** into `hsk-1.json` … `hsk-9.json`
-5. **Extract** unique characters from all words; download each character's stroke data from the hanzi-writer CDN / Make Me A Hanzi dataset into `public/data/strokes/`
-6. **Validate**: cross-check every character in every word against the downloaded stroke set. Write any missing chars to `missing-chars.json` and exclude affected words from the final shipped JSON — loudly logged at build time
-7. **Generate audio**: batch TTS (Azure Neural or Google Cloud TTS, Mandarin voice) for each word. Cache output in repo (`public/audio/`) so it's built once and not regenerated on every build
+5. **Extract** unique characters from all words. Stroke data is vendored once from the Make Me A Hanzi dataset (GitHub repo `skishore/makemeahanzi`, MIT-licensed) as a committed snapshot under `vendor/makemeahanzi/`. The build script copies only the characters referenced in the HSK word list into `public/data/strokes/<char>.json`. **Never deletes** existing files under `public/data/strokes/` — only adds new ones, so a network failure on a partial run cannot corrupt previously-cached data
+6. **Validate**: cross-check every character in every word against the available stroke set. Write any missing chars to `public/data/missing-chars.json` and exclude affected words from the final shipped `hsk-{level}.json` — loudly logged at build time (non-zero exit if the missing-char rate exceeds 2% so we notice data-source regressions)
+7. **Generate audio**: batch TTS (Azure Neural or Google Cloud TTS, Mandarin voice) for each word. Files named `<audioFile>` (ASCII slug from `pinyinNumeric`) and cached in `public/audio/` (gitignored for size, regenerated by CI or locally when missing). The script skips words whose audio file already exists — idempotent re-runs only generate new ones
 
-The build script is idempotent: re-running it only processes new or changed entries.
+The build script is idempotent: re-running it only processes new or changed entries. None of its steps ever delete previously-built output.
 
 ## 7. Engines
 
@@ -273,12 +309,15 @@ function getDueCards(now: number): Promise<SrsCard[]>  // via Dexie
 function introduceNewCard(wordId: string, promptType: PromptType): Promise<SrsCard>
 ```
 
-Handles learning-step progression: cards in `learning` state advance through `settings.learningSteps` on Good/Easy, reset to step 0 on Again, then graduate to `review` when all steps pass.
+Handles learning-step progression per the grade table in §4.3: Again resets, Hard repeats, Good advances, Easy graduates immediately. Once in `review` state, standard SM-2 applies: `ease` is bumped by ±0.15 on Hard/Easy, `interval` computed as `interval * easeFactor` on Good, reset to 0 on Again (back to `learning` state, step 0).
 
 ### 7.2 Writing grader (`src/engines/grader.ts`)
-Thin wrapper around `hanzi-writer` quiz mode. For a word, runs a quiz per character and collects per-character accuracy. Leniency:
-- `strict` — stroke order enforced (hanzi-writer default)
-- `lenient-order` — intercept `onMistake`; accept any stroke that matches an unused stroke in the character
+For a word, runs a writing quiz per character and collects per-character accuracy. Leniency modes:
+
+- **`strict`** — thin wrapper around `hanzi-writer.quiz()` with default options. Stroke order enforced natively. This is the low-risk, always-works path.
+- **`lenient-order`** — **custom quiz loop** (not a thin wrapper). Because the hanzi-writer quiz callbacks don't expose per-stroke geometry at runtime, the grader must instead load the raw stroke JSON (already present under `public/data/strokes/<char>.json`) directly and run its own stroke-matching loop: for each user-drawn stroke, test it against every unused target stroke using `hanzi-writer`'s exported internal matching helpers (or a reimplementation based on Douglas-Peucker + Fréchet distance), mark the best match used, accept if the match score exceeds a threshold.
+
+**Implementation risk:** `lenient-order` is the highest-risk component in the spec. It requires either (a) using hanzi-writer's internal stroke-matching helpers, which are not part of its public API and may break on version bumps, or (b) reimplementing stroke matching from scratch. Mitigation: ship `strict` in the first working version; treat `lenient-order` as a separate milestone that can be deferred if (a) and (b) both prove too costly. If deferred, the Settings UI hides the lenient option until the engine is ready.
 
 ### 7.3 Session builder (`src/engines/session.ts`)
 Given `settings` and current due cards, composes an ordered queue of prompts respecting the mix ratios and `sessionSize` cap. Mixes new cards (up to `newPerDay`) with review cards.
