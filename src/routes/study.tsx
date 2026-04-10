@@ -29,7 +29,10 @@ function Study() {
     if (!settings) return;
     (async () => {
       const BATCH_SIZE = 10;
-      const words = await db.words.orderBy("frequency").toArray();
+      const words = await db.words
+        .where("hskLevel")
+        .equals(settings.hskLevel)
+        .sortBy("frequency");
       const existing = new Set(
         (await db.srsCards.toArray()).map((c) => c.wordId)
       );

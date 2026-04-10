@@ -151,6 +151,7 @@ const translations = {
     en: "Stroke order leniency",
     fr: "Tol\u00e9rance de l'ordre des traits",
   },
+  "settings.hskLevel": { en: "HSK Level", fr: "Niveau HSK" },
   "settings.strict": { en: "Strict", fr: "Strict" },
   "settings.lenientOrder": { en: "Lenient (order)", fr: "Tol\u00e9rant (ordre)" },
   "settings.saved": { en: "Saved!", fr: "Enregistr\u00e9 !" },
@@ -179,6 +180,15 @@ const translations = {
     en: "New cards this week",
     fr: "Nouvelles cartes cette semaine",
   },
+  "stats.progressByLevel": {
+    en: "Progress by HSK level",
+    fr: "Progression par niveau HSK",
+  },
+  "stats.maturityNew": { en: "New", fr: "Nouveau" },
+  "stats.maturityLearning": { en: "Learning", fr: "En cours" },
+  "stats.maturityYoung": { en: "Young", fr: "Récent" },
+  "stats.maturityMature": { en: "Mature", fr: "Maîtrisé" },
+  "stats.characters": { en: "characters", fr: "caractères" },
 
   // Browse
   "browse.title": { en: "Vocabulary", fr: "Vocabulaire" },

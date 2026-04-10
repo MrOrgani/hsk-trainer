@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { loadOrInitSettings, updateSettings } from "@/state/settings-store";
-import type { Settings } from "@/db/schema";
+import type { Settings, HskLevel } from "@/db/schema";
 import { chunky } from "@/components/Button";
 import { useTranslation } from "@/lib/i18n";
 import { db } from "@/db/dexie";
@@ -44,6 +44,28 @@ export function SettingsPage() {
         {t("settings.title")}
       </h1>
       <div className="space-y-6">
+        <div className="rounded-xl card p-5">
+          <label className="block text-sm font-semibold text-ink-500 mb-3">
+            {t("settings.hskLevel")}
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {([1, 2, 3, 4, 5, 6, 7] as const).map((level) => (
+              <button
+                key={level}
+                onClick={() =>
+                  setSettings({ ...settings, hskLevel: level as HskLevel })
+                }
+                className={`h-10 w-10 rounded-lg text-sm font-bold transition-all active:scale-95 ${
+                  settings.hskLevel === level
+                    ? "bg-vermillion-500 text-white shadow-sm"
+                    : "bg-ink-50 text-ink-500 hover:bg-ink-100"
+                }`}
+              >
+                {level}
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="rounded-xl card p-5">
           <label
             htmlFor="newPerDay"

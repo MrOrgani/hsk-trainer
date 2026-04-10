@@ -61,9 +61,12 @@ export interface ReviewLog {
   };
 }
 
+export type HskLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+
 export interface Settings {
   id: "default";
   uiLanguage: "fr" | "en";
+  hskLevel: HskLevel;
   leniency: "strict" | "lenient-order";
   sessionMix: {
     recognition: number;
@@ -87,6 +90,7 @@ export interface DailyState {
 export const DEFAULT_SETTINGS: Settings = {
   id: "default",
   uiLanguage: "en",
+  hskLevel: 1,
   leniency: "strict",
   sessionMix: { recognition: 0.5, writing: 0.25, audioChoice: 0.25 },
   sessionSize: 20,
