@@ -55,10 +55,15 @@ export function DrawingCanvas({ character, onComplete, size = 260, leniency = "s
       },
       onComplete: () => {
         const color = masteryColor(mistakes);
-        // Color ALL stroke layers so the entire character shows the mastery color
+        // Color ALL stroke layers so the entire character shows the mastery color.
+        // radicalColor must also be updated: hanzi-writer uses radicalColor for
+        // strokes marked as part of the radical (e.g. 父 in 爸). Without this,
+        // those strokes stay their original color while the rest change.
+        const totalUpdates = 4;
         let done = 0;
-        const finish = () => { if (++done >= 3) onCompleteRef.current({ mistakes }); };
+        const finish = () => { if (++done >= totalUpdates) onCompleteRef.current({ mistakes }); };
         writer.updateColor('strokeColor', color, { duration: 300, onComplete: finish });
+        writer.updateColor('radicalColor', color, { duration: 300, onComplete: finish });
         writer.updateColor('drawingColor', color, { duration: 300, onComplete: finish });
         writer.updateColor('outlineColor', color, { duration: 300, onComplete: finish });
       },
