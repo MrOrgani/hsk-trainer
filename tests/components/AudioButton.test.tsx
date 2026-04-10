@@ -1,6 +1,13 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen, cleanup, act } from "@testing-library/react";
 import { AudioButton } from "@/components/AudioButton";
+
+/** Flush several rounds of microtasks so async play() chain settles. */
+async function flushMicrotasks(rounds = 10): Promise<void> {
+  for (let i = 0; i < rounds; i++) {
+    await act(() => Promise.resolve());
+  }
+}
 
 describe("AudioButton", () => {
   let speakMock: ReturnType<typeof vi.fn>;
@@ -37,15 +44,18 @@ describe("AudioButton", () => {
   afterEach(() => cleanup());
 
   it("falls back to speechSynthesis when audio playback rejects", async () => {
+    // Every Audio.play() call rejects (local file + Google TTS).
     const playSpy = vi
       .spyOn(HTMLMediaElement.prototype, "play")
       .mockRejectedValue(new Error("404"));
 
     render(<AudioButton audioFile="missing.mp3" fallbackText="你好" />);
-    screen.getByRole("button").click();
-    // Let the rejected promise microtask settle.
-    await Promise.resolve();
-    await Promise.resolve();
+
+    await act(async () => {
+      screen.getByRole("button").click();
+    });
+
+    await flushMicrotasks();
 
     expect(speakMock).toHaveBeenCalledTimes(1);
     const utter = speakMock.mock.calls[0][0] as SpeechSynthesisUtterance;
@@ -67,10 +77,12 @@ describe("AudioButton", () => {
       });
 
     render(<AudioButton audioFile="missing.mp3" fallbackText="你好" />);
-    screen.getByRole("button").click();
-    await Promise.resolve();
-    await Promise.resolve();
-    await Promise.resolve();
+
+    await act(async () => {
+      screen.getByRole("button").click();
+    });
+
+    await flushMicrotasks();
 
     expect(speakMock).toHaveBeenCalledTimes(1);
     playSpy.mockRestore();
