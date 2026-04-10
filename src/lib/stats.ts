@@ -1,5 +1,5 @@
 import { db } from "@/db/dexie";
-import type { DailyState } from "@/db/schema";
+import type { DailyState, HskLevel } from "@/db/schema";
 
 function localDateString(now: number): string {
   const d = new Date(now);
@@ -41,6 +41,65 @@ export interface OverallStats {
   review: number;
   suspended: number;
   newCount: number;
+}
+
+export type MaturityLevel = "new" | "learning" | "young" | "mature";
+
+export interface LevelProgress {
+  hskLevel: HskLevel;
+  total: number;
+  new: number;
+  learning: number;
+  young: number;
+  mature: number;
+}
+
+export async function getCharacterProgress(): Promise<LevelProgress[]> {
+  const words = await db.words.toArray();
+  const cards = await db.srsCards.toArray();
+
+  // Build a map from wordId to the best (highest interval) card
+  const bestCardByWord = new Map<string, { interval: number; repetitions: number; state: string }>();
+  for (const card of cards) {
+    const prev = bestCardByWord.get(card.wordId);
+    if (!prev || card.interval > prev.interval) {
+      bestCardByWord.set(card.wordId, {
+        interval: card.interval,
+        repetitions: card.repetitions,
+        state: card.state,
+      });
+    }
+  }
+
+  // Group words by HSK level
+  const byLevel = new Map<HskLevel, { total: number; new: number; learning: number; young: number; mature: number }>();
+  for (const word of words) {
+    const level = word.hskLevel as HskLevel;
+    if (!byLevel.has(level)) {
+      byLevel.set(level, { total: 0, new: 0, learning: 0, young: 0, mature: 0 });
+    }
+    const bucket = byLevel.get(level)!;
+    bucket.total++;
+
+    const card = bestCardByWord.get(word.id);
+    if (!card) {
+      bucket.new++;
+    } else if (card.state === "learning" || card.interval < 1 || card.repetitions < 3) {
+      bucket.learning++;
+    } else if (card.interval <= 21) {
+      bucket.young++;
+    } else {
+      bucket.mature++;
+    }
+  }
+
+  const levels: HskLevel[] = [1, 2, 3, 4, 5, 6, 7];
+  return levels
+    .filter((l) => byLevel.has(l))
+    .map((l) => ({
+      hskLevel: l,
+      ...byLevel.get(l)!,
+    }));
 }
 
 export async function getOverallStats(): Promise<OverallStats> {

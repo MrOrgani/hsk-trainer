@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import {
   getWeeklyStats,
   getOverallStats,
+  getCharacterProgress,
   type OverallStats,
+  type LevelProgress,
 } from "@/lib/stats";
 import type { DailyState } from "@/db/schema";
 import { useTranslation } from "@/lib/i18n";
@@ -15,12 +17,14 @@ export const Route = createFileRoute("/stats")({
 export function StatsPage() {
   const [weekly, setWeekly] = useState<DailyState[]>([]);
   const [overall, setOverall] = useState<OverallStats | null>(null);
+  const [progress, setProgress] = useState<LevelProgress[]>([]);
   const { t, lang } = useTranslation();
 
   useEffect(() => {
     const now = Date.now();
     getWeeklyStats(now).then(setWeekly);
     getOverallStats().then(setOverall);
+    getCharacterProgress().then(setProgress);
   }, []);
 
   const maxReviews = Math.max(1, ...weekly.map((d) => d.reviewsCompleted));
@@ -138,6 +142,88 @@ export function StatsPage() {
           </div>
         );
       })()}
+
+      {progress.length > 0 && (
+        <div className="rounded-xl card p-5 mt-4">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-ink-400 mb-5">
+            {t("stats.progressByLevel")}
+          </h2>
+
+          {/* Legend */}
+          <div className="flex flex-wrap gap-x-4 gap-y-1 mb-4">
+            <span className="flex items-center gap-1.5 text-[11px] font-semibold text-ink-400">
+              <span className="inline-block w-2.5 h-2.5 rounded-sm bg-ink-200" />
+              {t("stats.maturityNew")}
+            </span>
+            <span className="flex items-center gap-1.5 text-[11px] font-semibold text-ink-400">
+              <span className="inline-block w-2.5 h-2.5 rounded-sm bg-vermillion-400" />
+              {t("stats.maturityLearning")}
+            </span>
+            <span className="flex items-center gap-1.5 text-[11px] font-semibold text-ink-400">
+              <span className="inline-block w-2.5 h-2.5 rounded-sm bg-gold-400" />
+              {t("stats.maturityYoung")}
+            </span>
+            <span className="flex items-center gap-1.5 text-[11px] font-semibold text-ink-400">
+              <span className="inline-block w-2.5 h-2.5 rounded-sm bg-jade-400" />
+              {t("stats.maturityMature")}
+            </span>
+          </div>
+
+          <div className="space-y-3">
+            {progress.map((level) => {
+              const pctNew = level.total > 0 ? (level.new / level.total) * 100 : 0;
+              const pctLearning = level.total > 0 ? (level.learning / level.total) * 100 : 0;
+              const pctYoung = level.total > 0 ? (level.young / level.total) * 100 : 0;
+              const pctMature = level.total > 0 ? (level.mature / level.total) * 100 : 0;
+              const studied = level.learning + level.young + level.mature;
+
+              return (
+                <div key={level.hskLevel}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs font-bold text-ink-600">
+                      HSK {level.hskLevel}
+                    </span>
+                    <span className="text-[11px] font-semibold tabular-nums text-ink-400">
+                      {studied}/{level.total} {t("stats.characters")}
+                      {level.total > 0 && (
+                        <span className="ml-1 text-ink-300">
+                          ({Math.round((studied / level.total) * 100)}%)
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                  <div className="flex h-3 w-full rounded-full overflow-hidden bg-ink-100">
+                    {pctMature > 0 && (
+                      <div
+                        className="bg-jade-400 transition-all"
+                        style={{ width: `${pctMature}%` }}
+                      />
+                    )}
+                    {pctYoung > 0 && (
+                      <div
+                        className="bg-gold-400 transition-all"
+                        style={{ width: `${pctYoung}%` }}
+                      />
+                    )}
+                    {pctLearning > 0 && (
+                      <div
+                        className="bg-vermillion-400 transition-all"
+                        style={{ width: `${pctLearning}%` }}
+                      />
+                    )}
+                    {pctNew > 0 && (
+                      <div
+                        className="bg-ink-200 transition-all"
+                        style={{ width: `${pctNew}%` }}
+                      />
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
