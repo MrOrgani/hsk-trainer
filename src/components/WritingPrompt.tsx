@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Grade, PromptType, Word } from "@/db/schema";
 import { DrawingCanvas } from "./DrawingCanvas";
+import type { CompletedChar } from "./DrawingCanvas";
 import { GradeButtons } from "./GradeButtons";
 import { AudioButton } from "./AudioButton";
 
@@ -8,24 +9,93 @@ interface Props {
   word: Word;
   promptType: PromptType;
   onGrade: (grade: Grade) => void;
+  leniency?: "strict" | "lenient-order";
+  repetitions?: number;
 }
 
 interface Attempt {
   mistakes: number;
 }
 
-export function WritingPrompt({ word, promptType, onGrade }: Props) {
+/** Hide outline once the card has been reviewed enough times (3+ reps = from memory) */
+const OUTLINE_THRESHOLD = 3;
+
+const VIEWING_DELAY_MS = 1500;
+const SHRINK_DURATION_MS = 400;
+
+export function WritingPrompt({ word, promptType, onGrade, leniency = "strict", repetitions = 0 }: Props) {
   const [charIndex, setCharIndex] = useState(0);
   const [attempts, setAttempts] = useState<Attempt[]>([]);
+  const [shrinking, setShrinking] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const total = word.characters.length;
+  const isMultiChar = total > 1;
   const phase: "drawing" | "reveal" = charIndex >= total ? "reveal" : "drawing";
   const currentChar = word.characters[charIndex];
 
+  // Clean up timers on unmount
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  const advanceChar = useCallback(() => {
+    setShrinking(false);
+    setCharIndex((i) => i + 1);
+  }, []);
+
   function handleCharComplete({ mistakes }: { mistakes: number }) {
     setAttempts((prev) => [...prev, { mistakes }]);
-    setCharIndex((i) => i + 1);
+
+    const isLastChar = charIndex >= total - 1;
+
+    if (!isMultiChar || isLastChar) {
+      // Single char word or last char: just delay then advance
+      
+      timerRef.current = setTimeout(() => {
+        advanceChar();
+      }, VIEWING_DELAY_MS);
+    } else {
+      // Non-last char of multi-char word: delay, then shrink, then advance
+      
+      timerRef.current = setTimeout(() => {
+        setShrinking(true);
+      }, VIEWING_DELAY_MS);
+    }
   }
+
+  function handleTransitionEnd() {
+    if (shrinking) {
+      advanceChar();
+    }
+  }
+
+  // Build completedChars with mastery info
+  const completedChars: CompletedChar[] = word.characters
+    .slice(0, charIndex)
+    .map((char, i) => ({
+      char,
+      mistakes: attempts[i]?.mistakes ?? 0,
+    }));
+
+  // Canvas size for calculations
+  const canvasSize = 260;
+
+  // Shrink transform: scale down to corner char size and translate to corner position
+  const shrinkScale = 0.13;
+  // Target position: top-left corner, offset by completed chars count
+  // Each corner char is ~canvasSize*0.13 wide, plus small gap
+  const cornerCharWidth = canvasSize * 0.13;
+  const targetX = 8 + charIndex * (cornerCharWidth + 2); // left-2 = 8px, gap-0.5 = 2px
+  const targetY = 6; // top-1.5 = 6px
+  // Since transformOrigin is top-left, we translate to the target position
+  // But the canvas is centered (mx-auto), so we need to account for that
+  // The transform origin is top-left of the canvas wrapper
+  const shrinkTransform = shrinking
+    ? `scale(${shrinkScale}) translate(${targetX / shrinkScale - 0}px, ${targetY / shrinkScale}px)`
+    : "scale(1) translate(0, 0)";
 
   return (
     <div className="text-center">
@@ -56,11 +126,26 @@ export function WritingPrompt({ word, promptType, onGrade }: Props) {
           <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink-300 tabular-nums">
             Character {charIndex + 1} / {total}
           </p>
-          <DrawingCanvas
-            key={`${word.id}:${charIndex}`}
-            character={currentChar}
-            onComplete={handleCharComplete}
-          />
+          <div
+            style={{
+              transition: shrinking
+                ? `transform ${SHRINK_DURATION_MS}ms ease-in-out, opacity ${SHRINK_DURATION_MS}ms ease-in-out`
+                : "none",
+              transform: shrinkTransform,
+              transformOrigin: "top left",
+              opacity: shrinking ? 0 : 1,
+            }}
+            onTransitionEnd={handleTransitionEnd}
+          >
+            <DrawingCanvas
+              key={`${word.id}:${charIndex}`}
+              character={currentChar}
+              onComplete={handleCharComplete}
+              leniency={leniency}
+              showOutline={repetitions < OUTLINE_THRESHOLD}
+              completedChars={completedChars}
+            />
+          </div>
           <div
             className="mt-5 flex items-center justify-center gap-2"
             aria-label="progress"

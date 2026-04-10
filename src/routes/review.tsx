@@ -145,6 +145,8 @@ function Review() {
             word={current.word}
             promptType={current.card.promptType}
             onGrade={handleGrade}
+            leniency={settings.leniency}
+            repetitions={current.card.repetitions}
           />
         ) : (
           <MultipleChoicePrompt

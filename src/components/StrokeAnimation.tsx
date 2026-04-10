@@ -41,7 +41,7 @@ export function StrokeAnimation({ character, size = 200, onDone }: Props) {
     <div
       ref={containerRef}
       aria-label={`Stroke order for ${character}`}
-      className="mx-auto"
+      className="mx-auto rounded-xl hanzi-grid"
       style={{ width: size, height: size }}
     />
   );

@@ -15,7 +15,15 @@ function Home() {
   const [seeded, setSeeded] = useState(false);
 
   useEffect(() => {
-    seedHskLevel(1).then(() => setSeeded(true));
+    Promise.all([
+      seedHskLevel(1),
+      seedHskLevel(2),
+      seedHskLevel(3),
+      seedHskLevel(4),
+      seedHskLevel(5),
+      seedHskLevel(6),
+      seedHskLevel(7),
+    ]).then(() => setSeeded(true));
   }, []);
 
   const dueQuery = useQuery({

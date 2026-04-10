@@ -24,8 +24,14 @@ const WORD: Word = {
 };
 
 describe("WritingPrompt", () => {
-  beforeEach(() => resetHanziWriterMock());
-  afterEach(() => cleanup());
+  beforeEach(() => {
+    resetHanziWriterMock();
+    vi.useFakeTimers();
+  });
+  afterEach(() => {
+    cleanup();
+    vi.useRealTimers();
+  });
 
   it("renders the first character canvas and advances on completion", async () => {
     const onGrade = vi.fn();
@@ -44,6 +50,19 @@ describe("WritingPrompt", () => {
       first.onComplete?.();
     });
 
+    // Advance past the 800ms viewing delay
+    await act(async () => {
+      vi.advanceTimersByTime(1500);
+    });
+
+    // Fire the shrink transition end
+    const shrinkWrapper = document.querySelector("[style*='transform']");
+    if (shrinkWrapper) {
+      await act(async () => {
+        shrinkWrapper.dispatchEvent(new Event("transitionend", { bubbles: true }));
+      });
+    }
+
     expect(fakeWriters).toHaveLength(2);
     expect(fakeWriters[1].character).toBe("好");
   });
@@ -54,11 +73,29 @@ describe("WritingPrompt", () => {
       <WritingPrompt word={WORD} promptType="meaning-to-draw" onGrade={onGrade} />
     );
 
+    // Complete first character
     const a = fakeWriters[0].lastQuizOptions as { onComplete?: () => void };
     await act(async () => a.onComplete?.());
 
+    // Advance past viewing delay, then trigger shrink transition end
+    await act(async () => {
+      vi.advanceTimersByTime(1500);
+    });
+    const shrinkWrapper = document.querySelector("[style*='transform']");
+    if (shrinkWrapper) {
+      await act(async () => {
+        shrinkWrapper.dispatchEvent(new Event("transitionend", { bubbles: true }));
+      });
+    }
+
+    // Complete second (last) character
     const b = fakeWriters[1].lastQuizOptions as { onComplete?: () => void };
     await act(async () => b.onComplete?.());
+
+    // Advance past viewing delay for last char (no shrink needed)
+    await act(async () => {
+      vi.advanceTimersByTime(1500);
+    });
 
     expect(screen.getByText("nǐ hǎo")).toBeInTheDocument();
     expect(screen.getAllByText("hello").length).toBeGreaterThan(0);

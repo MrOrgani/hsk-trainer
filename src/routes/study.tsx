@@ -1,15 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { db } from "@/db/dexie";
 import {
   introduceNewCard,
   incrementDailyNew,
-  getTodayState,
 } from "@/engines/srs";
 import { useSettings } from "@/state/settings-store";
 import { useStudyStore } from "@/state/study-store";
-import { StrokeAnimation } from "@/components/StrokeAnimation";
+import { StrokeAnimationChain } from "@/components/StrokeAnimationChain";
 import { DrawingCanvas } from "@/components/DrawingCanvas";
+import type { CompletedChar } from "@/components/DrawingCanvas";
 import { AudioButton } from "@/components/AudioButton";
 import { chunky } from "@/components/Button";
 import type { Word } from "@/db/schema";
@@ -26,25 +26,14 @@ function Study() {
   useEffect(() => {
     if (!settings) return;
     (async () => {
-      const today = await getTodayState(Date.now());
-      const remaining = Math.max(
-        0,
-        settings.newPerDay - today.newCardsIntroduced
-      );
-      if (remaining === 0) {
-        start([]);
-        return;
-      }
-      const words = await db.words
-        .where("hskLevel")
-        .equals(1)
-        .sortBy("frequency");
+      const BATCH_SIZE = 10;
+      const words = await db.words.orderBy("frequency").toArray();
       const existing = new Set(
         (await db.srsCards.toArray()).map((c) => c.wordId)
       );
       const fresh = words
         .filter((w) => !existing.has(w.id))
-        .slice(0, remaining);
+        .slice(0, BATCH_SIZE);
       start(fresh);
     })();
     return () => clear();
@@ -68,7 +57,7 @@ function Study() {
           Nothing new to learn right now.
         </p>
         <p className="mt-2 text-ink-400 font-medium">
-          Either your daily cap is reached or HSK 1 is exhausted.
+          You've studied all available words!
         </p>
         <Link to="/" className={chunky("primary", "mt-8")}>
           Back to home
@@ -157,10 +146,11 @@ function Study() {
           <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
             Watch the stroke order
           </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
-            {word.characters.map((c, i) => (
-              <StrokeAnimation key={`${word.id}:${i}`} character={c} />
-            ))}
+          <div className="mt-6">
+            <StrokeAnimationChain
+              key={word.id}
+              characters={word.characters}
+            />
           </div>
           <button onClick={nextPhase} className={chunky("primary", "mt-8")}>
             Try it yourself →
@@ -169,39 +159,113 @@ function Study() {
       )}
 
       {phase === "attempt" && (
-        <AttemptPhase key={word.id} word={word} onDone={handleCommitCurrent} />
+        <AttemptPhase key={word.id} word={word} onDone={handleCommitCurrent} leniency={settings?.leniency ?? "strict"} />
       )}
     </div>
   );
 }
 
+const VIEWING_DELAY_MS = 1500;
+const SHRINK_DURATION_MS = 400;
+
 function AttemptPhase({
   word,
   onDone,
+  leniency,
 }: {
   word: Word;
   onDone: () => void;
+  leniency: "strict" | "lenient-order";
 }) {
   const [charIndex, setCharIndex] = useState(0);
+  const [attempts, setAttempts] = useState<{ mistakes: number }[]>([]);
+  const [shrinking, setShrinking] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const total = word.characters.length;
+  const isMultiChar = total > 1;
 
   useEffect(() => {
-    if (charIndex >= word.characters.length) {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (charIndex >= total) {
       onDone();
     }
-  }, [charIndex, word.characters.length, onDone]);
+  }, [charIndex, total, onDone]);
 
-  if (charIndex >= word.characters.length) return null;
+  const advanceChar = useCallback(() => {
+    setShrinking(false);
+    setCharIndex((i) => i + 1);
+  }, []);
+
+  function handleCharComplete({ mistakes }: { mistakes: number }) {
+    setAttempts((prev) => [...prev, { mistakes }]);
+
+    const isLastChar = charIndex >= total - 1;
+
+    if (!isMultiChar || isLastChar) {
+      timerRef.current = setTimeout(() => {
+        advanceChar();
+      }, VIEWING_DELAY_MS);
+    } else {
+      timerRef.current = setTimeout(() => {
+        setShrinking(true);
+      }, VIEWING_DELAY_MS);
+    }
+  }
+
+  function handleTransitionEnd() {
+    if (shrinking) {
+      advanceChar();
+    }
+  }
+
+  if (charIndex >= total) return null;
+
+  const completedChars: CompletedChar[] = word.characters
+    .slice(0, charIndex)
+    .map((char, i) => ({
+      char,
+      mistakes: attempts[i]?.mistakes ?? 0,
+    }));
+
+  const canvasSize = 260;
+  const shrinkScale = 0.13;
+  const cornerCharWidth = canvasSize * 0.13;
+  const targetX = 8 + charIndex * (cornerCharWidth + 2);
+  const targetY = 6;
+
+  const shrinkTransform = shrinking
+    ? `scale(${shrinkScale}) translate(${targetX / shrinkScale}px, ${targetY / shrinkScale}px)`
+    : "scale(1) translate(0, 0)";
 
   return (
     <div className="text-center animate-pop-in">
       <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
-        Your turn · {charIndex + 1} / {word.characters.length}
+        Your turn · {charIndex + 1} / {total}
       </p>
-      <div className="mt-6">
+      <div
+        className="mt-6"
+        style={{
+          transition: shrinking
+            ? `transform ${SHRINK_DURATION_MS}ms ease-in-out, opacity ${SHRINK_DURATION_MS}ms ease-in-out`
+            : "none",
+          transform: shrinkTransform,
+          transformOrigin: "top left",
+          opacity: shrinking ? 0 : 1,
+        }}
+        onTransitionEnd={handleTransitionEnd}
+      >
         <DrawingCanvas
           key={`${word.id}:${charIndex}`}
           character={word.characters[charIndex]}
-          onComplete={() => setCharIndex((i) => i + 1)}
+          onComplete={handleCharComplete}
+          leniency={leniency}
+          completedChars={completedChars}
         />
       </div>
     </div>

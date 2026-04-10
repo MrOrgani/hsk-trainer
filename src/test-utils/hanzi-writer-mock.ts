@@ -10,6 +10,7 @@ export interface FakeWriter {
   animateCharacter: ReturnType<typeof vi.fn>;
   cancelQuiz: ReturnType<typeof vi.fn>;
   hideCharacter: ReturnType<typeof vi.fn>;
+  updateColor: ReturnType<typeof vi.fn>;
   lastQuizOptions: Record<string, unknown> | null;
 }
 
@@ -31,6 +32,9 @@ export function installHanziWriterMock() {
             }),
             cancelQuiz: vi.fn(),
             hideCharacter: vi.fn(),
+            updateColor: vi.fn((_colorName: string, _color: string, opts?: { duration?: number; onComplete?: () => void }) => {
+              opts?.onComplete?.();
+            }),
           };
           fakeWriters.push(instance);
           return instance;

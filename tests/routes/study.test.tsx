@@ -93,8 +93,9 @@ describe("/study route", () => {
     };
     await act(async () => opts.onComplete?.());
 
-    await waitFor(() =>
-      expect(screen.getByText(/all done/i)).toBeInTheDocument()
+    await waitFor(
+      () => expect(screen.getByText(/all done/i)).toBeInTheDocument(),
+      { timeout: 3000 }
     );
     const cards = await db.srsCards.toArray();
     expect(cards.length).toBeGreaterThan(0);
