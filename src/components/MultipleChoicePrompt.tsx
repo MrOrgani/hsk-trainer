@@ -42,7 +42,7 @@ export function MultipleChoicePrompt({ word, promptType, onGrade }: Props) {
 
   return (
     <div className="text-center">
-      <p className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-sky-500">
+      <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-gold-500">
         {kicker}
       </p>
 
@@ -55,15 +55,15 @@ export function MultipleChoicePrompt({ word, promptType, onGrade }: Props) {
             label="Play audio"
           />
         ) : (
-          <div className="mx-auto max-w-md rounded-3xl bg-white border-2 border-b-4 border-gray-200 py-10 px-6">
-            <p className="text-2xl sm:text-3xl font-extrabold text-gray-800 leading-snug">
+          <div className="mx-auto max-w-md rounded-2xl bg-paper shadow-card border border-ink-100/50 py-10 px-6">
+            <p className="text-2xl sm:text-3xl font-bold text-ink-800 leading-snug">
               {word.meaningEn}
             </p>
           </div>
         )}
       </div>
 
-      {/* Four chunky option tiles */}
+      {/* Four option tiles */}
       <div className="grid grid-cols-2 gap-3 sm:gap-4 max-w-lg mx-auto">
         {choices.map((c) => {
           const isCorrect = c.id === word.id;
@@ -71,17 +71,17 @@ export function MultipleChoicePrompt({ word, promptType, onGrade }: Props) {
           const decided = picked !== null;
 
           let cls =
-            "bg-white border-2 border-b-4 border-gray-200 hover:border-sky-300 hover:bg-sky-50 text-gray-800";
+            "bg-paper border border-ink-100/50 shadow-card hover:shadow-card-hover hover:border-gold-300 text-ink-800";
           if (decided) {
             if (isCorrect) {
               cls =
-                "bg-green-50 border-2 border-b-4 border-green-500 text-green-700";
+                "bg-jade-50 border-2 border-jade-500 shadow-glow-jade text-jade-700";
             } else if (isPicked) {
               cls =
-                "bg-rose-50 border-2 border-b-4 border-rose-500 text-rose-700";
+                "bg-vermillion-50 border-2 border-vermillion-500 shadow-glow-vermillion text-vermillion-700";
             } else {
               cls =
-                "bg-white border-2 border-b-4 border-gray-200 text-gray-400 opacity-60";
+                "bg-paper border border-ink-100/50 text-ink-300 opacity-50";
             }
           }
 
@@ -91,7 +91,7 @@ export function MultipleChoicePrompt({ word, promptType, onGrade }: Props) {
               type="button"
               disabled={decided}
               onClick={() => setPicked(c.id)}
-              className={`rounded-2xl py-6 sm:py-8 px-4 transition-colors duration-100 disabled:cursor-default ${cls}`}
+              className={`rounded-xl py-6 sm:py-8 px-4 transition-all duration-150 disabled:cursor-default ${cls}`}
             >
               <span
                 className="font-hanzi text-3xl sm:text-4xl font-black"
@@ -106,16 +106,16 @@ export function MultipleChoicePrompt({ word, promptType, onGrade }: Props) {
       {/* Reveal + grade */}
       {picked && (
         <div className="mt-10 space-y-3 animate-pop-in">
-          <p className="font-hanzi text-5xl sm:text-6xl font-black text-gray-800">
+          <p className="font-hanzi text-5xl sm:text-6xl font-black text-ink-800">
             {word.id}
           </p>
-          <p className="text-xl sm:text-2xl font-extrabold text-gray-700">
+          <p className="text-xl sm:text-2xl font-bold text-ink-700">
             {word.pinyin}
           </p>
-          <p className="text-base sm:text-lg font-bold text-gray-500">
+          <p className="text-base sm:text-lg font-medium text-ink-400">
             {word.meaningEn}
           </p>
-          <p className="pt-4 text-sm font-bold uppercase tracking-wider text-gray-400">
+          <p className="pt-4 text-sm font-semibold uppercase tracking-wider text-ink-300">
             {picked === word.id ? "Nice! How well did you know it?" : "Not quite — let's try again"}
           </p>
           <div className="pt-2">

@@ -41,56 +41,58 @@ function Home() {
     <div className="max-w-2xl mx-auto px-5 pt-10 sm:pt-16 pb-16">
       {/* Hero */}
       <div className="text-center animate-pop-in">
-        <div className="inline-grid place-items-center h-24 w-24 sm:h-28 sm:w-28 rounded-3xl bg-green-500 border-b-[6px] border-green-700 shadow-lg mb-5">
-          <span className="font-hanzi text-white text-5xl sm:text-6xl font-black">
-            學
-          </span>
+        <div className="inline-flex flex-col items-center">
+          <div className="seal-stamp h-20 w-20 sm:h-24 sm:w-24 text-vermillion-500 mb-5 animate-stamp-in">
+            <span className="font-hanzi text-4xl sm:text-5xl font-black">
+              學
+            </span>
+          </div>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-800 tracking-tight">
+        <h1 className="font-display text-3xl sm:text-4xl text-ink-800 text-shadow-ink">
           Let's learn Chinese!
         </h1>
-        <p className="mt-2 text-gray-500 font-semibold">
+        <p className="mt-2 text-ink-400 font-medium">
           A few minutes a day keeps the characters flowing.
         </p>
       </div>
 
       {/* Stat pills */}
       <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4">
-        <div className="rounded-2xl bg-white border-2 border-b-4 border-gray-200 p-4 sm:p-5 text-center">
-          <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-gray-400">
+        <div className="rounded-xl bg-paper shadow-card p-4 sm:p-5 text-center border border-ink-100/50">
+          <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-ink-300">
             Due now
           </p>
           <p
             className={`mt-1 text-4xl sm:text-5xl font-black tabular-nums ${
-              dueCount > 0 ? "text-green-500" : "text-gray-300"
+              dueCount > 0 ? "text-vermillion-500" : "text-ink-200"
             }`}
           >
             {dueCount}
           </p>
-          <p className="mt-1 text-xs font-bold text-gray-400">
+          <p className="mt-1 text-xs font-medium text-ink-300">
             {dueCount === 1 ? "character" : "characters"}
           </p>
         </div>
-        <div className="rounded-2xl bg-white border-2 border-b-4 border-gray-200 p-4 sm:p-5 text-center">
-          <p className="text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-gray-400">
+        <div className="rounded-xl bg-paper shadow-card p-4 sm:p-5 text-center border border-ink-100/50">
+          <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-ink-300">
             New today
           </p>
-          <p className="mt-1 text-4xl sm:text-5xl font-black tabular-nums text-sky-500">
+          <p className="mt-1 text-4xl sm:text-5xl font-black tabular-nums text-jade-500">
             {newToday}
-            <span className="text-2xl sm:text-3xl text-gray-300"> / {newTarget}</span>
+            <span className="text-2xl sm:text-3xl text-ink-200"> / {newTarget}</span>
           </p>
-          <p className="mt-1 text-xs font-bold text-gray-400">introduced</p>
+          <p className="mt-1 text-xs font-medium text-ink-300">introduced</p>
         </div>
       </div>
 
       {/* Big CTA card */}
-      <div className="mt-8 rounded-3xl bg-white border-2 border-b-4 border-gray-200 p-6 sm:p-8 text-center">
+      <div className="mt-8 rounded-2xl bg-paper shadow-card border border-ink-100/50 p-6 sm:p-8 text-center">
         {canReview ? (
           <>
-            <p className="font-hanzi text-green-500 text-3xl sm:text-4xl font-black mb-2">
+            <p className="font-display text-vermillion-500 text-3xl sm:text-4xl mb-2">
               加油！
             </p>
-            <p className="text-gray-600 font-bold mb-5">
+            <p className="text-ink-500 font-medium mb-5">
               {dueCount} {dueCount === 1 ? "character is" : "characters are"} ready for you.
             </p>
             <Link to="/review" className={chunky("primary", "w-full")}>
@@ -99,8 +101,10 @@ function Home() {
           </>
         ) : (
           <>
-            <p className="text-5xl mb-2">🌱</p>
-            <p className="text-gray-600 font-bold mb-5">
+            <p className="font-display text-jade-500 text-3xl sm:text-4xl mb-2">
+              开始吧
+            </p>
+            <p className="text-ink-500 font-medium mb-5">
               No reviews due. Plant some new characters!
             </p>
             <Link to="/study" className={chunky("info", "w-full")}>
@@ -112,7 +116,7 @@ function Home() {
         {canReview && (
           <Link
             to="/study"
-            className="mt-3 block w-full text-center text-sm font-bold uppercase tracking-wider text-gray-400 hover:text-sky-500 py-2 transition-colors"
+            className="mt-3 block w-full text-center text-sm font-semibold text-ink-300 hover:text-jade-500 py-2 transition-colors"
           >
             + add new characters
           </Link>

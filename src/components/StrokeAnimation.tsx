@@ -4,18 +4,11 @@ import HanziWriter from "hanzi-writer";
 interface Props {
   character: string;
   size?: number;
-  /** Called once the animation has played through all strokes. */
   onDone?: () => void;
 }
 
-/**
- * Plays the stroke animation for a single character. Auto-starts on mount.
- * Study flow uses this to show the user the correct stroke order before
- * handing off to a DrawingCanvas for the first attempt.
- */
 export function StrokeAnimation({ character, size = 200, onDone }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  // Keep the latest onDone without retriggering the effect.
   const onDoneRef = useRef(onDone);
   useEffect(() => {
     onDoneRef.current = onDone;
@@ -31,8 +24,8 @@ export function StrokeAnimation({ character, size = 200, onDone }: Props) {
       height: size,
       padding: 8,
       showOutline: true,
-      strokeColor: "#0ea5e9", // tailwind sky-500
-      outlineColor: "#e5e7eb",
+      strokeColor: "#c93545",    // vermillion-500 — animated stroke
+      outlineColor: "#d6cdbf",   // ink-200 — warm outline
       strokeAnimationSpeed: 1.2,
       delayBetweenStrokes: 120,
     });

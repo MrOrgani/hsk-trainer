@@ -38,7 +38,7 @@ function Review() {
   if (!settings) {
     return (
       <div className="max-w-xl mx-auto px-6 py-24 text-center">
-        <p className="text-gray-400 font-bold uppercase tracking-wider text-sm">
+        <p className="text-ink-300 font-semibold uppercase tracking-wider text-sm">
           Loading…
         </p>
       </div>
@@ -48,15 +48,17 @@ function Review() {
   if (queue.length === 0) {
     return (
       <div className="max-w-md mx-auto px-6 py-20 text-center animate-pop-in">
-        <p className="text-6xl mb-4">🌱</p>
-        <p className="text-2xl sm:text-3xl font-extrabold text-gray-800">
+        <p className="font-display text-5xl text-jade-500 mb-4">
+          休息
+        </p>
+        <p className="text-2xl sm:text-3xl font-bold text-ink-800">
           Nothing to review!
         </p>
-        <p className="mt-2 text-gray-500 font-semibold">
+        <p className="mt-2 text-ink-400 font-medium">
           Come back later or add new characters.
         </p>
         <Link to="/" className={chunky("primary", "mt-8")}>
-          ← Back to home
+          Back to home
         </Link>
       </div>
     );
@@ -65,16 +67,18 @@ function Review() {
   if (index >= queue.length) {
     return (
       <div className="max-w-md mx-auto px-6 py-20 text-center animate-pop-in">
-        <p className="text-7xl mb-4">🎉</p>
-        <p className="text-3xl sm:text-4xl font-extrabold text-green-600">
+        <div className="seal-stamp h-20 w-20 text-jade-500 mx-auto mb-4 animate-stamp-in">
+          <span className="font-hanzi text-3xl font-black">完</span>
+        </div>
+        <p className="text-3xl sm:text-4xl font-bold text-jade-600">
           Lesson complete!
         </p>
-        <p className="mt-3 text-gray-600 font-bold">
+        <p className="mt-3 text-ink-500 font-medium">
           {queue.length} {queue.length === 1 ? "character" : "characters"} studied
         </p>
-        <div className="mt-8 rounded-2xl bg-white border-2 border-b-4 border-gray-200 py-5 px-4">
-          <p className="font-hanzi text-green-500 text-3xl font-black">太好了！</p>
-          <p className="mt-1 text-sm font-bold text-gray-400 uppercase tracking-wider">
+        <div className="mt-8 rounded-xl bg-paper shadow-card border border-ink-100/50 py-5 px-4">
+          <p className="font-display text-vermillion-500 text-3xl">太好了！</p>
+          <p className="mt-1 text-sm font-medium text-ink-300">
             Well done
           </p>
         </div>
@@ -106,7 +110,7 @@ function Review() {
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-5 pb-16">
-      {/* Progress header: X exit + progress bar */}
+      {/* Progress header */}
       <header className="flex items-center gap-3 sm:gap-4">
         <button
           type="button"
@@ -115,17 +119,17 @@ function Review() {
             navigate({ to: "/" });
           }}
           aria-label="Exit lesson"
-          className="grid place-items-center h-10 w-10 rounded-xl text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors text-2xl font-black"
+          className="grid place-items-center h-10 w-10 rounded-lg text-ink-300 hover:text-ink-600 hover:bg-ink-50 transition-colors text-2xl font-black"
         >
           ✕
         </button>
-        <div className="flex-1 h-4 rounded-full bg-gray-200 overflow-hidden">
+        <div className="flex-1 h-3.5 rounded-full bg-ink-100 overflow-hidden">
           <div
-            className="h-full bg-green-500 border-b-[3px] border-green-700 rounded-full transition-all duration-300"
+            className="h-full bg-gradient-to-r from-jade-500 to-jade-400 rounded-full transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
         </div>
-        <span className="text-sm font-extrabold tabular-nums text-gray-500 min-w-[3ch] text-right">
+        <span className="text-sm font-bold tabular-nums text-ink-400 min-w-[3ch] text-right">
           {index + 1}/{queue.length}
         </span>
       </header>

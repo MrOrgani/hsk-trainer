@@ -13,10 +13,6 @@ const LABELS: Array<{ grade: Grade; label: string; variant: ChunkyVariant }> = [
   { grade: "easy", label: "Easy", variant: "info" },
 ];
 
-/**
- * Four chunky Duolingo-style grade buttons in a 2×2 grid on mobile,
- * 1×4 on larger screens.
- */
 export function GradeButtons({ onGrade, disabled }: Props) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-xl mx-auto">

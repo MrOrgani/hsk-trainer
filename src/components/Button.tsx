@@ -1,40 +1,39 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 export type ChunkyVariant =
-  | "primary" // green — main CTA
-  | "danger" // red — again / destructive
-  | "warning" // orange — hard
-  | "success" // green — good (alias of primary for grading)
-  | "info" // sky blue — easy
-  | "neutral"; // gray — secondary
+  | "primary" // vermillion — main CTA
+  | "danger" // vermillion — again / destructive
+  | "warning" // gold — hard
+  | "success" // jade — good
+  | "info" // jade lighter — easy
+  | "neutral"; // ink/paper — secondary
 
 /**
- * Duolingo-style chunky button classes.
- * Base is a rounded pill with a colored underside (box-shadow offset).
- * On :active the button translates down and the shadow collapses, giving
- * the satisfying "press" feel.
+ * Ink & Jade button system. Soft rounded buttons with a subtle 3D press feel
+ * using box-shadow instead of hard borders. Chinese-inspired color palette.
  */
 export function chunky(variant: ChunkyVariant = "primary", extra = ""): string {
   const base =
     "inline-flex items-center justify-center gap-2 select-none " +
-    "rounded-2xl px-6 py-3.5 font-extrabold uppercase tracking-wider text-sm sm:text-base " +
-    "transition-transform duration-75 active:translate-y-[3px] " +
+    "rounded-xl px-6 py-3.5 font-bold text-sm sm:text-base " +
+    "transition-all duration-100 " +
+    "active:translate-y-[2px] active:shadow-press " +
     "disabled:opacity-50 disabled:cursor-not-allowed disabled:active:translate-y-0 " +
-    "focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-2";
+    "focus:outline-none focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-offset-paper";
 
   const variants: Record<ChunkyVariant, string> = {
     primary:
-      "bg-green-500 text-white border-b-[5px] border-green-700 hover:bg-green-400 active:border-b-2 focus-visible:ring-green-300",
+      "bg-vermillion-500 text-white shadow-[0_4px_0_0_#8c1f2e] hover:bg-vermillion-400 active:shadow-none focus-visible:ring-vermillion-300",
     success:
-      "bg-green-500 text-white border-b-[5px] border-green-700 hover:bg-green-400 active:border-b-2 focus-visible:ring-green-300",
+      "bg-jade-500 text-white shadow-[0_4px_0_0_#07624f] hover:bg-jade-400 active:shadow-none focus-visible:ring-jade-300",
     danger:
-      "bg-rose-500 text-white border-b-[5px] border-rose-700 hover:bg-rose-400 active:border-b-2 focus-visible:ring-rose-300",
+      "bg-vermillion-500 text-white shadow-[0_4px_0_0_#8c1f2e] hover:bg-vermillion-400 active:shadow-none focus-visible:ring-vermillion-300",
     warning:
-      "bg-amber-400 text-amber-950 border-b-[5px] border-amber-600 hover:bg-amber-300 active:border-b-2 focus-visible:ring-amber-300",
+      "bg-gold-500 text-white shadow-[0_4px_0_0_#875412] hover:bg-gold-400 active:shadow-none focus-visible:ring-gold-300",
     info:
-      "bg-sky-400 text-white border-b-[5px] border-sky-600 hover:bg-sky-300 active:border-b-2 focus-visible:ring-sky-300",
+      "bg-jade-400 text-white shadow-[0_4px_0_0_#097a61] hover:bg-jade-300 active:shadow-none focus-visible:ring-jade-300",
     neutral:
-      "bg-white text-gray-700 border-2 border-b-[5px] border-gray-300 hover:bg-gray-50 active:border-b-2 focus-visible:ring-gray-300",
+      "bg-paper text-ink-700 shadow-[0_4px_0_0_#d6cdbf] border border-ink-200 hover:bg-ink-50 active:shadow-none focus-visible:ring-ink-300",
   };
 
   return `${base} ${variants[variant]} ${extra}`.trim();

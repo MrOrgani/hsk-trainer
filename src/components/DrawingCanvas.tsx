@@ -3,22 +3,12 @@ import HanziWriter from "hanzi-writer";
 
 interface Props {
   character: string;
-  /** Called once when the user has drawn every stroke of the character. */
   onComplete: (result: { mistakes: number }) => void;
-  /** Square size in px — defaults to a mobile-friendly 260. */
   size?: number;
 }
 
-/**
- * Imperative bridge to hanzi-writer's quiz mode. The library owns the SVG DOM;
- * React owns the outer `<div>` ref and the lifecycle.
- *
- * We key the effect on `character` so that navigating to the next character
- * in a multi-char word tears down the previous writer cleanly.
- */
 export function DrawingCanvas({ character, onComplete, size = 260 }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  // Keep the latest onComplete without retriggering the effect.
   const onCompleteRef = useRef(onComplete);
   useEffect(() => {
     onCompleteRef.current = onComplete;
@@ -27,7 +17,6 @@ export function DrawingCanvas({ character, onComplete, size = 260 }: Props) {
   useEffect(() => {
     const target = containerRef.current;
     if (!target) return;
-    // Clear any previous SVG between re-mounts (safe: no user content).
     target.replaceChildren();
 
     let mistakes = 0;
@@ -39,9 +28,10 @@ export function DrawingCanvas({ character, onComplete, size = 260 }: Props) {
       showOutline: true,
       strokeAnimationSpeed: 1,
       delayBetweenStrokes: 50,
-      strokeColor: "#15803d", // tailwind green-700
-      outlineColor: "#e5e7eb", // tailwind gray-200
-      highlightColor: "#22c55e", // tailwind green-500
+      strokeColor: "#1c1917",    // ink-900 — true ink black
+      outlineColor: "#d6cdbf",   // ink-200 — warm gray outline
+      highlightColor: "#c93545", // vermillion-500 — highlight strokes
+      drawingColor: "#3d352a",   // ink-600 — dark ink drawing
     });
 
     writer.quiz({
@@ -62,7 +52,7 @@ export function DrawingCanvas({ character, onComplete, size = 260 }: Props) {
     <div
       ref={containerRef}
       aria-label={`Draw the character ${character}`}
-      className="mx-auto rounded-2xl bg-white border-2 border-b-4 border-gray-200"
+      className="mx-auto rounded-xl bg-paper shadow-card border border-ink-100/50"
       style={{ width: size, height: size, touchAction: "none" }}
     />
   );

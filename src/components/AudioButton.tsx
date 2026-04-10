@@ -1,24 +1,17 @@
 import { chunky, type ChunkyVariant } from "./Button";
 
 interface Props {
-  /** Filename in /public/audio (Plan 3). If missing, speech synthesis is used. */
   audioFile: string;
-  /** Text spoken by the synthesis fallback — the Chinese characters. */
   fallbackText: string;
   label?: string;
   variant?: ChunkyVariant;
 }
 
-/**
- * Plays pronunciation for a word. Prefers the bundled MP3 (shipping in Plan 3);
- * if the file is missing (404 or decode error) falls back to
- * `window.speechSynthesis` with the Mandarin voice.
- */
 export function AudioButton({
   audioFile,
   fallbackText,
   label = "Play",
-  variant = "info",
+  variant = "neutral",
 }: Props) {
   function speak() {
     if (typeof window === "undefined") return;
@@ -50,7 +43,7 @@ export function AudioButton({
       className={chunky(variant)}
       aria-label={`Play pronunciation of ${fallbackText}`}
     >
-      <span aria-hidden className="text-2xl">🔊</span>
+      <span aria-hidden className="text-xl">🔊</span>
       {label}
     </button>
   );

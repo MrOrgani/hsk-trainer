@@ -52,7 +52,7 @@ function Study() {
 
   if (!settings) {
     return (
-      <p className="text-center py-20 text-gray-400 font-bold uppercase tracking-wider text-sm">
+      <p className="text-center py-20 text-ink-300 font-semibold uppercase tracking-wider text-sm">
         Loading…
       </p>
     );
@@ -61,15 +61,17 @@ function Study() {
   if (queue.length === 0) {
     return (
       <div className="max-w-md mx-auto px-6 py-20 text-center animate-pop-in">
-        <p className="text-6xl mb-4">🌿</p>
-        <p className="text-2xl font-extrabold text-gray-800">
+        <p className="font-display text-5xl text-ink-300 mb-4">
+          等一等
+        </p>
+        <p className="text-2xl font-bold text-ink-800">
           Nothing new to learn right now.
         </p>
-        <p className="mt-2 text-gray-500 font-semibold">
+        <p className="mt-2 text-ink-400 font-medium">
           Either your daily cap is reached or HSK 1 is exhausted.
         </p>
         <Link to="/" className={chunky("primary", "mt-8")}>
-          ← Back to home
+          Back to home
         </Link>
       </div>
     );
@@ -78,11 +80,13 @@ function Study() {
   if (index >= queue.length) {
     return (
       <div className="max-w-md mx-auto px-6 py-20 text-center animate-pop-in">
-        <p className="text-7xl mb-4">🎉</p>
-        <p className="text-3xl sm:text-4xl font-extrabold text-green-600">
+        <div className="seal-stamp h-20 w-20 text-jade-500 mx-auto mb-4 animate-stamp-in">
+          <span className="font-hanzi text-3xl font-black">好</span>
+        </div>
+        <p className="text-3xl sm:text-4xl font-bold text-jade-600">
           All done!
         </p>
-        <p className="mt-2 text-gray-500 font-semibold">
+        <p className="mt-2 text-ink-400 font-medium">
           {queue.length} new {queue.length === 1 ? "word" : "words"} added to
           your deck.
         </p>
@@ -107,33 +111,33 @@ function Study() {
         <Link
           to="/"
           aria-label="Exit study"
-          className="grid place-items-center h-10 w-10 rounded-xl text-gray-400 hover:text-gray-600 hover:bg-gray-100 text-2xl font-black"
+          className="grid place-items-center h-10 w-10 rounded-lg text-ink-300 hover:text-ink-600 hover:bg-ink-50 text-2xl font-black"
         >
           ✕
         </Link>
-        <div className="flex-1 h-4 rounded-full bg-gray-200 overflow-hidden">
+        <div className="flex-1 h-3.5 rounded-full bg-ink-100 overflow-hidden">
           <div
-            className="h-full bg-sky-500 border-b-[3px] border-sky-700 rounded-full transition-all duration-300"
+            className="h-full bg-gradient-to-r from-gold-500 to-gold-400 rounded-full transition-all duration-300"
             style={{ width: `${(index / queue.length) * 100}%` }}
           />
         </div>
-        <span className="text-sm font-extrabold tabular-nums text-gray-500 min-w-[3ch] text-right">
+        <span className="text-sm font-bold tabular-nums text-ink-400 min-w-[3ch] text-right">
           {index + 1}/{queue.length}
         </span>
       </header>
 
       {phase === "present" && (
         <div className="text-center animate-pop-in">
-          <p className="text-xs font-extrabold uppercase tracking-widest text-sky-500">
+          <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
             New word
           </p>
-          <p className="mt-6 font-hanzi text-7xl sm:text-8xl font-black text-gray-800">
+          <p className="mt-6 font-hanzi text-7xl sm:text-8xl font-black text-ink-800">
             {word.id}
           </p>
-          <p className="mt-4 text-2xl font-extrabold text-gray-700">
+          <p className="mt-4 text-2xl font-bold text-ink-700">
             {word.pinyin}
           </p>
-          <p className="mt-2 text-lg font-bold text-gray-500">{word.meaningEn}</p>
+          <p className="mt-2 text-lg font-medium text-ink-400">{word.meaningEn}</p>
           <div className="mt-8 flex items-center justify-center gap-3">
             <AudioButton
               audioFile={word.audioFile}
@@ -150,7 +154,7 @@ function Study() {
 
       {phase === "animate" && (
         <div className="text-center animate-pop-in">
-          <p className="text-xs font-extrabold uppercase tracking-widest text-sky-500">
+          <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
             Watch the stroke order
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
@@ -190,7 +194,7 @@ function AttemptPhase({
 
   return (
     <div className="text-center animate-pop-in">
-      <p className="text-xs font-extrabold uppercase tracking-widest text-sky-500">
+      <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
         Your turn · {charIndex + 1} / {word.characters.length}
       </p>
       <div className="mt-6">
