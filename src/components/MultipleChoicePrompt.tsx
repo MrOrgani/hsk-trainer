@@ -55,7 +55,7 @@ export function MultipleChoicePrompt({ word, promptType, onGrade }: Props) {
             label="Play audio"
           />
         ) : (
-          <div className="mx-auto max-w-md rounded-2xl bg-paper shadow-card border border-ink-100/50 py-10 px-6">
+          <div className="mx-auto max-w-md rounded-2xl card py-10 px-6">
             <p className="text-2xl sm:text-3xl font-bold text-ink-800 leading-snug">
               {word.meaningEn}
             </p>

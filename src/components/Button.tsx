@@ -27,7 +27,7 @@ export function chunky(variant: ChunkyVariant = "primary", extra = ""): string {
     success:
       "bg-jade-500 text-white shadow-[0_4px_0_0_#07624f] hover:bg-jade-400 active:shadow-none focus-visible:ring-jade-300",
     danger:
-      "bg-vermillion-500 text-white shadow-[0_4px_0_0_#8c1f2e] hover:bg-vermillion-400 active:shadow-none focus-visible:ring-vermillion-300",
+      "bg-vermillion-600 text-white shadow-[0_4px_0_0_#6b1823] hover:bg-vermillion-500 active:shadow-none focus-visible:ring-vermillion-300",
     warning:
       "bg-gold-500 text-white shadow-[0_4px_0_0_#875412] hover:bg-gold-400 active:shadow-none focus-visible:ring-gold-300",
     info:

@@ -29,7 +29,7 @@ export function RecognitionPrompt({ word, onGrade }: Props) {
       {/* The big character card */}
       <div
         key={word.id}
-        className="mt-6 mx-auto max-w-md rounded-2xl bg-paper shadow-card border border-ink-100/50 py-12 sm:py-16 px-6 animate-pop-in"
+        className="mt-6 mx-auto max-w-md rounded-2xl card py-12 sm:py-16 px-6 animate-pop-in"
       >
         <div
           className="font-hanzi text-ink-800 leading-none text-[7rem] sm:text-[9rem]"

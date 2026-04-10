@@ -76,7 +76,7 @@ function Review() {
         <p className="mt-3 text-ink-500 font-medium">
           {queue.length} {queue.length === 1 ? "character" : "characters"} studied
         </p>
-        <div className="mt-8 rounded-xl bg-paper shadow-card border border-ink-100/50 py-5 px-4">
+        <div className="mt-8 rounded-xl card py-5 px-4">
           <p className="font-display text-vermillion-500 text-3xl">太好了！</p>
           <p className="mt-1 text-sm font-medium text-ink-300">
             Well done

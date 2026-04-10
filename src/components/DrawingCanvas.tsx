@@ -52,7 +52,7 @@ export function DrawingCanvas({ character, onComplete, size = 260 }: Props) {
     <div
       ref={containerRef}
       aria-label={`Draw the character ${character}`}
-      className="mx-auto rounded-xl bg-paper shadow-card border border-ink-100/50"
+      className="mx-auto rounded-xl card"
       style={{ width: size, height: size, touchAction: "none" }}
     />
   );

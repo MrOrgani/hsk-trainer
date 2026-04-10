@@ -41,14 +41,12 @@ function Home() {
     <div className="max-w-2xl mx-auto px-5 pt-10 sm:pt-16 pb-16">
       {/* Hero */}
       <div className="text-center animate-pop-in">
-        <div className="inline-flex flex-col items-center">
-          <div className="seal-stamp h-20 w-20 sm:h-24 sm:w-24 text-vermillion-500 mb-5 animate-stamp-in">
-            <span className="font-hanzi text-4xl sm:text-5xl font-black">
-              學
-            </span>
-          </div>
+        <div className="seal-stamp h-20 w-20 sm:h-24 sm:w-24 text-vermillion-500 mb-5 animate-stamp-in mx-auto">
+          <span className="font-hanzi text-4xl sm:text-5xl font-black">
+            學
+          </span>
         </div>
-        <h1 className="font-display text-3xl sm:text-4xl text-ink-800 text-shadow-ink">
+        <h1 className="font-display text-3xl sm:text-4xl text-ink-800">
           Let's learn Chinese!
         </h1>
         <p className="mt-2 text-ink-400 font-medium">
@@ -58,7 +56,7 @@ function Home() {
 
       {/* Stat pills */}
       <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4">
-        <div className="rounded-xl bg-paper shadow-card p-4 sm:p-5 text-center border border-ink-100/50">
+        <div className="rounded-xl card p-4 sm:p-5 text-center">
           <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-ink-300">
             Due now
           </p>
@@ -73,7 +71,7 @@ function Home() {
             {dueCount === 1 ? "character" : "characters"}
           </p>
         </div>
-        <div className="rounded-xl bg-paper shadow-card p-4 sm:p-5 text-center border border-ink-100/50">
+        <div className="rounded-xl card p-4 sm:p-5 text-center">
           <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-ink-300">
             New today
           </p>
@@ -86,7 +84,7 @@ function Home() {
       </div>
 
       {/* Big CTA card */}
-      <div className="mt-8 rounded-2xl bg-paper shadow-card border border-ink-100/50 p-6 sm:p-8 text-center">
+      <div className="mt-8 rounded-2xl card p-6 sm:p-8 text-center">
         {canReview ? (
           <>
             <p className="font-display text-vermillion-500 text-3xl sm:text-4xl mb-2">

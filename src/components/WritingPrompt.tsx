@@ -43,7 +43,7 @@ export function WritingPrompt({ word, promptType, onGrade }: Props) {
             label="Play audio"
           />
         ) : (
-          <div className="mx-auto max-w-md rounded-2xl bg-paper shadow-card border border-ink-100/50 py-6 px-6">
+          <div className="mx-auto max-w-md rounded-2xl card py-6 px-6">
             <p className="text-xl sm:text-2xl font-bold text-ink-800 leading-snug">
               {word.meaningEn}
             </p>
@@ -81,7 +81,9 @@ export function WritingPrompt({ word, promptType, onGrade }: Props) {
         </>
       )}
 
-      {phase === "reveal" && (
+      {phase === "reveal" && (() => {
+        const totalMistakes = attempts.reduce((s, a) => s + a.mistakes, 0);
+        return (
         <div className="mt-2 space-y-3 animate-pop-in">
           <p className="font-hanzi text-5xl sm:text-6xl font-black text-ink-800">
             {word.id}
@@ -93,15 +95,16 @@ export function WritingPrompt({ word, promptType, onGrade }: Props) {
             {word.meaningEn}
           </p>
           <p className="pt-2 text-xs font-semibold uppercase tracking-wider text-ink-300">
-            {attempts.every((a) => a.mistakes === 0)
+            {totalMistakes === 0
               ? "Perfect strokes!"
-              : `${attempts.reduce((s, a) => s + a.mistakes, 0)} stroke mistake${attempts.reduce((s, a) => s + a.mistakes, 0) === 1 ? "" : "s"}`}
+              : `${totalMistakes} stroke mistake${totalMistakes === 1 ? "" : "s"}`}
           </p>
           <div className="pt-4">
             <GradeButtons onGrade={onGrade} />
           </div>
         </div>
-      )}
+        );
+      })()}
     </div>
   );
 }
