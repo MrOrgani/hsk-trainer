@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import type { Grade, Word } from "@/db/schema";
 import { GradeButtons } from "./GradeButtons";
 import { chunky } from "./Button";
+import { useTranslation, meaningFor } from "@/lib/i18n";
 
 interface Props {
   word: Word;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export function RecognitionPrompt({ word, onGrade }: Props) {
+  const { t, lang } = useTranslation();
   const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export function RecognitionPrompt({ word, onGrade }: Props) {
   return (
     <div className="text-center">
       <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-gold-500">
-        What does this mean?
+        {t("prompt.whatDoesThisMean")}
       </p>
 
       {/* The big character card */}
@@ -45,10 +47,10 @@ export function RecognitionPrompt({ word, onGrade }: Props) {
             {word.pinyin}
           </p>
           <p className="text-lg sm:text-xl font-medium text-ink-400">
-            {word.meaningEn}
+            {meaningFor(word, lang)}
           </p>
           <p className="text-sm font-semibold uppercase tracking-wider text-ink-300 pt-2">
-            How well did you know it?
+            {t("prompt.howWellDidYouKnow")}
           </p>
           <div className="pt-2">
             <GradeButtons onGrade={handleGrade} />
@@ -60,7 +62,7 @@ export function RecognitionPrompt({ word, onGrade }: Props) {
           onClick={() => setRevealed(true)}
           className={chunky("primary", "mt-10")}
         >
-          Show answer
+          {t("prompt.showAnswer")}
         </button>
       )}
     </div>

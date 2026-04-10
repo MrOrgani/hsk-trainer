@@ -6,6 +6,7 @@ import {
   type OverallStats,
 } from "@/lib/stats";
 import type { DailyState } from "@/db/schema";
+import { useTranslation } from "@/lib/i18n";
 
 export const Route = createFileRoute("/stats")({
   component: StatsPage,
@@ -14,6 +15,7 @@ export const Route = createFileRoute("/stats")({
 export function StatsPage() {
   const [weekly, setWeekly] = useState<DailyState[]>([]);
   const [overall, setOverall] = useState<OverallStats | null>(null);
+  const { t, lang } = useTranslation();
 
   useEffect(() => {
     const now = Date.now();
@@ -22,18 +24,19 @@ export function StatsPage() {
   }, []);
 
   const maxReviews = Math.max(1, ...weekly.map((d) => d.reviewsCompleted));
+  const weekdayLocale = lang === "fr" ? "fr" : "en";
 
   return (
     <div className="max-w-2xl mx-auto px-5 pt-10 pb-16">
       <h1 className="font-display text-3xl sm:text-4xl text-ink-800 mb-8">
-        Statistics
+        {t("stats.title")}
       </h1>
 
       {overall && (
         <div className="grid grid-cols-3 gap-3 mb-8">
           <div className="rounded-xl card p-4 text-center">
             <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-300">
-              Total cards
+              {t("stats.totalCards")}
             </p>
             <p className="mt-1 text-3xl font-black tabular-nums text-ink-800">
               {overall.total}
@@ -41,7 +44,7 @@ export function StatsPage() {
           </div>
           <div className="rounded-xl card p-4 text-center">
             <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-300">
-              Learning
+              {t("stats.learning")}
             </p>
             <p className="mt-1 text-3xl font-black tabular-nums text-gold-500">
               {overall.learning}
@@ -49,7 +52,7 @@ export function StatsPage() {
           </div>
           <div className="rounded-xl card p-4 text-center">
             <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-300">
-              Reviewing
+              {t("stats.reviewing")}
             </p>
             <p className="mt-1 text-3xl font-black tabular-nums text-jade-500">
               {overall.review}
@@ -60,7 +63,7 @@ export function StatsPage() {
 
       <div className="rounded-xl card p-5">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-ink-400 mb-4">
-          Reviews this week
+          {t("stats.reviewsThisWeek")}
         </h2>
         <div className="flex items-end gap-2 h-32">
           {weekly.map((day) => {
@@ -70,7 +73,7 @@ export function StatsPage() {
                 : 4;
             const dayLabel = new Date(
               day.date + "T00:00:00",
-            ).toLocaleDateString("en", { weekday: "short" });
+            ).toLocaleDateString(weekdayLocale, { weekday: "short" });
             return (
               <div
                 key={day.date}
@@ -100,7 +103,7 @@ export function StatsPage() {
         return (
           <div className="rounded-xl card p-5 mt-4">
             <h2 className="text-sm font-semibold uppercase tracking-wider text-ink-400 mb-4">
-              New cards this week
+              {t("stats.newCardsThisWeek")}
             </h2>
             <div className="flex items-end gap-2 h-32">
               {weekly.map((day) => {
@@ -110,7 +113,7 @@ export function StatsPage() {
                     : 4;
                 const dayLabel = new Date(
                   day.date + "T00:00:00",
-                ).toLocaleDateString("en", { weekday: "short" });
+                ).toLocaleDateString(weekdayLocale, { weekday: "short" });
                 return (
                   <div
                     key={day.date}

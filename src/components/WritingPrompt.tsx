@@ -4,6 +4,7 @@ import { DrawingCanvas } from "./DrawingCanvas";
 import type { CompletedChar } from "./DrawingCanvas";
 import { GradeButtons } from "./GradeButtons";
 import { AudioButton } from "./AudioButton";
+import { useTranslation, meaningFor } from "@/lib/i18n";
 
 interface Props {
   word: Word;
@@ -24,6 +25,7 @@ const VIEWING_DELAY_MS = 1500;
 const SHRINK_DURATION_MS = 400;
 
 export function WritingPrompt({ word, promptType, onGrade, leniency = "strict", repetitions = 0 }: Props) {
+  const { t, lang } = useTranslation();
   const [charIndex, setCharIndex] = useState(0);
   const [attempts, setAttempts] = useState<Attempt[]>([]);
   const [shrinking, setShrinking] = useState(false);
@@ -101,8 +103,8 @@ export function WritingPrompt({ word, promptType, onGrade, leniency = "strict", 
     <div className="text-center">
       <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-gold-500">
         {promptType === "audio-to-draw"
-          ? "Listen and write it"
-          : "Write the word"}
+          ? t("prompt.listenAndWrite")
+          : t("prompt.writeTheWord")}
       </p>
 
       <div className="mt-5 mb-8 flex flex-col items-center gap-4 animate-pop-in">
@@ -110,12 +112,12 @@ export function WritingPrompt({ word, promptType, onGrade, leniency = "strict", 
           <AudioButton
             audioFile={word.audioFile}
             fallbackText={word.id}
-            label="Play audio"
+            label={t("common.playAudio")}
           />
         ) : (
           <div className="mx-auto max-w-md rounded-2xl card py-6 px-6">
             <p className="text-xl sm:text-2xl font-bold text-ink-800 leading-snug">
-              {word.meaningEn}
+              {meaningFor(word, lang)}
             </p>
           </div>
         )}
@@ -124,7 +126,7 @@ export function WritingPrompt({ word, promptType, onGrade, leniency = "strict", 
       {phase === "drawing" && (
         <>
           <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-ink-300 tabular-nums">
-            Character {charIndex + 1} / {total}
+            {t("prompt.character")} {charIndex + 1} / {total}
           </p>
           <div
             style={{
@@ -177,12 +179,15 @@ export function WritingPrompt({ word, promptType, onGrade, leniency = "strict", 
             {word.pinyin}
           </p>
           <p className="text-base sm:text-lg font-medium text-ink-400">
-            {word.meaningEn}
+            {meaningFor(word, lang)}
           </p>
           <p className="pt-2 text-xs font-semibold uppercase tracking-wider text-ink-300">
             {totalMistakes === 0
-              ? "Perfect strokes!"
-              : `${totalMistakes} stroke mistake${totalMistakes === 1 ? "" : "s"}`}
+              ? t("prompt.perfectStrokes")
+              : (totalMistakes === 1
+                  ? t("prompt.strokeMistake")
+                  : t("prompt.strokeMistakes")
+                ).replace("{count}", String(totalMistakes))}
           </p>
           <div className="pt-4">
             <GradeButtons onGrade={onGrade} />

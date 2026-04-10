@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { db } from "@/db/dexie";
 import type { Word, CardState } from "@/db/schema";
+import { useTranslation, meaningFor } from "@/lib/i18n";
 
 export const Route = createFileRoute("/browse")({
   component: BrowsePage,
@@ -36,6 +37,7 @@ function statePriority(state: CardState): number {
 export function BrowsePage() {
   const [items, setItems] = useState<WordWithState[]>([]);
   const [search, setSearch] = useState("");
+  const { t, lang } = useTranslation();
 
   useEffect(() => {
     (async () => {
@@ -62,18 +64,19 @@ export function BrowsePage() {
         ({ word }) =>
           word.id.includes(search) ||
           word.pinyin.toLowerCase().includes(search.toLowerCase()) ||
-          word.meaningEn.toLowerCase().includes(search.toLowerCase()),
+          word.meaningEn.toLowerCase().includes(search.toLowerCase()) ||
+          word.meaningFr.toLowerCase().includes(search.toLowerCase()),
       )
     : items;
 
   return (
     <div className="max-w-2xl mx-auto px-5 pt-10 pb-16">
       <h1 className="font-display text-3xl sm:text-4xl text-ink-800 mb-6">
-        Vocabulary
+        {t("browse.title")}
       </h1>
       <input
         type="text"
-        placeholder="Search by character, pinyin, or meaning..."
+        placeholder={t("browse.searchPlaceholder")}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="w-full rounded-xl border border-ink-200 bg-paper px-4 py-3 text-ink-800 font-medium placeholder:text-ink-300 focus:outline-none focus:ring-2 focus:ring-vermillion-300 mb-6"
@@ -92,7 +95,7 @@ export function BrowsePage() {
                 {word.pinyin}
               </p>
               <p className="text-xs sm:text-sm text-ink-400 truncate">
-                {word.meaningEn}
+                {meaningFor(word, lang)}
               </p>
             </div>
             <span
@@ -104,7 +107,7 @@ export function BrowsePage() {
         ))}
         {filtered.length === 0 && (
           <p className="text-center py-8 text-ink-300 font-medium">
-            No words found.
+            {t("browse.noWordsFound")}
           </p>
         )}
       </div>

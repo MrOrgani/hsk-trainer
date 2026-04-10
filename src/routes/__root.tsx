@@ -1,4 +1,5 @@
 import { Outlet, Link, createRootRoute, useRouterState } from "@tanstack/react-router";
+import { useTranslation } from "@/lib/i18n";
 
 export const Route = createRootRoute({
   component: RootLayout,
@@ -6,6 +7,7 @@ export const Route = createRootRoute({
 
 function RootLayout() {
   const { location } = useRouterState();
+  const { t } = useTranslation();
   const onFocused =
     location.pathname.startsWith("/review") ||
     location.pathname.startsWith("/study");
@@ -31,37 +33,37 @@ function RootLayout() {
                 to="/"
                 className="px-3 sm:px-4 py-2 rounded-lg text-sm font-semibold text-ink-400 hover:text-vermillion-500 hover:bg-vermillion-50 [&.active]:text-vermillion-600 [&.active]:bg-vermillion-50 transition-colors"
               >
-                Home
+                {t("nav.home")}
               </Link>
               <Link
                 to="/study"
                 className="px-3 sm:px-4 py-2 rounded-lg text-sm font-semibold text-ink-400 hover:text-jade-600 hover:bg-jade-50 [&.active]:text-jade-600 [&.active]:bg-jade-50 transition-colors"
               >
-                Study
+                {t("nav.study")}
               </Link>
               <Link
                 to="/review"
                 className="px-3 sm:px-4 py-2 rounded-lg text-sm font-semibold text-ink-400 hover:text-gold-600 hover:bg-gold-50 [&.active]:text-gold-600 [&.active]:bg-gold-50 transition-colors"
               >
-                Review
+                {t("nav.review")}
               </Link>
               <Link
                 to="/browse"
                 className="px-3 sm:px-4 py-2 rounded-lg text-sm font-semibold text-ink-400 hover:text-jade-600 hover:bg-jade-50 [&.active]:text-jade-600 [&.active]:bg-jade-50 transition-colors"
               >
-                Browse
+                {t("nav.browse")}
               </Link>
               <Link
                 to="/stats"
                 className="px-3 sm:px-4 py-2 rounded-lg text-sm font-semibold text-ink-400 hover:text-gold-600 hover:bg-gold-50 [&.active]:text-gold-600 [&.active]:bg-gold-50 transition-colors"
               >
-                Stats
+                {t("nav.stats")}
               </Link>
               <Link
                 to="/settings"
                 className="px-3 sm:px-4 py-2 rounded-lg text-sm font-semibold text-ink-400 hover:text-ink-600 hover:bg-ink-50 [&.active]:text-ink-600 [&.active]:bg-ink-100 transition-colors"
               >
-                Settings
+                {t("nav.settings")}
               </Link>
             </nav>
           </div>

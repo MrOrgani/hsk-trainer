@@ -13,6 +13,7 @@ import type { CompletedChar } from "@/components/DrawingCanvas";
 import { AudioButton } from "@/components/AudioButton";
 import { chunky } from "@/components/Button";
 import type { Word } from "@/db/schema";
+import { useTranslation, meaningFor } from "@/lib/i18n";
 
 export const Route = createFileRoute("/study")({
   component: Study,
@@ -20,6 +21,7 @@ export const Route = createFileRoute("/study")({
 
 function Study() {
   const settings = useSettings();
+  const { t, lang } = useTranslation();
   const { queue, index, phase, start, nextPhase, commitCurrent, clear } =
     useStudyStore();
 
@@ -42,7 +44,7 @@ function Study() {
   if (!settings) {
     return (
       <p className="text-center py-20 text-ink-300 font-semibold uppercase tracking-wider text-sm">
-        Loading…
+        {t("common.loading")}
       </p>
     );
   }
@@ -54,13 +56,13 @@ function Study() {
           等一等
         </p>
         <p className="text-2xl font-bold text-ink-800">
-          Nothing new to learn right now.
+          {t("study.nothingNew")}
         </p>
         <p className="mt-2 text-ink-400 font-medium">
-          You've studied all available words!
+          {t("study.allStudied")}
         </p>
         <Link to="/" className={chunky("primary", "mt-8")}>
-          Back to home
+          {t("common.backToHome")}
         </Link>
       </div>
     );
@@ -73,14 +75,15 @@ function Study() {
           <span className="font-hanzi text-3xl font-black">好</span>
         </div>
         <p className="text-3xl sm:text-4xl font-bold text-jade-600">
-          All done!
+          {t("study.allDone")}
         </p>
         <p className="mt-2 text-ink-400 font-medium">
-          {queue.length} new {queue.length === 1 ? "word" : "words"} added to
-          your deck.
+          {t("study.newWordsAdded")
+            .replace("{count}", String(queue.length))
+            .replace("{unit}", queue.length === 1 ? t("study.word") : t("study.words"))}
         </p>
         <Link to="/" className={chunky("primary", "mt-8 w-full")}>
-          Back to home
+          {t("common.backToHome")}
         </Link>
       </div>
     );
@@ -118,7 +121,7 @@ function Study() {
       {phase === "present" && (
         <div className="text-center animate-pop-in">
           <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
-            New word
+            {t("study.newWord")}
           </p>
           <p className="mt-6 font-hanzi text-7xl sm:text-8xl font-black text-ink-800">
             {word.id}
@@ -126,16 +129,16 @@ function Study() {
           <p className="mt-4 text-2xl font-bold text-ink-700">
             {word.pinyin}
           </p>
-          <p className="mt-2 text-lg font-medium text-ink-400">{word.meaningEn}</p>
+          <p className="mt-2 text-lg font-medium text-ink-400">{meaningFor(word, lang)}</p>
           <div className="mt-8 flex items-center justify-center gap-3">
             <AudioButton
               audioFile={word.audioFile}
               fallbackText={word.id}
-              label="Listen"
+              label={t("study.listen")}
               variant="neutral"
             />
             <button onClick={nextPhase} className={chunky("primary")}>
-              Show strokes →
+              {t("study.showStrokes")}
             </button>
           </div>
         </div>
@@ -144,7 +147,7 @@ function Study() {
       {phase === "animate" && (
         <div className="text-center animate-pop-in">
           <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
-            Watch the stroke order
+            {t("study.watchStrokeOrder")}
           </p>
           <div className="mt-6">
             <StrokeAnimationChain
@@ -153,7 +156,7 @@ function Study() {
             />
           </div>
           <button onClick={nextPhase} className={chunky("primary", "mt-8")}>
-            Try it yourself →
+            {t("study.tryItYourself")}
           </button>
         </div>
       )}
@@ -177,6 +180,7 @@ function AttemptPhase({
   onDone: () => void;
   leniency: "strict" | "lenient-order";
 }) {
+  const { t } = useTranslation();
   const [charIndex, setCharIndex] = useState(0);
   const [attempts, setAttempts] = useState<{ mistakes: number }[]>([]);
   const [shrinking, setShrinking] = useState(false);
@@ -246,7 +250,7 @@ function AttemptPhase({
   return (
     <div className="text-center animate-pop-in">
       <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
-        Your turn · {charIndex + 1} / {total}
+        {t("study.yourTurn")} · {charIndex + 1} / {total}
       </p>
       <div
         className="mt-6"

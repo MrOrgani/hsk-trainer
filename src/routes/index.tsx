@@ -5,6 +5,7 @@ import { seedHskLevel } from "@/lib/seed";
 import { getDueCards, getTodayState } from "@/engines/srs";
 import { useSettings } from "@/state/settings-store";
 import { chunky } from "@/components/Button";
+import { useTranslation } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -12,6 +13,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const settings = useSettings();
+  const { t } = useTranslation();
   const [seeded, setSeeded] = useState(false);
 
   useEffect(() => {
@@ -55,10 +57,10 @@ function Home() {
           </span>
         </div>
         <h1 className="font-display text-3xl sm:text-4xl text-ink-800">
-          Let's learn Chinese!
+          {t("home.title")}
         </h1>
         <p className="mt-2 text-ink-400 font-medium">
-          A few minutes a day keeps the characters flowing.
+          {t("home.subtitle")}
         </p>
       </div>
 
@@ -66,7 +68,7 @@ function Home() {
       <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4">
         <div className="rounded-xl card p-4 sm:p-5 text-center">
           <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-ink-300">
-            Due now
+            {t("home.dueNow")}
           </p>
           <p
             className={`mt-1 text-4xl sm:text-5xl font-black tabular-nums ${
@@ -76,18 +78,18 @@ function Home() {
             {dueCount}
           </p>
           <p className="mt-1 text-xs font-medium text-ink-300">
-            {dueCount === 1 ? "character" : "characters"}
+            {dueCount === 1 ? t("home.character") : t("home.characters")}
           </p>
         </div>
         <div className="rounded-xl card p-4 sm:p-5 text-center">
           <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-ink-300">
-            New today
+            {t("home.newToday")}
           </p>
           <p className="mt-1 text-4xl sm:text-5xl font-black tabular-nums text-jade-500">
             {newToday}
             <span className="text-2xl sm:text-3xl text-ink-200"> / {newTarget}</span>
           </p>
-          <p className="mt-1 text-xs font-medium text-ink-300">introduced</p>
+          <p className="mt-1 text-xs font-medium text-ink-300">{t("home.introduced")}</p>
         </div>
       </div>
 
@@ -99,10 +101,10 @@ function Home() {
               加油！
             </p>
             <p className="text-ink-500 font-medium mb-5">
-              {dueCount} {dueCount === 1 ? "character is" : "characters are"} ready for you.
+              {dueCount} {dueCount === 1 ? t("home.characterIs") : t("home.charactersAre")}
             </p>
             <Link to="/review" className={chunky("primary", "w-full")}>
-              Start lesson →
+              {t("home.startLesson")}
             </Link>
           </>
         ) : (
@@ -111,10 +113,10 @@ function Home() {
               开始吧
             </p>
             <p className="text-ink-500 font-medium mb-5">
-              No reviews due. Plant some new characters!
+              {t("home.noReviewsDue")}
             </p>
             <Link to="/study" className={chunky("info", "w-full")}>
-              + Add new characters
+              {t("home.addNewCharacters")}
             </Link>
           </>
         )}
@@ -124,7 +126,7 @@ function Home() {
             to="/study"
             className="mt-3 block w-full text-center text-sm font-semibold text-ink-300 hover:text-jade-500 py-2 transition-colors"
           >
-            + add new characters
+            {t("home.addNewCharactersLower")}
           </Link>
         )}
       </div>

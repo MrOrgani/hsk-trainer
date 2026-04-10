@@ -10,6 +10,7 @@ import { RecognitionPrompt } from "@/components/RecognitionPrompt";
 import { MultipleChoicePrompt } from "@/components/MultipleChoicePrompt";
 import { WritingPrompt } from "@/components/WritingPrompt";
 import { chunky } from "@/components/Button";
+import { useTranslation } from "@/lib/i18n";
 
 export const Route = createFileRoute("/review")({
   component: Review,
@@ -19,6 +20,7 @@ function Review() {
   const settings = useSettings();
   const navigate = useNavigate();
   const { queue, index, start, advance, clear } = useSessionStore();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!settings) return;
@@ -39,7 +41,7 @@ function Review() {
     return (
       <div className="max-w-xl mx-auto px-6 py-24 text-center">
         <p className="text-ink-300 font-semibold uppercase tracking-wider text-sm">
-          Loading…
+          {t("common.loading")}
         </p>
       </div>
     );
@@ -52,13 +54,13 @@ function Review() {
           休息
         </p>
         <p className="text-2xl sm:text-3xl font-bold text-ink-800">
-          Nothing to review!
+          {t("review.nothingToReview")}
         </p>
         <p className="mt-2 text-ink-400 font-medium">
-          Come back later or add new characters.
+          {t("review.comeBackLater")}
         </p>
         <Link to="/" className={chunky("primary", "mt-8")}>
-          Back to home
+          {t("common.backToHome")}
         </Link>
       </div>
     );
@@ -71,19 +73,19 @@ function Review() {
           <span className="font-hanzi text-3xl font-black">完</span>
         </div>
         <p className="text-3xl sm:text-4xl font-bold text-jade-600">
-          Lesson complete!
+          {t("review.lessonComplete")}
         </p>
         <p className="mt-3 text-ink-500 font-medium">
-          {queue.length} {queue.length === 1 ? "character" : "characters"} studied
+          {queue.length} {queue.length === 1 ? t("home.character") : t("home.characters")} {t("review.studied")}
         </p>
         <div className="mt-8 rounded-xl card py-5 px-4">
           <p className="font-display text-vermillion-500 text-3xl">太好了！</p>
           <p className="mt-1 text-sm font-medium text-ink-300">
-            Well done
+            {t("review.wellDone")}
           </p>
         </div>
         <Link to="/" className={chunky("primary", "mt-8 w-full")}>
-          Finish
+          {t("review.finish")}
         </Link>
       </div>
     );

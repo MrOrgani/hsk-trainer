@@ -3,6 +3,7 @@ import { db } from "@/db/dexie";
 import type { Grade, PromptType, Word } from "@/db/schema";
 import { GradeButtons } from "./GradeButtons";
 import { AudioButton } from "./AudioButton";
+import { useTranslation, meaningFor } from "@/lib/i18n";
 
 interface Props {
   word: Word;
@@ -10,12 +11,8 @@ interface Props {
   onGrade: (grade: Grade) => void;
 }
 
-const KICKER: Record<string, string> = {
-  "audio-to-word": "Tap to listen",
-  "meaning-to-word": "Which one means…",
-};
-
 export function MultipleChoicePrompt({ word, promptType, onGrade }: Props) {
+  const { t, lang } = useTranslation();
   const [distractors, setDistractors] = useState<Word[]>([]);
   const [picked, setPicked] = useState<string | null>(null);
 
@@ -38,7 +35,11 @@ export function MultipleChoicePrompt({ word, promptType, onGrade }: Props) {
     return all.sort(() => Math.random() - 0.5);
   }, [word, distractors]);
 
-  const kicker = KICKER[promptType] ?? "";
+  const kicker = promptType === "audio-to-word"
+    ? t("prompt.tapToListen")
+    : promptType === "meaning-to-word"
+      ? t("prompt.whichOneMeans")
+      : "";
 
   return (
     <div className="text-center">
@@ -52,12 +53,12 @@ export function MultipleChoicePrompt({ word, promptType, onGrade }: Props) {
           <AudioButton
             audioFile={word.audioFile}
             fallbackText={word.id}
-            label="Play audio"
+            label={t("common.playAudio")}
           />
         ) : (
           <div className="mx-auto max-w-md rounded-2xl card py-10 px-6">
             <p className="text-2xl sm:text-3xl font-bold text-ink-800 leading-snug">
-              {word.meaningEn}
+              {meaningFor(word, lang)}
             </p>
           </div>
         )}
@@ -113,10 +114,10 @@ export function MultipleChoicePrompt({ word, promptType, onGrade }: Props) {
             {word.pinyin}
           </p>
           <p className="text-base sm:text-lg font-medium text-ink-400">
-            {word.meaningEn}
+            {meaningFor(word, lang)}
           </p>
           <p className="pt-4 text-sm font-semibold uppercase tracking-wider text-ink-300">
-            {picked === word.id ? "Nice! How well did you know it?" : "Not quite — let's try again"}
+            {picked === word.id ? t("prompt.niceHowWell") : t("prompt.notQuite")}
           </p>
           <div className="pt-2">
             <GradeButtons

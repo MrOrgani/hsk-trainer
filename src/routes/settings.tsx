@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { loadOrInitSettings, updateSettings } from "@/state/settings-store";
 import type { Settings } from "@/db/schema";
 import { chunky } from "@/components/Button";
+import { useTranslation } from "@/lib/i18n";
 
 export const Route = createFileRoute("/settings")({
   component: SettingsPage,
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/settings")({
 export function SettingsPage() {
   const [settings, setSettings] = useState<Settings | null>(null);
   const [saved, setSaved] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     loadOrInitSettings().then(setSettings);
@@ -27,7 +29,7 @@ export function SettingsPage() {
   if (!settings) {
     return (
       <p className="text-center py-20 text-ink-300 font-semibold uppercase tracking-wider text-sm">
-        Loading...
+        {t("common.loading")}
       </p>
     );
   }
@@ -38,7 +40,7 @@ export function SettingsPage() {
   return (
     <div className="max-w-xl mx-auto px-5 pt-10 pb-16">
       <h1 className="font-display text-3xl sm:text-4xl text-ink-800 mb-8">
-        Settings
+        {t("settings.title")}
       </h1>
       <div className="space-y-6">
         <div className="rounded-xl card p-5">
@@ -46,7 +48,7 @@ export function SettingsPage() {
             htmlFor="newPerDay"
             className="block text-sm font-semibold text-ink-500 mb-2"
           >
-            New cards per day
+            {t("settings.newCardsPerDay")}
           </label>
           <input
             id="newPerDay"
@@ -68,7 +70,7 @@ export function SettingsPage() {
             htmlFor="sessionSize"
             className="block text-sm font-semibold text-ink-500 mb-2"
           >
-            Session size
+            {t("settings.sessionSize")}
           </label>
           <input
             id="sessionSize"
@@ -90,7 +92,7 @@ export function SettingsPage() {
             htmlFor="uiLanguage"
             className="block text-sm font-semibold text-ink-500 mb-2"
           >
-            Interface language
+            {t("settings.interfaceLanguage")}
           </label>
           <select
             id="uiLanguage"
@@ -104,7 +106,7 @@ export function SettingsPage() {
             className={inputCls}
           >
             <option value="en">English</option>
-            <option value="fr">French</option>
+            <option value="fr">Fran\u00e7ais</option>
           </select>
         </div>
         <div className="rounded-xl card p-5">
@@ -112,7 +114,7 @@ export function SettingsPage() {
             htmlFor="leniency"
             className="block text-sm font-semibold text-ink-500 mb-2"
           >
-            Stroke order leniency
+            {t("settings.strokeOrderLeniency")}
           </label>
           <select
             id="leniency"
@@ -125,12 +127,12 @@ export function SettingsPage() {
             }
             className={inputCls}
           >
-            <option value="strict">Strict</option>
-            <option value="lenient-order">Lenient (order)</option>
+            <option value="strict">{t("settings.strict")}</option>
+            <option value="lenient-order">{t("settings.lenientOrder")}</option>
           </select>
         </div>
         <button onClick={handleSave} className={chunky("primary", "w-full")}>
-          {saved ? "Saved!" : "Save settings"}
+          {saved ? t("settings.saved") : t("settings.saveSettings")}
         </button>
       </div>
     </div>
