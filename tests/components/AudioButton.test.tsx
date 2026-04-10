@@ -11,7 +11,13 @@ describe("AudioButton", () => {
     cancelMock = vi.fn();
     Object.defineProperty(window, "speechSynthesis", {
       configurable: true,
-      value: { speak: speakMock, cancel: cancelMock },
+      value: {
+        speak: speakMock,
+        cancel: cancelMock,
+        getVoices: vi.fn(() => []),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      },
     });
     // jsdom doesn't ship SpeechSynthesisUtterance — provide a minimal stub.
     class FakeUtterance {
