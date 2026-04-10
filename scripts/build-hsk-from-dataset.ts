@@ -70,6 +70,63 @@ async function fetchLevel(level: HskLevel): Promise<SourceEntry[]> {
 }
 
 // ---------------------------------------------------------------------------
+// CFDICT – Chinese-French dictionary (CC BY-SA 3.0)
+// Format per line: Traditional Simplified [pinyin] /def1/def2/.../
+// Source: https://chine.in/mandarin/dictionnaire/CFDICT/
+// ---------------------------------------------------------------------------
+
+const CFDICT_URL = "https://chine.in/mandarin/dictionnaire/CFDICT/cfdict.u8";
+
+/** Parse the CFDICT file into a Map<simplified, frenchDefinitions> */
+async function fetchCfdict(): Promise<Map<string, string>> {
+  console.log(`  Fetching CFDICT from ${CFDICT_URL}`);
+  const res = await fetch(CFDICT_URL);
+  if (!res.ok) {
+    console.warn(`  ⚠ Failed to fetch CFDICT: ${res.status} – French translations will be empty`);
+    return new Map();
+  }
+
+  const text = await res.text();
+  const dict = new Map<string, string[]>();
+
+  for (const line of text.split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+
+    // Split into: Traditional, Simplified, rest ([pinyin] /defs/)
+    const parts = trimmed.split(" ", 2);
+    if (parts.length < 2) continue;
+
+    const simplified = parts[1];
+    const rest = trimmed.slice(parts[0].length + 1 + simplified.length);
+    const bracketEnd = rest.indexOf("]");
+    if (bracketEnd < 0) continue;
+
+    const defsPart = rest.slice(bracketEnd + 1).trim();
+    const defs = defsPart
+      .split("/")
+      .map((d) => d.trim())
+      .filter(Boolean);
+
+    if (defs.length === 0) continue;
+
+    // First entry for a simplified form wins (most common reading)
+    if (!dict.has(simplified)) {
+      dict.set(simplified, defs);
+    }
+  }
+
+  // Join definitions into a single string per word
+  const result = new Map<string, string>();
+  for (const [key, defs] of dict) {
+    result.set(key, defs.join("; "));
+  }
+
+  console.log(`  CFDICT loaded: ${result.size} entries`);
+  return result;
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 
@@ -81,7 +138,11 @@ async function main() {
 
   await mkdir(outDir, { recursive: true });
 
+  // Fetch French dictionary in parallel with first HSK level
+  const frenchDict = await fetchCfdict();
+
   let totalWords = 0;
+  let totalFrench = 0;
 
   for (const level of [1, 2, 3, 4, 5, 6, 7] as HskLevel[]) {
     const entries = await fetchLevel(level);
@@ -96,6 +157,7 @@ async function main() {
       const pinyin = form.transcriptions.pinyin;
       const pinyinNumeric = toCompactNumeric(form.transcriptions.numeric);
       const meaningEn = form.meanings.join("; ");
+      const meaningFr = frenchDict.get(entry.simplified) ?? "";
 
       words.push({
         id: entry.simplified,
@@ -104,7 +166,7 @@ async function main() {
         pinyin,
         pinyinNumeric,
         meaningEn,
-        meaningFr: "",
+        meaningFr,
         frequency: 0, // assigned below
         audioFile: `${pinyinNumeric}.mp3`,
       });
@@ -117,13 +179,16 @@ async function main() {
       words[i].frequency = i + 1;
     }
 
+    const frenchCount = words.filter((w) => w.meaningFr !== "").length;
+    totalFrench += frenchCount;
+
     const outPath = path.join(outDir, `hsk-${level}.json`);
     await writeFile(outPath, JSON.stringify(words, null, 2), "utf-8");
-    console.log(`  HSK ${level}: ${words.length} words -> ${outPath}`);
+    console.log(`  HSK ${level}: ${words.length} words -> ${outPath} (${frenchCount} with French)`);
     totalWords += words.length;
   }
 
-  console.log(`\nTotal: ${totalWords} words across 7 levels`);
+  console.log(`\nTotal: ${totalWords} words across 7 levels (${totalFrench} with French translations, ${totalWords - totalFrench} without)`);
 }
 
 main().catch((err: unknown) => {
