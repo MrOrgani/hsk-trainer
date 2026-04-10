@@ -155,6 +155,16 @@ const translations = {
   "settings.lenientOrder": { en: "Lenient (order)", fr: "Tol\u00e9rant (ordre)" },
   "settings.saved": { en: "Saved!", fr: "Enregistr\u00e9 !" },
   "settings.saveSettings": { en: "Save settings", fr: "Enregistrer" },
+  "settings.resetTitle": { en: "Reset all data", fr: "R\u00e9initialiser les donn\u00e9es" },
+  "settings.resetDescription": {
+    en: "This will delete all your progress, settings, and review history. This action cannot be undone.",
+    fr: "Cela supprimera toute votre progression, vos param\u00e8tres et votre historique de r\u00e9visions. Cette action est irr\u00e9versible.",
+  },
+  "settings.resetButton": { en: "Clear all data", fr: "Effacer toutes les donn\u00e9es" },
+  "settings.resetConfirm": {
+    en: "Are you sure you want to delete all data? This cannot be undone.",
+    fr: "\u00cates-vous s\u00fbr de vouloir supprimer toutes les donn\u00e9es ? Cette action est irr\u00e9versible.",
+  },
 
   // Stats
   "stats.title": { en: "Statistics", fr: "Statistiques" },

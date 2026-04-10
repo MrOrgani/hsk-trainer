@@ -4,6 +4,7 @@ import { loadOrInitSettings, updateSettings } from "@/state/settings-store";
 import type { Settings } from "@/db/schema";
 import { chunky } from "@/components/Button";
 import { useTranslation } from "@/lib/i18n";
+import { db } from "@/db/dexie";
 
 export const Route = createFileRoute("/settings")({
   component: SettingsPage,
@@ -133,6 +134,32 @@ export function SettingsPage() {
         </div>
         <button onClick={handleSave} className={chunky("primary", "w-full")}>
           {saved ? t("settings.saved") : t("settings.saveSettings")}
+        </button>
+      </div>
+
+      {/* Danger zone */}
+      <div className="mt-12 rounded-xl border border-vermillion-200 bg-vermillion-50/40 p-5">
+        <h2 className="font-display text-lg text-vermillion-700 mb-1">
+          {t("settings.resetTitle")}
+        </h2>
+        <p className="text-sm text-ink-500 mb-4">
+          {t("settings.resetDescription")}
+        </p>
+        <button
+          onClick={async () => {
+            if (!window.confirm(t("settings.resetConfirm"))) return;
+            await Promise.all([
+              db.words.clear(),
+              db.srsCards.clear(),
+              db.reviewLog.clear(),
+              db.settings.clear(),
+              db.dailyState.clear(),
+            ]);
+            window.location.reload();
+          }}
+          className="rounded-lg bg-vermillion-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-vermillion-700 active:scale-[.97] transition-all"
+        >
+          {t("settings.resetButton")}
         </button>
       </div>
     </div>
