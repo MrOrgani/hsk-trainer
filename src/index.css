@@ -13,14 +13,17 @@
   }
   body {
     background-color: #F5F0E8;
-    @apply text-ink-900 font-sans;
+    color: #1c1917;
+    @apply font-sans;
   }
 }
 
 @layer components {
   /* Shared card surface: warm paper with soft shadow */
   .card {
-    @apply bg-paper shadow-card border border-ink-100/50;
+    background-color: #FDFBF7;
+    border: 1px solid rgb(234 229 220 / 0.5);
+    @apply shadow-card;
   }
 
   /* Subtle rice-paper noise texture */
@@ -42,7 +45,7 @@
   .seal-stamp {
     @apply inline-flex items-center justify-center;
     @apply rounded-lg border-2 border-current;
-    @apply font-display;
+    font-family: "ZCOOL KuaiLe", "Noto Sans SC", cursive;
     box-shadow: inset 0 0 0 2px currentColor;
   }
 }
