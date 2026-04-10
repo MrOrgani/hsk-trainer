@@ -41,6 +41,15 @@
     z-index: 0;
   }
 
+  /* 米字格 rice-paper grid for hanzi writing practice (8-section with diagonals) */
+  .hanzi-grid {
+    position: relative;
+    background-color: #FDFBF7;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cline x1='50%25' y1='0' x2='50%25' y2='100%25' stroke='%23d6cdbf' stroke-width='1' stroke-dasharray='8 8'/%3E%3Cline x1='0' y1='50%25' x2='100%25' y2='50%25' stroke='%23d6cdbf' stroke-width='1' stroke-dasharray='8 8'/%3E%3Cline x1='0' y1='0' x2='100%25' y2='100%25' stroke='%23d6cdbf' stroke-width='0.7' stroke-dasharray='8 8'/%3E%3Cline x1='100%25' y1='0' x2='0' y2='100%25' stroke='%23d6cdbf' stroke-width='0.7' stroke-dasharray='8 8'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    border: 1.5px solid #d6cdbf;
+  }
+
   /* Seal stamp effect for badges */
   .seal-stamp {
     @apply inline-flex items-center justify-center;
