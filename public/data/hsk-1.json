@@ -1,134 +1,6907 @@
 [
   {
-    "id": "你好",
+    "id": "爱",
+    "hskLevel": 1,
     "characters": [
-      "你",
+      "爱"
+    ],
+    "pinyin": "ài",
+    "pinyinNumeric": "ai4",
+    "meaningEn": "to love; to be fond of; to like; affection; to be inclined (to do sth); to tend to (happen)",
+    "meaningFr": "",
+    "frequency": 1,
+    "audioFile": "ai4.mp3"
+  },
+  {
+    "id": "爱好",
+    "hskLevel": 1,
+    "characters": [
+      "爱",
       "好"
     ],
-    "pinyin": "nǐ hǎo",
-    "pinyinNumeric": "ni3hao3",
-    "meaningEn": "hello",
-    "meaningFr": "bonjour",
-    "frequency": 1,
-    "hskLevel": 1,
-    "audioFile": "ni3hao3.mp3"
-  },
-  {
-    "id": "谢谢",
-    "characters": [
-      "谢",
-      "谢"
-    ],
-    "pinyin": "xiè xiè",
-    "pinyinNumeric": "xie4xie4",
-    "meaningEn": "thank you",
-    "meaningFr": "merci",
+    "pinyin": "ài hào",
+    "pinyinNumeric": "ai4hao4",
+    "meaningEn": "to like; to be fond of; to take pleasure in; to be keen on; interest; hobby",
+    "meaningFr": "",
     "frequency": 2,
-    "hskLevel": 1,
-    "audioFile": "xie4xie4.mp3"
+    "audioFile": "ai4hao4.mp3"
   },
   {
-    "id": "我",
+    "id": "八",
+    "hskLevel": 1,
     "characters": [
-      "我"
+      "八"
     ],
-    "pinyin": "wǒ",
-    "pinyinNumeric": "wo3",
-    "meaningEn": "I / me",
-    "meaningFr": "je / moi",
+    "pinyin": "bā",
+    "pinyinNumeric": "ba1",
+    "meaningEn": "eight; 8",
+    "meaningFr": "",
     "frequency": 3,
-    "hskLevel": 1,
-    "audioFile": "wo3.mp3"
+    "audioFile": "ba1.mp3"
   },
   {
-    "id": "你",
+    "id": "吧",
+    "hskLevel": 1,
     "characters": [
-      "你"
+      "吧"
     ],
-    "pinyin": "nǐ",
-    "pinyinNumeric": "ni3",
-    "meaningEn": "you",
-    "meaningFr": "tu / toi",
+    "pinyin": "bā",
+    "pinyinNumeric": "ba1",
+    "meaningEn": "bar (loanword) (serving drinks, or providing Internet access etc); to puff (on a pipe etc); (onom.) bang; abbr. for 贴吧",
+    "meaningFr": "",
     "frequency": 4,
-    "hskLevel": 1,
-    "audioFile": "ni3.mp3"
+    "audioFile": "ba1.mp3"
   },
   {
-    "id": "他",
+    "id": "爸",
+    "hskLevel": 1,
     "characters": [
-      "他"
+      "爸"
     ],
-    "pinyin": "tā",
-    "pinyinNumeric": "ta1",
-    "meaningEn": "he / him",
-    "meaningFr": "il / lui",
+    "pinyin": "bà",
+    "pinyinNumeric": "ba4",
+    "meaningEn": "father; dad; pa; papa",
+    "meaningFr": "",
     "frequency": 5,
-    "hskLevel": 1,
-    "audioFile": "ta1.mp3"
+    "audioFile": "ba4.mp3"
   },
   {
-    "id": "水",
+    "id": "爸爸",
+    "hskLevel": 1,
     "characters": [
-      "水"
+      "爸",
+      "爸"
     ],
-    "pinyin": "shuǐ",
-    "pinyinNumeric": "shui3",
-    "meaningEn": "water",
-    "meaningFr": "eau",
+    "pinyin": "bà ba",
+    "pinyinNumeric": "ba4ba5",
+    "meaningEn": "(coll.) father; dad",
+    "meaningFr": "",
     "frequency": 6,
-    "hskLevel": 1,
-    "audioFile": "shui3.mp3"
+    "audioFile": "ba4ba5.mp3"
   },
   {
-    "id": "是",
-    "characters": [
-      "是"
-    ],
-    "pinyin": "shì",
-    "pinyinNumeric": "shi4",
-    "meaningEn": "to be",
-    "meaningFr": "être",
-    "frequency": 7,
+    "id": "白",
     "hskLevel": 1,
-    "audioFile": "shi4.mp3"
+    "characters": [
+      "白"
+    ],
+    "pinyin": "Bái",
+    "pinyinNumeric": "bai2",
+    "meaningEn": "surname Bai",
+    "meaningFr": "",
+    "frequency": 7,
+    "audioFile": "bai2.mp3"
+  },
+  {
+    "id": "百",
+    "hskLevel": 1,
+    "characters": [
+      "百"
+    ],
+    "pinyin": "Bǎi",
+    "pinyinNumeric": "bai3",
+    "meaningEn": "surname Bai",
+    "meaningFr": "",
+    "frequency": 8,
+    "audioFile": "bai3.mp3"
+  },
+  {
+    "id": "白天",
+    "hskLevel": 1,
+    "characters": [
+      "白",
+      "天"
+    ],
+    "pinyin": "bái tiān",
+    "pinyinNumeric": "bai2tian1",
+    "meaningEn": "daytime; during the day; day",
+    "meaningFr": "",
+    "frequency": 9,
+    "audioFile": "bai2tian1.mp3"
+  },
+  {
+    "id": "班",
+    "hskLevel": 1,
+    "characters": [
+      "班"
+    ],
+    "pinyin": "Bān",
+    "pinyinNumeric": "ban1",
+    "meaningEn": "surname Ban",
+    "meaningFr": "",
+    "frequency": 10,
+    "audioFile": "ban1.mp3"
+  },
+  {
+    "id": "半",
+    "hskLevel": 1,
+    "characters": [
+      "半"
+    ],
+    "pinyin": "bàn",
+    "pinyinNumeric": "ban4",
+    "meaningEn": "half; semi-; incomplete; (after a number) and a half",
+    "meaningFr": "",
+    "frequency": 11,
+    "audioFile": "ban4.mp3"
+  },
+  {
+    "id": "半年",
+    "hskLevel": 1,
+    "characters": [
+      "半",
+      "年"
+    ],
+    "pinyin": "bàn nián",
+    "pinyinNumeric": "ban4nian2",
+    "meaningEn": "half a year",
+    "meaningFr": "",
+    "frequency": 12,
+    "audioFile": "ban4nian2.mp3"
+  },
+  {
+    "id": "半天",
+    "hskLevel": 1,
+    "characters": [
+      "半",
+      "天"
+    ],
+    "pinyin": "bàn tiān",
+    "pinyinNumeric": "ban4tian1",
+    "meaningEn": "half of the day; a long time; quite a while; midair",
+    "meaningFr": "",
+    "frequency": 13,
+    "audioFile": "ban4tian1.mp3"
+  },
+  {
+    "id": "帮",
+    "hskLevel": 1,
+    "characters": [
+      "帮"
+    ],
+    "pinyin": "bāng",
+    "pinyinNumeric": "bang1",
+    "meaningEn": "old variant of 帮",
+    "meaningFr": "",
+    "frequency": 14,
+    "audioFile": "bang1.mp3"
+  },
+  {
+    "id": "帮忙",
+    "hskLevel": 1,
+    "characters": [
+      "帮",
+      "忙"
+    ],
+    "pinyin": "bāng máng",
+    "pinyinNumeric": "bang1mang2",
+    "meaningEn": "to help; to lend a hand; to do a favor; to do a good turn",
+    "meaningFr": "",
+    "frequency": 15,
+    "audioFile": "bang1mang2.mp3"
+  },
+  {
+    "id": "包",
+    "hskLevel": 1,
+    "characters": [
+      "包"
+    ],
+    "pinyin": "Bāo",
+    "pinyinNumeric": "bao1",
+    "meaningEn": "surname Bao",
+    "meaningFr": "",
+    "frequency": 16,
+    "audioFile": "bao1.mp3"
+  },
+  {
+    "id": "包子",
+    "hskLevel": 1,
+    "characters": [
+      "包",
+      "子"
+    ],
+    "pinyin": "bāo zi",
+    "pinyinNumeric": "bao1zi5",
+    "meaningEn": "bao (steamed stuffed bun)",
+    "meaningFr": "",
+    "frequency": 17,
+    "audioFile": "bao1zi5.mp3"
+  },
+  {
+    "id": "杯",
+    "hskLevel": 1,
+    "characters": [
+      "杯"
+    ],
+    "pinyin": "bēi",
+    "pinyinNumeric": "bei1",
+    "meaningEn": "cup; trophy cup; classifier for certain containers of liquids: glass, cup",
+    "meaningFr": "",
+    "frequency": 18,
+    "audioFile": "bei1.mp3"
+  },
+  {
+    "id": "北",
+    "hskLevel": 1,
+    "characters": [
+      "北"
+    ],
+    "pinyin": "běi",
+    "pinyinNumeric": "bei3",
+    "meaningEn": "north; (classical) to be defeated",
+    "meaningFr": "",
+    "frequency": 19,
+    "audioFile": "bei3.mp3"
+  },
+  {
+    "id": "北边",
+    "hskLevel": 1,
+    "characters": [
+      "北",
+      "边"
+    ],
+    "pinyin": "běi biān",
+    "pinyinNumeric": "bei3bian1",
+    "meaningEn": "north; north side; northern part; to the north of",
+    "meaningFr": "",
+    "frequency": 20,
+    "audioFile": "bei3bian1.mp3"
+  },
+  {
+    "id": "北京",
+    "hskLevel": 1,
+    "characters": [
+      "北",
+      "京"
+    ],
+    "pinyin": "Běi jīng",
+    "pinyinNumeric": "bei3jing1",
+    "meaningEn": "Beijing, capital of the People's Republic of China",
+    "meaningFr": "",
+    "frequency": 21,
+    "audioFile": "bei3jing1.mp3"
+  },
+  {
+    "id": "杯子",
+    "hskLevel": 1,
+    "characters": [
+      "杯",
+      "子"
+    ],
+    "pinyin": "bēi zi",
+    "pinyinNumeric": "bei1zi5",
+    "meaningEn": "cup; glass",
+    "meaningFr": "",
+    "frequency": 22,
+    "audioFile": "bei1zi5.mp3"
+  },
+  {
+    "id": "本",
+    "hskLevel": 1,
+    "characters": [
+      "本"
+    ],
+    "pinyin": "běn",
+    "pinyinNumeric": "ben3",
+    "meaningEn": "root; stem; origin; source; this; the current; original; inherent; originally; classifier for books, periodicals, files etc",
+    "meaningFr": "",
+    "frequency": 23,
+    "audioFile": "ben3.mp3"
+  },
+  {
+    "id": "本子",
+    "hskLevel": 1,
+    "characters": [
+      "本",
+      "子"
+    ],
+    "pinyin": "běn zi",
+    "pinyinNumeric": "ben3zi5",
+    "meaningEn": "book; notebook; Japanese-style self-published comic (esp. an erotic one), aka \"dōjinshi\"; edition",
+    "meaningFr": "",
+    "frequency": 24,
+    "audioFile": "ben3zi5.mp3"
+  },
+  {
+    "id": "比",
+    "hskLevel": 1,
+    "characters": [
+      "比"
+    ],
+    "pinyin": "Bǐ",
+    "pinyinNumeric": "bi3",
+    "meaningEn": "Belgium; Belgian; abbr. for 比利时",
+    "meaningFr": "",
+    "frequency": 25,
+    "audioFile": "bi3.mp3"
+  },
+  {
+    "id": "别",
+    "hskLevel": 1,
+    "characters": [
+      "别"
+    ],
+    "pinyin": "Bié",
+    "pinyinNumeric": "bie2",
+    "meaningEn": "surname Bie",
+    "meaningFr": "",
+    "frequency": 26,
+    "audioFile": "bie2.mp3"
+  },
+  {
+    "id": "别的",
+    "hskLevel": 1,
+    "characters": [
+      "别",
+      "的"
+    ],
+    "pinyin": "bié de",
+    "pinyinNumeric": "bie2de5",
+    "meaningEn": "else; other",
+    "meaningFr": "",
+    "frequency": 27,
+    "audioFile": "bie2de5.mp3"
+  },
+  {
+    "id": "别人",
+    "hskLevel": 1,
+    "characters": [
+      "别",
+      "人"
+    ],
+    "pinyin": "bié ren",
+    "pinyinNumeric": "bie2ren5",
+    "meaningEn": "other people; others; other person",
+    "meaningFr": "",
+    "frequency": 28,
+    "audioFile": "bie2ren5.mp3"
+  },
+  {
+    "id": "病",
+    "hskLevel": 1,
+    "characters": [
+      "病"
+    ],
+    "pinyin": "bìng",
+    "pinyinNumeric": "bing4",
+    "meaningEn": "illness; disease; to fall ill; defect",
+    "meaningFr": "",
+    "frequency": 29,
+    "audioFile": "bing4.mp3"
+  },
+  {
+    "id": "病人",
+    "hskLevel": 1,
+    "characters": [
+      "病",
+      "人"
+    ],
+    "pinyin": "bìng rén",
+    "pinyinNumeric": "bing4ren2",
+    "meaningEn": "sick person; patient; invalid",
+    "meaningFr": "",
+    "frequency": 30,
+    "audioFile": "bing4ren2.mp3"
   },
   {
     "id": "不",
+    "hskLevel": 1,
     "characters": [
       "不"
     ],
     "pinyin": "bù",
     "pinyinNumeric": "bu4",
-    "meaningEn": "not",
-    "meaningFr": "ne pas",
-    "frequency": 8,
-    "hskLevel": 1,
+    "meaningEn": "no; not so; (bound form) not; un-",
+    "meaningFr": "",
+    "frequency": 31,
     "audioFile": "bu4.mp3"
   },
   {
-    "id": "在",
+    "id": "不大",
+    "hskLevel": 1,
     "characters": [
+      "不",
+      "大"
+    ],
+    "pinyin": "bù dà",
+    "pinyinNumeric": "bu4da4",
+    "meaningEn": "not very; not too; not often",
+    "meaningFr": "",
+    "frequency": 32,
+    "audioFile": "bu4da4.mp3"
+  },
+  {
+    "id": "不对",
+    "hskLevel": 1,
+    "characters": [
+      "不",
+      "对"
+    ],
+    "pinyin": "bù duì",
+    "pinyinNumeric": "bu4dui4",
+    "meaningEn": "incorrect; wrong; amiss; abnormal; queer",
+    "meaningFr": "",
+    "frequency": 33,
+    "audioFile": "bu4dui4.mp3"
+  },
+  {
+    "id": "不客气",
+    "hskLevel": 1,
+    "characters": [
+      "不",
+      "客",
+      "气"
+    ],
+    "pinyin": "bù kè qi",
+    "pinyinNumeric": "bu4ke4qi5",
+    "meaningEn": "you're welcome; don't mention it; impolite; rude; blunt",
+    "meaningFr": "",
+    "frequency": 34,
+    "audioFile": "bu4ke4qi5.mp3"
+  },
+  {
+    "id": "不用",
+    "hskLevel": 1,
+    "characters": [
+      "不",
+      "用"
+    ],
+    "pinyin": "bù yòng",
+    "pinyinNumeric": "bu4yong4",
+    "meaningEn": "need not",
+    "meaningFr": "",
+    "frequency": 35,
+    "audioFile": "bu4yong4.mp3"
+  },
+  {
+    "id": "菜",
+    "hskLevel": 1,
+    "characters": [
+      "菜"
+    ],
+    "pinyin": "cài",
+    "pinyinNumeric": "cai4",
+    "meaningEn": "dish (type of food); vegetable; cuisine; (coll.) (one's) type; (of one's skills etc) weak; poor",
+    "meaningFr": "",
+    "frequency": 36,
+    "audioFile": "cai4.mp3"
+  },
+  {
+    "id": "差",
+    "hskLevel": 1,
+    "characters": [
+      "差"
+    ],
+    "pinyin": "chā",
+    "pinyinNumeric": "cha1",
+    "meaningEn": "difference; discrepancy; (math.) difference (amount remaining after a subtraction); (literary) a little; somewhat; slightly",
+    "meaningFr": "",
+    "frequency": 37,
+    "audioFile": "cha1.mp3"
+  },
+  {
+    "id": "茶",
+    "hskLevel": 1,
+    "characters": [
+      "茶"
+    ],
+    "pinyin": "chá",
+    "pinyinNumeric": "cha2",
+    "meaningEn": "tea; tea plant",
+    "meaningFr": "",
+    "frequency": 38,
+    "audioFile": "cha2.mp3"
+  },
+  {
+    "id": "常",
+    "hskLevel": 1,
+    "characters": [
+      "常"
+    ],
+    "pinyin": "Cháng",
+    "pinyinNumeric": "chang2",
+    "meaningEn": "surname Chang",
+    "meaningFr": "",
+    "frequency": 39,
+    "audioFile": "chang2.mp3"
+  },
+  {
+    "id": "唱",
+    "hskLevel": 1,
+    "characters": [
+      "唱"
+    ],
+    "pinyin": "chàng",
+    "pinyinNumeric": "chang4",
+    "meaningEn": "to sing; to call loudly; to chant",
+    "meaningFr": "",
+    "frequency": 40,
+    "audioFile": "chang4.mp3"
+  },
+  {
+    "id": "常常",
+    "hskLevel": 1,
+    "characters": [
+      "常",
+      "常"
+    ],
+    "pinyin": "cháng cháng",
+    "pinyinNumeric": "chang2chang2",
+    "meaningEn": "frequently; often",
+    "meaningFr": "",
+    "frequency": 41,
+    "audioFile": "chang2chang2.mp3"
+  },
+  {
+    "id": "唱歌",
+    "hskLevel": 1,
+    "characters": [
+      "唱",
+      "歌"
+    ],
+    "pinyin": "chàng gē",
+    "pinyinNumeric": "chang4ge1",
+    "meaningEn": "to sing a song",
+    "meaningFr": "",
+    "frequency": 42,
+    "audioFile": "chang4ge1.mp3"
+  },
+  {
+    "id": "车",
+    "hskLevel": 1,
+    "characters": [
+      "车"
+    ],
+    "pinyin": "Chē",
+    "pinyinNumeric": "che1",
+    "meaningEn": "surname Che",
+    "meaningFr": "",
+    "frequency": 43,
+    "audioFile": "che1.mp3"
+  },
+  {
+    "id": "车票",
+    "hskLevel": 1,
+    "characters": [
+      "车",
+      "票"
+    ],
+    "pinyin": "chē piào",
+    "pinyinNumeric": "che1piao4",
+    "meaningEn": "ticket (for a bus or train)",
+    "meaningFr": "",
+    "frequency": 44,
+    "audioFile": "che1piao4.mp3"
+  },
+  {
+    "id": "车上",
+    "hskLevel": 1,
+    "characters": [
+      "车",
+      "上"
+    ],
+    "pinyin": "chē shàng",
+    "pinyinNumeric": "che1shang4",
+    "meaningEn": "Car",
+    "meaningFr": "",
+    "frequency": 45,
+    "audioFile": "che1shang4.mp3"
+  },
+  {
+    "id": "车站",
+    "hskLevel": 1,
+    "characters": [
+      "车",
+      "站"
+    ],
+    "pinyin": "chē zhàn",
+    "pinyinNumeric": "che1zhan4",
+    "meaningEn": "rail station; bus stop",
+    "meaningFr": "",
+    "frequency": 46,
+    "audioFile": "che1zhan4.mp3"
+  },
+  {
+    "id": "吃",
+    "hskLevel": 1,
+    "characters": [
+      "吃"
+    ],
+    "pinyin": "chī",
+    "pinyinNumeric": "chi1",
+    "meaningEn": "to eat; to consume; to eat at (a cafeteria etc); to eradicate; to destroy; to absorb; to suffer (shock, injury, defeat etc)",
+    "meaningFr": "",
+    "frequency": 47,
+    "audioFile": "chi1.mp3"
+  },
+  {
+    "id": "吃饭",
+    "hskLevel": 1,
+    "characters": [
+      "吃",
+      "饭"
+    ],
+    "pinyin": "chī fàn",
+    "pinyinNumeric": "chi1fan4",
+    "meaningEn": "to have a meal; to eat; to make a living",
+    "meaningFr": "",
+    "frequency": 48,
+    "audioFile": "chi1fan4.mp3"
+  },
+  {
+    "id": "重",
+    "hskLevel": 1,
+    "characters": [
+      "重"
+    ],
+    "pinyin": "chóng",
+    "pinyinNumeric": "chong2",
+    "meaningEn": "to repeat; repetition; again; re-; classifier: layer",
+    "meaningFr": "",
+    "frequency": 49,
+    "audioFile": "chong2.mp3"
+  },
+  {
+    "id": "出",
+    "hskLevel": 1,
+    "characters": [
+      "出"
+    ],
+    "pinyin": "chū",
+    "pinyinNumeric": "chu1",
+    "meaningEn": "to go out; to come out; to occur; to produce; to go beyond; to rise; to put forth; to happen; (used after a verb to indicate an outward direction or a positive result); classifier for dramas, plays, operas etc",
+    "meaningFr": "",
+    "frequency": 50,
+    "audioFile": "chu1.mp3"
+  },
+  {
+    "id": "出来",
+    "hskLevel": 1,
+    "characters": [
+      "出",
+      "来"
+    ],
+    "pinyin": "chū lái",
+    "pinyinNumeric": "chu1lai2",
+    "meaningEn": "to come out; to appear; to arise",
+    "meaningFr": "",
+    "frequency": 51,
+    "audioFile": "chu1lai2.mp3"
+  },
+  {
+    "id": "出去",
+    "hskLevel": 1,
+    "characters": [
+      "出",
+      "去"
+    ],
+    "pinyin": "chū qù",
+    "pinyinNumeric": "chu1qu4",
+    "meaningEn": "to go out",
+    "meaningFr": "",
+    "frequency": 52,
+    "audioFile": "chu1qu4.mp3"
+  },
+  {
+    "id": "穿",
+    "hskLevel": 1,
+    "characters": [
+      "穿"
+    ],
+    "pinyin": "chuān",
+    "pinyinNumeric": "chuan1",
+    "meaningEn": "to wear; to put on; to dress; to bore through; to pierce; to perforate; to penetrate; to pass through; to thread",
+    "meaningFr": "",
+    "frequency": 53,
+    "audioFile": "chuan1.mp3"
+  },
+  {
+    "id": "床",
+    "hskLevel": 1,
+    "characters": [
+      "床"
+    ],
+    "pinyin": "chuáng",
+    "pinyinNumeric": "chuang2",
+    "meaningEn": "bed; couch; classifier for beds",
+    "meaningFr": "",
+    "frequency": 54,
+    "audioFile": "chuang2.mp3"
+  },
+  {
+    "id": "次",
+    "hskLevel": 1,
+    "characters": [
+      "次"
+    ],
+    "pinyin": "cì",
+    "pinyinNumeric": "ci4",
+    "meaningEn": "next in sequence; second; the second (day, time etc); secondary; vice-; sub-; infra-; inferior quality; substandard; order; sequence; hypo- (chemistry); classifier for enumerated events: time",
+    "meaningFr": "",
+    "frequency": 55,
+    "audioFile": "ci4.mp3"
+  },
+  {
+    "id": "从",
+    "hskLevel": 1,
+    "characters": [
+      "从"
+    ],
+    "pinyin": "cóng",
+    "pinyinNumeric": "cong2",
+    "meaningEn": "variant of 从",
+    "meaningFr": "",
+    "frequency": 56,
+    "audioFile": "cong2.mp3"
+  },
+  {
+    "id": "错",
+    "hskLevel": 1,
+    "characters": [
+      "错"
+    ],
+    "pinyin": "Cuò",
+    "pinyinNumeric": "cuo4",
+    "meaningEn": "surname Cuo",
+    "meaningFr": "",
+    "frequency": 57,
+    "audioFile": "cuo4.mp3"
+  },
+  {
+    "id": "打",
+    "hskLevel": 1,
+    "characters": [
+      "打"
+    ],
+    "pinyin": "dá",
+    "pinyinNumeric": "da2",
+    "meaningEn": "dozen (loanword)",
+    "meaningFr": "",
+    "frequency": 58,
+    "audioFile": "da2.mp3"
+  },
+  {
+    "id": "大",
+    "hskLevel": 1,
+    "characters": [
+      "大"
+    ],
+    "pinyin": "dà",
+    "pinyinNumeric": "da4",
+    "meaningEn": "big; large; great; older (than another person); eldest (as in 姐); greatly; freely; fully; (dialect) father; (dialect) uncle (father's brother)",
+    "meaningFr": "",
+    "frequency": 59,
+    "audioFile": "da4.mp3"
+  },
+  {
+    "id": "打车",
+    "hskLevel": 1,
+    "characters": [
+      "打",
+      "车"
+    ],
+    "pinyin": "dǎ chē",
+    "pinyinNumeric": "da3che1",
+    "meaningEn": "to take a taxi (in town); to hitch a lift",
+    "meaningFr": "",
+    "frequency": 60,
+    "audioFile": "da3che1.mp3"
+  },
+  {
+    "id": "打电话",
+    "hskLevel": 1,
+    "characters": [
+      "打",
+      "电",
+      "话"
+    ],
+    "pinyin": "dǎ diàn huà",
+    "pinyinNumeric": "da3dian4hua4",
+    "meaningEn": "to make a telephone call",
+    "meaningFr": "",
+    "frequency": 61,
+    "audioFile": "da3dian4hua4.mp3"
+  },
+  {
+    "id": "打开",
+    "hskLevel": 1,
+    "characters": [
+      "打",
+      "开"
+    ],
+    "pinyin": "dǎ kāi",
+    "pinyinNumeric": "da3kai1",
+    "meaningEn": "to open; to show (a ticket); to turn on; to switch on",
+    "meaningFr": "",
+    "frequency": 62,
+    "audioFile": "da3kai1.mp3"
+  },
+  {
+    "id": "打球",
+    "hskLevel": 1,
+    "characters": [
+      "打",
+      "球"
+    ],
+    "pinyin": "dǎ qiú",
+    "pinyinNumeric": "da3qiu2",
+    "meaningEn": "to play ball; to play with a ball",
+    "meaningFr": "",
+    "frequency": 63,
+    "audioFile": "da3qiu2.mp3"
+  },
+  {
+    "id": "大学",
+    "hskLevel": 1,
+    "characters": [
+      "大",
+      "学"
+    ],
+    "pinyin": "Dà xué",
+    "pinyinNumeric": "da4xue2",
+    "meaningEn": "the Great Learning, one of the Four Books 四书 in Confucianism",
+    "meaningFr": "",
+    "frequency": 64,
+    "audioFile": "da4xue2.mp3"
+  },
+  {
+    "id": "大学生",
+    "hskLevel": 1,
+    "characters": [
+      "大",
+      "学",
+      "生"
+    ],
+    "pinyin": "dà xué shēng",
+    "pinyinNumeric": "da4xue2sheng1",
+    "meaningEn": "university student; college student",
+    "meaningFr": "",
+    "frequency": 65,
+    "audioFile": "da4xue2sheng1.mp3"
+  },
+  {
+    "id": "到",
+    "hskLevel": 1,
+    "characters": [
+      "到"
+    ],
+    "pinyin": "dào",
+    "pinyinNumeric": "dao4",
+    "meaningEn": "to reach; to arrive; to leave for; to go to; to (a place); until (a time); up to (a point); (verb complement indicating arriving at a place or reaching a point); considerate; thoughtful; thorough",
+    "meaningFr": "",
+    "frequency": 66,
+    "audioFile": "dao4.mp3"
+  },
+  {
+    "id": "地",
+    "hskLevel": 1,
+    "characters": [
+      "地"
+    ],
+    "pinyin": "de",
+    "pinyinNumeric": "de5",
+    "meaningEn": "-ly; structural particle: used before a verb or adjective, linking it to preceding modifying adverbial adjunct",
+    "meaningFr": "",
+    "frequency": 67,
+    "audioFile": "de5.mp3"
+  },
+  {
+    "id": "的",
+    "hskLevel": 1,
+    "characters": [
+      "的"
+    ],
+    "pinyin": "de",
+    "pinyinNumeric": "de5",
+    "meaningEn": "of; ~'s (possessive particle); (used after an attribute); (used to form a nominal expression); (used at the end of a declarative sentence for emphasis); also pr. [dì] or [di] in poetry and songs",
+    "meaningFr": "",
+    "frequency": 68,
+    "audioFile": "de5.mp3"
+  },
+  {
+    "id": "得到",
+    "hskLevel": 1,
+    "characters": [
+      "得",
+      "到"
+    ],
+    "pinyin": "dé dào",
+    "pinyinNumeric": "de2dao4",
+    "meaningEn": "to get; to obtain; to receive",
+    "meaningFr": "",
+    "frequency": 69,
+    "audioFile": "de2dao4.mp3"
+  },
+  {
+    "id": "等",
+    "hskLevel": 1,
+    "characters": [
+      "等"
+    ],
+    "pinyin": "děng",
+    "pinyinNumeric": "deng3",
+    "meaningEn": "class; rank; grade; equal to; same as; to wait for; to await; et cetera; and so on; et al. (and other authors); after; as soon as; once",
+    "meaningFr": "",
+    "frequency": 70,
+    "audioFile": "deng3.mp3"
+  },
+  {
+    "id": "弟",
+    "hskLevel": 1,
+    "characters": [
+      "弟"
+    ],
+    "pinyin": "dì",
+    "pinyinNumeric": "di4",
+    "meaningEn": "younger brother; junior male; I (modest word in letter)",
+    "meaningFr": "",
+    "frequency": 71,
+    "audioFile": "di4.mp3"
+  },
+  {
+    "id": "第",
+    "hskLevel": 1,
+    "characters": [
+      "第"
+    ],
+    "pinyin": "dì",
+    "pinyinNumeric": "di4",
+    "meaningEn": "(prefix indicating ordinal number, as in 六 \"sixth\"); (literary) grades in which successful candidates in the imperial examinations were placed; (old) residence of a high official; (literary) but; however; (literary) only; just",
+    "meaningFr": "",
+    "frequency": 72,
+    "audioFile": "di4.mp3"
+  },
+  {
+    "id": "弟弟",
+    "hskLevel": 1,
+    "characters": [
+      "弟",
+      "弟"
+    ],
+    "pinyin": "dì di",
+    "pinyinNumeric": "di4di5",
+    "meaningEn": "younger brother",
+    "meaningFr": "",
+    "frequency": 73,
+    "audioFile": "di4di5.mp3"
+  },
+  {
+    "id": "地点",
+    "hskLevel": 1,
+    "characters": [
+      "地",
+      "点"
+    ],
+    "pinyin": "dì diǎn",
+    "pinyinNumeric": "di4dian3",
+    "meaningEn": "place; site; location; venue",
+    "meaningFr": "",
+    "frequency": 74,
+    "audioFile": "di4dian3.mp3"
+  },
+  {
+    "id": "第二",
+    "hskLevel": 1,
+    "characters": [
+      "第",
+      "二"
+    ],
+    "pinyin": "dì èr",
+    "pinyinNumeric": "di4er4",
+    "meaningEn": "second; number two; next; secondary",
+    "meaningFr": "",
+    "frequency": 75,
+    "audioFile": "di4er4.mp3"
+  },
+  {
+    "id": "地方",
+    "hskLevel": 1,
+    "characters": [
+      "地",
+      "方"
+    ],
+    "pinyin": "dì fāng",
+    "pinyinNumeric": "di4fang1",
+    "meaningEn": "region; regional (away from the central administration); local",
+    "meaningFr": "",
+    "frequency": 76,
+    "audioFile": "di4fang1.mp3"
+  },
+  {
+    "id": "地上",
+    "hskLevel": 1,
+    "characters": [
+      "地",
+      "上"
+    ],
+    "pinyin": "dì shang",
+    "pinyinNumeric": "di4shang5",
+    "meaningEn": "on the ground; on the floor",
+    "meaningFr": "",
+    "frequency": 77,
+    "audioFile": "di4shang5.mp3"
+  },
+  {
+    "id": "地图",
+    "hskLevel": 1,
+    "characters": [
+      "地",
+      "图"
+    ],
+    "pinyin": "dì tú",
+    "pinyinNumeric": "di4tu2",
+    "meaningEn": "map",
+    "meaningFr": "",
+    "frequency": 78,
+    "audioFile": "di4tu2.mp3"
+  },
+  {
+    "id": "点",
+    "hskLevel": 1,
+    "characters": [
+      "点"
+    ],
+    "pinyin": "diǎn",
+    "pinyinNumeric": "dian3",
+    "meaningEn": "point; dot; drop; speck; o'clock; point (in space or time); to draw a dot; to check on a list; to choose; to order (food in a restaurant); to touch briefly; to hint; to light; to ignite; to pour a liquid drop by drop; (old) one fifth of a two-hour watch 更; dot stroke in Chinese characters; classifier for items",
+    "meaningFr": "",
+    "frequency": 79,
+    "audioFile": "dian3.mp3"
+  },
+  {
+    "id": "电",
+    "hskLevel": 1,
+    "characters": [
+      "电"
+    ],
+    "pinyin": "diàn",
+    "pinyinNumeric": "dian4",
+    "meaningEn": "lightning; electricity; electric (bound form); to get (or give) an electric shock; phone call or telegram etc; to send via telephone or telegram etc",
+    "meaningFr": "",
+    "frequency": 80,
+    "audioFile": "dian4.mp3"
+  },
+  {
+    "id": "电话",
+    "hskLevel": 1,
+    "characters": [
+      "电",
+      "话"
+    ],
+    "pinyin": "diàn huà",
+    "pinyinNumeric": "dian4hua4",
+    "meaningEn": "telephone; phone call; phone number",
+    "meaningFr": "",
+    "frequency": 81,
+    "audioFile": "dian4hua4.mp3"
+  },
+  {
+    "id": "电脑",
+    "hskLevel": 1,
+    "characters": [
+      "电",
+      "脑"
+    ],
+    "pinyin": "diàn nǎo",
+    "pinyinNumeric": "dian4nao3",
+    "meaningEn": "computer",
+    "meaningFr": "",
+    "frequency": 82,
+    "audioFile": "dian4nao3.mp3"
+  },
+  {
+    "id": "电视",
+    "hskLevel": 1,
+    "characters": [
+      "电",
+      "视"
+    ],
+    "pinyin": "diàn shì",
+    "pinyinNumeric": "dian4shi4",
+    "meaningEn": "television; TV",
+    "meaningFr": "",
+    "frequency": 83,
+    "audioFile": "dian4shi4.mp3"
+  },
+  {
+    "id": "电视机",
+    "hskLevel": 1,
+    "characters": [
+      "电",
+      "视",
+      "机"
+    ],
+    "pinyin": "diàn shì jī",
+    "pinyinNumeric": "dian4shi4ji1",
+    "meaningEn": "television set",
+    "meaningFr": "",
+    "frequency": 84,
+    "audioFile": "dian4shi4ji1.mp3"
+  },
+  {
+    "id": "电影",
+    "hskLevel": 1,
+    "characters": [
+      "电",
+      "影"
+    ],
+    "pinyin": "diàn yǐng",
+    "pinyinNumeric": "dian4ying3",
+    "meaningEn": "movie; film",
+    "meaningFr": "",
+    "frequency": 85,
+    "audioFile": "dian4ying3.mp3"
+  },
+  {
+    "id": "电影院",
+    "hskLevel": 1,
+    "characters": [
+      "电",
+      "影",
+      "院"
+    ],
+    "pinyin": "diàn yǐng yuàn",
+    "pinyinNumeric": "dian4ying3yuan4",
+    "meaningEn": "cinema; movie theater",
+    "meaningFr": "",
+    "frequency": 86,
+    "audioFile": "dian4ying3yuan4.mp3"
+  },
+  {
+    "id": "东",
+    "hskLevel": 1,
+    "characters": [
+      "东"
+    ],
+    "pinyin": "Dōng",
+    "pinyinNumeric": "dong1",
+    "meaningEn": "surname Dong",
+    "meaningFr": "",
+    "frequency": 87,
+    "audioFile": "dong1.mp3"
+  },
+  {
+    "id": "动",
+    "hskLevel": 1,
+    "characters": [
+      "动"
+    ],
+    "pinyin": "dòng",
+    "pinyinNumeric": "dong4",
+    "meaningEn": "(of sth) to move; to set in movement; to displace; to touch; to make use of; to stir (emotions); to alter; abbr. for 动词, verb",
+    "meaningFr": "",
+    "frequency": 88,
+    "audioFile": "dong4.mp3"
+  },
+  {
+    "id": "东边",
+    "hskLevel": 1,
+    "characters": [
+      "东",
+      "边"
+    ],
+    "pinyin": "dōng bian",
+    "pinyinNumeric": "dong1bian5",
+    "meaningEn": "east; east side; eastern part; to the east of",
+    "meaningFr": "",
+    "frequency": 89,
+    "audioFile": "dong1bian5.mp3"
+  },
+  {
+    "id": "东西",
+    "hskLevel": 1,
+    "characters": [
+      "东",
+      "西"
+    ],
+    "pinyin": "dōng xī",
+    "pinyinNumeric": "dong1xi1",
+    "meaningEn": "east and west",
+    "meaningFr": "",
+    "frequency": 90,
+    "audioFile": "dong1xi1.mp3"
+  },
+  {
+    "id": "动作",
+    "hskLevel": 1,
+    "characters": [
+      "动",
+      "作"
+    ],
+    "pinyin": "dòng zuò",
+    "pinyinNumeric": "dong4zuo4",
+    "meaningEn": "movement; motion; action; to act; to move",
+    "meaningFr": "",
+    "frequency": 91,
+    "audioFile": "dong4zuo4.mp3"
+  },
+  {
+    "id": "读",
+    "hskLevel": 1,
+    "characters": [
+      "读"
+    ],
+    "pinyin": "dòu",
+    "pinyinNumeric": "dou4",
+    "meaningEn": "comma; phrase marked by pause",
+    "meaningFr": "",
+    "frequency": 92,
+    "audioFile": "dou4.mp3"
+  },
+  {
+    "id": "都",
+    "hskLevel": 1,
+    "characters": [
+      "都"
+    ],
+    "pinyin": "Dū",
+    "pinyinNumeric": "du1",
+    "meaningEn": "surname Du",
+    "meaningFr": "",
+    "frequency": 93,
+    "audioFile": "du1.mp3"
+  },
+  {
+    "id": "读书",
+    "hskLevel": 1,
+    "characters": [
+      "读",
+      "书"
+    ],
+    "pinyin": "dú shū",
+    "pinyinNumeric": "du2shu1",
+    "meaningEn": "to read a book; to study; to attend school",
+    "meaningFr": "",
+    "frequency": 94,
+    "audioFile": "du2shu1.mp3"
+  },
+  {
+    "id": "对",
+    "hskLevel": 1,
+    "characters": [
+      "对"
+    ],
+    "pinyin": "duì",
+    "pinyinNumeric": "dui4",
+    "meaningEn": "right; correct; towards; at; for; concerning; regarding; to treat (sb a certain way); to face; (bound form) opposite; facing; matching; to match together; to adjust; to fit; to suit; to answer; to reply; to add; to pour in (a fluid); to check; to compare; classifier: couple; pair",
+    "meaningFr": "",
+    "frequency": 95,
+    "audioFile": "dui4.mp3"
+  },
+  {
+    "id": "对不起",
+    "hskLevel": 1,
+    "characters": [
+      "对",
+      "不",
+      "起"
+    ],
+    "pinyin": "duì bu qǐ",
+    "pinyinNumeric": "dui4bu5qi3",
+    "meaningEn": "I'm sorry; excuse me; I beg your pardon; to let (sb) down; to disappoint",
+    "meaningFr": "",
+    "frequency": 96,
+    "audioFile": "dui4bu5qi3.mp3"
+  },
+  {
+    "id": "多",
+    "hskLevel": 1,
+    "characters": [
+      "多"
+    ],
+    "pinyin": "duō",
+    "pinyinNumeric": "duo1",
+    "meaningEn": "many; much; too many; in excess; (after a numeral) ... odd; how (to what extent) (Taiwan pr. [duó]); (bound form) multi-; poly-",
+    "meaningFr": "",
+    "frequency": 97,
+    "audioFile": "duo1.mp3"
+  },
+  {
+    "id": "多少",
+    "hskLevel": 1,
+    "characters": [
+      "多",
+      "少"
+    ],
+    "pinyin": "duō shǎo",
+    "pinyinNumeric": "duo1shao3",
+    "meaningEn": "number; amount; somewhat",
+    "meaningFr": "",
+    "frequency": 98,
+    "audioFile": "duo1shao3.mp3"
+  },
+  {
+    "id": "饿",
+    "hskLevel": 1,
+    "characters": [
+      "饿"
+    ],
+    "pinyin": "è",
+    "pinyinNumeric": "e4",
+    "meaningEn": "to be hungry; hungry; to starve (sb)",
+    "meaningFr": "",
+    "frequency": 99,
+    "audioFile": "e4.mp3"
+  },
+  {
+    "id": "二",
+    "hskLevel": 1,
+    "characters": [
+      "二"
+    ],
+    "pinyin": "èr",
+    "pinyinNumeric": "er4",
+    "meaningEn": "two; 2; (Beijing dialect) stupid",
+    "meaningFr": "",
+    "frequency": 100,
+    "audioFile": "er4.mp3"
+  },
+  {
+    "id": "儿子",
+    "hskLevel": 1,
+    "characters": [
+      "儿",
+      "子"
+    ],
+    "pinyin": "ér zi",
+    "pinyinNumeric": "er2zi5",
+    "meaningEn": "son",
+    "meaningFr": "",
+    "frequency": 101,
+    "audioFile": "er2zi5.mp3"
+  },
+  {
+    "id": "饭",
+    "hskLevel": 1,
+    "characters": [
+      "饭"
+    ],
+    "pinyin": "fàn",
+    "pinyinNumeric": "fan4",
+    "meaningEn": "cooked rice; meal; (loanword) fan; devotee",
+    "meaningFr": "",
+    "frequency": 102,
+    "audioFile": "fan4.mp3"
+  },
+  {
+    "id": "饭店",
+    "hskLevel": 1,
+    "characters": [
+      "饭",
+      "店"
+    ],
+    "pinyin": "fàn diàn",
+    "pinyinNumeric": "fan4dian4",
+    "meaningEn": "restaurant; hotel",
+    "meaningFr": "",
+    "frequency": 103,
+    "audioFile": "fan4dian4.mp3"
+  },
+  {
+    "id": "放",
+    "hskLevel": 1,
+    "characters": [
+      "放"
+    ],
+    "pinyin": "fàng",
+    "pinyinNumeric": "fang4",
+    "meaningEn": "to put; to place; to release; to free; to let go; to let out; to set off (fireworks)",
+    "meaningFr": "",
+    "frequency": 104,
+    "audioFile": "fang4.mp3"
+  },
+  {
+    "id": "放假",
+    "hskLevel": 1,
+    "characters": [
+      "放",
+      "假"
+    ],
+    "pinyin": "fàng jià",
+    "pinyinNumeric": "fang4jia4",
+    "meaningEn": "to have a holiday or vacation",
+    "meaningFr": "",
+    "frequency": 105,
+    "audioFile": "fang4jia4.mp3"
+  },
+  {
+    "id": "房间",
+    "hskLevel": 1,
+    "characters": [
+      "房",
+      "间"
+    ],
+    "pinyin": "fáng jiān",
+    "pinyinNumeric": "fang2jian1",
+    "meaningEn": "room",
+    "meaningFr": "",
+    "frequency": 106,
+    "audioFile": "fang2jian1.mp3"
+  },
+  {
+    "id": "放学",
+    "hskLevel": 1,
+    "characters": [
+      "放",
+      "学"
+    ],
+    "pinyin": "fàng xué",
+    "pinyinNumeric": "fang4xue2",
+    "meaningEn": "to dismiss students at the end of the school day",
+    "meaningFr": "",
+    "frequency": 107,
+    "audioFile": "fang4xue2.mp3"
+  },
+  {
+    "id": "房子",
+    "hskLevel": 1,
+    "characters": [
+      "房",
+      "子"
+    ],
+    "pinyin": "fáng zi",
+    "pinyinNumeric": "fang2zi5",
+    "meaningEn": "house; building (single- or two-story); apartment; room",
+    "meaningFr": "",
+    "frequency": 108,
+    "audioFile": "fang2zi5.mp3"
+  },
+  {
+    "id": "飞",
+    "hskLevel": 1,
+    "characters": [
+      "飞"
+    ],
+    "pinyin": "fēi",
+    "pinyinNumeric": "fei1",
+    "meaningEn": "to fly",
+    "meaningFr": "",
+    "frequency": 109,
+    "audioFile": "fei1.mp3"
+  },
+  {
+    "id": "非常",
+    "hskLevel": 1,
+    "characters": [
+      "非",
+      "常"
+    ],
+    "pinyin": "fēi cháng",
+    "pinyinNumeric": "fei1chang2",
+    "meaningEn": "very; really; unusual; extraordinary",
+    "meaningFr": "",
+    "frequency": 110,
+    "audioFile": "fei1chang2.mp3"
+  },
+  {
+    "id": "飞机",
+    "hskLevel": 1,
+    "characters": [
+      "飞",
+      "机"
+    ],
+    "pinyin": "fēi jī",
+    "pinyinNumeric": "fei1ji1",
+    "meaningEn": "airplane",
+    "meaningFr": "",
+    "frequency": 111,
+    "audioFile": "fei1ji1.mp3"
+  },
+  {
+    "id": "分",
+    "hskLevel": 1,
+    "characters": [
+      "分"
+    ],
+    "pinyin": "fēn",
+    "pinyinNumeric": "fen1",
+    "meaningEn": "to divide; to separate; to distribute; to allocate; to distinguish (good and bad); (bound form) branch of (an organization); sub- (as in 局); fraction; one tenth (of certain units); unit of length equivalent to 0.33 cm; minute (unit of time); minute (angular measurement unit); a point (in sports or games); 0.01 yuan (unit of money)",
+    "meaningFr": "",
+    "frequency": 112,
+    "audioFile": "fen1.mp3"
+  },
+  {
+    "id": "风",
+    "hskLevel": 1,
+    "characters": [
+      "风"
+    ],
+    "pinyin": "fēng",
+    "pinyinNumeric": "feng1",
+    "meaningEn": "wind; news; style; custom; manner",
+    "meaningFr": "",
+    "frequency": 113,
+    "audioFile": "feng1.mp3"
+  },
+  {
+    "id": "干",
+    "hskLevel": 1,
+    "characters": [
+      "干"
+    ],
+    "pinyin": "gān",
+    "pinyinNumeric": "gan1",
+    "meaningEn": "old variant of 干",
+    "meaningFr": "",
+    "frequency": 114,
+    "audioFile": "gan1.mp3"
+  },
+  {
+    "id": "干净",
+    "hskLevel": 1,
+    "characters": [
+      "干",
+      "净"
+    ],
+    "pinyin": "gān jìng",
+    "pinyinNumeric": "gan1jing4",
+    "meaningEn": "clean; neat",
+    "meaningFr": "",
+    "frequency": 115,
+    "audioFile": "gan1jing4.mp3"
+  },
+  {
+    "id": "干什么",
+    "hskLevel": 1,
+    "characters": [
+      "干",
+      "什",
+      "么"
+    ],
+    "pinyin": "gàn shén me",
+    "pinyinNumeric": "gan4shen2me5",
+    "meaningEn": "what are you doing?; what's he up to?",
+    "meaningFr": "",
+    "frequency": 116,
+    "audioFile": "gan4shen2me5.mp3"
+  },
+  {
+    "id": "高",
+    "hskLevel": 1,
+    "characters": [
+      "高"
+    ],
+    "pinyin": "Gāo",
+    "pinyinNumeric": "gao1",
+    "meaningEn": "surname Gao",
+    "meaningFr": "",
+    "frequency": 117,
+    "audioFile": "gao1.mp3"
+  },
+  {
+    "id": "告诉",
+    "hskLevel": 1,
+    "characters": [
+      "告",
+      "诉"
+    ],
+    "pinyin": "gào sù",
+    "pinyinNumeric": "gao4su4",
+    "meaningEn": "to press charges; to file a complaint",
+    "meaningFr": "",
+    "frequency": 118,
+    "audioFile": "gao4su4.mp3"
+  },
+  {
+    "id": "高兴",
+    "hskLevel": 1,
+    "characters": [
+      "高",
+      "兴"
+    ],
+    "pinyin": "gāo xìng",
+    "pinyinNumeric": "gao1xing4",
+    "meaningEn": "happy; glad; willing (to do sth); in a cheerful mood",
+    "meaningFr": "",
+    "frequency": 119,
+    "audioFile": "gao1xing4.mp3"
+  },
+  {
+    "id": "哥",
+    "hskLevel": 1,
+    "characters": [
+      "哥"
+    ],
+    "pinyin": "gē",
+    "pinyinNumeric": "ge1",
+    "meaningEn": "elder brother",
+    "meaningFr": "",
+    "frequency": 120,
+    "audioFile": "ge1.mp3"
+  },
+  {
+    "id": "歌",
+    "hskLevel": 1,
+    "characters": [
+      "歌"
+    ],
+    "pinyin": "gē",
+    "pinyinNumeric": "ge1",
+    "meaningEn": "song; to sing",
+    "meaningFr": "",
+    "frequency": 121,
+    "audioFile": "ge1.mp3"
+  },
+  {
+    "id": "个",
+    "hskLevel": 1,
+    "characters": [
+      "个"
+    ],
+    "pinyin": "gě",
+    "pinyinNumeric": "ge3",
+    "meaningEn": "used in 自个儿",
+    "meaningFr": "",
+    "frequency": 122,
+    "audioFile": "ge3.mp3"
+  },
+  {
+    "id": "哥哥",
+    "hskLevel": 1,
+    "characters": [
+      "哥",
+      "哥"
+    ],
+    "pinyin": "gē ge",
+    "pinyinNumeric": "ge1ge5",
+    "meaningEn": "older brother",
+    "meaningFr": "",
+    "frequency": 123,
+    "audioFile": "ge1ge5.mp3"
+  },
+  {
+    "id": "给",
+    "hskLevel": 1,
+    "characters": [
+      "给"
+    ],
+    "pinyin": "gěi",
+    "pinyinNumeric": "gei3",
+    "meaningEn": "to; for; for the benefit of; to give; to allow; to do sth (for sb); (grammatical equivalent of 被); (grammatical equivalent of 把); (sentence intensifier)",
+    "meaningFr": "",
+    "frequency": 124,
+    "audioFile": "gei3.mp3"
+  },
+  {
+    "id": "跟",
+    "hskLevel": 1,
+    "characters": [
+      "跟"
+    ],
+    "pinyin": "gēn",
+    "pinyinNumeric": "gen1",
+    "meaningEn": "heel; to follow closely; to go with; (of a woman) to marry sb; with; compared with; to; towards; and (joining two nouns)",
+    "meaningFr": "",
+    "frequency": 125,
+    "audioFile": "gen1.mp3"
+  },
+  {
+    "id": "工人",
+    "hskLevel": 1,
+    "characters": [
+      "工",
+      "人"
+    ],
+    "pinyin": "gōng rén",
+    "pinyinNumeric": "gong1ren2",
+    "meaningEn": "worker",
+    "meaningFr": "",
+    "frequency": 126,
+    "audioFile": "gong1ren2.mp3"
+  },
+  {
+    "id": "工作",
+    "hskLevel": 1,
+    "characters": [
+      "工",
+      "作"
+    ],
+    "pinyin": "gōng zuò",
+    "pinyinNumeric": "gong1zuo4",
+    "meaningEn": "to work; (of a machine) to operate; job; work; task",
+    "meaningFr": "",
+    "frequency": 127,
+    "audioFile": "gong1zuo4.mp3"
+  },
+  {
+    "id": "关",
+    "hskLevel": 1,
+    "characters": [
+      "关"
+    ],
+    "pinyin": "Guān",
+    "pinyinNumeric": "guan1",
+    "meaningEn": "surname Guan",
+    "meaningFr": "",
+    "frequency": 128,
+    "audioFile": "guan1.mp3"
+  },
+  {
+    "id": "关上",
+    "hskLevel": 1,
+    "characters": [
+      "关",
+      "上"
+    ],
+    "pinyin": "guān shàng",
+    "pinyinNumeric": "guan1shang4",
+    "meaningEn": "to close (a door); to turn off (light, electrical equipment etc)",
+    "meaningFr": "",
+    "frequency": 129,
+    "audioFile": "guan1shang4.mp3"
+  },
+  {
+    "id": "贵",
+    "hskLevel": 1,
+    "characters": [
+      "贵"
+    ],
+    "pinyin": "guì",
+    "pinyinNumeric": "gui4",
+    "meaningEn": "expensive; noble; precious; (honorific) your",
+    "meaningFr": "",
+    "frequency": 130,
+    "audioFile": "gui4.mp3"
+  },
+  {
+    "id": "过",
+    "hskLevel": 1,
+    "characters": [
+      "过"
+    ],
+    "pinyin": "Guō",
+    "pinyinNumeric": "guo1",
+    "meaningEn": "surname Guo",
+    "meaningFr": "",
+    "frequency": 131,
+    "audioFile": "guo1.mp3"
+  },
+  {
+    "id": "国",
+    "hskLevel": 1,
+    "characters": [
+      "国"
+    ],
+    "pinyin": "Guó",
+    "pinyinNumeric": "guo2",
+    "meaningEn": "surname Guo",
+    "meaningFr": "",
+    "frequency": 132,
+    "audioFile": "guo2.mp3"
+  },
+  {
+    "id": "国家",
+    "hskLevel": 1,
+    "characters": [
+      "国",
+      "家"
+    ],
+    "pinyin": "guó jiā",
+    "pinyinNumeric": "guo2jia1",
+    "meaningEn": "country; nation; state",
+    "meaningFr": "",
+    "frequency": 133,
+    "audioFile": "guo2jia1.mp3"
+  },
+  {
+    "id": "国外",
+    "hskLevel": 1,
+    "characters": [
+      "国",
+      "外"
+    ],
+    "pinyin": "guó wài",
+    "pinyinNumeric": "guo2wai4",
+    "meaningEn": "abroad; external (affairs); overseas; foreign",
+    "meaningFr": "",
+    "frequency": 134,
+    "audioFile": "guo2wai4.mp3"
+  },
+  {
+    "id": "还是",
+    "hskLevel": 1,
+    "characters": [
+      "还",
+      "是"
+    ],
+    "pinyin": "hái shi",
+    "pinyinNumeric": "hai2shi5",
+    "meaningEn": "still (as before); had better; unexpectedly; or",
+    "meaningFr": "",
+    "frequency": 135,
+    "audioFile": "hai2shi5.mp3"
+  },
+  {
+    "id": "还有",
+    "hskLevel": 1,
+    "characters": [
+      "还",
+      "有"
+    ],
+    "pinyin": "hái yǒu",
+    "pinyinNumeric": "hai2you3",
+    "meaningEn": "furthermore; in addition; still; also",
+    "meaningFr": "",
+    "frequency": 136,
+    "audioFile": "hai2you3.mp3"
+  },
+  {
+    "id": "孩子",
+    "hskLevel": 1,
+    "characters": [
+      "孩",
+      "子"
+    ],
+    "pinyin": "hái zi",
+    "pinyinNumeric": "hai2zi5",
+    "meaningEn": "child",
+    "meaningFr": "",
+    "frequency": 137,
+    "audioFile": "hai2zi5.mp3"
+  },
+  {
+    "id": "汉语",
+    "hskLevel": 1,
+    "characters": [
+      "汉",
+      "语"
+    ],
+    "pinyin": "Hàn yǔ",
+    "pinyinNumeric": "han4yu3",
+    "meaningEn": "Chinese language",
+    "meaningFr": "",
+    "frequency": 138,
+    "audioFile": "han4yu3.mp3"
+  },
+  {
+    "id": "汉字",
+    "hskLevel": 1,
+    "characters": [
+      "汉",
+      "字"
+    ],
+    "pinyin": "hàn zì",
+    "pinyinNumeric": "han4zi4",
+    "meaningEn": "Chinese character; Japanese: kanji; Korean: hanja; Vietnamese: hán tự",
+    "meaningFr": "",
+    "frequency": 139,
+    "audioFile": "han4zi4.mp3"
+  },
+  {
+    "id": "行",
+    "hskLevel": 1,
+    "characters": [
+      "行"
+    ],
+    "pinyin": "háng",
+    "pinyinNumeric": "hang2",
+    "meaningEn": "row; line; commercial firm; line of business; profession; to rank (first, second etc) among one's siblings (by age); (in data tables) row; (Tw) column",
+    "meaningFr": "",
+    "frequency": 140,
+    "audioFile": "hang2.mp3"
+  },
+  {
+    "id": "号",
+    "hskLevel": 1,
+    "characters": [
+      "号"
+    ],
+    "pinyin": "háo",
+    "pinyinNumeric": "hao2",
+    "meaningEn": "roar; cry",
+    "meaningFr": "",
+    "frequency": 141,
+    "audioFile": "hao2.mp3"
+  },
+  {
+    "id": "好",
+    "hskLevel": 1,
+    "characters": [
+      "好"
+    ],
+    "pinyin": "hǎo",
+    "pinyinNumeric": "hao3",
+    "meaningEn": "good; appropriate; proper; all right!; (before a verb) easy to; (before a verb) good to; (before an adjective for exclamatory effect) so; (verb complement indicating completion); (of two people) close; on intimate terms; (after a personal pronoun) hello",
+    "meaningFr": "",
+    "frequency": 142,
+    "audioFile": "hao3.mp3"
+  },
+  {
+    "id": "好吃",
+    "hskLevel": 1,
+    "characters": [
+      "好",
+      "吃"
+    ],
+    "pinyin": "hǎo chī",
+    "pinyinNumeric": "hao3chi1",
+    "meaningEn": "tasty; delicious",
+    "meaningFr": "",
+    "frequency": 143,
+    "audioFile": "hao3chi1.mp3"
+  },
+  {
+    "id": "好看",
+    "hskLevel": 1,
+    "characters": [
+      "好",
+      "看"
+    ],
+    "pinyin": "hǎo kàn",
+    "pinyinNumeric": "hao3kan4",
+    "meaningEn": "good-looking; nice-looking; good (of a movie, book, TV show etc); embarrassed; humiliated",
+    "meaningFr": "",
+    "frequency": 144,
+    "audioFile": "hao3kan4.mp3"
+  },
+  {
+    "id": "好听",
+    "hskLevel": 1,
+    "characters": [
+      "好",
+      "听"
+    ],
+    "pinyin": "hǎo tīng",
+    "pinyinNumeric": "hao3ting1",
+    "meaningEn": "pleasant to hear",
+    "meaningFr": "",
+    "frequency": 145,
+    "audioFile": "hao3ting1.mp3"
+  },
+  {
+    "id": "好玩儿",
+    "hskLevel": 1,
+    "characters": [
+      "好",
+      "玩",
+      "儿"
+    ],
+    "pinyin": "hǎo wán r",
+    "pinyinNumeric": "hao3wan2r5",
+    "meaningEn": "erhua variant of 好玩; amusing; fun; interesting",
+    "meaningFr": "",
+    "frequency": 146,
+    "audioFile": "hao3wan2r5.mp3"
+  },
+  {
+    "id": "喝",
+    "hskLevel": 1,
+    "characters": [
+      "喝"
+    ],
+    "pinyin": "hē",
+    "pinyinNumeric": "he1",
+    "meaningEn": "to drink; variant of 嗬",
+    "meaningFr": "",
+    "frequency": 147,
+    "audioFile": "he1.mp3"
+  },
+  {
+    "id": "和",
+    "hskLevel": 1,
+    "characters": [
+      "和"
+    ],
+    "pinyin": "hé",
+    "pinyinNumeric": "he2",
+    "meaningEn": "old variant of 和",
+    "meaningFr": "",
+    "frequency": 148,
+    "audioFile": "he2.mp3"
+  },
+  {
+    "id": "很",
+    "hskLevel": 1,
+    "characters": [
+      "很"
+    ],
+    "pinyin": "hěn",
+    "pinyinNumeric": "hen3",
+    "meaningEn": "(adverb of degree); quite; very; awfully",
+    "meaningFr": "",
+    "frequency": 149,
+    "audioFile": "hen3.mp3"
+  },
+  {
+    "id": "后",
+    "hskLevel": 1,
+    "characters": [
+      "后"
+    ],
+    "pinyin": "Hòu",
+    "pinyinNumeric": "hou4",
+    "meaningEn": "surname Hou",
+    "meaningFr": "",
+    "frequency": 150,
+    "audioFile": "hou4.mp3"
+  },
+  {
+    "id": "后边",
+    "hskLevel": 1,
+    "characters": [
+      "后",
+      "边"
+    ],
+    "pinyin": "hòu bian",
+    "pinyinNumeric": "hou4bian5",
+    "meaningEn": "the back; the rear; the last bit; behind; near the end; at the back; later; afterwards",
+    "meaningFr": "",
+    "frequency": 151,
+    "audioFile": "hou4bian5.mp3"
+  },
+  {
+    "id": "后天",
+    "hskLevel": 1,
+    "characters": [
+      "后",
+      "天"
+    ],
+    "pinyin": "hòu tiān",
+    "pinyinNumeric": "hou4tian1",
+    "meaningEn": "the day after tomorrow; life after birth (the period in which one develops through experiences, contrasted with 天); acquired (not innate or congenital); a posteriori",
+    "meaningFr": "",
+    "frequency": 152,
+    "audioFile": "hou4tian1.mp3"
+  },
+  {
+    "id": "花",
+    "hskLevel": 1,
+    "characters": [
+      "花"
+    ],
+    "pinyin": "Huā",
+    "pinyinNumeric": "hua1",
+    "meaningEn": "surname Hua",
+    "meaningFr": "",
+    "frequency": 153,
+    "audioFile": "hua1.mp3"
+  },
+  {
+    "id": "话",
+    "hskLevel": 1,
+    "characters": [
+      "话"
+    ],
+    "pinyin": "huà",
+    "pinyinNumeric": "hua4",
+    "meaningEn": "dialect; language; spoken words; speech; talk; words; conversation; what sb said",
+    "meaningFr": "",
+    "frequency": 154,
+    "audioFile": "hua4.mp3"
+  },
+  {
+    "id": "坏",
+    "hskLevel": 1,
+    "characters": [
+      "坏"
+    ],
+    "pinyin": "huài",
+    "pinyinNumeric": "huai4",
+    "meaningEn": "bad; spoiled; broken; to break down; (suffix) to the utmost",
+    "meaningFr": "",
+    "frequency": 155,
+    "audioFile": "huai4.mp3"
+  },
+  {
+    "id": "还",
+    "hskLevel": 1,
+    "characters": [
+      "还"
+    ],
+    "pinyin": "Huán",
+    "pinyinNumeric": "huan2",
+    "meaningEn": "surname Huan",
+    "meaningFr": "",
+    "frequency": 156,
+    "audioFile": "huan2.mp3"
+  },
+  {
+    "id": "回",
+    "hskLevel": 1,
+    "characters": [
+      "回"
+    ],
+    "pinyin": "huí",
+    "pinyinNumeric": "hui2",
+    "meaningEn": "to circle; to go back; to turn around; to answer; to return; to revolve; Hui ethnic group (Chinese Muslims); time; classifier for acts of a play; section or chapter (of a classic book)",
+    "meaningFr": "",
+    "frequency": 157,
+    "audioFile": "hui2.mp3"
+  },
+  {
+    "id": "会",
+    "hskLevel": 1,
+    "characters": [
+      "会"
+    ],
+    "pinyin": "huì",
+    "pinyinNumeric": "hui4",
+    "meaningEn": "can; to have the skill; to know how to; to be likely to; to be sure to; to meet; to get together; meeting; gathering; (suffix) union; group; association; (bound form) a moment (Taiwan pr. [huǐ])",
+    "meaningFr": "",
+    "frequency": 158,
+    "audioFile": "hui4.mp3"
+  },
+  {
+    "id": "回答",
+    "hskLevel": 1,
+    "characters": [
+      "回",
+      "答"
+    ],
+    "pinyin": "huí dá",
+    "pinyinNumeric": "hui2da2",
+    "meaningEn": "to reply; to answer; reply; answer",
+    "meaningFr": "",
+    "frequency": 159,
+    "audioFile": "hui2da2.mp3"
+  },
+  {
+    "id": "回到",
+    "hskLevel": 1,
+    "characters": [
+      "回",
+      "到"
+    ],
+    "pinyin": "huí dào",
+    "pinyinNumeric": "hui2dao4",
+    "meaningEn": "to return to",
+    "meaningFr": "",
+    "frequency": 160,
+    "audioFile": "hui2dao4.mp3"
+  },
+  {
+    "id": "回家",
+    "hskLevel": 1,
+    "characters": [
+      "回",
+      "家"
+    ],
+    "pinyin": "huí jiā",
+    "pinyinNumeric": "hui2jia1",
+    "meaningEn": "to return home",
+    "meaningFr": "",
+    "frequency": 161,
+    "audioFile": "hui2jia1.mp3"
+  },
+  {
+    "id": "回来",
+    "hskLevel": 1,
+    "characters": [
+      "回",
+      "来"
+    ],
+    "pinyin": "huí lai",
+    "pinyinNumeric": "hui2lai5",
+    "meaningEn": "to return; to come back",
+    "meaningFr": "",
+    "frequency": 162,
+    "audioFile": "hui2lai5.mp3"
+  },
+  {
+    "id": "回去",
+    "hskLevel": 1,
+    "characters": [
+      "回",
+      "去"
+    ],
+    "pinyin": "huí qu",
+    "pinyinNumeric": "hui2qu5",
+    "meaningEn": "to return; to go back",
+    "meaningFr": "",
+    "frequency": 163,
+    "audioFile": "hui2qu5.mp3"
+  },
+  {
+    "id": "火车",
+    "hskLevel": 1,
+    "characters": [
+      "火",
+      "车"
+    ],
+    "pinyin": "huǒ chē",
+    "pinyinNumeric": "huo3che1",
+    "meaningEn": "train",
+    "meaningFr": "",
+    "frequency": 164,
+    "audioFile": "huo3che1.mp3"
+  },
+  {
+    "id": "几",
+    "hskLevel": 1,
+    "characters": [
+      "几"
+    ],
+    "pinyin": "jī",
+    "pinyinNumeric": "ji1",
+    "meaningEn": "small table",
+    "meaningFr": "",
+    "frequency": 165,
+    "audioFile": "ji1.mp3"
+  },
+  {
+    "id": "记",
+    "hskLevel": 1,
+    "characters": [
+      "记"
+    ],
+    "pinyin": "jì",
+    "pinyinNumeric": "ji4",
+    "meaningEn": "to record; to note; to memorize; to remember; mark; sign; classifier for blows, kicks, shots",
+    "meaningFr": "",
+    "frequency": 166,
+    "audioFile": "ji4.mp3"
+  },
+  {
+    "id": "机场",
+    "hskLevel": 1,
+    "characters": [
+      "机",
+      "场"
+    ],
+    "pinyin": "jī chǎng",
+    "pinyinNumeric": "ji1chang3",
+    "meaningEn": "airport; airfield; (slang) service provider for Shadowsocks or similar software for circumventing Internet censorship",
+    "meaningFr": "",
+    "frequency": 167,
+    "audioFile": "ji1chang3.mp3"
+  },
+  {
+    "id": "鸡蛋",
+    "hskLevel": 1,
+    "characters": [
+      "鸡",
+      "蛋"
+    ],
+    "pinyin": "jī dàn",
+    "pinyinNumeric": "ji1dan4",
+    "meaningEn": "(chicken) egg; hen's egg",
+    "meaningFr": "",
+    "frequency": 168,
+    "audioFile": "ji1dan4.mp3"
+  },
+  {
+    "id": "记得",
+    "hskLevel": 1,
+    "characters": [
+      "记",
+      "得"
+    ],
+    "pinyin": "jì de",
+    "pinyinNumeric": "ji4de5",
+    "meaningEn": "to remember",
+    "meaningFr": "",
+    "frequency": 169,
+    "audioFile": "ji4de5.mp3"
+  },
+  {
+    "id": "机票",
+    "hskLevel": 1,
+    "characters": [
+      "机",
+      "票"
+    ],
+    "pinyin": "jī piào",
+    "pinyinNumeric": "ji1piao4",
+    "meaningEn": "air ticket; passenger ticket",
+    "meaningFr": "",
+    "frequency": 170,
+    "audioFile": "ji1piao4.mp3"
+  },
+  {
+    "id": "记住",
+    "hskLevel": 1,
+    "characters": [
+      "记",
+      "住"
+    ],
+    "pinyin": "jì zhu",
+    "pinyinNumeric": "ji4zhu5",
+    "meaningEn": "to remember; to bear in mind; to learn by heart",
+    "meaningFr": "",
+    "frequency": 171,
+    "audioFile": "ji4zhu5.mp3"
+  },
+  {
+    "id": "家",
+    "hskLevel": 1,
+    "characters": [
+      "家"
+    ],
+    "pinyin": "jiā",
+    "pinyinNumeric": "jia1",
+    "meaningEn": "used in 家伙 and 家俱",
+    "meaningFr": "",
+    "frequency": 172,
+    "audioFile": "jia1.mp3"
+  },
+  {
+    "id": "家里",
+    "hskLevel": 1,
+    "characters": [
+      "家",
+      "里"
+    ],
+    "pinyin": "jiā lǐ",
+    "pinyinNumeric": "jia1li3",
+    "meaningEn": "home",
+    "meaningFr": "",
+    "frequency": 173,
+    "audioFile": "jia1li3.mp3"
+  },
+  {
+    "id": "家人",
+    "hskLevel": 1,
+    "characters": [
+      "家",
+      "人"
+    ],
+    "pinyin": "jiā rén",
+    "pinyinNumeric": "jia1ren2",
+    "meaningEn": "family member; (old) servant",
+    "meaningFr": "",
+    "frequency": 174,
+    "audioFile": "jia1ren2.mp3"
+  },
+  {
+    "id": "间",
+    "hskLevel": 1,
+    "characters": [
+      "间"
+    ],
+    "pinyin": "jiān",
+    "pinyinNumeric": "jian1",
+    "meaningEn": "between; among; within a definite time or space; room; section of a room or lateral space between two pairs of pillars; classifier for rooms",
+    "meaningFr": "",
+    "frequency": 175,
+    "audioFile": "jian1.mp3"
+  },
+  {
+    "id": "见",
+    "hskLevel": 1,
+    "characters": [
+      "见"
+    ],
+    "pinyin": "jiàn",
+    "pinyinNumeric": "jian4",
+    "meaningEn": "to see; to meet; to appear (to be sth); to interview; opinion; view",
+    "meaningFr": "",
+    "frequency": 176,
+    "audioFile": "jian4.mp3"
+  },
+  {
+    "id": "见面",
+    "hskLevel": 1,
+    "characters": [
+      "见",
+      "面"
+    ],
+    "pinyin": "jiàn miàn",
+    "pinyinNumeric": "jian4mian4",
+    "meaningEn": "to meet; to see each other",
+    "meaningFr": "",
+    "frequency": 177,
+    "audioFile": "jian4mian4.mp3"
+  },
+  {
+    "id": "叫",
+    "hskLevel": 1,
+    "characters": [
+      "叫"
+    ],
+    "pinyin": "jiào",
+    "pinyinNumeric": "jiao4",
+    "meaningEn": "to shout; to call; to order; to ask; to be called; by (indicates agent in the passive mood)",
+    "meaningFr": "",
+    "frequency": 178,
+    "audioFile": "jiao4.mp3"
+  },
+  {
+    "id": "教",
+    "hskLevel": 1,
+    "characters": [
+      "教"
+    ],
+    "pinyin": "Jiào",
+    "pinyinNumeric": "jiao4",
+    "meaningEn": "surname Jiao",
+    "meaningFr": "",
+    "frequency": 179,
+    "audioFile": "jiao4.mp3"
+  },
+  {
+    "id": "教学楼",
+    "hskLevel": 1,
+    "characters": [
+      "教",
+      "学",
+      "楼"
+    ],
+    "pinyin": "jiào xué lóu",
+    "pinyinNumeric": "jiao4xue2lou2",
+    "meaningEn": "teaching block; school building",
+    "meaningFr": "",
+    "frequency": 180,
+    "audioFile": "jiao4xue2lou2.mp3"
+  },
+  {
+    "id": "姐",
+    "hskLevel": 1,
+    "characters": [
+      "姐"
+    ],
+    "pinyin": "jiě",
+    "pinyinNumeric": "jie3",
+    "meaningEn": "older sister",
+    "meaningFr": "",
+    "frequency": 181,
+    "audioFile": "jie3.mp3"
+  },
+  {
+    "id": "姐姐",
+    "hskLevel": 1,
+    "characters": [
+      "姐",
+      "姐"
+    ],
+    "pinyin": "jiě jie",
+    "pinyinNumeric": "jie3jie5",
+    "meaningEn": "older sister",
+    "meaningFr": "",
+    "frequency": 182,
+    "audioFile": "jie3jie5.mp3"
+  },
+  {
+    "id": "介绍",
+    "hskLevel": 1,
+    "characters": [
+      "介",
+      "绍"
+    ],
+    "pinyin": "jiè shào",
+    "pinyinNumeric": "jie4shao4",
+    "meaningEn": "to introduce (sb to sb); to give a presentation; to present (sb for a job etc); introduction",
+    "meaningFr": "",
+    "frequency": 183,
+    "audioFile": "jie4shao4.mp3"
+  },
+  {
+    "id": "进",
+    "hskLevel": 1,
+    "characters": [
+      "进"
+    ],
+    "pinyin": "jìn",
+    "pinyinNumeric": "jin4",
+    "meaningEn": "to go forward; to advance; to go in; to enter; to put in; to submit; to take in; to admit; (math.) base of a number system; classifier for sections in a building or residential compound",
+    "meaningFr": "",
+    "frequency": 184,
+    "audioFile": "jin4.mp3"
+  },
+  {
+    "id": "进来",
+    "hskLevel": 1,
+    "characters": [
+      "进",
+      "来"
+    ],
+    "pinyin": "jìn lái",
+    "pinyinNumeric": "jin4lai2",
+    "meaningEn": "to come in",
+    "meaningFr": "",
+    "frequency": 185,
+    "audioFile": "jin4lai2.mp3"
+  },
+  {
+    "id": "今年",
+    "hskLevel": 1,
+    "characters": [
+      "今",
+      "年"
+    ],
+    "pinyin": "jīn nián",
+    "pinyinNumeric": "jin1nian2",
+    "meaningEn": "this year",
+    "meaningFr": "",
+    "frequency": 186,
+    "audioFile": "jin1nian2.mp3"
+  },
+  {
+    "id": "进去",
+    "hskLevel": 1,
+    "characters": [
+      "进",
+      "去"
+    ],
+    "pinyin": "jìn qù",
+    "pinyinNumeric": "jin4qu4",
+    "meaningEn": "to go in",
+    "meaningFr": "",
+    "frequency": 187,
+    "audioFile": "jin4qu4.mp3"
+  },
+  {
+    "id": "今天",
+    "hskLevel": 1,
+    "characters": [
+      "今",
+      "天"
+    ],
+    "pinyin": "jīn tiān",
+    "pinyinNumeric": "jin1tian1",
+    "meaningEn": "today; at the present; now",
+    "meaningFr": "",
+    "frequency": 188,
+    "audioFile": "jin1tian1.mp3"
+  },
+  {
+    "id": "九",
+    "hskLevel": 1,
+    "characters": [
+      "九"
+    ],
+    "pinyin": "jiǔ",
+    "pinyinNumeric": "jiu3",
+    "meaningEn": "nine; 9",
+    "meaningFr": "",
+    "frequency": 189,
+    "audioFile": "jiu3.mp3"
+  },
+  {
+    "id": "就",
+    "hskLevel": 1,
+    "characters": [
+      "就"
+    ],
+    "pinyin": "jiù",
+    "pinyinNumeric": "jiu4",
+    "meaningEn": "(after a suppositional clause) in that case; then; (after a clause of action) as soon as; immediately after; (same as 是) merely; nothing else but; simply; just; precisely; exactly; only; as little as; as much as; as many as; to approach; to move towards; to undertake; to engage in; (often followed by 着) taking advantage of; (of food) to go with; with regard to; concerning; (pattern: 就 ... 也 ...) even if ... still ...; (pattern: 不 ... 就 ...) if not ... then must be ...",
+    "meaningFr": "",
+    "frequency": 190,
+    "audioFile": "jiu4.mp3"
+  },
+  {
+    "id": "觉得",
+    "hskLevel": 1,
+    "characters": [
+      "觉",
+      "得"
+    ],
+    "pinyin": "jué de",
+    "pinyinNumeric": "jue2de5",
+    "meaningEn": "to think that ...; to feel that ...; to feel (uncomfortable etc)",
+    "meaningFr": "",
+    "frequency": 191,
+    "audioFile": "jue2de5.mp3"
+  },
+  {
+    "id": "开",
+    "hskLevel": 1,
+    "characters": [
+      "开"
+    ],
+    "pinyin": "kāi",
+    "pinyinNumeric": "kai1",
+    "meaningEn": "to open (transitive or intransitive); (of ships, vehicles, troops etc) to start; to turn on; to put in operation; to operate; to run; to boil; to write out (a prescription, check, invoice etc); (directional complement) away; off; carat (gold); abbr. for Kelvin, 开尔文; abbr. for 开本, book format",
+    "meaningFr": "",
+    "frequency": 192,
+    "audioFile": "kai1.mp3"
+  },
+  {
+    "id": "开车",
+    "hskLevel": 1,
+    "characters": [
+      "开",
+      "车"
+    ],
+    "pinyin": "kāi chē",
+    "pinyinNumeric": "kai1che1",
+    "meaningEn": "to drive a car",
+    "meaningFr": "",
+    "frequency": 193,
+    "audioFile": "kai1che1.mp3"
+  },
+  {
+    "id": "开会",
+    "hskLevel": 1,
+    "characters": [
+      "开",
+      "会"
+    ],
+    "pinyin": "kāi huì",
+    "pinyinNumeric": "kai1hui4",
+    "meaningEn": "to hold a meeting; to attend a meeting",
+    "meaningFr": "",
+    "frequency": 194,
+    "audioFile": "kai1hui4.mp3"
+  },
+  {
+    "id": "开玩笑",
+    "hskLevel": 1,
+    "characters": [
+      "开",
+      "玩",
+      "笑"
+    ],
+    "pinyin": "kāi wán xiào",
+    "pinyinNumeric": "kai1wan2xiao4",
+    "meaningEn": "to play a joke; to make fun of; to joke",
+    "meaningFr": "",
+    "frequency": 195,
+    "audioFile": "kai1wan2xiao4.mp3"
+  },
+  {
+    "id": "看",
+    "hskLevel": 1,
+    "characters": [
+      "看"
+    ],
+    "pinyin": "kān",
+    "pinyinNumeric": "kan1",
+    "meaningEn": "to look after; to take care of; to watch; to guard",
+    "meaningFr": "",
+    "frequency": 196,
+    "audioFile": "kan1.mp3"
+  },
+  {
+    "id": "看病",
+    "hskLevel": 1,
+    "characters": [
+      "看",
+      "病"
+    ],
+    "pinyin": "kàn bìng",
+    "pinyinNumeric": "kan4bing4",
+    "meaningEn": "to visit a doctor; to see a patient",
+    "meaningFr": "",
+    "frequency": 197,
+    "audioFile": "kan4bing4.mp3"
+  },
+  {
+    "id": "看到",
+    "hskLevel": 1,
+    "characters": [
+      "看",
+      "到"
+    ],
+    "pinyin": "kàn dào",
+    "pinyinNumeric": "kan4dao4",
+    "meaningEn": "to see",
+    "meaningFr": "",
+    "frequency": 198,
+    "audioFile": "kan4dao4.mp3"
+  },
+  {
+    "id": "看见",
+    "hskLevel": 1,
+    "characters": [
+      "看",
+      "见"
+    ],
+    "pinyin": "kàn jiàn",
+    "pinyinNumeric": "kan4jian4",
+    "meaningEn": "to see; to catch sight of",
+    "meaningFr": "",
+    "frequency": 199,
+    "audioFile": "kan4jian4.mp3"
+  },
+  {
+    "id": "考",
+    "hskLevel": 1,
+    "characters": [
+      "考"
+    ],
+    "pinyin": "kǎo",
+    "pinyinNumeric": "kao3",
+    "meaningEn": "to beat; to hit; variant of 考; to inspect; to test; to take an exam",
+    "meaningFr": "",
+    "frequency": 200,
+    "audioFile": "kao3.mp3"
+  },
+  {
+    "id": "考试",
+    "hskLevel": 1,
+    "characters": [
+      "考",
+      "试"
+    ],
+    "pinyin": "kǎo shì",
+    "pinyinNumeric": "kao3shi4",
+    "meaningEn": "to take an exam; exam",
+    "meaningFr": "",
+    "frequency": 201,
+    "audioFile": "kao3shi4.mp3"
+  },
+  {
+    "id": "渴",
+    "hskLevel": 1,
+    "characters": [
+      "渴"
+    ],
+    "pinyin": "kě",
+    "pinyinNumeric": "ke3",
+    "meaningEn": "thirsty",
+    "meaningFr": "",
+    "frequency": 202,
+    "audioFile": "ke3.mp3"
+  },
+  {
+    "id": "课",
+    "hskLevel": 1,
+    "characters": [
+      "课"
+    ],
+    "pinyin": "kè",
+    "pinyinNumeric": "ke4",
+    "meaningEn": "subject; course; class; lesson; to levy; tax; form of divination",
+    "meaningFr": "",
+    "frequency": 203,
+    "audioFile": "ke4.mp3"
+  },
+  {
+    "id": "课本",
+    "hskLevel": 1,
+    "characters": [
+      "课",
+      "本"
+    ],
+    "pinyin": "kè běn",
+    "pinyinNumeric": "ke4ben3",
+    "meaningEn": "textbook",
+    "meaningFr": "",
+    "frequency": 204,
+    "audioFile": "ke4ben3.mp3"
+  },
+  {
+    "id": "课文",
+    "hskLevel": 1,
+    "characters": [
+      "课",
+      "文"
+    ],
+    "pinyin": "kè wén",
+    "pinyinNumeric": "ke4wen2",
+    "meaningEn": "text",
+    "meaningFr": "",
+    "frequency": 205,
+    "audioFile": "ke4wen2.mp3"
+  },
+  {
+    "id": "口",
+    "hskLevel": 1,
+    "characters": [
+      "口"
+    ],
+    "pinyin": "kǒu",
+    "pinyinNumeric": "kou3",
+    "meaningEn": "mouth; classifier for things with mouths (people, domestic animals, cannons, wells etc); classifier for bites or mouthfuls",
+    "meaningFr": "",
+    "frequency": 206,
+    "audioFile": "kou3.mp3"
+  },
+  {
+    "id": "块",
+    "hskLevel": 1,
+    "characters": [
+      "块"
+    ],
+    "pinyin": "kuài",
+    "pinyinNumeric": "kuai4",
+    "meaningEn": "lump; chunk; piece; classifier for pieces of cloth, cake, soap etc; (coll.) classifier for money and currency units",
+    "meaningFr": "",
+    "frequency": 207,
+    "audioFile": "kuai4.mp3"
+  },
+  {
+    "id": "快",
+    "hskLevel": 1,
+    "characters": [
+      "快"
+    ],
+    "pinyin": "kuài",
+    "pinyinNumeric": "kuai4",
+    "meaningEn": "rapid; quick; speed; rate; soon; almost; to make haste; clever; sharp (of knives or wits); forthright; plainspoken; gratified; pleased; pleasant",
+    "meaningFr": "",
+    "frequency": 208,
+    "audioFile": "kuai4.mp3"
+  },
+  {
+    "id": "来",
+    "hskLevel": 1,
+    "characters": [
+      "来"
+    ],
+    "pinyin": "lái",
+    "pinyinNumeric": "lai2",
+    "meaningEn": "to come; (used as a substitute for a more specific verb); hither (directional complement for motion toward the speaker, as in 回来); ever since (as in 自古以来); for the past (amount of time); (prefix) the coming ...; the next ... (as in 来世); (between two verbs) in order to; (after a round number) approximately; (used after 得 to indicate possibility, as in 谈得来, or after 不 to indicate impossibility, as in 吃不来)",
+    "meaningFr": "",
+    "frequency": 209,
+    "audioFile": "lai2.mp3"
+  },
+  {
+    "id": "来到",
+    "hskLevel": 1,
+    "characters": [
+      "来",
+      "到"
+    ],
+    "pinyin": "lái dào",
+    "pinyinNumeric": "lai2dao4",
+    "meaningEn": "to arrive; to come",
+    "meaningFr": "",
+    "frequency": 210,
+    "audioFile": "lai2dao4.mp3"
+  },
+  {
+    "id": "老",
+    "hskLevel": 1,
+    "characters": [
+      "老"
+    ],
+    "pinyin": "lǎo",
+    "pinyinNumeric": "lao3",
+    "meaningEn": "prefix used before the surname of a person or a numeral indicating the order of birth of the children in a family or to indicate affection or familiarity; old (of people); venerable (person); experienced; of long standing; always; all the time; of the past; very; outdated; (of meat etc) tough",
+    "meaningFr": "",
+    "frequency": 211,
+    "audioFile": "lao3.mp3"
+  },
+  {
+    "id": "老人",
+    "hskLevel": 1,
+    "characters": [
+      "老",
+      "人"
+    ],
+    "pinyin": "lǎo rén",
+    "pinyinNumeric": "lao3ren2",
+    "meaningEn": "old man or woman; the elderly; one's aged parents or grandparents",
+    "meaningFr": "",
+    "frequency": 212,
+    "audioFile": "lao3ren2.mp3"
+  },
+  {
+    "id": "老师",
+    "hskLevel": 1,
+    "characters": [
+      "老",
+      "师"
+    ],
+    "pinyin": "lǎo shī",
+    "pinyinNumeric": "lao3shi1",
+    "meaningEn": "teacher",
+    "meaningFr": "",
+    "frequency": 213,
+    "audioFile": "lao3shi1.mp3"
+  },
+  {
+    "id": "了",
+    "hskLevel": 1,
+    "characters": [
+      "了"
+    ],
+    "pinyin": "le",
+    "pinyinNumeric": "le5",
+    "meaningEn": "(completed action marker); (modal particle indicating change of state, situation now); (modal particle intensifying preceding clause)",
+    "meaningFr": "",
+    "frequency": 214,
+    "audioFile": "le5.mp3"
+  },
+  {
+    "id": "累",
+    "hskLevel": 1,
+    "characters": [
+      "累"
+    ],
+    "pinyin": "lěi",
+    "pinyinNumeric": "lei3",
+    "meaningEn": "to accumulate; to involve or implicate (Taiwan pr. [lèi]); continuous; repeated",
+    "meaningFr": "",
+    "frequency": 215,
+    "audioFile": "lei3.mp3"
+  },
+  {
+    "id": "冷",
+    "hskLevel": 1,
+    "characters": [
+      "冷"
+    ],
+    "pinyin": "Lěng",
+    "pinyinNumeric": "leng3",
+    "meaningEn": "surname Leng",
+    "meaningFr": "",
+    "frequency": 216,
+    "audioFile": "leng3.mp3"
+  },
+  {
+    "id": "里",
+    "hskLevel": 1,
+    "characters": [
+      "里"
+    ],
+    "pinyin": "lǐ",
+    "pinyinNumeric": "li3",
+    "meaningEn": "variant of 里",
+    "meaningFr": "",
+    "frequency": 217,
+    "audioFile": "li3.mp3"
+  },
+  {
+    "id": "里边",
+    "hskLevel": 1,
+    "characters": [
+      "里",
+      "边"
+    ],
+    "pinyin": "lǐ bian",
+    "pinyinNumeric": "li3bian5",
+    "meaningEn": "inside",
+    "meaningFr": "",
+    "frequency": 218,
+    "audioFile": "li3bian5.mp3"
+  },
+  {
+    "id": "两",
+    "hskLevel": 1,
+    "characters": [
+      "两"
+    ],
+    "pinyin": "liǎng",
+    "pinyinNumeric": "liang3",
+    "meaningEn": "two; both; some; a few; tael, unit of weight equal to 50 grams (modern) or 1⁄16 of a catty 斤 (old)",
+    "meaningFr": "",
+    "frequency": 219,
+    "audioFile": "liang3.mp3"
+  },
+  {
+    "id": "零",
+    "hskLevel": 1,
+    "characters": [
+      "零"
+    ],
+    "pinyin": "líng",
+    "pinyinNumeric": "ling2",
+    "meaningEn": "zero; nought; zero sign; fractional; fragmentary; odd (of numbers); (placed between two numbers to indicate a smaller quantity followed by a larger one); fraction; (in mathematics) remainder (after division); extra; to wither and fall; to wither",
+    "meaningFr": "",
+    "frequency": 220,
+    "audioFile": "ling2.mp3"
+  },
+  {
+    "id": "六",
+    "hskLevel": 1,
+    "characters": [
+      "六"
+    ],
+    "pinyin": "liù",
+    "pinyinNumeric": "liu4",
+    "meaningEn": "six; 6",
+    "meaningFr": "",
+    "frequency": 221,
+    "audioFile": "liu4.mp3"
+  },
+  {
+    "id": "楼",
+    "hskLevel": 1,
+    "characters": [
+      "楼"
+    ],
+    "pinyin": "Lóu",
+    "pinyinNumeric": "lou2",
+    "meaningEn": "surname Lou",
+    "meaningFr": "",
+    "frequency": 222,
+    "audioFile": "lou2.mp3"
+  },
+  {
+    "id": "楼上",
+    "hskLevel": 1,
+    "characters": [
+      "楼",
+      "上"
+    ],
+    "pinyin": "lóu shàng",
+    "pinyinNumeric": "lou2shang4",
+    "meaningEn": "upstairs; (Internet slang) previous poster in a forum thread",
+    "meaningFr": "",
+    "frequency": 223,
+    "audioFile": "lou2shang4.mp3"
+  },
+  {
+    "id": "楼下",
+    "hskLevel": 1,
+    "characters": [
+      "楼",
+      "下"
+    ],
+    "pinyin": "lóu xià",
+    "pinyinNumeric": "lou2xia4",
+    "meaningEn": "downstairs",
+    "meaningFr": "",
+    "frequency": 224,
+    "audioFile": "lou2xia4.mp3"
+  },
+  {
+    "id": "路",
+    "hskLevel": 1,
+    "characters": [
+      "路"
+    ],
+    "pinyin": "Lù",
+    "pinyinNumeric": "lu4",
+    "meaningEn": "surname Lu",
+    "meaningFr": "",
+    "frequency": 225,
+    "audioFile": "lu4.mp3"
+  },
+  {
+    "id": "路口",
+    "hskLevel": 1,
+    "characters": [
+      "路",
+      "口"
+    ],
+    "pinyin": "lù kǒu",
+    "pinyinNumeric": "lu4kou3",
+    "meaningEn": "crossing; intersection (of roads)",
+    "meaningFr": "",
+    "frequency": 226,
+    "audioFile": "lu4kou3.mp3"
+  },
+  {
+    "id": "路上",
+    "hskLevel": 1,
+    "characters": [
+      "路",
+      "上"
+    ],
+    "pinyin": "lù shang",
+    "pinyinNumeric": "lu4shang5",
+    "meaningEn": "on the road; on a journey; road surface",
+    "meaningFr": "",
+    "frequency": 227,
+    "audioFile": "lu4shang5.mp3"
+  },
+  {
+    "id": "妈",
+    "hskLevel": 1,
+    "characters": [
+      "妈"
+    ],
+    "pinyin": "mā",
+    "pinyinNumeric": "ma1",
+    "meaningEn": "ma; mom; mother",
+    "meaningFr": "",
+    "frequency": 228,
+    "audioFile": "ma1.mp3"
+  },
+  {
+    "id": "吗",
+    "hskLevel": 1,
+    "characters": [
+      "吗"
+    ],
+    "pinyin": "má",
+    "pinyinNumeric": "ma2",
+    "meaningEn": "(coll.) what?",
+    "meaningFr": "",
+    "frequency": 229,
+    "audioFile": "ma2.mp3"
+  },
+  {
+    "id": "马路",
+    "hskLevel": 1,
+    "characters": [
+      "马",
+      "路"
+    ],
+    "pinyin": "mǎ lù",
+    "pinyinNumeric": "ma3lu4",
+    "meaningEn": "street; road",
+    "meaningFr": "",
+    "frequency": 230,
+    "audioFile": "ma3lu4.mp3"
+  },
+  {
+    "id": "妈妈",
+    "hskLevel": 1,
+    "characters": [
+      "妈",
+      "妈"
+    ],
+    "pinyin": "mā ma",
+    "pinyinNumeric": "ma1ma5",
+    "meaningEn": "mama; mommy; mother",
+    "meaningFr": "",
+    "frequency": 231,
+    "audioFile": "ma1ma5.mp3"
+  },
+  {
+    "id": "马上",
+    "hskLevel": 1,
+    "characters": [
+      "马",
+      "上"
+    ],
+    "pinyin": "mǎ shàng",
+    "pinyinNumeric": "ma3shang4",
+    "meaningEn": "at once; right away; immediately; on horseback (i.e. by military force)",
+    "meaningFr": "",
+    "frequency": 232,
+    "audioFile": "ma3shang4.mp3"
+  },
+  {
+    "id": "买",
+    "hskLevel": 1,
+    "characters": [
+      "买"
+    ],
+    "pinyin": "mǎi",
+    "pinyinNumeric": "mai3",
+    "meaningEn": "to buy; to purchase",
+    "meaningFr": "",
+    "frequency": 233,
+    "audioFile": "mai3.mp3"
+  },
+  {
+    "id": "慢",
+    "hskLevel": 1,
+    "characters": [
+      "慢"
+    ],
+    "pinyin": "màn",
+    "pinyinNumeric": "man4",
+    "meaningEn": "slow",
+    "meaningFr": "",
+    "frequency": 234,
+    "audioFile": "man4.mp3"
+  },
+  {
+    "id": "忙",
+    "hskLevel": 1,
+    "characters": [
+      "忙"
+    ],
+    "pinyin": "máng",
+    "pinyinNumeric": "mang2",
+    "meaningEn": "busy; hurriedly; to hurry; to rush",
+    "meaningFr": "",
+    "frequency": 235,
+    "audioFile": "mang2.mp3"
+  },
+  {
+    "id": "毛",
+    "hskLevel": 1,
+    "characters": [
+      "毛"
+    ],
+    "pinyin": "Máo",
+    "pinyinNumeric": "mao2",
+    "meaningEn": "surname Mao",
+    "meaningFr": "",
+    "frequency": 236,
+    "audioFile": "mao2.mp3"
+  },
+  {
+    "id": "没",
+    "hskLevel": 1,
+    "characters": [
+      "没"
+    ],
+    "pinyin": "méi",
+    "pinyinNumeric": "mei2",
+    "meaningEn": "(negative prefix for verbs) have not; not",
+    "meaningFr": "",
+    "frequency": 237,
+    "audioFile": "mei2.mp3"
+  },
+  {
+    "id": "妹",
+    "hskLevel": 1,
+    "characters": [
+      "妹"
+    ],
+    "pinyin": "mèi",
+    "pinyinNumeric": "mei4",
+    "meaningEn": "younger sister",
+    "meaningFr": "",
+    "frequency": 238,
+    "audioFile": "mei4.mp3"
+  },
+  {
+    "id": "没关系",
+    "hskLevel": 1,
+    "characters": [
+      "没",
+      "关",
+      "系"
+    ],
+    "pinyin": "méi guān xi",
+    "pinyinNumeric": "mei2guan1xi5",
+    "meaningEn": "it doesn't matter",
+    "meaningFr": "",
+    "frequency": 239,
+    "audioFile": "mei2guan1xi5.mp3"
+  },
+  {
+    "id": "妹妹",
+    "hskLevel": 1,
+    "characters": [
+      "妹",
+      "妹"
+    ],
+    "pinyin": "mèi mei",
+    "pinyinNumeric": "mei4mei5",
+    "meaningEn": "younger sister; young woman",
+    "meaningFr": "",
+    "frequency": 240,
+    "audioFile": "mei4mei5.mp3"
+  },
+  {
+    "id": "没什么",
+    "hskLevel": 1,
+    "characters": [
+      "没",
+      "什",
+      "么"
+    ],
+    "pinyin": "méi shén me",
+    "pinyinNumeric": "mei2shen2me5",
+    "meaningEn": "nothing; it doesn't matter; it's nothing; never mind",
+    "meaningFr": "",
+    "frequency": 241,
+    "audioFile": "mei2shen2me5.mp3"
+  },
+  {
+    "id": "没事儿",
+    "hskLevel": 1,
+    "characters": [
+      "没",
+      "事",
+      "儿"
+    ],
+    "pinyin": "méi shì r",
+    "pinyinNumeric": "mei2shi4r5",
+    "meaningEn": "to have spare time; free from work; it's not important; it's nothing; never mind",
+    "meaningFr": "",
+    "frequency": 242,
+    "audioFile": "mei2shi4r5.mp3"
+  },
+  {
+    "id": "没有",
+    "hskLevel": 1,
+    "characters": [
+      "没",
+      "有"
+    ],
+    "pinyin": "méi yǒu",
+    "pinyinNumeric": "mei2you3",
+    "meaningEn": "haven't; hasn't; doesn't exist; to not have; to not be",
+    "meaningFr": "",
+    "frequency": 243,
+    "audioFile": "mei2you3.mp3"
+  },
+  {
+    "id": "门",
+    "hskLevel": 1,
+    "characters": [
+      "门"
+    ],
+    "pinyin": "Mén",
+    "pinyinNumeric": "men2",
+    "meaningEn": "surname Men",
+    "meaningFr": "",
+    "frequency": 244,
+    "audioFile": "men2.mp3"
+  },
+  {
+    "id": "们",
+    "hskLevel": 1,
+    "characters": [
+      "们"
+    ],
+    "pinyin": "men",
+    "pinyinNumeric": "men5",
+    "meaningEn": "plural marker for pronouns, and nouns referring to individuals",
+    "meaningFr": "",
+    "frequency": 245,
+    "audioFile": "men5.mp3"
+  },
+  {
+    "id": "门口",
+    "hskLevel": 1,
+    "characters": [
+      "门",
+      "口"
+    ],
+    "pinyin": "mén kǒu",
+    "pinyinNumeric": "men2kou3",
+    "meaningEn": "doorway; gate",
+    "meaningFr": "",
+    "frequency": 246,
+    "audioFile": "men2kou3.mp3"
+  },
+  {
+    "id": "门票",
+    "hskLevel": 1,
+    "characters": [
+      "门",
+      "票"
+    ],
+    "pinyin": "mén piào",
+    "pinyinNumeric": "men2piao4",
+    "meaningEn": "ticket (for theater, cinema etc)",
+    "meaningFr": "",
+    "frequency": 247,
+    "audioFile": "men2piao4.mp3"
+  },
+  {
+    "id": "米饭",
+    "hskLevel": 1,
+    "characters": [
+      "米",
+      "饭"
+    ],
+    "pinyin": "mǐ fàn",
+    "pinyinNumeric": "mi3fan4",
+    "meaningEn": "(cooked) rice",
+    "meaningFr": "",
+    "frequency": 248,
+    "audioFile": "mi3fan4.mp3"
+  },
+  {
+    "id": "面包",
+    "hskLevel": 1,
+    "characters": [
+      "面",
+      "包"
+    ],
+    "pinyin": "miàn bāo",
+    "pinyinNumeric": "mian4bao1",
+    "meaningEn": "bread",
+    "meaningFr": "",
+    "frequency": 249,
+    "audioFile": "mian4bao1.mp3"
+  },
+  {
+    "id": "面条儿",
+    "hskLevel": 1,
+    "characters": [
+      "面",
+      "条",
+      "儿"
+    ],
+    "pinyin": "miàn tiáo r",
+    "pinyinNumeric": "mian4tiao2r5",
+    "meaningEn": "erhua variant of 面条; noodles",
+    "meaningFr": "",
+    "frequency": 250,
+    "audioFile": "mian4tiao2r5.mp3"
+  },
+  {
+    "id": "明白",
+    "hskLevel": 1,
+    "characters": [
+      "明",
+      "白"
+    ],
+    "pinyin": "míng bai",
+    "pinyinNumeric": "ming2bai5",
+    "meaningEn": "clear; obvious; unequivocal; to understand; to realize",
+    "meaningFr": "",
+    "frequency": 251,
+    "audioFile": "ming2bai5.mp3"
+  },
+  {
+    "id": "明年",
+    "hskLevel": 1,
+    "characters": [
+      "明",
+      "年"
+    ],
+    "pinyin": "míng nián",
+    "pinyinNumeric": "ming2nian2",
+    "meaningEn": "next year",
+    "meaningFr": "",
+    "frequency": 252,
+    "audioFile": "ming2nian2.mp3"
+  },
+  {
+    "id": "明天",
+    "hskLevel": 1,
+    "characters": [
+      "明",
+      "天"
+    ],
+    "pinyin": "míng tiān",
+    "pinyinNumeric": "ming2tian1",
+    "meaningEn": "tomorrow",
+    "meaningFr": "",
+    "frequency": 253,
+    "audioFile": "ming2tian1.mp3"
+  },
+  {
+    "id": "名字",
+    "hskLevel": 1,
+    "characters": [
+      "名",
+      "字"
+    ],
+    "pinyin": "míng zi",
+    "pinyinNumeric": "ming2zi5",
+    "meaningEn": "name (of a person or thing)",
+    "meaningFr": "",
+    "frequency": 254,
+    "audioFile": "ming2zi5.mp3"
+  },
+  {
+    "id": "那",
+    "hskLevel": 1,
+    "characters": [
+      "那"
+    ],
+    "pinyin": "Nā",
+    "pinyinNumeric": "na1",
+    "meaningEn": "surname Na",
+    "meaningFr": "",
+    "frequency": 255,
+    "audioFile": "na1.mp3"
+  },
+  {
+    "id": "拿",
+    "hskLevel": 1,
+    "characters": [
+      "拿"
+    ],
+    "pinyin": "ná",
+    "pinyinNumeric": "na2",
+    "meaningEn": "old variant of 拿",
+    "meaningFr": "",
+    "frequency": 256,
+    "audioFile": "na2.mp3"
+  },
+  {
+    "id": "哪",
+    "hskLevel": 1,
+    "characters": [
+      "哪"
+    ],
+    "pinyin": "nǎ",
+    "pinyinNumeric": "na3",
+    "meaningEn": "how; which",
+    "meaningFr": "",
+    "frequency": 257,
+    "audioFile": "na3.mp3"
+  },
+  {
+    "id": "那边",
+    "hskLevel": 1,
+    "characters": [
+      "那",
+      "边"
+    ],
+    "pinyin": "nà bian",
+    "pinyinNumeric": "na4bian5",
+    "meaningEn": "over there; yonder",
+    "meaningFr": "",
+    "frequency": 258,
+    "audioFile": "na4bian5.mp3"
+  },
+  {
+    "id": "哪里",
+    "hskLevel": 1,
+    "characters": [
+      "哪",
+      "里"
+    ],
+    "pinyin": "nǎ lǐ",
+    "pinyinNumeric": "na3li3",
+    "meaningEn": "where?; somewhere; anywhere; wherever; nowhere (negative answer to question); humble expression denying compliment; also written 哪里",
+    "meaningFr": "",
+    "frequency": 259,
+    "audioFile": "na3li3.mp3"
+  },
+  {
+    "id": "那里",
+    "hskLevel": 1,
+    "characters": [
+      "那",
+      "里"
+    ],
+    "pinyin": "nà li",
+    "pinyinNumeric": "na4li5",
+    "meaningEn": "there; that place",
+    "meaningFr": "",
+    "frequency": 260,
+    "audioFile": "na4li5.mp3"
+  },
+  {
+    "id": "哪儿",
+    "hskLevel": 1,
+    "characters": [
+      "哪",
+      "儿"
+    ],
+    "pinyin": "nǎ r",
+    "pinyinNumeric": "na3r5",
+    "meaningEn": "where?; wherever; anywhere; somewhere; (used in rhetorical questions) how can ...?; how could ...?",
+    "meaningFr": "",
+    "frequency": 261,
+    "audioFile": "na3r5.mp3"
+  },
+  {
+    "id": "那儿",
+    "hskLevel": 1,
+    "characters": [
+      "那",
+      "儿"
+    ],
+    "pinyin": "nà r",
+    "pinyinNumeric": "na4r5",
+    "meaningEn": "there",
+    "meaningFr": "",
+    "frequency": 262,
+    "audioFile": "na4r5.mp3"
+  },
+  {
+    "id": "哪些",
+    "hskLevel": 1,
+    "characters": [
+      "哪",
+      "些"
+    ],
+    "pinyin": "nǎ xiē",
+    "pinyinNumeric": "na3xie1",
+    "meaningEn": "which ones?; who?; what?",
+    "meaningFr": "",
+    "frequency": 263,
+    "audioFile": "na3xie1.mp3"
+  },
+  {
+    "id": "那些",
+    "hskLevel": 1,
+    "characters": [
+      "那",
+      "些"
+    ],
+    "pinyin": "nà xiē",
+    "pinyinNumeric": "na4xie1",
+    "meaningEn": "those",
+    "meaningFr": "",
+    "frequency": 264,
+    "audioFile": "na4xie1.mp3"
+  },
+  {
+    "id": "奶",
+    "hskLevel": 1,
+    "characters": [
+      "奶"
+    ],
+    "pinyin": "nǎi",
+    "pinyinNumeric": "nai3",
+    "meaningEn": "breast; milk; to breastfeed",
+    "meaningFr": "",
+    "frequency": 265,
+    "audioFile": "nai3.mp3"
+  },
+  {
+    "id": "奶奶",
+    "hskLevel": 1,
+    "characters": [
+      "奶",
+      "奶"
+    ],
+    "pinyin": "nǎi nai",
+    "pinyinNumeric": "nai3nai5",
+    "meaningEn": "(informal) grandma (paternal grandmother); (respectful) mistress of the house; (coll.) boobies; breasts",
+    "meaningFr": "",
+    "frequency": 266,
+    "audioFile": "nai3nai5.mp3"
+  },
+  {
+    "id": "男",
+    "hskLevel": 1,
+    "characters": [
+      "男"
+    ],
+    "pinyin": "nán",
+    "pinyinNumeric": "nan2",
+    "meaningEn": "male; Baron, lowest of five orders of nobility 位",
+    "meaningFr": "",
+    "frequency": 267,
+    "audioFile": "nan2.mp3"
+  },
+  {
+    "id": "难",
+    "hskLevel": 1,
+    "characters": [
+      "难"
+    ],
+    "pinyin": "nán",
+    "pinyinNumeric": "nan2",
+    "meaningEn": "difficult (to...); problem; difficulty; difficult; not good",
+    "meaningFr": "",
+    "frequency": 268,
+    "audioFile": "nan2.mp3"
+  },
+  {
+    "id": "南",
+    "hskLevel": 1,
+    "characters": [
+      "南"
+    ],
+    "pinyin": "Nán",
+    "pinyinNumeric": "nan2",
+    "meaningEn": "surname Nan",
+    "meaningFr": "",
+    "frequency": 269,
+    "audioFile": "nan2.mp3"
+  },
+  {
+    "id": "南边",
+    "hskLevel": 1,
+    "characters": [
+      "南",
+      "边"
+    ],
+    "pinyin": "nán bian",
+    "pinyinNumeric": "nan2bian5",
+    "meaningEn": "south; south side; southern part; to the south of",
+    "meaningFr": "",
+    "frequency": 270,
+    "audioFile": "nan2bian5.mp3"
+  },
+  {
+    "id": "男孩儿",
+    "hskLevel": 1,
+    "characters": [
+      "男",
+      "孩",
+      "儿"
+    ],
+    "pinyin": "nán hái r",
+    "pinyinNumeric": "nan2hai2r5",
+    "meaningEn": "erhua variant of 男孩; boy",
+    "meaningFr": "",
+    "frequency": 271,
+    "audioFile": "nan2hai2r5.mp3"
+  },
+  {
+    "id": "男朋友",
+    "hskLevel": 1,
+    "characters": [
+      "男",
+      "朋",
+      "友"
+    ],
+    "pinyin": "nán péng you",
+    "pinyinNumeric": "nan2peng2you5",
+    "meaningEn": "boyfriend",
+    "meaningFr": "",
+    "frequency": 272,
+    "audioFile": "nan2peng2you5.mp3"
+  },
+  {
+    "id": "男人",
+    "hskLevel": 1,
+    "characters": [
+      "男",
+      "人"
+    ],
+    "pinyin": "nán rén",
+    "pinyinNumeric": "nan2ren2",
+    "meaningEn": "a man; a male; men",
+    "meaningFr": "",
+    "frequency": 273,
+    "audioFile": "nan2ren2.mp3"
+  },
+  {
+    "id": "男生",
+    "hskLevel": 1,
+    "characters": [
+      "男",
+      "生"
+    ],
+    "pinyin": "nán shēng",
+    "pinyinNumeric": "nan2sheng1",
+    "meaningEn": "schoolboy; male student; boy; guy (young adult male)",
+    "meaningFr": "",
+    "frequency": 274,
+    "audioFile": "nan2sheng1.mp3"
+  },
+  {
+    "id": "呢",
+    "hskLevel": 1,
+    "characters": [
+      "呢"
+    ],
+    "pinyin": "ne",
+    "pinyinNumeric": "ne5",
+    "meaningEn": "particle indicating that a previously asked question is to be applied to the preceding word (\"What about ...?\", \"And ...?\"); particle for inquiring about location (\"Where is ...?\"); particle signaling a pause, to emphasize the preceding words and allow the listener time to take them on board (\"ok?\", \"are you with me?\"); (at the end of a declarative sentence) particle indicating continuation of a state or action; particle indicating strong affirmation",
+    "meaningFr": "",
+    "frequency": 275,
+    "audioFile": "ne5.mp3"
+  },
+  {
+    "id": "能",
+    "hskLevel": 1,
+    "characters": [
+      "能"
+    ],
+    "pinyin": "Néng",
+    "pinyinNumeric": "neng2",
+    "meaningEn": "surname Neng",
+    "meaningFr": "",
+    "frequency": 276,
+    "audioFile": "neng2.mp3"
+  },
+  {
+    "id": "你",
+    "hskLevel": 1,
+    "characters": [
+      "你"
+    ],
+    "pinyin": "nǐ",
+    "pinyinNumeric": "ni3",
+    "meaningEn": "you (informal, as opposed to courteous 您)",
+    "meaningFr": "",
+    "frequency": 277,
+    "audioFile": "ni3.mp3"
+  },
+  {
+    "id": "你们",
+    "hskLevel": 1,
+    "characters": [
+      "你",
+      "们"
+    ],
+    "pinyin": "nǐ men",
+    "pinyinNumeric": "ni3men5",
+    "meaningEn": "you (plural)",
+    "meaningFr": "",
+    "frequency": 278,
+    "audioFile": "ni3men5.mp3"
+  },
+  {
+    "id": "年",
+    "hskLevel": 1,
+    "characters": [
+      "年"
+    ],
+    "pinyin": "Nián",
+    "pinyinNumeric": "nian2",
+    "meaningEn": "surname Nian",
+    "meaningFr": "",
+    "frequency": 279,
+    "audioFile": "nian2.mp3"
+  },
+  {
+    "id": "您",
+    "hskLevel": 1,
+    "characters": [
+      "您"
+    ],
+    "pinyin": "nín",
+    "pinyinNumeric": "nin2",
+    "meaningEn": "you (courteous, as opposed to informal 你)",
+    "meaningFr": "",
+    "frequency": 280,
+    "audioFile": "nin2.mp3"
+  },
+  {
+    "id": "牛奶",
+    "hskLevel": 1,
+    "characters": [
+      "牛",
+      "奶"
+    ],
+    "pinyin": "niú nǎi",
+    "pinyinNumeric": "niu2nai3",
+    "meaningEn": "cow's milk",
+    "meaningFr": "",
+    "frequency": 281,
+    "audioFile": "niu2nai3.mp3"
+  },
+  {
+    "id": "女",
+    "hskLevel": 1,
+    "characters": [
+      "女"
+    ],
+    "pinyin": "nǚ",
+    "pinyinNumeric": "nü3",
+    "meaningEn": "female; woman; daughter",
+    "meaningFr": "",
+    "frequency": 282,
+    "audioFile": "nü3.mp3"
+  },
+  {
+    "id": "女儿",
+    "hskLevel": 1,
+    "characters": [
+      "女",
+      "儿"
+    ],
+    "pinyin": "nǚ ér",
+    "pinyinNumeric": "nü3er2",
+    "meaningEn": "daughter",
+    "meaningFr": "",
+    "frequency": 283,
+    "audioFile": "nü3er2.mp3"
+  },
+  {
+    "id": "女孩儿",
+    "hskLevel": 1,
+    "characters": [
+      "女",
+      "孩",
+      "儿"
+    ],
+    "pinyin": "nǚ hái r",
+    "pinyinNumeric": "nü3hai2r5",
+    "meaningEn": "erhua variant of 女孩; girl",
+    "meaningFr": "",
+    "frequency": 284,
+    "audioFile": "nü3hai2r5.mp3"
+  },
+  {
+    "id": "女朋友",
+    "hskLevel": 1,
+    "characters": [
+      "女",
+      "朋",
+      "友"
+    ],
+    "pinyin": "nǚ péng you",
+    "pinyinNumeric": "nü3peng2you5",
+    "meaningEn": "girlfriend",
+    "meaningFr": "",
+    "frequency": 285,
+    "audioFile": "nü3peng2you5.mp3"
+  },
+  {
+    "id": "女人",
+    "hskLevel": 1,
+    "characters": [
+      "女",
+      "人"
+    ],
+    "pinyin": "nǚ rén",
+    "pinyinNumeric": "nü3ren2",
+    "meaningEn": "woman",
+    "meaningFr": "",
+    "frequency": 286,
+    "audioFile": "nü3ren2.mp3"
+  },
+  {
+    "id": "女生",
+    "hskLevel": 1,
+    "characters": [
+      "女",
+      "生"
+    ],
+    "pinyin": "nǚ shēng",
+    "pinyinNumeric": "nü3sheng1",
+    "meaningEn": "schoolgirl; female student; girl",
+    "meaningFr": "",
+    "frequency": 287,
+    "audioFile": "nü3sheng1.mp3"
+  },
+  {
+    "id": "旁边",
+    "hskLevel": 1,
+    "characters": [
+      "旁",
+      "边"
+    ],
+    "pinyin": "páng biān",
+    "pinyinNumeric": "pang2bian1",
+    "meaningEn": "side; adjacent place",
+    "meaningFr": "",
+    "frequency": 288,
+    "audioFile": "pang2bian1.mp3"
+  },
+  {
+    "id": "跑",
+    "hskLevel": 1,
+    "characters": [
+      "跑"
+    ],
+    "pinyin": "páo",
+    "pinyinNumeric": "pao2",
+    "meaningEn": "(of an animal) to paw (the ground)",
+    "meaningFr": "",
+    "frequency": 289,
+    "audioFile": "pao2.mp3"
+  },
+  {
+    "id": "朋友",
+    "hskLevel": 1,
+    "characters": [
+      "朋",
+      "友"
+    ],
+    "pinyin": "péng you",
+    "pinyinNumeric": "peng2you5",
+    "meaningEn": "friend",
+    "meaningFr": "",
+    "frequency": 290,
+    "audioFile": "peng2you5.mp3"
+  },
+  {
+    "id": "票",
+    "hskLevel": 1,
+    "characters": [
+      "票"
+    ],
+    "pinyin": "piào",
+    "pinyinNumeric": "piao4",
+    "meaningEn": "ticket; ballot; banknote; person held for ransom; amateur performance of Chinese opera; classifier for groups, batches, business transactions",
+    "meaningFr": "",
+    "frequency": 291,
+    "audioFile": "piao4.mp3"
+  },
+  {
+    "id": "七",
+    "hskLevel": 1,
+    "characters": [
+      "七"
+    ],
+    "pinyin": "qī",
+    "pinyinNumeric": "qi1",
+    "meaningEn": "seven; 7",
+    "meaningFr": "",
+    "frequency": 292,
+    "audioFile": "qi1.mp3"
+  },
+  {
+    "id": "起",
+    "hskLevel": 1,
+    "characters": [
+      "起"
+    ],
+    "pinyin": "qǐ",
+    "pinyinNumeric": "qi3",
+    "meaningEn": "to rise; to raise; to get up; to set out; to start; to appear; to launch; to initiate (action); to draft; to establish; to get (from a depot or counter); verb suffix, to start; starting from (a time, place, price etc); classifier for occurrences or unpredictable events: case, instance; classifier for groups: batch, group",
+    "meaningFr": "",
+    "frequency": 293,
+    "audioFile": "qi3.mp3"
+  },
+  {
+    "id": "汽车",
+    "hskLevel": 1,
+    "characters": [
+      "汽",
+      "车"
+    ],
+    "pinyin": "qì chē",
+    "pinyinNumeric": "qi4che1",
+    "meaningEn": "car; automobile; bus",
+    "meaningFr": "",
+    "frequency": 294,
+    "audioFile": "qi4che1.mp3"
+  },
+  {
+    "id": "起床",
+    "hskLevel": 1,
+    "characters": [
+      "起",
+      "床"
+    ],
+    "pinyin": "qǐ chuáng",
+    "pinyinNumeric": "qi3chuang2",
+    "meaningEn": "to get out of bed; to get up",
+    "meaningFr": "",
+    "frequency": 295,
+    "audioFile": "qi3chuang2.mp3"
+  },
+  {
+    "id": "起来",
+    "hskLevel": 1,
+    "characters": [
+      "起",
+      "来"
+    ],
+    "pinyin": "qǐ lai",
+    "pinyinNumeric": "qi3lai5",
+    "meaningEn": "to stand up; to get up; also pr. [qǐ lái]",
+    "meaningFr": "",
+    "frequency": 296,
+    "audioFile": "qi3lai5.mp3"
+  },
+  {
+    "id": "前",
+    "hskLevel": 1,
+    "characters": [
+      "前"
+    ],
+    "pinyin": "qián",
+    "pinyinNumeric": "qian2",
+    "meaningEn": "front; forward; ahead; first; top (followed by a number); future; ago; before; BC (e.g. 前293年); former; formerly",
+    "meaningFr": "",
+    "frequency": 297,
+    "audioFile": "qian2.mp3"
+  },
+  {
+    "id": "钱",
+    "hskLevel": 1,
+    "characters": [
+      "钱"
+    ],
+    "pinyin": "Qián",
+    "pinyinNumeric": "qian2",
+    "meaningEn": "surname Qian",
+    "meaningFr": "",
+    "frequency": 298,
+    "audioFile": "qian2.mp3"
+  },
+  {
+    "id": "钱包",
+    "hskLevel": 1,
+    "characters": [
+      "钱",
+      "包"
+    ],
+    "pinyin": "qián bāo",
+    "pinyinNumeric": "qian2bao1",
+    "meaningEn": "purse; wallet",
+    "meaningFr": "",
+    "frequency": 299,
+    "audioFile": "qian2bao1.mp3"
+  },
+  {
+    "id": "前边",
+    "hskLevel": 1,
+    "characters": [
+      "前",
+      "边"
+    ],
+    "pinyin": "qián bian",
+    "pinyinNumeric": "qian2bian5",
+    "meaningEn": "front; the front side; in front of",
+    "meaningFr": "",
+    "frequency": 300,
+    "audioFile": "qian2bian5.mp3"
+  },
+  {
+    "id": "前天",
+    "hskLevel": 1,
+    "characters": [
+      "前",
+      "天"
+    ],
+    "pinyin": "qián tiān",
+    "pinyinNumeric": "qian2tian1",
+    "meaningEn": "the day before yesterday",
+    "meaningFr": "",
+    "frequency": 301,
+    "audioFile": "qian2tian1.mp3"
+  },
+  {
+    "id": "请",
+    "hskLevel": 1,
+    "characters": [
+      "请"
+    ],
+    "pinyin": "qǐng",
+    "pinyinNumeric": "qing3",
+    "meaningEn": "to ask; to invite; please (do sth); to treat (to a meal etc); to request",
+    "meaningFr": "",
+    "frequency": 302,
+    "audioFile": "qing3.mp3"
+  },
+  {
+    "id": "请假",
+    "hskLevel": 1,
+    "characters": [
+      "请",
+      "假"
+    ],
+    "pinyin": "qǐng jià",
+    "pinyinNumeric": "qing3jia4",
+    "meaningEn": "to request leave of absence",
+    "meaningFr": "",
+    "frequency": 303,
+    "audioFile": "qing3jia4.mp3"
+  },
+  {
+    "id": "请进",
+    "hskLevel": 1,
+    "characters": [
+      "请",
+      "进"
+    ],
+    "pinyin": "qǐng jìn",
+    "pinyinNumeric": "qing3jin4",
+    "meaningEn": "\"please come in\"",
+    "meaningFr": "",
+    "frequency": 304,
+    "audioFile": "qing3jin4.mp3"
+  },
+  {
+    "id": "请问",
+    "hskLevel": 1,
+    "characters": [
+      "请",
+      "问"
+    ],
+    "pinyin": "qǐng wèn",
+    "pinyinNumeric": "qing3wen4",
+    "meaningEn": "Excuse me, may I ask...?",
+    "meaningFr": "",
+    "frequency": 305,
+    "audioFile": "qing3wen4.mp3"
+  },
+  {
+    "id": "请坐",
+    "hskLevel": 1,
+    "characters": [
+      "请",
+      "坐"
+    ],
+    "pinyin": "qǐng zuò",
+    "pinyinNumeric": "qing3zuo4",
+    "meaningEn": "please, have a seat",
+    "meaningFr": "",
+    "frequency": 306,
+    "audioFile": "qing3zuo4.mp3"
+  },
+  {
+    "id": "球",
+    "hskLevel": 1,
+    "characters": [
+      "球"
+    ],
+    "pinyin": "qiú",
+    "pinyinNumeric": "qiu2",
+    "meaningEn": "ball; sphere; globe; ball game; match",
+    "meaningFr": "",
+    "frequency": 307,
+    "audioFile": "qiu2.mp3"
+  },
+  {
+    "id": "去",
+    "hskLevel": 1,
+    "characters": [
+      "去"
+    ],
+    "pinyin": "qù",
+    "pinyinNumeric": "qu4",
+    "meaningEn": "to go; to go to (a place); (of a time etc) last; just passed; to send; to remove; to get rid of; to reduce; to be apart from in space or time; to die (euphemism); to play (a part); (when used either before or after a verb) to go in order to do sth; (after a verb of motion indicates movement away from the speaker); (used after certain verbs to indicate detachment or separation)",
+    "meaningFr": "",
+    "frequency": 308,
+    "audioFile": "qu4.mp3"
+  },
+  {
+    "id": "去年",
+    "hskLevel": 1,
+    "characters": [
+      "去",
+      "年"
+    ],
+    "pinyin": "qù nián",
+    "pinyinNumeric": "qu4nian2",
+    "meaningEn": "last year",
+    "meaningFr": "",
+    "frequency": 309,
+    "audioFile": "qu4nian2.mp3"
+  },
+  {
+    "id": "热",
+    "hskLevel": 1,
+    "characters": [
+      "热"
+    ],
+    "pinyin": "rè",
+    "pinyinNumeric": "re4",
+    "meaningEn": "to warm up; to heat up; hot (of weather); heat; fervent",
+    "meaningFr": "",
+    "frequency": 310,
+    "audioFile": "re4.mp3"
+  },
+  {
+    "id": "人",
+    "hskLevel": 1,
+    "characters": [
+      "人"
+    ],
+    "pinyin": "rén",
+    "pinyinNumeric": "ren2",
+    "meaningEn": "person; people",
+    "meaningFr": "",
+    "frequency": 311,
+    "audioFile": "ren2.mp3"
+  },
+  {
+    "id": "认识",
+    "hskLevel": 1,
+    "characters": [
+      "认",
+      "识"
+    ],
+    "pinyin": "rèn shi",
+    "pinyinNumeric": "ren4shi5",
+    "meaningEn": "to know; to recognize; to be familiar with; to get acquainted with sb; knowledge; understanding; awareness; cognition",
+    "meaningFr": "",
+    "frequency": 312,
+    "audioFile": "ren4shi5.mp3"
+  },
+  {
+    "id": "认真",
+    "hskLevel": 1,
+    "characters": [
+      "认",
+      "真"
+    ],
+    "pinyin": "rèn zhēn",
+    "pinyinNumeric": "ren4zhen1",
+    "meaningEn": "conscientious; earnest; serious; to take seriously; to take to heart",
+    "meaningFr": "",
+    "frequency": 313,
+    "audioFile": "ren4zhen1.mp3"
+  },
+  {
+    "id": "日",
+    "hskLevel": 1,
+    "characters": [
+      "日"
+    ],
+    "pinyin": "Rì",
+    "pinyinNumeric": "ri4",
+    "meaningEn": "abbr. for 本, Japan",
+    "meaningFr": "",
+    "frequency": 314,
+    "audioFile": "ri4.mp3"
+  },
+  {
+    "id": "日期",
+    "hskLevel": 1,
+    "characters": [
+      "日",
+      "期"
+    ],
+    "pinyin": "rì qī",
+    "pinyinNumeric": "ri4qi1",
+    "meaningEn": "date",
+    "meaningFr": "",
+    "frequency": 315,
+    "audioFile": "ri4qi1.mp3"
+  },
+  {
+    "id": "肉",
+    "hskLevel": 1,
+    "characters": [
+      "肉"
+    ],
+    "pinyin": "ròu",
+    "pinyinNumeric": "rou4",
+    "meaningEn": "meat; flesh; pulp (of a fruit); (coll.) (of a fruit) squashy; (of a person) flabby; irresolute; Kangxi radical 130",
+    "meaningFr": "",
+    "frequency": 316,
+    "audioFile": "rou4.mp3"
+  },
+  {
+    "id": "三",
+    "hskLevel": 1,
+    "characters": [
+      "三"
+    ],
+    "pinyin": "Sān",
+    "pinyinNumeric": "san1",
+    "meaningEn": "surname San",
+    "meaningFr": "",
+    "frequency": 317,
+    "audioFile": "san1.mp3"
+  },
+  {
+    "id": "山",
+    "hskLevel": 1,
+    "characters": [
+      "山"
+    ],
+    "pinyin": "Shān",
+    "pinyinNumeric": "shan1",
+    "meaningEn": "surname Shan",
+    "meaningFr": "",
+    "frequency": 318,
+    "audioFile": "shan1.mp3"
+  },
+  {
+    "id": "上",
+    "hskLevel": 1,
+    "characters": [
+      "上"
+    ],
+    "pinyin": "shǎng",
+    "pinyinNumeric": "shang3",
+    "meaningEn": "used in 上声",
+    "meaningFr": "",
+    "frequency": 319,
+    "audioFile": "shang3.mp3"
+  },
+  {
+    "id": "上班",
+    "hskLevel": 1,
+    "characters": [
+      "上",
+      "班"
+    ],
+    "pinyin": "shàng bān",
+    "pinyinNumeric": "shang4ban1",
+    "meaningEn": "to go to work; to be on duty; to start work; to go to the office",
+    "meaningFr": "",
+    "frequency": 320,
+    "audioFile": "shang4ban1.mp3"
+  },
+  {
+    "id": "上边",
+    "hskLevel": 1,
+    "characters": [
+      "上",
+      "边"
+    ],
+    "pinyin": "shàng bian",
+    "pinyinNumeric": "shang4bian5",
+    "meaningEn": "the top; above; overhead; upwards; the top margin; above-mentioned; those higher up",
+    "meaningFr": "",
+    "frequency": 321,
+    "audioFile": "shang4bian5.mp3"
+  },
+  {
+    "id": "商场",
+    "hskLevel": 1,
+    "characters": [
+      "商",
+      "场"
+    ],
+    "pinyin": "shāng chǎng",
+    "pinyinNumeric": "shang1chang3",
+    "meaningEn": "shopping mall; shopping center; department store; emporium; the business world",
+    "meaningFr": "",
+    "frequency": 322,
+    "audioFile": "shang1chang3.mp3"
+  },
+  {
+    "id": "上车",
+    "hskLevel": 1,
+    "characters": [
+      "上",
+      "车"
+    ],
+    "pinyin": "shàng chē",
+    "pinyinNumeric": "shang4che1",
+    "meaningEn": "to get on or into (a bus, train, car etc)",
+    "meaningFr": "",
+    "frequency": 323,
+    "audioFile": "shang4che1.mp3"
+  },
+  {
+    "id": "上次",
+    "hskLevel": 1,
+    "characters": [
+      "上",
+      "次"
+    ],
+    "pinyin": "shàng cì",
+    "pinyinNumeric": "shang4ci4",
+    "meaningEn": "last time",
+    "meaningFr": "",
+    "frequency": 324,
+    "audioFile": "shang4ci4.mp3"
+  },
+  {
+    "id": "商店",
+    "hskLevel": 1,
+    "characters": [
+      "商",
+      "店"
+    ],
+    "pinyin": "shāng diàn",
+    "pinyinNumeric": "shang1dian4",
+    "meaningEn": "store; shop",
+    "meaningFr": "",
+    "frequency": 325,
+    "audioFile": "shang1dian4.mp3"
+  },
+  {
+    "id": "上课",
+    "hskLevel": 1,
+    "characters": [
+      "上",
+      "课"
+    ],
+    "pinyin": "shàng kè",
+    "pinyinNumeric": "shang4ke4",
+    "meaningEn": "to go to class; to attend class; to go to teach a class",
+    "meaningFr": "",
+    "frequency": 326,
+    "audioFile": "shang4ke4.mp3"
+  },
+  {
+    "id": "上网",
+    "hskLevel": 1,
+    "characters": [
+      "上",
+      "网"
+    ],
+    "pinyin": "shàng wǎng",
+    "pinyinNumeric": "shang4wang3",
+    "meaningEn": "to go online; to connect to the Internet; (of a document etc) to be uploaded to the Internet; (tennis, volleyball etc) to move in close to the net",
+    "meaningFr": "",
+    "frequency": 327,
+    "audioFile": "shang4wang3.mp3"
+  },
+  {
+    "id": "上午",
+    "hskLevel": 1,
+    "characters": [
+      "上",
+      "午"
+    ],
+    "pinyin": "shàng wǔ",
+    "pinyinNumeric": "shang4wu3",
+    "meaningEn": "morning",
+    "meaningFr": "",
+    "frequency": 328,
+    "audioFile": "shang4wu3.mp3"
+  },
+  {
+    "id": "上学",
+    "hskLevel": 1,
+    "characters": [
+      "上",
+      "学"
+    ],
+    "pinyin": "shàng xué",
+    "pinyinNumeric": "shang4xue2",
+    "meaningEn": "to go to school; to attend school",
+    "meaningFr": "",
+    "frequency": 329,
+    "audioFile": "shang4xue2.mp3"
+  },
+  {
+    "id": "少",
+    "hskLevel": 1,
+    "characters": [
+      "少"
+    ],
+    "pinyin": "shǎo",
+    "pinyinNumeric": "shao3",
+    "meaningEn": "few; less; to lack; to be missing; to stop (doing sth); seldom",
+    "meaningFr": "",
+    "frequency": 330,
+    "audioFile": "shao3.mp3"
+  },
+  {
+    "id": "谁",
+    "hskLevel": 1,
+    "characters": [
+      "谁"
+    ],
+    "pinyin": "shéi",
+    "pinyinNumeric": "shei2",
+    "meaningEn": "who; also pr. [shuí]",
+    "meaningFr": "",
+    "frequency": 331,
+    "audioFile": "shei2.mp3"
+  },
+  {
+    "id": "什么",
+    "hskLevel": 1,
+    "characters": [
+      "什",
+      "么"
+    ],
+    "pinyin": "shén me",
+    "pinyinNumeric": "shen2me5",
+    "meaningEn": "what?; something; anything",
+    "meaningFr": "",
+    "frequency": 332,
+    "audioFile": "shen2me5.mp3"
+  },
+  {
+    "id": "身上",
+    "hskLevel": 1,
+    "characters": [
+      "身",
+      "上"
+    ],
+    "pinyin": "shēn shang",
+    "pinyinNumeric": "shen1shang5",
+    "meaningEn": "on the body; at hand; among",
+    "meaningFr": "",
+    "frequency": 333,
+    "audioFile": "shen1shang5.mp3"
+  },
+  {
+    "id": "身体",
+    "hskLevel": 1,
+    "characters": [
+      "身",
+      "体"
+    ],
+    "pinyin": "shēn tǐ",
+    "pinyinNumeric": "shen1ti3",
+    "meaningEn": "the body; one's health; in person",
+    "meaningFr": "",
+    "frequency": 334,
+    "audioFile": "shen1ti3.mp3"
+  },
+  {
+    "id": "生病",
+    "hskLevel": 1,
+    "characters": [
+      "生",
+      "病"
+    ],
+    "pinyin": "shēng bìng",
+    "pinyinNumeric": "sheng1bing4",
+    "meaningEn": "to fall ill",
+    "meaningFr": "",
+    "frequency": 335,
+    "audioFile": "sheng1bing4.mp3"
+  },
+  {
+    "id": "生气",
+    "hskLevel": 1,
+    "characters": [
+      "生",
+      "气"
+    ],
+    "pinyin": "shēng qì",
+    "pinyinNumeric": "sheng1qi4",
+    "meaningEn": "to get angry; to take offense; angry; vitality; liveliness",
+    "meaningFr": "",
+    "frequency": 336,
+    "audioFile": "sheng1qi4.mp3"
+  },
+  {
+    "id": "生日",
+    "hskLevel": 1,
+    "characters": [
+      "生",
+      "日"
+    ],
+    "pinyin": "shēng rì",
+    "pinyinNumeric": "sheng1ri4",
+    "meaningEn": "birthday",
+    "meaningFr": "",
+    "frequency": 337,
+    "audioFile": "sheng1ri4.mp3"
+  },
+  {
+    "id": "十",
+    "hskLevel": 1,
+    "characters": [
+      "十"
+    ],
+    "pinyin": "shí",
+    "pinyinNumeric": "shi2",
+    "meaningEn": "ten; 10",
+    "meaningFr": "",
+    "frequency": 338,
+    "audioFile": "shi2.mp3"
+  },
+  {
+    "id": "事",
+    "hskLevel": 1,
+    "characters": [
+      "事"
+    ],
+    "pinyin": "shì",
+    "pinyinNumeric": "shi4",
+    "meaningEn": "matter; thing; item; work; affair",
+    "meaningFr": "",
+    "frequency": 339,
+    "audioFile": "shi4.mp3"
+  },
+  {
+    "id": "试",
+    "hskLevel": 1,
+    "characters": [
+      "试"
+    ],
+    "pinyin": "shì",
+    "pinyinNumeric": "shi4",
+    "meaningEn": "to test; to try; experiment; examination; test",
+    "meaningFr": "",
+    "frequency": 340,
+    "audioFile": "shi4.mp3"
+  },
+  {
+    "id": "是",
+    "hskLevel": 1,
+    "characters": [
+      "是"
+    ],
+    "pinyin": "shì",
+    "pinyinNumeric": "shi4",
+    "meaningEn": "to be (followed by substantives only); correct; right; true; (respectful acknowledgement of a command) very well; (adverb for emphatic assertion)",
+    "meaningFr": "",
+    "frequency": 341,
+    "audioFile": "shi4.mp3"
+  },
+  {
+    "id": "是不是",
+    "hskLevel": 1,
+    "characters": [
+      "是",
+      "不",
+      "是"
+    ],
+    "pinyin": "shì bù shì",
+    "pinyinNumeric": "shi4bu4shi4",
+    "meaningEn": "is or isn't; yes or no; whether or not",
+    "meaningFr": "",
+    "frequency": 342,
+    "audioFile": "shi4bu4shi4.mp3"
+  },
+  {
+    "id": "时候",
+    "hskLevel": 1,
+    "characters": [
+      "时",
+      "候"
+    ],
+    "pinyin": "shí hou",
+    "pinyinNumeric": "shi2hou5",
+    "meaningEn": "time; length of time; moment; period",
+    "meaningFr": "",
+    "frequency": 343,
+    "audioFile": "shi2hou5.mp3"
+  },
+  {
+    "id": "时间",
+    "hskLevel": 1,
+    "characters": [
+      "时",
+      "间"
+    ],
+    "pinyin": "shí jiān",
+    "pinyinNumeric": "shi2jian1",
+    "meaningEn": "time; period",
+    "meaningFr": "",
+    "frequency": 344,
+    "audioFile": "shi2jian1.mp3"
+  },
+  {
+    "id": "手",
+    "hskLevel": 1,
+    "characters": [
+      "手"
+    ],
+    "pinyin": "shǒu",
+    "pinyinNumeric": "shou3",
+    "meaningEn": "hand; (formal) to hold; person engaged in certain types of work; person skilled in certain types of work; personal(ly); convenient; classifier for skill",
+    "meaningFr": "",
+    "frequency": 345,
+    "audioFile": "shou3.mp3"
+  },
+  {
+    "id": "手机",
+    "hskLevel": 1,
+    "characters": [
+      "手",
+      "机"
+    ],
+    "pinyin": "shǒu jī",
+    "pinyinNumeric": "shou3ji1",
+    "meaningEn": "cell phone; mobile phone",
+    "meaningFr": "",
+    "frequency": 346,
+    "audioFile": "shou3ji1.mp3"
+  },
+  {
+    "id": "书",
+    "hskLevel": 1,
+    "characters": [
+      "书"
+    ],
+    "pinyin": "Shū",
+    "pinyinNumeric": "shu1",
+    "meaningEn": "abbr. for 书经",
+    "meaningFr": "",
+    "frequency": 347,
+    "audioFile": "shu1.mp3"
+  },
+  {
+    "id": "树",
+    "hskLevel": 1,
+    "characters": [
+      "树"
+    ],
+    "pinyin": "shù",
+    "pinyinNumeric": "shu4",
+    "meaningEn": "tree; to cultivate; to set up",
+    "meaningFr": "",
+    "frequency": 348,
+    "audioFile": "shu4.mp3"
+  },
+  {
+    "id": "书包",
+    "hskLevel": 1,
+    "characters": [
+      "书",
+      "包"
+    ],
+    "pinyin": "shū bāo",
+    "pinyinNumeric": "shu1bao1",
+    "meaningEn": "schoolbag; satchel; bookbag",
+    "meaningFr": "",
+    "frequency": 349,
+    "audioFile": "shu1bao1.mp3"
+  },
+  {
+    "id": "书店",
+    "hskLevel": 1,
+    "characters": [
+      "书",
+      "店"
+    ],
+    "pinyin": "shū diàn",
+    "pinyinNumeric": "shu1dian4",
+    "meaningEn": "bookstore",
+    "meaningFr": "",
+    "frequency": 350,
+    "audioFile": "shu1dian4.mp3"
+  },
+  {
+    "id": "水",
+    "hskLevel": 1,
+    "characters": [
+      "水"
+    ],
+    "pinyin": "Shuǐ",
+    "pinyinNumeric": "shui3",
+    "meaningEn": "surname Shui",
+    "meaningFr": "",
+    "frequency": 351,
+    "audioFile": "shui3.mp3"
+  },
+  {
+    "id": "睡",
+    "hskLevel": 1,
+    "characters": [
+      "睡"
+    ],
+    "pinyin": "shuì",
+    "pinyinNumeric": "shui4",
+    "meaningEn": "to sleep; to lie down",
+    "meaningFr": "",
+    "frequency": 352,
+    "audioFile": "shui4.mp3"
+  },
+  {
+    "id": "说",
+    "hskLevel": 1,
+    "characters": [
+      "说"
+    ],
+    "pinyin": "shuì",
+    "pinyinNumeric": "shui4",
+    "meaningEn": "to persuade",
+    "meaningFr": "",
+    "frequency": 353,
+    "audioFile": "shui4.mp3"
+  },
+  {
+    "id": "水果",
+    "hskLevel": 1,
+    "characters": [
+      "水",
+      "果"
+    ],
+    "pinyin": "shuǐ guǒ",
+    "pinyinNumeric": "shui3guo3",
+    "meaningEn": "fruit",
+    "meaningFr": "",
+    "frequency": 354,
+    "audioFile": "shui3guo3.mp3"
+  },
+  {
+    "id": "睡觉",
+    "hskLevel": 1,
+    "characters": [
+      "睡",
+      "觉"
+    ],
+    "pinyin": "shuì jiào",
+    "pinyinNumeric": "shui4jiao4",
+    "meaningEn": "to go to bed; to sleep",
+    "meaningFr": "",
+    "frequency": 355,
+    "audioFile": "shui4jiao4.mp3"
+  },
+  {
+    "id": "说话",
+    "hskLevel": 1,
+    "characters": [
+      "说",
+      "话"
+    ],
+    "pinyin": "shuō huà",
+    "pinyinNumeric": "shuo1hua4",
+    "meaningEn": "to speak; to say; to talk; to gossip; to tell stories; talk; word",
+    "meaningFr": "",
+    "frequency": 356,
+    "audioFile": "shuo1hua4.mp3"
+  },
+  {
+    "id": "四",
+    "hskLevel": 1,
+    "characters": [
+      "四"
+    ],
+    "pinyin": "sì",
+    "pinyinNumeric": "si4",
+    "meaningEn": "four; 4",
+    "meaningFr": "",
+    "frequency": 357,
+    "audioFile": "si4.mp3"
+  },
+  {
+    "id": "送",
+    "hskLevel": 1,
+    "characters": [
+      "送"
+    ],
+    "pinyin": "sòng",
+    "pinyinNumeric": "song4",
+    "meaningEn": "to send; to deliver; to transmit; to give (as a present); to see (sb) off; to accompany; to go along with",
+    "meaningFr": "",
+    "frequency": 358,
+    "audioFile": "song4.mp3"
+  },
+  {
+    "id": "岁",
+    "hskLevel": 1,
+    "characters": [
+      "岁"
+    ],
+    "pinyin": "suì",
+    "pinyinNumeric": "sui4",
+    "meaningEn": "variant of 岁, year; years old",
+    "meaningFr": "",
+    "frequency": 359,
+    "audioFile": "sui4.mp3"
+  },
+  {
+    "id": "他",
+    "hskLevel": 1,
+    "characters": [
+      "他"
+    ],
+    "pinyin": "tā",
+    "pinyinNumeric": "ta1",
+    "meaningEn": "he; him (used for either sex when the sex is unknown or unimportant); (used before sb's name for emphasis); (used as a meaningless mock object); (literary) other",
+    "meaningFr": "",
+    "frequency": 360,
+    "audioFile": "ta1.mp3"
+  },
+  {
+    "id": "她",
+    "hskLevel": 1,
+    "characters": [
+      "她"
+    ],
+    "pinyin": "tā",
+    "pinyinNumeric": "ta1",
+    "meaningEn": "she",
+    "meaningFr": "",
+    "frequency": 361,
+    "audioFile": "ta1.mp3"
+  },
+  {
+    "id": "他们",
+    "hskLevel": 1,
+    "characters": [
+      "他",
+      "们"
+    ],
+    "pinyin": "tā men",
+    "pinyinNumeric": "ta1men5",
+    "meaningEn": "they",
+    "meaningFr": "",
+    "frequency": 362,
+    "audioFile": "ta1men5.mp3"
+  },
+  {
+    "id": "她们",
+    "hskLevel": 1,
+    "characters": [
+      "她",
+      "们"
+    ],
+    "pinyin": "tā men",
+    "pinyinNumeric": "ta1men5",
+    "meaningEn": "they; them (for females)",
+    "meaningFr": "",
+    "frequency": 363,
+    "audioFile": "ta1men5.mp3"
+  },
+  {
+    "id": "太",
+    "hskLevel": 1,
+    "characters": [
+      "太"
+    ],
+    "pinyin": "tài",
+    "pinyinNumeric": "tai4",
+    "meaningEn": "highest; greatest; too (much); very; extremely",
+    "meaningFr": "",
+    "frequency": 364,
+    "audioFile": "tai4.mp3"
+  },
+  {
+    "id": "天",
+    "hskLevel": 1,
+    "characters": [
+      "天"
+    ],
+    "pinyin": "tiān",
+    "pinyinNumeric": "tian1",
+    "meaningEn": "day; sky; heaven",
+    "meaningFr": "",
+    "frequency": 365,
+    "audioFile": "tian1.mp3"
+  },
+  {
+    "id": "天气",
+    "hskLevel": 1,
+    "characters": [
+      "天",
+      "气"
+    ],
+    "pinyin": "tiān qì",
+    "pinyinNumeric": "tian1qi4",
+    "meaningEn": "weather",
+    "meaningFr": "",
+    "frequency": 366,
+    "audioFile": "tian1qi4.mp3"
+  },
+  {
+    "id": "听到",
+    "hskLevel": 1,
+    "characters": [
+      "听",
+      "到"
+    ],
+    "pinyin": "tīng dào",
+    "pinyinNumeric": "ting1dao4",
+    "meaningEn": "to hear",
+    "meaningFr": "",
+    "frequency": 367,
+    "audioFile": "ting1dao4.mp3"
+  },
+  {
+    "id": "听见",
+    "hskLevel": 1,
+    "characters": [
+      "听",
+      "见"
+    ],
+    "pinyin": "tīng jiàn",
+    "pinyinNumeric": "ting1jian4",
+    "meaningEn": "to hear",
+    "meaningFr": "",
+    "frequency": 368,
+    "audioFile": "ting1jian4.mp3"
+  },
+  {
+    "id": "听写",
+    "hskLevel": 1,
+    "characters": [
+      "听",
+      "写"
+    ],
+    "pinyin": "tīng xiě",
+    "pinyinNumeric": "ting1xie3",
+    "meaningEn": "(of a pupil) to write down (in a dictation exercise); dictation; (music) to transcribe by ear",
+    "meaningFr": "",
+    "frequency": 369,
+    "audioFile": "ting1xie3.mp3"
+  },
+  {
+    "id": "同学",
+    "hskLevel": 1,
+    "characters": [
+      "同",
+      "学"
+    ],
+    "pinyin": "tóng xué",
+    "pinyinNumeric": "tong2xue2",
+    "meaningEn": "to study at the same school; fellow student; classmate",
+    "meaningFr": "",
+    "frequency": 370,
+    "audioFile": "tong2xue2.mp3"
+  },
+  {
+    "id": "图书馆",
+    "hskLevel": 1,
+    "characters": [
+      "图",
+      "书",
+      "馆"
+    ],
+    "pinyin": "tú shū guǎn",
+    "pinyinNumeric": "tu2shu1guan3",
+    "meaningEn": "library",
+    "meaningFr": "",
+    "frequency": 371,
+    "audioFile": "tu2shu1guan3.mp3"
+  },
+  {
+    "id": "外",
+    "hskLevel": 1,
+    "characters": [
+      "外"
+    ],
+    "pinyin": "wài",
+    "pinyinNumeric": "wai4",
+    "meaningEn": "outside; in addition; foreign; external",
+    "meaningFr": "",
+    "frequency": 372,
+    "audioFile": "wai4.mp3"
+  },
+  {
+    "id": "外边",
+    "hskLevel": 1,
+    "characters": [
+      "外",
+      "边"
+    ],
+    "pinyin": "wài bian",
+    "pinyinNumeric": "wai4bian5",
+    "meaningEn": "outside; outer surface; abroad; place other than one's home",
+    "meaningFr": "",
+    "frequency": 373,
+    "audioFile": "wai4bian5.mp3"
+  },
+  {
+    "id": "外国",
+    "hskLevel": 1,
+    "characters": [
+      "外",
+      "国"
+    ],
+    "pinyin": "wài guó",
+    "pinyinNumeric": "wai4guo2",
+    "meaningEn": "foreign (country)",
+    "meaningFr": "",
+    "frequency": 374,
+    "audioFile": "wai4guo2.mp3"
+  },
+  {
+    "id": "外语",
+    "hskLevel": 1,
+    "characters": [
+      "外",
+      "语"
+    ],
+    "pinyin": "wài yǔ",
+    "pinyinNumeric": "wai4yu3",
+    "meaningEn": "foreign language",
+    "meaningFr": "",
+    "frequency": 375,
+    "audioFile": "wai4yu3.mp3"
+  },
+  {
+    "id": "晚",
+    "hskLevel": 1,
+    "characters": [
+      "晚"
+    ],
+    "pinyin": "wǎn",
+    "pinyinNumeric": "wan3",
+    "meaningEn": "evening; night; late",
+    "meaningFr": "",
+    "frequency": 376,
+    "audioFile": "wan3.mp3"
+  },
+  {
+    "id": "晚饭",
+    "hskLevel": 1,
+    "characters": [
+      "晚",
+      "饭"
+    ],
+    "pinyin": "wǎn fàn",
+    "pinyinNumeric": "wan3fan4",
+    "meaningEn": "evening meal; dinner; supper",
+    "meaningFr": "",
+    "frequency": 377,
+    "audioFile": "wan3fan4.mp3"
+  },
+  {
+    "id": "玩儿",
+    "hskLevel": 1,
+    "characters": [
+      "玩",
+      "儿"
+    ],
+    "pinyin": "wán r",
+    "pinyinNumeric": "wan2r5",
+    "meaningEn": "to play; to have fun; to hang out",
+    "meaningFr": "",
+    "frequency": 378,
+    "audioFile": "wan2r5.mp3"
+  },
+  {
+    "id": "晚上",
+    "hskLevel": 1,
+    "characters": [
+      "晚",
+      "上"
+    ],
+    "pinyin": "wǎn shang",
+    "pinyinNumeric": "wan3shang5",
+    "meaningEn": "evening; night; in the evening",
+    "meaningFr": "",
+    "frequency": 379,
+    "audioFile": "wan3shang5.mp3"
+  },
+  {
+    "id": "忘",
+    "hskLevel": 1,
+    "characters": [
+      "忘"
+    ],
+    "pinyin": "wàng",
+    "pinyinNumeric": "wang4",
+    "meaningEn": "to forget; to overlook; to neglect",
+    "meaningFr": "",
+    "frequency": 380,
+    "audioFile": "wang4.mp3"
+  },
+  {
+    "id": "忘记",
+    "hskLevel": 1,
+    "characters": [
+      "忘",
+      "记"
+    ],
+    "pinyin": "wàng jì",
+    "pinyinNumeric": "wang4ji4",
+    "meaningEn": "to forget",
+    "meaningFr": "",
+    "frequency": 381,
+    "audioFile": "wang4ji4.mp3"
+  },
+  {
+    "id": "网上",
+    "hskLevel": 1,
+    "characters": [
+      "网",
+      "上"
+    ],
+    "pinyin": "wǎng shàng",
+    "pinyinNumeric": "wang3shang4",
+    "meaningEn": "online",
+    "meaningFr": "",
+    "frequency": 382,
+    "audioFile": "wang3shang4.mp3"
+  },
+  {
+    "id": "网友",
+    "hskLevel": 1,
+    "characters": [
+      "网",
+      "友"
+    ],
+    "pinyin": "wǎng yǒu",
+    "pinyinNumeric": "wang3you3",
+    "meaningEn": "online friend; Internet user",
+    "meaningFr": "",
+    "frequency": 383,
+    "audioFile": "wang3you3.mp3"
+  },
+  {
+    "id": "问",
+    "hskLevel": 1,
+    "characters": [
+      "问"
+    ],
+    "pinyin": "wèn",
+    "pinyinNumeric": "wen4",
+    "meaningEn": "to ask; to inquire",
+    "meaningFr": "",
+    "frequency": 384,
+    "audioFile": "wen4.mp3"
+  },
+  {
+    "id": "我",
+    "hskLevel": 1,
+    "characters": [
+      "我"
+    ],
+    "pinyin": "wǒ",
+    "pinyinNumeric": "wo3",
+    "meaningEn": "I; me; my",
+    "meaningFr": "",
+    "frequency": 385,
+    "audioFile": "wo3.mp3"
+  },
+  {
+    "id": "我们",
+    "hskLevel": 1,
+    "characters": [
+      "我",
+      "们"
+    ],
+    "pinyin": "wǒ men",
+    "pinyinNumeric": "wo3men5",
+    "meaningEn": "we; us; ourselves; our",
+    "meaningFr": "",
+    "frequency": 386,
+    "audioFile": "wo3men5.mp3"
+  },
+  {
+    "id": "五",
+    "hskLevel": 1,
+    "characters": [
+      "五"
+    ],
+    "pinyin": "wǔ",
+    "pinyinNumeric": "wu3",
+    "meaningEn": "five; 5",
+    "meaningFr": "",
+    "frequency": 387,
+    "audioFile": "wu3.mp3"
+  },
+  {
+    "id": "午饭",
+    "hskLevel": 1,
+    "characters": [
+      "午",
+      "饭"
+    ],
+    "pinyin": "wǔ fàn",
+    "pinyinNumeric": "wu3fan4",
+    "meaningEn": "lunch",
+    "meaningFr": "",
+    "frequency": 388,
+    "audioFile": "wu3fan4.mp3"
+  },
+  {
+    "id": "西",
+    "hskLevel": 1,
+    "characters": [
+      "西"
+    ],
+    "pinyin": "Xī",
+    "pinyinNumeric": "xi1",
+    "meaningEn": "the West; abbr. for Spain 牙; Spanish",
+    "meaningFr": "",
+    "frequency": 389,
+    "audioFile": "xi1.mp3"
+  },
+  {
+    "id": "洗",
+    "hskLevel": 1,
+    "characters": [
+      "洗"
+    ],
+    "pinyin": "xǐ",
+    "pinyinNumeric": "xi3",
+    "meaningEn": "to wash; to bathe; to develop (photographs); to shuffle (cards etc); to erase (a recording)",
+    "meaningFr": "",
+    "frequency": 390,
+    "audioFile": "xi3.mp3"
+  },
+  {
+    "id": "西边",
+    "hskLevel": 1,
+    "characters": [
+      "西",
+      "边"
+    ],
+    "pinyin": "xī biān",
+    "pinyinNumeric": "xi1bian1",
+    "meaningEn": "west; west side; western part; to the west of",
+    "meaningFr": "",
+    "frequency": 391,
+    "audioFile": "xi1bian1.mp3"
+  },
+  {
+    "id": "喜欢",
+    "hskLevel": 1,
+    "characters": [
+      "喜",
+      "欢"
+    ],
+    "pinyin": "xǐ huan",
+    "pinyinNumeric": "xi3huan5",
+    "meaningEn": "to like; to be fond of",
+    "meaningFr": "",
+    "frequency": 392,
+    "audioFile": "xi3huan5.mp3"
+  },
+  {
+    "id": "洗手间",
+    "hskLevel": 1,
+    "characters": [
+      "洗",
+      "手",
+      "间"
+    ],
+    "pinyin": "xǐ shǒu jiān",
+    "pinyinNumeric": "xi3shou3jian1",
+    "meaningEn": "toilet; lavatory; washroom",
+    "meaningFr": "",
+    "frequency": 393,
+    "audioFile": "xi3shou3jian1.mp3"
+  },
+  {
+    "id": "下",
+    "hskLevel": 1,
+    "characters": [
+      "下"
+    ],
+    "pinyin": "xià",
+    "pinyinNumeric": "xia4",
+    "meaningEn": "down; downwards; below; lower; later; next (week etc); second (of two parts); to decline; to go down; to arrive at (a decision, conclusion etc); measure word to show the frequency of an action",
+    "meaningFr": "",
+    "frequency": 394,
+    "audioFile": "xia4.mp3"
+  },
+  {
+    "id": "下班",
+    "hskLevel": 1,
+    "characters": [
+      "下",
+      "班"
+    ],
+    "pinyin": "xià bān",
+    "pinyinNumeric": "xia4ban1",
+    "meaningEn": "to finish work; to get off work",
+    "meaningFr": "",
+    "frequency": 395,
+    "audioFile": "xia4ban1.mp3"
+  },
+  {
+    "id": "下边",
+    "hskLevel": 1,
+    "characters": [
+      "下",
+      "边"
+    ],
+    "pinyin": "xià bian",
+    "pinyinNumeric": "xia4bian5",
+    "meaningEn": "under; the underside; below",
+    "meaningFr": "",
+    "frequency": 396,
+    "audioFile": "xia4bian5.mp3"
+  },
+  {
+    "id": "下车",
+    "hskLevel": 1,
+    "characters": [
+      "下",
+      "车"
+    ],
+    "pinyin": "xià chē",
+    "pinyinNumeric": "xia4che1",
+    "meaningEn": "to get off or out of (a bus, train, car etc)",
+    "meaningFr": "",
+    "frequency": 397,
+    "audioFile": "xia4che1.mp3"
+  },
+  {
+    "id": "下次",
+    "hskLevel": 1,
+    "characters": [
+      "下",
+      "次"
+    ],
+    "pinyin": "xià cì",
+    "pinyinNumeric": "xia4ci4",
+    "meaningEn": "next time",
+    "meaningFr": "",
+    "frequency": 398,
+    "audioFile": "xia4ci4.mp3"
+  },
+  {
+    "id": "下课",
+    "hskLevel": 1,
+    "characters": [
+      "下",
+      "课"
+    ],
+    "pinyin": "xià kè",
+    "pinyinNumeric": "xia4ke4",
+    "meaningEn": "to finish class; to get out of class; (fig.) (esp. of a sports coach) to be dismissed; to be fired",
+    "meaningFr": "",
+    "frequency": 399,
+    "audioFile": "xia4ke4.mp3"
+  },
+  {
+    "id": "下午",
+    "hskLevel": 1,
+    "characters": [
+      "下",
+      "午"
+    ],
+    "pinyin": "xià wǔ",
+    "pinyinNumeric": "xia4wu3",
+    "meaningEn": "afternoon; p.m.",
+    "meaningFr": "",
+    "frequency": 400,
+    "audioFile": "xia4wu3.mp3"
+  },
+  {
+    "id": "下雨",
+    "hskLevel": 1,
+    "characters": [
+      "下",
+      "雨"
+    ],
+    "pinyin": "xià yǔ",
+    "pinyinNumeric": "xia4yu3",
+    "meaningEn": "to rain",
+    "meaningFr": "",
+    "frequency": 401,
+    "audioFile": "xia4yu3.mp3"
+  },
+  {
+    "id": "先",
+    "hskLevel": 1,
+    "characters": [
+      "先"
+    ],
+    "pinyin": "xiān",
+    "pinyinNumeric": "xian1",
+    "meaningEn": "early; prior; former; in advance; first",
+    "meaningFr": "",
+    "frequency": 402,
+    "audioFile": "xian1.mp3"
+  },
+  {
+    "id": "先生",
+    "hskLevel": 1,
+    "characters": [
+      "先",
+      "生"
+    ],
+    "pinyin": "xiān sheng",
+    "pinyinNumeric": "xian1sheng5",
+    "meaningEn": "teacher; gentleman; sir; mister (Mr.); husband; (dialect) doctor",
+    "meaningFr": "",
+    "frequency": 403,
+    "audioFile": "xian1sheng5.mp3"
+  },
+  {
+    "id": "现在",
+    "hskLevel": 1,
+    "characters": [
+      "现",
       "在"
     ],
-    "pinyin": "zài",
-    "pinyinNumeric": "zai4",
-    "meaningEn": "at / in",
-    "meaningFr": "à / dans",
-    "frequency": 9,
+    "pinyin": "xiàn zài",
+    "pinyinNumeric": "xian4zai4",
+    "meaningEn": "now; at present; at the moment; modern; current; nowadays",
+    "meaningFr": "",
+    "frequency": 404,
+    "audioFile": "xian4zai4.mp3"
+  },
+  {
+    "id": "想",
     "hskLevel": 1,
-    "audioFile": "zai4.mp3"
+    "characters": [
+      "想"
+    ],
+    "pinyin": "xiǎng",
+    "pinyinNumeric": "xiang3",
+    "meaningEn": "to think (about); to think of; to devise; to think (that); to believe (that); to desire; to want (to); to miss (feel wistful about the absence of)",
+    "meaningFr": "",
+    "frequency": 405,
+    "audioFile": "xiang3.mp3"
+  },
+  {
+    "id": "小",
+    "hskLevel": 1,
+    "characters": [
+      "小"
+    ],
+    "pinyin": "xiǎo",
+    "pinyinNumeric": "xiao3",
+    "meaningEn": "small; tiny; few; young",
+    "meaningFr": "",
+    "frequency": 406,
+    "audioFile": "xiao3.mp3"
+  },
+  {
+    "id": "笑",
+    "hskLevel": 1,
+    "characters": [
+      "笑"
+    ],
+    "pinyin": "xiào",
+    "pinyinNumeric": "xiao4",
+    "meaningEn": "old variant of 笑",
+    "meaningFr": "",
+    "frequency": 407,
+    "audioFile": "xiao4.mp3"
+  },
+  {
+    "id": "小孩儿",
+    "hskLevel": 1,
+    "characters": [
+      "小",
+      "孩",
+      "儿"
+    ],
+    "pinyin": "xiǎo hái r",
+    "pinyinNumeric": "xiao3hai2r5",
+    "meaningEn": "erhua variant of 小孩; child",
+    "meaningFr": "",
+    "frequency": 408,
+    "audioFile": "xiao3hai2r5.mp3"
+  },
+  {
+    "id": "小姐",
+    "hskLevel": 1,
+    "characters": [
+      "小",
+      "姐"
+    ],
+    "pinyin": "xiǎo jie",
+    "pinyinNumeric": "xiao3jie5",
+    "meaningEn": "young lady; miss; (slang) prostitute",
+    "meaningFr": "",
+    "frequency": 409,
+    "audioFile": "xiao3jie5.mp3"
+  },
+  {
+    "id": "小朋友",
+    "hskLevel": 1,
+    "characters": [
+      "小",
+      "朋",
+      "友"
+    ],
+    "pinyin": "xiǎo péng yǒu",
+    "pinyinNumeric": "xiao3peng2you3",
+    "meaningEn": "child",
+    "meaningFr": "",
+    "frequency": 410,
+    "audioFile": "xiao3peng2you3.mp3"
+  },
+  {
+    "id": "小时",
+    "hskLevel": 1,
+    "characters": [
+      "小",
+      "时"
+    ],
+    "pinyin": "xiǎo shí",
+    "pinyinNumeric": "xiao3shi2",
+    "meaningEn": "hour",
+    "meaningFr": "",
+    "frequency": 411,
+    "audioFile": "xiao3shi2.mp3"
+  },
+  {
+    "id": "小学",
+    "hskLevel": 1,
+    "characters": [
+      "小",
+      "学"
+    ],
+    "pinyin": "xiǎo xué",
+    "pinyinNumeric": "xiao3xue2",
+    "meaningEn": "elementary school; primary school",
+    "meaningFr": "",
+    "frequency": 412,
+    "audioFile": "xiao3xue2.mp3"
+  },
+  {
+    "id": "小学生",
+    "hskLevel": 1,
+    "characters": [
+      "小",
+      "学",
+      "生"
+    ],
+    "pinyin": "xiǎo xué shēng",
+    "pinyinNumeric": "xiao3xue2sheng1",
+    "meaningEn": "primary school student; schoolchild; (fig.) beginner",
+    "meaningFr": "",
+    "frequency": 413,
+    "audioFile": "xiao3xue2sheng1.mp3"
+  },
+  {
+    "id": "页",
+    "hskLevel": 1,
+    "characters": [
+      "页"
+    ],
+    "pinyin": "xié",
+    "pinyinNumeric": "xie2",
+    "meaningEn": "head",
+    "meaningFr": "",
+    "frequency": 414,
+    "audioFile": "xie2.mp3"
+  },
+  {
+    "id": "写",
+    "hskLevel": 1,
+    "characters": [
+      "写"
+    ],
+    "pinyin": "xiě",
+    "pinyinNumeric": "xie3",
+    "meaningEn": "to write",
+    "meaningFr": "",
+    "frequency": 415,
+    "audioFile": "xie3.mp3"
+  },
+  {
+    "id": "谢谢",
+    "hskLevel": 1,
+    "characters": [
+      "谢",
+      "谢"
+    ],
+    "pinyin": "xiè xie",
+    "pinyinNumeric": "xie4xie5",
+    "meaningEn": "to thank; thanks; thank you",
+    "meaningFr": "",
+    "frequency": 416,
+    "audioFile": "xie4xie5.mp3"
+  },
+  {
+    "id": "新",
+    "hskLevel": 1,
+    "characters": [
+      "新"
+    ],
+    "pinyin": "Xīn",
+    "pinyinNumeric": "xin1",
+    "meaningEn": "abbr. for Xinjiang 疆 or Singapore 坡; surname Xin",
+    "meaningFr": "",
+    "frequency": 417,
+    "audioFile": "xin1.mp3"
+  },
+  {
+    "id": "新年",
+    "hskLevel": 1,
+    "characters": [
+      "新",
+      "年"
+    ],
+    "pinyin": "xīn nián",
+    "pinyinNumeric": "xin1nian2",
+    "meaningEn": "New Year",
+    "meaningFr": "",
+    "frequency": 418,
+    "audioFile": "xin1nian2.mp3"
+  },
+  {
+    "id": "星期",
+    "hskLevel": 1,
+    "characters": [
+      "星",
+      "期"
+    ],
+    "pinyin": "xīng qī",
+    "pinyinNumeric": "xing1qi1",
+    "meaningEn": "week; day of the week; Sunday",
+    "meaningFr": "",
+    "frequency": 419,
+    "audioFile": "xing1qi1.mp3"
+  },
+  {
+    "id": "星期日",
+    "hskLevel": 1,
+    "characters": [
+      "星",
+      "期",
+      "日"
+    ],
+    "pinyin": "Xīng qī rì",
+    "pinyinNumeric": "xing1qi1ri4",
+    "meaningEn": "Sunday",
+    "meaningFr": "",
+    "frequency": 420,
+    "audioFile": "xing1qi1ri4.mp3"
+  },
+  {
+    "id": "星期天",
+    "hskLevel": 1,
+    "characters": [
+      "星",
+      "期",
+      "天"
+    ],
+    "pinyin": "Xīng qī tiān",
+    "pinyinNumeric": "xing1qi1tian1",
+    "meaningEn": "Sunday",
+    "meaningFr": "",
+    "frequency": 421,
+    "audioFile": "xing1qi1tian1.mp3"
+  },
+  {
+    "id": "休息",
+    "hskLevel": 1,
+    "characters": [
+      "休",
+      "息"
+    ],
+    "pinyin": "xiū xi",
+    "pinyinNumeric": "xiu1xi5",
+    "meaningEn": "rest; to rest",
+    "meaningFr": "",
+    "frequency": 422,
+    "audioFile": "xiu1xi5.mp3"
+  },
+  {
+    "id": "学",
+    "hskLevel": 1,
+    "characters": [
+      "学"
+    ],
+    "pinyin": "xué",
+    "pinyinNumeric": "xue2",
+    "meaningEn": "to learn; to study; to imitate; science; -ology",
+    "meaningFr": "",
+    "frequency": 423,
+    "audioFile": "xue2.mp3"
+  },
+  {
+    "id": "学生",
+    "hskLevel": 1,
+    "characters": [
+      "学",
+      "生"
+    ],
+    "pinyin": "xué sheng",
+    "pinyinNumeric": "xue2sheng5",
+    "meaningEn": "student; schoolchild",
+    "meaningFr": "",
+    "frequency": 424,
+    "audioFile": "xue2sheng5.mp3"
+  },
+  {
+    "id": "学习",
+    "hskLevel": 1,
+    "characters": [
+      "学",
+      "习"
+    ],
+    "pinyin": "xué xí",
+    "pinyinNumeric": "xue2xi2",
+    "meaningEn": "to learn; to study",
+    "meaningFr": "",
+    "frequency": 425,
+    "audioFile": "xue2xi2.mp3"
+  },
+  {
+    "id": "学校",
+    "hskLevel": 1,
+    "characters": [
+      "学",
+      "校"
+    ],
+    "pinyin": "xué xiào",
+    "pinyinNumeric": "xue2xiao4",
+    "meaningEn": "school",
+    "meaningFr": "",
+    "frequency": 426,
+    "audioFile": "xue2xiao4.mp3"
+  },
+  {
+    "id": "学院",
+    "hskLevel": 1,
+    "characters": [
+      "学",
+      "院"
+    ],
+    "pinyin": "xué yuàn",
+    "pinyinNumeric": "xue2yuan4",
+    "meaningEn": "college; educational institute; school; faculty",
+    "meaningFr": "",
+    "frequency": 427,
+    "audioFile": "xue2yuan4.mp3"
+  },
+  {
+    "id": "要",
+    "hskLevel": 1,
+    "characters": [
+      "要"
+    ],
+    "pinyin": "yāo",
+    "pinyinNumeric": "yao1",
+    "meaningEn": "(bound form) to demand; to coerce",
+    "meaningFr": "",
+    "frequency": 428,
+    "audioFile": "yao1.mp3"
+  },
+  {
+    "id": "也",
+    "hskLevel": 1,
+    "characters": [
+      "也"
+    ],
+    "pinyin": "Yě",
+    "pinyinNumeric": "ye3",
+    "meaningEn": "surname Ye",
+    "meaningFr": "",
+    "frequency": 429,
+    "audioFile": "ye3.mp3"
+  },
+  {
+    "id": "爷爷",
+    "hskLevel": 1,
+    "characters": [
+      "爷",
+      "爷"
+    ],
+    "pinyin": "yé ye",
+    "pinyinNumeric": "ye2ye5",
+    "meaningEn": "(coll.) father's father; paternal grandfather",
+    "meaningFr": "",
+    "frequency": 430,
+    "audioFile": "ye2ye5.mp3"
+  },
+  {
+    "id": "一",
+    "hskLevel": 1,
+    "characters": [
+      "一"
+    ],
+    "pinyin": "yī",
+    "pinyinNumeric": "yi1",
+    "meaningEn": "one; single; a (article); as soon as; entire; whole; all; throughout; \"one\" radical in Chinese characters (Kangxi radical 1); also pr. [yāo] for greater clarity when spelling out numbers digit by digit",
+    "meaningFr": "",
+    "frequency": 431,
+    "audioFile": "yi1.mp3"
+  },
+  {
+    "id": "一半",
+    "hskLevel": 1,
+    "characters": [
+      "一",
+      "半"
+    ],
+    "pinyin": "yī bàn",
+    "pinyinNumeric": "yi1ban4",
+    "meaningEn": "half",
+    "meaningFr": "",
+    "frequency": 432,
+    "audioFile": "yi1ban4.mp3"
+  },
+  {
+    "id": "一边",
+    "hskLevel": 1,
+    "characters": [
+      "一",
+      "边"
+    ],
+    "pinyin": "yī biān",
+    "pinyinNumeric": "yi1bian1",
+    "meaningEn": "one side; either side; on the one hand; on the other hand; doing while",
+    "meaningFr": "",
+    "frequency": 433,
+    "audioFile": "yi1bian1.mp3"
+  },
+  {
+    "id": "一点儿",
+    "hskLevel": 1,
+    "characters": [
+      "一",
+      "点",
+      "儿"
+    ],
+    "pinyin": "yī diǎn r",
+    "pinyinNumeric": "yi1dian3r5",
+    "meaningEn": "erhua variant of 一点; a bit; a little bit; (used in negative expressions) (not) the least bit; (after an adjective, used to form the comparative) a bit more",
+    "meaningFr": "",
+    "frequency": 434,
+    "audioFile": "yi1dian3r5.mp3"
+  },
+  {
+    "id": "衣服",
+    "hskLevel": 1,
+    "characters": [
+      "衣",
+      "服"
+    ],
+    "pinyin": "yī fu",
+    "pinyinNumeric": "yi1fu5",
+    "meaningEn": "clothes",
+    "meaningFr": "",
+    "frequency": 435,
+    "audioFile": "yi1fu5.mp3"
+  },
+  {
+    "id": "一会儿",
+    "hskLevel": 1,
+    "characters": [
+      "一",
+      "会",
+      "儿"
+    ],
+    "pinyin": "yī huì r",
+    "pinyinNumeric": "yi1hui4r5",
+    "meaningEn": "a moment; a while; in a moment; now...now...; also pr. [yī huǐ r]",
+    "meaningFr": "",
+    "frequency": 436,
+    "audioFile": "yi1hui4r5.mp3"
+  },
+  {
+    "id": "一块儿",
+    "hskLevel": 1,
+    "characters": [
+      "一",
+      "块",
+      "儿"
+    ],
+    "pinyin": "yī kuài r",
+    "pinyinNumeric": "yi1kuai4r5",
+    "meaningEn": "erhua variant of 一块; a piece; a chunk; (coll.) one yuan; one dollar",
+    "meaningFr": "",
+    "frequency": 437,
+    "audioFile": "yi1kuai4r5.mp3"
+  },
+  {
+    "id": "一起",
+    "hskLevel": 1,
+    "characters": [
+      "一",
+      "起"
+    ],
+    "pinyin": "yī qǐ",
+    "pinyinNumeric": "yi1qi3",
+    "meaningEn": "in the same place; together; with; altogether (in total)",
+    "meaningFr": "",
+    "frequency": 438,
+    "audioFile": "yi1qi3.mp3"
+  },
+  {
+    "id": "医生",
+    "hskLevel": 1,
+    "characters": [
+      "医",
+      "生"
+    ],
+    "pinyin": "yī shēng",
+    "pinyinNumeric": "yi1sheng1",
+    "meaningEn": "doctor",
+    "meaningFr": "",
+    "frequency": 439,
+    "audioFile": "yi1sheng1.mp3"
+  },
+  {
+    "id": "一下儿",
+    "hskLevel": 1,
+    "characters": [
+      "一",
+      "下",
+      "儿"
+    ],
+    "pinyin": "yī xià r",
+    "pinyinNumeric": "yi1xia4r5",
+    "meaningEn": "erhua variant of 一下; one time; once; all of sudden",
+    "meaningFr": "",
+    "frequency": 440,
+    "audioFile": "yi1xia4r5.mp3"
+  },
+  {
+    "id": "一些",
+    "hskLevel": 1,
+    "characters": [
+      "一",
+      "些"
+    ],
+    "pinyin": "yī xiē",
+    "pinyinNumeric": "yi1xie1",
+    "meaningEn": "some; a few; a little; (following an adjective) slightly ...er",
+    "meaningFr": "",
+    "frequency": 441,
+    "audioFile": "yi1xie1.mp3"
+  },
+  {
+    "id": "一样",
+    "hskLevel": 1,
+    "characters": [
+      "一",
+      "样"
+    ],
+    "pinyin": "yī yàng",
+    "pinyinNumeric": "yi1yang4",
+    "meaningEn": "same; like; equal to; the same as; just like",
+    "meaningFr": "",
+    "frequency": 442,
+    "audioFile": "yi1yang4.mp3"
+  },
+  {
+    "id": "医院",
+    "hskLevel": 1,
+    "characters": [
+      "医",
+      "院"
+    ],
+    "pinyin": "yī yuàn",
+    "pinyinNumeric": "yi1yuan4",
+    "meaningEn": "hospital",
+    "meaningFr": "",
+    "frequency": 443,
+    "audioFile": "yi1yuan4.mp3"
+  },
+  {
+    "id": "听",
+    "hskLevel": 1,
+    "characters": [
+      "听"
+    ],
+    "pinyin": "yǐn",
+    "pinyinNumeric": "yin3",
+    "meaningEn": "smile (archaic)",
+    "meaningFr": "",
+    "frequency": 444,
+    "audioFile": "yin3.mp3"
+  },
+  {
+    "id": "用",
+    "hskLevel": 1,
+    "characters": [
+      "用"
+    ],
+    "pinyin": "yòng",
+    "pinyinNumeric": "yong4",
+    "meaningEn": "to use; to employ; to have to; to eat or drink; expense or outlay; usefulness; hence; therefore",
+    "meaningFr": "",
+    "frequency": 445,
+    "audioFile": "yong4.mp3"
   },
   {
     "id": "有",
+    "hskLevel": 1,
     "characters": [
       "有"
     ],
     "pinyin": "yǒu",
     "pinyinNumeric": "you3",
-    "meaningEn": "to have",
-    "meaningFr": "avoir",
-    "frequency": 10,
-    "hskLevel": 1,
+    "meaningEn": "to have; there is; (bound form) having; with; -ful; -ed; -al (as in 意 intentional)",
+    "meaningFr": "",
+    "frequency": 446,
     "audioFile": "you3.mp3"
+  },
+  {
+    "id": "右",
+    "hskLevel": 1,
+    "characters": [
+      "右"
+    ],
+    "pinyin": "yòu",
+    "pinyinNumeric": "you4",
+    "meaningEn": "(bound form) right; right-hand side; (bound form) (politics) right of center; (bound form) (old) west; (literary) the right side as the side of precedence",
+    "meaningFr": "",
+    "frequency": 447,
+    "audioFile": "you4.mp3"
+  },
+  {
+    "id": "右边",
+    "hskLevel": 1,
+    "characters": [
+      "右",
+      "边"
+    ],
+    "pinyin": "yòu bian",
+    "pinyinNumeric": "you4bian5",
+    "meaningEn": "right side; right, to the right",
+    "meaningFr": "",
+    "frequency": 448,
+    "audioFile": "you4bian5.mp3"
+  },
+  {
+    "id": "有的",
+    "hskLevel": 1,
+    "characters": [
+      "有",
+      "的"
+    ],
+    "pinyin": "yǒu de",
+    "pinyinNumeric": "you3de5",
+    "meaningEn": "(there are) some (who are...); some (exist)",
+    "meaningFr": "",
+    "frequency": 449,
+    "audioFile": "you3de5.mp3"
+  },
+  {
+    "id": "有名",
+    "hskLevel": 1,
+    "characters": [
+      "有",
+      "名"
+    ],
+    "pinyin": "yǒu míng",
+    "pinyinNumeric": "you3ming2",
+    "meaningEn": "famous; well-known",
+    "meaningFr": "",
+    "frequency": 450,
+    "audioFile": "you3ming2.mp3"
+  },
+  {
+    "id": "有时",
+    "hskLevel": 1,
+    "characters": [
+      "有",
+      "时"
+    ],
+    "pinyin": "yǒu shí",
+    "pinyinNumeric": "you3shi2",
+    "meaningEn": "sometimes; now and then",
+    "meaningFr": "",
+    "frequency": 451,
+    "audioFile": "you3shi2.mp3"
+  },
+  {
+    "id": "有时候",
+    "hskLevel": 1,
+    "characters": [
+      "有",
+      "时",
+      "候"
+    ],
+    "pinyin": "yǒu shí hou",
+    "pinyinNumeric": "you3shi2hou5",
+    "meaningEn": "sometimes",
+    "meaningFr": "",
+    "frequency": 452,
+    "audioFile": "you3shi2hou5.mp3"
+  },
+  {
+    "id": "有些",
+    "hskLevel": 1,
+    "characters": [
+      "有",
+      "些"
+    ],
+    "pinyin": "yǒu xiē",
+    "pinyinNumeric": "you3xie1",
+    "meaningEn": "some; somewhat",
+    "meaningFr": "",
+    "frequency": 453,
+    "audioFile": "you3xie1.mp3"
+  },
+  {
+    "id": "有一些",
+    "hskLevel": 1,
+    "characters": [
+      "有",
+      "一",
+      "些"
+    ],
+    "pinyin": "yǒu yī xiē",
+    "pinyinNumeric": "you3yi1xie1",
+    "meaningEn": "somewhat; rather; some",
+    "meaningFr": "",
+    "frequency": 454,
+    "audioFile": "you3yi1xie1.mp3"
+  },
+  {
+    "id": "有用",
+    "hskLevel": 1,
+    "characters": [
+      "有",
+      "用"
+    ],
+    "pinyin": "yǒu yòng",
+    "pinyinNumeric": "you3yong4",
+    "meaningEn": "useful",
+    "meaningFr": "",
+    "frequency": 455,
+    "audioFile": "you3yong4.mp3"
+  },
+  {
+    "id": "雨",
+    "hskLevel": 1,
+    "characters": [
+      "雨"
+    ],
+    "pinyin": "yǔ",
+    "pinyinNumeric": "yu3",
+    "meaningEn": "rain",
+    "meaningFr": "",
+    "frequency": 456,
+    "audioFile": "yu3.mp3"
+  },
+  {
+    "id": "元",
+    "hskLevel": 1,
+    "characters": [
+      "元"
+    ],
+    "pinyin": "Yuán",
+    "pinyinNumeric": "yuan2",
+    "meaningEn": "surname Yuan; the Yuan or Mongol dynasty (1279-1368)",
+    "meaningFr": "",
+    "frequency": 457,
+    "audioFile": "yuan2.mp3"
+  },
+  {
+    "id": "远",
+    "hskLevel": 1,
+    "characters": [
+      "远"
+    ],
+    "pinyin": "yuǎn",
+    "pinyinNumeric": "yuan3",
+    "meaningEn": "far; distant; remote; (intensifier in a comparison) by far; much (lower etc)",
+    "meaningFr": "",
+    "frequency": 458,
+    "audioFile": "yuan3.mp3"
+  },
+  {
+    "id": "月",
+    "hskLevel": 1,
+    "characters": [
+      "月"
+    ],
+    "pinyin": "yuè",
+    "pinyinNumeric": "yue4",
+    "meaningEn": "moon; month; monthly",
+    "meaningFr": "",
+    "frequency": 459,
+    "audioFile": "yue4.mp3"
+  },
+  {
+    "id": "再",
+    "hskLevel": 1,
+    "characters": [
+      "再"
+    ],
+    "pinyin": "zài",
+    "pinyinNumeric": "zai4",
+    "meaningEn": "again; once more; re-; second; another; then (after sth, and not until then); no matter how ... (followed by an adjective or verb, and then (usually) 也 or 都 for emphasis)",
+    "meaningFr": "",
+    "frequency": 460,
+    "audioFile": "zai4.mp3"
+  },
+  {
+    "id": "在",
+    "hskLevel": 1,
+    "characters": [
+      "在"
+    ],
+    "pinyin": "zài",
+    "pinyinNumeric": "zai4",
+    "meaningEn": "to exist; to be alive; (of sb or sth) to be (located) at; (used before a verb to indicate an action in progress)",
+    "meaningFr": "",
+    "frequency": 461,
+    "audioFile": "zai4.mp3"
+  },
+  {
+    "id": "在家",
+    "hskLevel": 1,
+    "characters": [
+      "在",
+      "家"
+    ],
+    "pinyin": "zài jiā",
+    "pinyinNumeric": "zai4jia1",
+    "meaningEn": "to be at home; (at a workplace) to be in (as opposed to being away on official business 差); (Buddhism etc) to remain a layman (as opposed to becoming a monk or a nun 家)",
+    "meaningFr": "",
+    "frequency": 462,
+    "audioFile": "zai4jia1.mp3"
+  },
+  {
+    "id": "再见",
+    "hskLevel": 1,
+    "characters": [
+      "再",
+      "见"
+    ],
+    "pinyin": "zài jiàn",
+    "pinyinNumeric": "zai4jian4",
+    "meaningEn": "goodbye; see you again later",
+    "meaningFr": "",
+    "frequency": 463,
+    "audioFile": "zai4jian4.mp3"
+  },
+  {
+    "id": "早",
+    "hskLevel": 1,
+    "characters": [
+      "早"
+    ],
+    "pinyin": "zǎo",
+    "pinyinNumeric": "zao3",
+    "meaningEn": "early; morning; Good morning!; long ago; prematurely",
+    "meaningFr": "",
+    "frequency": 464,
+    "audioFile": "zao3.mp3"
+  },
+  {
+    "id": "早饭",
+    "hskLevel": 1,
+    "characters": [
+      "早",
+      "饭"
+    ],
+    "pinyin": "zǎo fàn",
+    "pinyinNumeric": "zao3fan4",
+    "meaningEn": "breakfast",
+    "meaningFr": "",
+    "frequency": 465,
+    "audioFile": "zao3fan4.mp3"
+  },
+  {
+    "id": "早上",
+    "hskLevel": 1,
+    "characters": [
+      "早",
+      "上"
+    ],
+    "pinyin": "zǎo shang",
+    "pinyinNumeric": "zao3shang5",
+    "meaningEn": "early morning",
+    "meaningFr": "",
+    "frequency": 466,
+    "audioFile": "zao3shang5.mp3"
+  },
+  {
+    "id": "怎么",
+    "hskLevel": 1,
+    "characters": [
+      "怎",
+      "么"
+    ],
+    "pinyin": "zěn me",
+    "pinyinNumeric": "zen3me5",
+    "meaningEn": "how?; what?; why?",
+    "meaningFr": "",
+    "frequency": 467,
+    "audioFile": "zen3me5.mp3"
+  },
+  {
+    "id": "站",
+    "hskLevel": 1,
+    "characters": [
+      "站"
+    ],
+    "pinyin": "zhàn",
+    "pinyinNumeric": "zhan4",
+    "meaningEn": "station; to stand; to halt; to stop; branch of a company or organization; website",
+    "meaningFr": "",
+    "frequency": 468,
+    "audioFile": "zhan4.mp3"
+  },
+  {
+    "id": "着",
+    "hskLevel": 1,
+    "characters": [
+      "着"
+    ],
+    "pinyin": "zhāo",
+    "pinyinNumeric": "zhao1",
+    "meaningEn": "(chess) move; trick; all right!; (dialect) to add",
+    "meaningFr": "",
+    "frequency": 469,
+    "audioFile": "zhao1.mp3"
+  },
+  {
+    "id": "找",
+    "hskLevel": 1,
+    "characters": [
+      "找"
+    ],
+    "pinyin": "zhǎo",
+    "pinyinNumeric": "zhao3",
+    "meaningEn": "to try to find; to look for; to call on sb; to find; to seek; to return; to give change",
+    "meaningFr": "",
+    "frequency": 470,
+    "audioFile": "zhao3.mp3"
+  },
+  {
+    "id": "找到",
+    "hskLevel": 1,
+    "characters": [
+      "找",
+      "到"
+    ],
+    "pinyin": "zhǎo dào",
+    "pinyinNumeric": "zhao3dao4",
+    "meaningEn": "to find",
+    "meaningFr": "",
+    "frequency": 471,
+    "audioFile": "zhao3dao4.mp3"
+  },
+  {
+    "id": "这",
+    "hskLevel": 1,
+    "characters": [
+      "这"
+    ],
+    "pinyin": "zhè",
+    "pinyinNumeric": "zhe4",
+    "meaningEn": "(pronoun) this; these; (bound form) this; the (followed by a noun); (bound form) this; these (followed by a classifier) (in this sense, commonly pr. [zhèi], esp. in Beijing)",
+    "meaningFr": "",
+    "frequency": 472,
+    "audioFile": "zhe4.mp3"
+  },
+  {
+    "id": "这边",
+    "hskLevel": 1,
+    "characters": [
+      "这",
+      "边"
+    ],
+    "pinyin": "zhè biān",
+    "pinyinNumeric": "zhe4bian1",
+    "meaningEn": "this side; here",
+    "meaningFr": "",
+    "frequency": 473,
+    "audioFile": "zhe4bian1.mp3"
+  },
+  {
+    "id": "这里",
+    "hskLevel": 1,
+    "characters": [
+      "这",
+      "里"
+    ],
+    "pinyin": "zhè lǐ",
+    "pinyinNumeric": "zhe4li3",
+    "meaningEn": "variant of 这里",
+    "meaningFr": "",
+    "frequency": 474,
+    "audioFile": "zhe4li3.mp3"
+  },
+  {
+    "id": "这儿",
+    "hskLevel": 1,
+    "characters": [
+      "这",
+      "儿"
+    ],
+    "pinyin": "zhè r",
+    "pinyinNumeric": "zhe4r5",
+    "meaningEn": "here",
+    "meaningFr": "",
+    "frequency": 475,
+    "audioFile": "zhe4r5.mp3"
+  },
+  {
+    "id": "这些",
+    "hskLevel": 1,
+    "characters": [
+      "这",
+      "些"
+    ],
+    "pinyin": "zhè xiē",
+    "pinyinNumeric": "zhe4xie1",
+    "meaningEn": "these",
+    "meaningFr": "",
+    "frequency": 476,
+    "audioFile": "zhe4xie1.mp3"
+  },
+  {
+    "id": "真",
+    "hskLevel": 1,
+    "characters": [
+      "真"
+    ],
+    "pinyin": "zhēn",
+    "pinyinNumeric": "zhen1",
+    "meaningEn": "really; truly; indeed; real; true; genuine",
+    "meaningFr": "",
+    "frequency": 477,
+    "audioFile": "zhen1.mp3"
+  },
+  {
+    "id": "真的",
+    "hskLevel": 1,
+    "characters": [
+      "真",
+      "的"
+    ],
+    "pinyin": "zhēn de",
+    "pinyinNumeric": "zhen1de",
+    "meaningEn": "really, truly, indeed",
+    "meaningFr": "",
+    "frequency": 478,
+    "audioFile": "zhen1de.mp3"
+  },
+  {
+    "id": "正",
+    "hskLevel": 1,
+    "characters": [
+      "正"
+    ],
+    "pinyin": "zhēng",
+    "pinyinNumeric": "zheng1",
+    "meaningEn": "first month of the lunar year",
+    "meaningFr": "",
+    "frequency": 479,
+    "audioFile": "zheng1.mp3"
+  },
+  {
+    "id": "正在",
+    "hskLevel": 1,
+    "characters": [
+      "正",
+      "在"
+    ],
+    "pinyin": "zhèng zài",
+    "pinyinNumeric": "zheng4zai4",
+    "meaningEn": "just at (that time); right in (that place); right in the middle of (doing sth)",
+    "meaningFr": "",
+    "frequency": 480,
+    "audioFile": "zheng4zai4.mp3"
+  },
+  {
+    "id": "知道",
+    "hskLevel": 1,
+    "characters": [
+      "知",
+      "道"
+    ],
+    "pinyin": "zhī dào",
+    "pinyinNumeric": "zhi1dao4",
+    "meaningEn": "to know; to become aware of; also pr. [zhī dao]",
+    "meaningFr": "",
+    "frequency": 481,
+    "audioFile": "zhi1dao4.mp3"
+  },
+  {
+    "id": "知识",
+    "hskLevel": 1,
+    "characters": [
+      "知",
+      "识"
+    ],
+    "pinyin": "zhī shi",
+    "pinyinNumeric": "zhi1shi5",
+    "meaningEn": "knowledge; intellectual",
+    "meaningFr": "",
+    "frequency": 482,
+    "audioFile": "zhi1shi5.mp3"
+  },
+  {
+    "id": "中",
+    "hskLevel": 1,
+    "characters": [
+      "中"
+    ],
+    "pinyin": "Zhōng",
+    "pinyinNumeric": "zhong1",
+    "meaningEn": "China; Chinese; surname Zhong",
+    "meaningFr": "",
+    "frequency": 483,
+    "audioFile": "zhong1.mp3"
+  },
+  {
+    "id": "中国",
+    "hskLevel": 1,
+    "characters": [
+      "中",
+      "国"
+    ],
+    "pinyin": "Zhōng guó",
+    "pinyinNumeric": "zhong1guo2",
+    "meaningEn": "China",
+    "meaningFr": "",
+    "frequency": 484,
+    "audioFile": "zhong1guo2.mp3"
+  },
+  {
+    "id": "中间",
+    "hskLevel": 1,
+    "characters": [
+      "中",
+      "间"
+    ],
+    "pinyin": "zhōng jiān",
+    "pinyinNumeric": "zhong1jian1",
+    "meaningEn": "the middle; the inside; in the middle; within; between; among; during; in the meantime",
+    "meaningFr": "",
+    "frequency": 485,
+    "audioFile": "zhong1jian1.mp3"
+  },
+  {
+    "id": "中文",
+    "hskLevel": 1,
+    "characters": [
+      "中",
+      "文"
+    ],
+    "pinyin": "Zhōng wén",
+    "pinyinNumeric": "zhong1wen2",
+    "meaningEn": "Chinese language",
+    "meaningFr": "",
+    "frequency": 486,
+    "audioFile": "zhong1wen2.mp3"
+  },
+  {
+    "id": "中午",
+    "hskLevel": 1,
+    "characters": [
+      "中",
+      "午"
+    ],
+    "pinyin": "zhōng wǔ",
+    "pinyinNumeric": "zhong1wu3",
+    "meaningEn": "noon; midday",
+    "meaningFr": "",
+    "frequency": 487,
+    "audioFile": "zhong1wu3.mp3"
+  },
+  {
+    "id": "中学",
+    "hskLevel": 1,
+    "characters": [
+      "中",
+      "学"
+    ],
+    "pinyin": "zhōng xué",
+    "pinyinNumeric": "zhong1xue2",
+    "meaningEn": "middle school",
+    "meaningFr": "",
+    "frequency": 488,
+    "audioFile": "zhong1xue2.mp3"
+  },
+  {
+    "id": "中学生",
+    "hskLevel": 1,
+    "characters": [
+      "中",
+      "学",
+      "生"
+    ],
+    "pinyin": "zhōng xué shēng",
+    "pinyinNumeric": "zhong1xue2sheng1",
+    "meaningEn": "middle-school student; high school student",
+    "meaningFr": "",
+    "frequency": 489,
+    "audioFile": "zhong1xue2sheng1.mp3"
+  },
+  {
+    "id": "重要",
+    "hskLevel": 1,
+    "characters": [
+      "重",
+      "要"
+    ],
+    "pinyin": "zhòng yào",
+    "pinyinNumeric": "zhong4yao4",
+    "meaningEn": "important; significant; major",
+    "meaningFr": "",
+    "frequency": 490,
+    "audioFile": "zhong4yao4.mp3"
+  },
+  {
+    "id": "住",
+    "hskLevel": 1,
+    "characters": [
+      "住"
+    ],
+    "pinyin": "zhù",
+    "pinyinNumeric": "zhu4",
+    "meaningEn": "to live; to dwell; to stay; to reside; to stop; (suffix indicating firmness, steadiness, or coming to a halt)",
+    "meaningFr": "",
+    "frequency": 491,
+    "audioFile": "zhu4.mp3"
+  },
+  {
+    "id": "准备",
+    "hskLevel": 1,
+    "characters": [
+      "准",
+      "备"
+    ],
+    "pinyin": "zhǔn bèi",
+    "pinyinNumeric": "zhun3bei4",
+    "meaningEn": "preparation; to prepare; to intend; to be about to; reserve (fund)",
+    "meaningFr": "",
+    "frequency": 492,
+    "audioFile": "zhun3bei4.mp3"
+  },
+  {
+    "id": "桌子",
+    "hskLevel": 1,
+    "characters": [
+      "桌",
+      "子"
+    ],
+    "pinyin": "zhuō zi",
+    "pinyinNumeric": "zhuo1zi5",
+    "meaningEn": "table; desk",
+    "meaningFr": "",
+    "frequency": 493,
+    "audioFile": "zhuo1zi5.mp3"
+  },
+  {
+    "id": "子",
+    "hskLevel": 1,
+    "characters": [
+      "子"
+    ],
+    "pinyin": "zǐ",
+    "pinyinNumeric": "zi3",
+    "meaningEn": "son; child; seed; egg; small thing; 1st earthly branch: 11 p.m.-1 a.m., midnight, 11th solar month (7th December to 5th January), year of the Rat; Viscount, fourth of five orders of nobility 位; ancient Chinese compass point: 0° (north); subsidiary; subordinate; sub-",
+    "meaningFr": "",
+    "frequency": 494,
+    "audioFile": "zi3.mp3"
+  },
+  {
+    "id": "字",
+    "hskLevel": 1,
+    "characters": [
+      "字"
+    ],
+    "pinyin": "zì",
+    "pinyinNumeric": "zi4",
+    "meaningEn": "letter; symbol; character; word; courtesy or style name traditionally given to males aged 20 in dynastic China",
+    "meaningFr": "",
+    "frequency": 495,
+    "audioFile": "zi4.mp3"
+  },
+  {
+    "id": "走",
+    "hskLevel": 1,
+    "characters": [
+      "走"
+    ],
+    "pinyin": "zǒu",
+    "pinyinNumeric": "zou3",
+    "meaningEn": "to walk; to go; to run; to move (of vehicle); to visit; to leave; to go away; to die (euph.); from; through; away (in compound verbs, such as 走); to change (shape, form, meaning)",
+    "meaningFr": "",
+    "frequency": 496,
+    "audioFile": "zou3.mp3"
+  },
+  {
+    "id": "走路",
+    "hskLevel": 1,
+    "characters": [
+      "走",
+      "路"
+    ],
+    "pinyin": "zǒu lù",
+    "pinyinNumeric": "zou3lu4",
+    "meaningEn": "to walk; to go on foot",
+    "meaningFr": "",
+    "frequency": 497,
+    "audioFile": "zou3lu4.mp3"
+  },
+  {
+    "id": "最",
+    "hskLevel": 1,
+    "characters": [
+      "最"
+    ],
+    "pinyin": "zuì",
+    "pinyinNumeric": "zui4",
+    "meaningEn": "variant of 最",
+    "meaningFr": "",
+    "frequency": 498,
+    "audioFile": "zui4.mp3"
+  },
+  {
+    "id": "最好",
+    "hskLevel": 1,
+    "characters": [
+      "最",
+      "好"
+    ],
+    "pinyin": "zuì hǎo",
+    "pinyinNumeric": "zui4hao3",
+    "meaningEn": "best; (you) had better (do what we suggest)",
+    "meaningFr": "",
+    "frequency": 499,
+    "audioFile": "zui4hao3.mp3"
+  },
+  {
+    "id": "最后",
+    "hskLevel": 1,
+    "characters": [
+      "最",
+      "后"
+    ],
+    "pinyin": "zuì hòu",
+    "pinyinNumeric": "zui4hou4",
+    "meaningEn": "final; last; finally; ultimate",
+    "meaningFr": "",
+    "frequency": 500,
+    "audioFile": "zui4hou4.mp3"
+  },
+  {
+    "id": "左",
+    "hskLevel": 1,
+    "characters": [
+      "左"
+    ],
+    "pinyin": "Zuǒ",
+    "pinyinNumeric": "zuo3",
+    "meaningEn": "surname Zuo",
+    "meaningFr": "",
+    "frequency": 501,
+    "audioFile": "zuo3.mp3"
+  },
+  {
+    "id": "做",
+    "hskLevel": 1,
+    "characters": [
+      "做"
+    ],
+    "pinyin": "zuò",
+    "pinyinNumeric": "zuo4",
+    "meaningEn": "to make; to produce; to write; to compose; to do; to engage in; to hold (a party etc); (of a person) to be (an intermediary, a good student etc); to become (husband and wife, friends etc); (of a thing) to serve as; to be used for; to assume (an air or manner)",
+    "meaningFr": "",
+    "frequency": 502,
+    "audioFile": "zuo4.mp3"
+  },
+  {
+    "id": "坐",
+    "hskLevel": 1,
+    "characters": [
+      "坐"
+    ],
+    "pinyin": "Zuò",
+    "pinyinNumeric": "zuo4",
+    "meaningEn": "surname Zuo",
+    "meaningFr": "",
+    "frequency": 503,
+    "audioFile": "zuo4.mp3"
+  },
+  {
+    "id": "左边",
+    "hskLevel": 1,
+    "characters": [
+      "左",
+      "边"
+    ],
+    "pinyin": "zuǒ bian",
+    "pinyinNumeric": "zuo3bian5",
+    "meaningEn": "left; the left side; to the left of",
+    "meaningFr": "",
+    "frequency": 504,
+    "audioFile": "zuo3bian5.mp3"
+  },
+  {
+    "id": "昨天",
+    "hskLevel": 1,
+    "characters": [
+      "昨",
+      "天"
+    ],
+    "pinyin": "zuó tiān",
+    "pinyinNumeric": "zuo2tian1",
+    "meaningEn": "yesterday",
+    "meaningFr": "",
+    "frequency": 505,
+    "audioFile": "zuo2tian1.mp3"
+  },
+  {
+    "id": "坐下",
+    "hskLevel": 1,
+    "characters": [
+      "坐",
+      "下"
+    ],
+    "pinyin": "zuò xia",
+    "pinyinNumeric": "zuo4xia5",
+    "meaningEn": "to sit down",
+    "meaningFr": "",
+    "frequency": 506,
+    "audioFile": "zuo4xia5.mp3"
   }
 ]
