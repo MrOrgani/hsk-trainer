@@ -9,6 +9,15 @@ export async function loadOrInitSettings(): Promise<Settings> {
   return DEFAULT_SETTINGS;
 }
 
+export async function updateSettings(
+  partial: Partial<Omit<Settings, "id">>
+): Promise<Settings> {
+  const current = await loadOrInitSettings();
+  const merged: Settings = { ...current, ...partial, id: "default" };
+  await db.settings.put(merged);
+  return merged;
+}
+
 export function useSettings(): Settings | null {
   const [settings, setSettings] = useState<Settings | null>(null);
   useEffect(() => {
