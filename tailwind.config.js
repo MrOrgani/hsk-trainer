@@ -63,7 +63,7 @@ export default {
       fontFamily: {
         sans: ['"Outfit"', "system-ui", "sans-serif"],
         hanzi: ['"Noto Sans SC"', "sans-serif"],
-        display: ['"ZCOOL KuaiLe"', '"Noto Sans SC"', "cursive"],
+        display: ['"Noto Serif SC"', '"Noto Sans SC"', "serif"],
       },
       keyframes: {
         "pop-in": {

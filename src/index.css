@@ -45,7 +45,7 @@
   .seal-stamp {
     @apply inline-flex items-center justify-center;
     @apply rounded-lg border-2 border-current;
-    font-family: "ZCOOL KuaiLe", "Noto Sans SC", cursive;
+    font-family: "Noto Serif SC", "Noto Sans SC", serif;
     box-shadow: inset 0 0 0 2px currentColor;
   }
 }
