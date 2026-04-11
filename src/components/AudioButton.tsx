@@ -11,24 +11,20 @@ interface Props {
 }
 
 // ---------------------------------------------------------------------------
-// In-memory audio cache: text -> HTMLAudioElement (already loaded & decodable)
+// In-memory audio cache: url -> HTMLAudioElement (already loaded & decodable)
 // ---------------------------------------------------------------------------
 const audioCache = new Map<string, HTMLAudioElement>();
 
 /**
- * Build a Google Translate TTS URL for Mandarin Chinese.
- * This uses the unofficial `client=tw-ob` endpoint.  It may stop working at
- * any time, which is fine — we always fall back to speechSynthesis.
- */
-function buildGoogleTtsUrl(text: string): string {
-  const encoded = encodeURIComponent(text);
-  return `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=zh-CN&q=${encoded}`;
-}
-
-/**
  * Finds the best available Chinese voice from speechSynthesis.
- * Prefers premium / neural voices (they tend to have "Premium", "Enhanced",
- * or "Natural" in their name) over standard ones.
+ *
+ * Priority order:
+ * 1. Premium / Neural / Enhanced voices (highest quality)
+ * 2. Well-known high-quality voices by name:
+ *    - Chrome: "Google 普通话（中国大陆）" or similar Google voices
+ *    - Safari/iOS: "Ting-Ting" (compact but decent)
+ * 3. Any zh-CN voice
+ * 4. Any other Chinese voice (zh-TW, zh, cmn)
  */
 function findChineseVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | undefined {
   const prefixes = ["zh-CN", "zh-TW", "zh", "cmn"];
@@ -44,11 +40,26 @@ function findChineseVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice 
 
   if (candidates.length === 0) return undefined;
 
-  // Prefer higher-quality voices when the browser exposes them
+  // 1. Prefer premium / neural / enhanced voices
   const premium = candidates.find((v) =>
     /premium|enhanced|natural|neural/i.test(v.name),
   );
-  return premium ?? candidates[0];
+  if (premium) return premium;
+
+  // 2. Prefer well-known high-quality voices by name
+  const googleVoice = candidates.find((v) =>
+    /google.*普通话|google.*mandarin|google.*chinese/i.test(v.name),
+  );
+  if (googleVoice) return googleVoice;
+
+  const tingTing = candidates.find((v) => /ting-ting/i.test(v.name));
+  if (tingTing) return tingTing;
+
+  // 3. Prefer zh-CN over other variants
+  const zhCN = candidates.find((v) => v.lang === "zh-CN" || v.lang.startsWith("zh-CN"));
+  if (zhCN) return zhCN;
+
+  return candidates[0];
 }
 
 export function AudioButton({
@@ -176,12 +187,9 @@ export function AudioButton({
     // 1. Try local audio file (if it exists in /audio/)
     if (await tryAudioElement(`/audio/${audioFile}`)) return;
 
-    // 2. Try Google Translate TTS
-    if (await tryAudioElement(buildGoogleTtsUrl(fallbackText))) return;
-
-    // 3. Fall back to browser speechSynthesis
+    // 2. Use browser speechSynthesis
     speak();
-  }, [audioFile, fallbackText, tryAudioElement, speak]);
+  }, [audioFile, tryAudioElement, speak]);
 
   const isDisabled = state === "unavailable";
 
