@@ -50,7 +50,7 @@ export function DrawingCanvas({ character, onComplete, size = 260, leniency = "s
       outlineColor: "#d6cdbf",   // ink-200 — warm gray outline
       highlightColor: "#00c0ff", // cyan — Inkstone-style hint color
       drawingColor: "#999999",   // soft gray while drawing
-      drawingWidth: 6,           // slightly thicker for brush-like feel
+      drawingWidth: 50,          // bold brush-like strokes (coordinate space is 1024 units)
     });
 
     writer.quiz({
