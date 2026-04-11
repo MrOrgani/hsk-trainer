@@ -226,8 +226,10 @@ function AttemptPhase({
     }
   }
 
-  function handleTransitionEnd() {
-    if (shrinking) {
+  function handleTransitionEnd(e: React.TransitionEvent) {
+    // Two properties animate (transform + opacity), so transitionend fires twice.
+    // Only react to the first one to avoid advancing charIndex twice.
+    if (shrinking && e.propertyName !== "opacity") {
       advanceChar();
     }
   }
