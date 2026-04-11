@@ -32,7 +32,7 @@ describe("DrawingCanvas", () => {
     opts.onMistake?.({ strokeNum: 0 });
     opts.onMistake?.({ strokeNum: 1 });
     opts.onComplete?.({ totalMistakes: 2 });
-    expect(onComplete).toHaveBeenCalledWith({ mistakes: 2 });
+    expect(onComplete).toHaveBeenCalledWith({ mistakes: 2, strokeMistakes: [] });
   });
 
   it("cancels the quiz on unmount", () => {

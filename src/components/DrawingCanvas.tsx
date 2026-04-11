@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import HanziWriter from "hanzi-writer";
+import type { StrokeData } from "hanzi-writer";
+
 
 export interface CompletedChar {
   char: string;
@@ -14,7 +16,7 @@ export function masteryColor(mistakes: number): string {
 
 interface Props {
   character: string;
-  onComplete: (result: { mistakes: number }) => void;
+  onComplete: (result: { mistakes: number; strokeMistakes: number[] }) => void;
   size?: number;
   leniency?: "strict" | "lenient-order";
   showOutline?: boolean;
@@ -35,6 +37,7 @@ export function DrawingCanvas({ character, onComplete, size = 260, leniency = "s
     target.replaceChildren();
 
     let mistakes = 0;
+    const strokeMistakes: number[] = [];
     const writer = HanziWriter.create(target, character, {
       width: size,
       height: size,
@@ -45,13 +48,17 @@ export function DrawingCanvas({ character, onComplete, size = 260, leniency = "s
       delayBetweenStrokes: 50,
       strokeColor: "#1c1917",    // ink-900 — true ink black
       outlineColor: "#d6cdbf",   // ink-200 — warm gray outline
-      highlightColor: "#c93545", // vermillion-500 — highlight strokes
-      drawingColor: "#3d352a",   // ink-600 — dark ink drawing
+      highlightColor: "#00c0ff", // cyan — Inkstone-style hint color
+      drawingColor: "#999999",   // soft gray while drawing
+      drawingWidth: 6,           // slightly thicker for brush-like feel
     });
 
     writer.quiz({
       onMistake: () => {
         mistakes += 1;
+      },
+      onCorrectStroke: (strokeData: StrokeData) => {
+        strokeMistakes.push(strokeData.mistakesOnStroke);
       },
       onComplete: () => {
         const color = masteryColor(mistakes);
@@ -61,7 +68,7 @@ export function DrawingCanvas({ character, onComplete, size = 260, leniency = "s
         // those strokes stay their original color while the rest change.
         const totalUpdates = 4;
         let done = 0;
-        const finish = () => { if (++done >= totalUpdates) onCompleteRef.current({ mistakes }); };
+        const finish = () => { if (++done >= totalUpdates) onCompleteRef.current({ mistakes, strokeMistakes }); };
         writer.updateColor('strokeColor', color, { duration: 300, onComplete: finish });
         writer.updateColor('radicalColor', color, { duration: 300, onComplete: finish });
         writer.updateColor('drawingColor', color, { duration: 300, onComplete: finish });

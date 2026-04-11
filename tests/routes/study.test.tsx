@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { render, screen, cleanup, waitFor, act } from "@testing-library/react";
+import { render, screen, cleanup, waitFor, act, fireEvent } from "@testing-library/react";
 import {
   createMemoryHistory,
   createRouter,
@@ -58,7 +58,7 @@ describe("/study route", () => {
   });
   afterEach(() => cleanup());
 
-  it("walks a single word through present → animate → attempt → done", async () => {
+  it("goes directly to attempt phase and completes", async () => {
     const client = new QueryClient({
       defaultOptions: { queries: { retry: false } },
     });
@@ -69,24 +69,20 @@ describe("/study route", () => {
       </QueryClientProvider>
     );
 
+    // Should show level picker first
     await waitFor(() =>
-      expect(
-        screen.getByRole("button", { name: /show strokes/i })
-      ).toBeInTheDocument()
+      expect(screen.getByText(/HSK 1/)).toBeInTheDocument()
     );
-    await act(async () => {
-      screen.getByRole("button", { name: /show strokes/i }).click();
-    });
 
+    // Pick HSK 1
+    fireEvent.click(screen.getByText(/HSK 1/));
+
+    // Should proceed to drawing (attempt) phase
     await waitFor(() =>
-      expect(
-        screen.getByRole("button", { name: /try it yourself/i })
-      ).toBeInTheDocument()
+      expect(screen.getByText(/write from memory/i)).toBeInTheDocument()
     );
-    await act(async () => {
-      screen.getByRole("button", { name: /try it yourself/i }).click();
-    });
 
+    // The drawing canvas should be active
     await waitFor(() => expect(fakeWriters.length).toBeGreaterThan(0));
     const opts = fakeWriters[fakeWriters.length - 1].lastQuizOptions as {
       onComplete?: () => void;

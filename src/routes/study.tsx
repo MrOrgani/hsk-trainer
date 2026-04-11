@@ -7,31 +7,35 @@ import {
 } from "@/engines/srs";
 import { useSettings } from "@/state/settings-store";
 import { useStudyStore } from "@/state/study-store";
-import { StrokeAnimationChain } from "@/components/StrokeAnimationChain";
 import { DrawingCanvas } from "@/components/DrawingCanvas";
 import type { CompletedChar } from "@/components/DrawingCanvas";
 import { AudioButton } from "@/components/AudioButton";
 import { chunky } from "@/components/Button";
-import type { Word } from "@/db/schema";
+import type { Word, HskLevel } from "@/db/schema";
 import { useTranslation, meaningFor } from "@/lib/i18n";
+import { playWordAudio } from "@/lib/audio";
+import { Button } from "@/components/Button";
 
 export const Route = createFileRoute("/study")({
   component: Study,
 });
 
+const HSK_LEVELS: HskLevel[] = [1, 2, 3, 4, 5, 6, 7];
+
 function Study() {
   const settings = useSettings();
   const { t, lang } = useTranslation();
-  const { queue, index, phase, start, nextPhase, commitCurrent, clear } =
+  const { queue, index, start, commitCurrent, clear } =
     useStudyStore();
+  const [selectedLevel, setSelectedLevel] = useState<HskLevel | null>(null);
 
   useEffect(() => {
-    if (!settings) return;
+    if (!settings || selectedLevel === null) return;
     (async () => {
       const BATCH_SIZE = 10;
       const words = await db.words
         .where("hskLevel")
-        .equals(settings.hskLevel)
+        .equals(selectedLevel)
         .sortBy("frequency");
       const existing = new Set(
         (await db.srsCards.toArray()).map((c) => c.wordId)
@@ -42,13 +46,45 @@ function Study() {
       start(fresh);
     })();
     return () => clear();
-  }, [settings, start, clear]);
+  }, [settings, selectedLevel, start, clear]);
 
   if (!settings) {
     return (
       <p className="text-center py-20 text-ink-300 font-semibold uppercase tracking-wider text-sm">
         {t("common.loading")}
       </p>
+    );
+  }
+
+  if (selectedLevel === null && queue.length === 0) {
+    return (
+      <div className="max-w-md mx-auto px-6 py-20 text-center animate-pop-in">
+        <Link
+          to="/"
+          aria-label="Exit study"
+          className="absolute top-4 left-4 grid place-items-center h-10 w-10 rounded-lg text-ink-300 hover:text-ink-600 hover:bg-ink-50 text-2xl font-black"
+        >
+          ✕
+        </Link>
+        <p className="font-display text-5xl text-ink-300 mb-4">
+          学
+        </p>
+        <p className="text-2xl font-bold text-ink-800">
+          {t("study.chooseLevel")}
+        </p>
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {HSK_LEVELS.map((level) => (
+            <Button
+              key={level}
+              variant={level === settings.hskLevel ? "primary" : "neutral"}
+              className="text-lg py-4"
+              onClick={() => setSelectedLevel(level)}
+            >
+              HSK {level}
+            </Button>
+          ))}
+        </div>
+      </div>
     );
   }
 
@@ -121,52 +157,7 @@ function Study() {
         </span>
       </header>
 
-      {phase === "present" && (
-        <div className="text-center animate-pop-in">
-          <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
-            {t("study.newWord")}
-          </p>
-          <p className="mt-6 font-hanzi text-7xl sm:text-8xl font-black text-ink-800">
-            {word.id}
-          </p>
-          <p className="mt-4 text-2xl font-bold text-ink-700">
-            {word.pinyin}
-          </p>
-          <p className="mt-2 text-lg font-medium text-ink-400">{meaningFor(word, lang)}</p>
-          <div className="mt-8 flex items-center justify-center gap-3">
-            <AudioButton
-              audioFile={word.audioFile}
-              fallbackText={word.id}
-              label={t("study.listen")}
-              variant="neutral"
-            />
-            <button onClick={nextPhase} className={chunky("primary")}>
-              {t("study.showStrokes")}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {phase === "animate" && (
-        <div className="text-center animate-pop-in">
-          <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
-            {t("study.watchStrokeOrder")}
-          </p>
-          <div className="mt-6">
-            <StrokeAnimationChain
-              key={word.id}
-              characters={word.characters}
-            />
-          </div>
-          <button onClick={nextPhase} className={chunky("primary", "mt-8")}>
-            {t("study.tryItYourself")}
-          </button>
-        </div>
-      )}
-
-      {phase === "attempt" && (
-        <AttemptPhase key={word.id} word={word} onDone={handleCommitCurrent} leniency={settings?.leniency ?? "strict"} />
-      )}
+      <AttemptPhase key={word.id} word={word} onDone={handleCommitCurrent} leniency={settings?.leniency ?? "strict"} lang={lang} />
     </div>
   );
 }
@@ -178,12 +169,15 @@ function AttemptPhase({
   word,
   onDone,
   leniency,
+  lang,
 }: {
   word: Word;
   onDone: () => void;
   leniency: "strict" | "lenient-order";
+  lang: "en" | "fr";
 }) {
   const { t } = useTranslation();
+  const settings = useSettings();
   const [charIndex, setCharIndex] = useState(0);
   const [attempts, setAttempts] = useState<{ mistakes: number }[]>([]);
   const [shrinking, setShrinking] = useState(false);
@@ -191,6 +185,13 @@ function AttemptPhase({
 
   const total = word.characters.length;
   const isMultiChar = total > 1;
+
+  // Auto-play pronunciation when a new word appears
+  useEffect(() => {
+    if (settings?.audioAutoplay) {
+      playWordAudio(word.id);
+    }
+  }, [word.id]);
 
   useEffect(() => {
     return () => {
@@ -209,7 +210,7 @@ function AttemptPhase({
     setCharIndex((i) => i + 1);
   }, []);
 
-  function handleCharComplete({ mistakes }: { mistakes: number }) {
+  function handleCharComplete({ mistakes, strokeMistakes: _strokeMistakes }: { mistakes: number; strokeMistakes: number[] }) {
     setAttempts((prev) => [...prev, { mistakes }]);
 
     const isLastChar = charIndex >= total - 1;
@@ -253,10 +254,27 @@ function AttemptPhase({
   return (
     <div className="text-center animate-pop-in">
       <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
-        {t("study.yourTurn")} · {charIndex + 1} / {total}
+        {t("study.writeFromMemory")}
+      </p>
+      <p className="mt-3 text-2xl font-bold text-ink-700">
+        {word.pinyin}
+      </p>
+      <p className="mt-1 text-lg font-medium text-ink-400">
+        {meaningFor(word, lang)}
+      </p>
+      <div className="mt-3 flex items-center justify-center">
+        <AudioButton
+          audioFile={word.audioFile}
+          fallbackText={word.id}
+          label={t("study.listen")}
+          variant="neutral"
+        />
+      </div>
+      <p className="mt-4 text-xs font-semibold tabular-nums text-ink-300">
+        {charIndex + 1} / {total}
       </p>
       <div
-        className="mt-6"
+        className="mt-3"
         style={{
           transition: shrinking
             ? `transform ${SHRINK_DURATION_MS}ms ease-in-out, opacity ${SHRINK_DURATION_MS}ms ease-in-out`

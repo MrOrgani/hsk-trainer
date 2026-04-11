@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { chunky, type ChunkyVariant } from "./Button";
+import { findChineseVoice } from "@/lib/audio";
 
 type AudioState = "idle" | "speaking" | "error" | "unavailable";
 
@@ -15,52 +16,6 @@ interface Props {
 // ---------------------------------------------------------------------------
 const audioCache = new Map<string, HTMLAudioElement>();
 
-/**
- * Finds the best available Chinese voice from speechSynthesis.
- *
- * Priority order:
- * 1. Premium / Neural / Enhanced voices (highest quality)
- * 2. Well-known high-quality voices by name:
- *    - Chrome: "Google 普通话（中国大陆）" or similar Google voices
- *    - Safari/iOS: "Ting-Ting" (compact but decent)
- * 3. Any zh-CN voice
- * 4. Any other Chinese voice (zh-TW, zh, cmn)
- */
-function findChineseVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | undefined {
-  const prefixes = ["zh-CN", "zh-TW", "zh", "cmn"];
-  const candidates: SpeechSynthesisVoice[] = [];
-
-  for (const prefix of prefixes) {
-    for (const v of voices) {
-      if (v.lang === prefix || v.lang.startsWith(prefix + "-")) {
-        candidates.push(v);
-      }
-    }
-  }
-
-  if (candidates.length === 0) return undefined;
-
-  // 1. Prefer premium / neural / enhanced voices
-  const premium = candidates.find((v) =>
-    /premium|enhanced|natural|neural/i.test(v.name),
-  );
-  if (premium) return premium;
-
-  // 2. Prefer well-known high-quality voices by name
-  const googleVoice = candidates.find((v) =>
-    /google.*普通话|google.*mandarin|google.*chinese/i.test(v.name),
-  );
-  if (googleVoice) return googleVoice;
-
-  const tingTing = candidates.find((v) => /ting-ting/i.test(v.name));
-  if (tingTing) return tingTing;
-
-  // 3. Prefer zh-CN over other variants
-  const zhCN = candidates.find((v) => v.lang === "zh-CN" || v.lang.startsWith("zh-CN"));
-  if (zhCN) return zhCN;
-
-  return candidates[0];
-}
 
 export function AudioButton({
   audioFile,

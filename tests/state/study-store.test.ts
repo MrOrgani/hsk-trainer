@@ -12,30 +12,20 @@ const W2: Word = { ...W1, id: "好", characters: ["好"], pinyin: "hǎo", meanin
 describe("study-store", () => {
   beforeEach(() => useStudyStore.getState().clear());
 
-  it("starts a queue and begins in 'present' phase", () => {
+  it("starts a queue and begins in 'attempt' phase", () => {
     useStudyStore.getState().start([W1, W2]);
     const s = useStudyStore.getState();
     expect(s.queue).toHaveLength(2);
     expect(s.index).toBe(0);
-    expect(s.phase).toBe("present");
-  });
-
-  it("advances phase through present → animate → attempt", () => {
-    useStudyStore.getState().start([W1]);
-    useStudyStore.getState().nextPhase();
-    expect(useStudyStore.getState().phase).toBe("animate");
-    useStudyStore.getState().nextPhase();
-    expect(useStudyStore.getState().phase).toBe("attempt");
+    expect(s.phase).toBe("attempt");
   });
 
   it("commits the current word, moves to the next, and resets phase", () => {
     useStudyStore.getState().start([W1, W2]);
-    useStudyStore.getState().nextPhase();
-    useStudyStore.getState().nextPhase();
     useStudyStore.getState().commitCurrent();
     const s = useStudyStore.getState();
     expect(s.index).toBe(1);
-    expect(s.phase).toBe("present");
+    expect(s.phase).toBe("attempt");
   });
 
   it("past the last word the store is in a 'done' state", () => {

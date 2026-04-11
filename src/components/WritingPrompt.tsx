@@ -48,7 +48,7 @@ export function WritingPrompt({ word, promptType, onGrade, leniency = "strict", 
     setCharIndex((i) => i + 1);
   }, []);
 
-  function handleCharComplete({ mistakes }: { mistakes: number }) {
+  function handleCharComplete({ mistakes, strokeMistakes: _strokeMistakes }: { mistakes: number; strokeMistakes: number[] }) {
     setAttempts((prev) => [...prev, { mistakes }]);
 
     const isLastChar = charIndex >= total - 1;

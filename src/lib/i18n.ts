@@ -71,6 +71,8 @@ const translations = {
   "study.word": { en: "word", fr: "mot" },
   "study.words": { en: "words", fr: "mots" },
   "study.listen": { en: "Listen", fr: "Ecouter" },
+  "study.writeFromMemory": { en: "Write from memory", fr: "Ecrivez de memoire" },
+  "study.chooseLevel": { en: "Choose your level", fr: "Choisissez votre niveau" },
 
   // Review page
   "review.nothingToReview": {
