@@ -191,7 +191,7 @@ function AttemptPhase({
     if (settings?.audioAutoplay) {
       playWordAudio(word.id);
     }
-  }, [word.id]);
+  }, [word.id, settings?.audioAutoplay]);
 
   useEffect(() => {
     return () => {
