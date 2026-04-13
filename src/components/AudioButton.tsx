@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { findChineseVoice } from "@/lib/audio";
+import { speakChinese } from "@/lib/audio";
 
 type AudioState = "idle" | "speaking" | "error" | "unavailable";
 
@@ -23,32 +23,7 @@ export function AudioButton({
   variant = "inline",
 }: Props) {
   const [state, setState] = useState<AudioState>("idle");
-  const voiceRef = useRef<SpeechSynthesisVoice | undefined>(undefined);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  // Load voices (may be async on some browsers)
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.speechSynthesis) {
-      setState("unavailable");
-      return;
-    }
-
-    const synth = window.speechSynthesis;
-
-    const loadVoices = () => {
-      const voices = synth.getVoices();
-      voiceRef.current = findChineseVoice(voices);
-    };
-
-    // Try immediately (Chrome sometimes has them ready)
-    loadVoices();
-
-    // Also listen for the async load event
-    synth.addEventListener("voiceschanged", loadVoices);
-    return () => {
-      synth.removeEventListener("voiceschanged", loadVoices);
-    };
-  }, []);
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -57,57 +32,13 @@ export function AudioButton({
     };
   }, []);
 
-  /** Last-resort fallback: browser speechSynthesis */
-  const speak = useCallback(() => {
-    if (typeof window === "undefined") return;
-    const synth = window.speechSynthesis;
-    if (!synth) {
-      setState("unavailable");
-      return;
-    }
-
-    // iOS workaround: cancel any pending speech first
-    synth.cancel();
-
-    const utter = new SpeechSynthesisUtterance(fallbackText);
-    utter.lang = "zh-CN";
-    utter.rate = 0.8;
-    utter.pitch = 1.0;
-
-    if (voiceRef.current) {
-      utter.voice = voiceRef.current;
-    }
-
-    utter.onstart = () => setState("speaking");
-    utter.onend = () => setState("idle");
-    utter.onerror = (e) => {
-      // "interrupted" fires when we cancel before a new utterance; not a real error
-      if (e.error === "interrupted" || e.error === "canceled") {
-        setState("idle");
-      } else {
-        setState("error");
-        // Reset back to idle after a short delay
-        timeoutRef.current = setTimeout(() => setState("idle"), 2000);
-      }
-    };
-
-    synth.speak(utter);
-
-    // iOS workaround: speechSynthesis can get stuck in "pending" state
-    // Force resume after a short delay
-    setTimeout(() => {
-      if (synth.paused) synth.resume();
-    }, 100);
-  }, [fallbackText]);
-
   /**
-   * Try playing audio via an HTMLAudioElement (local file or remote TTS URL).
-   * Returns a promise that resolves to `true` if playback started, `false` otherwise.
+   * Try playing audio via an HTMLAudioElement (local file).
+   * Returns true if playback started, false otherwise.
    */
   const tryAudioElement = useCallback(
     (src: string): Promise<boolean> =>
       new Promise((resolve) => {
-        // Check cache first
         const cached = audioCache.get(src);
         if (cached) {
           const clone = cached.cloneNode() as HTMLAudioElement;
@@ -136,7 +67,6 @@ export function AudioButton({
         audio.addEventListener(
           "canplaythrough",
           () => {
-            // Cache for future use
             audioCache.set(src, audio);
           },
           { once: true },
@@ -153,14 +83,42 @@ export function AudioButton({
   const play = useCallback(async () => {
     if (state === "speaking") return;
 
-    // 1. Try local audio file (if it exists in /audio/)
+    // 1. Try local audio file
     if (await tryAudioElement(`${import.meta.env.BASE_URL}audio/${audioFile}`)) return;
 
-    // 2. Use browser speechSynthesis
-    speak();
-  }, [audioFile, tryAudioElement, speak, state]);
+    // 2. Use easy-speech (handles iOS Safari workarounds)
+    setState("speaking");
+    try {
+      await speakChinese(fallbackText);
+      setState("idle");
+    } catch {
+      setState("error");
+      timeoutRef.current = setTimeout(() => setState("idle"), 2000);
+    }
+  }, [audioFile, tryAudioElement, fallbackText, state]);
 
   const isDisabled = state === "unavailable";
+
+  const speakerIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      width={18}
+      height={18}
+      className="w-[18px] h-[18px] shrink-0"
+    >
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+      {variant === "inline" && (
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+      )}
+    </svg>
+  );
 
   if (variant === "inline") {
     return (
@@ -175,20 +133,7 @@ export function AudioButton({
         } ${isDisabled ? "opacity-30" : ""}`}
         aria-label={`Play pronunciation of ${fallbackText}`}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-4.5 h-4.5"
-        >
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-        </svg>
+        {speakerIcon}
       </button>
     );
   }
@@ -206,19 +151,7 @@ export function AudioButton({
       } ${isDisabled ? "opacity-30" : ""}`}
       aria-label={`Play pronunciation of ${fallbackText}`}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={2}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="w-4.5 h-4.5"
-      >
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-      </svg>
+      {speakerIcon}
       {label}
     </button>
   );

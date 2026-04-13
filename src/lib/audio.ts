@@ -1,19 +1,67 @@
 /**
  * Shared audio utilities for Chinese speech synthesis.
+ * Uses easy-speech for cross-browser compatibility (especially iOS Safari).
  */
 
-/** Module-level cached voice reference */
-let cachedVoice: SpeechSynthesisVoice | undefined;
-let voiceLoaded = false;
+import EasySpeech from "easy-speech";
+
+let initialized = false;
+let initializing = false;
 
 /**
- * Finds the best available Chinese voice from speechSynthesis.
+ * Initialize easy-speech. Safe to call multiple times — only runs once.
+ * Returns true if speech synthesis is available.
+ */
+export async function initSpeech(): Promise<boolean> {
+  if (initialized) return true;
+  if (initializing) {
+    // Wait for the in-flight init
+    return new Promise((resolve) => {
+      const check = setInterval(() => {
+        if (!initializing) {
+          clearInterval(check);
+          resolve(initialized);
+        }
+      }, 50);
+    });
+  }
+
+  initializing = true;
+  try {
+    const detected = EasySpeech.detect();
+    if (!detected.speechSynthesis) {
+      initialized = false;
+      return false;
+    }
+
+    await EasySpeech.init({ maxTimeout: 5000, interval: 250, quiet: true });
+
+    // Set defaults for Chinese speech
+    const voices = EasySpeech.voices();
+    const voice = findChineseVoice(voices);
+    EasySpeech.defaults({
+      voice: voice ?? undefined,
+      rate: 0.8,
+      pitch: 1.0,
+      volume: 1.0,
+    });
+
+    initialized = true;
+    return true;
+  } catch {
+    initialized = false;
+    return false;
+  } finally {
+    initializing = false;
+  }
+}
+
+/**
+ * Finds the best available Chinese voice.
  *
  * Priority order:
- * 1. Premium / Neural / Enhanced voices (highest quality)
- * 2. Well-known high-quality voices by name:
- *    - Chrome: "Google 普通话（中国大陆）" or similar Google voices
- *    - Safari/iOS: "Ting-Ting" (compact but decent)
+ * 1. Premium / Neural / Enhanced voices
+ * 2. Well-known high-quality voices (Google, Ting-Ting)
  * 3. Any zh-CN voice
  * 4. Any other Chinese voice (zh-TW, zh, cmn)
  */
@@ -31,13 +79,11 @@ export function findChineseVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesi
 
   if (candidates.length === 0) return undefined;
 
-  // 1. Prefer premium / neural / enhanced voices
   const premium = candidates.find((v) =>
     /premium|enhanced|natural|neural/i.test(v.name),
   );
   if (premium) return premium;
 
-  // 2. Prefer well-known high-quality voices by name
   const googleVoice = candidates.find((v) =>
     /google.*普通话|google.*mandarin|google.*chinese/i.test(v.name),
   );
@@ -46,53 +92,26 @@ export function findChineseVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesi
   const tingTing = candidates.find((v) => /ting-ting/i.test(v.name));
   if (tingTing) return tingTing;
 
-  // 3. Prefer zh-CN over other variants
   const zhCN = candidates.find((v) => v.lang === "zh-CN" || v.lang.startsWith("zh-CN"));
   if (zhCN) return zhCN;
 
   return candidates[0];
 }
 
-/** Resolve and cache the best Chinese voice. */
-function resolveVoice(): SpeechSynthesisVoice | undefined {
-  if (voiceLoaded) return cachedVoice;
-  if (typeof window === "undefined" || !window.speechSynthesis) return undefined;
-
-  const voices = window.speechSynthesis.getVoices();
-  if (voices.length > 0) {
-    cachedVoice = findChineseVoice(voices);
-    voiceLoaded = true;
-  }
-  return cachedVoice;
-}
-
-// Eagerly listen for voiceschanged so the cache is warm
-if (typeof window !== "undefined" && window.speechSynthesis) {
-  window.speechSynthesis.addEventListener("voiceschanged", () => {
-    voiceLoaded = false; // reset so next call re-resolves
-    resolveVoice();
-  });
-}
-
 /**
- * Fire-and-forget: speak the given Chinese text using speechSynthesis.
+ * Speak the given Chinese text. Initializes easy-speech on first call.
+ * Returns a promise that resolves when speech ends.
  */
-export function playWordAudio(text: string): void {
-  if (typeof window === "undefined") return;
-  const synth = window.speechSynthesis;
-  if (!synth) return;
+export async function speakChinese(text: string): Promise<void> {
+  const available = await initSpeech();
+  if (!available) return;
 
-  synth.cancel();
-
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = "zh-CN";
-  utter.rate = 0.8;
-  utter.pitch = 1.0;
-
-  const voice = resolveVoice();
-  if (voice) {
-    utter.voice = voice;
-  }
-
-  synth.speak(utter);
+  EasySpeech.cancel();
+  await EasySpeech.speak({
+    text,
+    rate: 0.8,
+    pitch: 1.0,
+    force: true,
+    infiniteResume: true,
+  });
 }
