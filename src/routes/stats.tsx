@@ -216,7 +216,7 @@ export function StatsPage() {
                   <button
                     type="button"
                     onClick={() => toggleLevel(level.hskLevel)}
-                    className="mt-1.5 text-[11px] font-semibold text-ink-300 hover:text-vermillion-500 transition-colors"
+                    className="mt-1.5 py-1.5 px-2 -ml-2 text-[11px] font-semibold text-ink-300 hover:text-vermillion-500 active:text-vermillion-500 transition-colors"
                   >
                     {expandedLevels.has(level.hskLevel)
                       ? t("stats.hideCharacters")
@@ -224,7 +224,7 @@ export function StatsPage() {
                   </button>
 
                   {expandedLevels.has(level.hskLevel) && (
-                    <div className="flex flex-wrap gap-1 mt-2">
+                    <div className="flex flex-wrap gap-1.5 mt-2">
                       {(wordsByLevel.get(level.hskLevel) ?? []).map((item) => {
                         const maturity = getMaturity(item.bestCard);
                         return (
@@ -232,8 +232,8 @@ export function StatsPage() {
                             key={item.word.id}
                             type="button"
                             onClick={() => setSelectedWord(item)}
-                            className={`w-8 h-8 rounded-md font-hanzi font-bold flex items-center justify-center transition-colors hover:ring-2 hover:ring-vermillion-300 text-white/90 ${MATURITY_TILE_COLORS[maturity]} ${
-                              item.word.id.length > 1 ? "text-[10px]" : "text-xs"
+                            className={`w-10 h-10 rounded-lg font-hanzi font-bold flex items-center justify-center transition-colors active:scale-95 text-white/90 ${MATURITY_TILE_COLORS[maturity]} ${
+                              item.word.id.length > 1 ? "text-[11px]" : "text-sm"
                             }`}
                             title={`${item.word.id} — ${item.word.pinyin}`}
                           >

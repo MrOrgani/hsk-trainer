@@ -64,7 +64,7 @@ function Home() {
   const isSearching = search.trim().length > 0;
 
   return (
-    <div className="max-w-2xl mx-auto px-5 pt-10 sm:pt-16 pb-16">
+    <div className="max-w-2xl mx-auto px-4 sm:px-5 pt-6 sm:pt-16 pb-8">
       {/* Hero */}
       <div className="text-center animate-pop-in">
         <div className="seal-stamp h-20 w-20 sm:h-24 sm:w-24 text-vermillion-500 mb-5 animate-stamp-in mx-auto">

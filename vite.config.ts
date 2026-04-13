@@ -58,6 +58,21 @@ export default defineConfig({
           },
           {
             urlPattern:
+              /^https:\/\/cdn\.jsdelivr\.net\/npm\/hanzi-writer-data.*/i,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "hanzi-data-cache",
+              expiration: {
+                maxEntries: 500,
+                maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+          {
+            urlPattern:
               /^https:\/\/fonts\.gstatic\.com\/.*/i,
             handler: "CacheFirst",
             options: {

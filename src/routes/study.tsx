@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { db } from "@/db/dexie";
 import {
   introduceNewCardWithGrade,
@@ -7,13 +7,12 @@ import {
 } from "@/engines/srs";
 import { useSettings } from "@/state/settings-store";
 import { useStudyStore } from "@/state/study-store";
-import { DrawingCanvas, masteryColor } from "@/components/DrawingCanvas";
+import { DrawingCanvas } from "@/components/DrawingCanvas";
 import type { CompletedChar } from "@/components/DrawingCanvas";
 import { AudioButton } from "@/components/AudioButton";
 import { chunky } from "@/components/Button";
 import type { Word, HskLevel, Grade } from "@/db/schema";
 import { useTranslation, meaningFor } from "@/lib/i18n";
-import { playWordAudio } from "@/lib/audio";
 import { Button } from "@/components/Button";
 
 export const Route = createFileRoute("/study")({
@@ -65,7 +64,7 @@ function Study() {
 
   if (selectedLevel === null && queue.length === 0) {
     return (
-      <div className="max-w-md mx-auto px-6 py-20 text-center animate-pop-in">
+      <div className="max-w-md mx-auto px-6 py-10 sm:py-20 text-center animate-pop-in">
         <Link
           to="/"
           aria-label="Exit study"
@@ -97,7 +96,7 @@ function Study() {
 
   if (queue.length === 0) {
     return (
-      <div className="max-w-md mx-auto px-6 py-20 text-center animate-pop-in">
+      <div className="max-w-md mx-auto px-6 py-10 sm:py-20 text-center animate-pop-in">
         <p className="font-display text-5xl text-ink-300 mb-4">
           等一等
         </p>
@@ -116,7 +115,7 @@ function Study() {
 
   if (index >= queue.length) {
     return (
-      <div className="max-w-md mx-auto px-6 py-20 text-center animate-pop-in">
+      <div className="max-w-md mx-auto px-6 py-10 sm:py-20 text-center animate-pop-in">
         <div className="seal-stamp h-20 w-20 text-jade-500 mx-auto mb-4 animate-stamp-in">
           <span className="font-hanzi text-3xl font-black">好</span>
         </div>
@@ -177,7 +176,6 @@ function Study() {
 }
 
 const VIEWING_DELAY_MS = 1500;
-const REVEAL_AUTO_ADVANCE_MS = 2500;
 
 function AttemptPhase({
   word,
@@ -193,144 +191,35 @@ function AttemptPhase({
   lang: "en" | "fr";
 }) {
   const { t } = useTranslation();
-  const settings = useSettings();
   const [charIndex, setCharIndex] = useState(0);
   const [attempts, setAttempts] = useState<{ mistakes: number }[]>([]);
-  const [revealPhase, setRevealPhase] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const revealTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const onDoneRef = useRef(onDone);
+  useEffect(() => { onDoneRef.current = onDone; }, [onDone]);
 
   const total = word.characters.length;
-
-  // Auto-play pronunciation when a new word appears
-  useEffect(() => {
-    if (settings?.audioAutoplay) {
-      playWordAudio(word.id);
-    }
-  }, [word.id, settings?.audioAutoplay]);
 
   useEffect(() => {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
-      if (revealTimerRef.current) clearTimeout(revealTimerRef.current);
     };
-  }, []);
-
-  // When all characters drawn, enter reveal phase
-  useEffect(() => {
-    if (charIndex >= total && !revealPhase && attempts.length === total) {
-      setRevealPhase(true);
-    }
-  }, [charIndex, total, revealPhase, attempts.length]);
-
-  // Auto-advance from reveal after delay
-  useEffect(() => {
-    if (!revealPhase) return;
-    revealTimerRef.current = setTimeout(() => {
-      const totalMistakes = attempts.reduce((sum, a) => sum + a.mistakes, 0);
-      const grade = gradeFromMistakes(totalMistakes, false);
-      onDone(grade);
-    }, REVEAL_AUTO_ADVANCE_MS);
-    return () => {
-      if (revealTimerRef.current) clearTimeout(revealTimerRef.current);
-    };
-  }, [revealPhase, attempts, onDone]);
-
-  const advanceChar = useCallback(() => {
-    setCharIndex((i) => i + 1);
   }, []);
 
   function handleCharComplete({ mistakes, strokeMistakes: _strokeMistakes }: { mistakes: number; strokeMistakes: number[] }) {
-    setAttempts((prev) => [...prev, { mistakes }]);
+    const newAttempts = [...attempts, { mistakes }];
+    setAttempts(newAttempts);
 
-    // After viewing delay, advance to next character (or trigger reveal for last)
+    const isLast = newAttempts.length === total;
+
     timerRef.current = setTimeout(() => {
-      advanceChar();
+      if (isLast) {
+        const totalMistakes = newAttempts.reduce((sum, a) => sum + a.mistakes, 0);
+        const grade = gradeFromMistakes(totalMistakes, false);
+        onDoneRef.current(grade);
+      } else {
+        setCharIndex((i) => i + 1);
+      }
     }, VIEWING_DELAY_MS);
-  }
-
-  function handleRevealTap() {
-    if (revealTimerRef.current) clearTimeout(revealTimerRef.current);
-    const totalMistakes = attempts.reduce((sum, a) => sum + a.mistakes, 0);
-    const grade = gradeFromMistakes(totalMistakes, false);
-    onDone(grade);
-  }
-
-  // Reveal phase UI
-  if (revealPhase) {
-    const totalMistakes = attempts.reduce((sum, a) => sum + a.mistakes, 0);
-    const grade = gradeFromMistakes(totalMistakes, false);
-
-    const gradeLabel = (() => {
-      switch (grade) {
-        case "easy": return t("study.autoGradeEasy");
-        case "good": return t("study.autoGradeGood");
-        case "hard": return t("study.autoGradeHard");
-        case "again": return t("study.autoGradeAgain");
-      }
-    })();
-
-    const mistakesLabel = totalMistakes === 0
-      ? t("study.perfect")
-      : t("study.mistakes").replace("{count}", String(totalMistakes));
-
-    const gradeColor = (() => {
-      switch (grade) {
-        case "easy": return "text-jade-600";
-        case "good": return "text-gold-600";
-        case "hard": return "text-orange-500";
-        case "again": return "text-vermillion-500";
-      }
-    })();
-
-    return (
-      <div
-        className="text-center animate-pop-in cursor-pointer select-none"
-        onClick={handleRevealTap}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleRevealTap(); }}
-      >
-        {/* Characters with mastery colors */}
-        <div className="flex items-center justify-center gap-1 mt-4">
-          {word.characters.map((char, i) => (
-            <span
-              key={i}
-              className="font-hanzi font-bold"
-              style={{
-                fontSize: "4rem",
-                lineHeight: 1.1,
-                color: masteryColor(attempts[i]?.mistakes ?? 0),
-              }}
-            >
-              {char}
-            </span>
-          ))}
-        </div>
-
-        <p className="mt-4 text-xl font-bold text-ink-600">
-          {word.pinyin}
-        </p>
-        <p className="mt-1 text-lg font-medium text-ink-400">
-          {meaningFor(word, lang)}
-        </p>
-
-        {/* Mistakes + grade */}
-        <div className="mt-6 space-y-1">
-          <p className={`text-lg font-bold ${gradeColor}`}>
-            {mistakesLabel}
-          </p>
-          <p className="text-sm font-semibold text-ink-400">
-            {gradeLabel}
-          </p>
-        </div>
-
-        {/* Auto-advance hint */}
-        <p className="mt-8 text-xs font-medium text-ink-300 animate-pulse">
-          {t("study.tapToContinue")}
-        </p>
-      </div>
-    );
   }
 
   if (charIndex >= total) return null;
@@ -349,7 +238,7 @@ function AttemptPhase({
         <button
           type="button"
           onClick={onSkip}
-          className="text-xs font-semibold text-ink-300 hover:text-jade-500 transition-colors"
+          className="text-xs font-semibold text-ink-300 hover:text-jade-500 active:text-jade-500 transition-colors py-2 px-3"
         >
           {t("study.iKnowThis")} &rarr;
         </button>
