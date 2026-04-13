@@ -247,20 +247,18 @@ function AttemptPhase({
       <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
         {t("study.writeFromMemory")}
       </p>
-      <p className="mt-3 text-2xl font-bold text-ink-700">
-        {word.pinyin}
-      </p>
-      <p className="mt-1 text-lg font-medium text-ink-400">
-        {meaningFor(word, lang)}
-      </p>
-      <div className="mt-3 flex items-center justify-center">
+      <div className="mt-3 flex items-center justify-center gap-2">
+        <p className="text-2xl font-bold text-ink-700">
+          {word.pinyin}
+        </p>
         <AudioButton
           audioFile={word.audioFile}
           fallbackText={word.id}
-          label={t("study.listen")}
-          variant="neutral"
         />
       </div>
+      <p className="mt-1 text-lg font-medium text-ink-400">
+        {meaningFor(word, lang)}
+      </p>
       <p className="mt-4 text-xs font-semibold tabular-nums text-ink-300">
         {charIndex + 1} / {total}
       </p>

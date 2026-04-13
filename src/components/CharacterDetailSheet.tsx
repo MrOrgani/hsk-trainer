@@ -80,7 +80,7 @@ export function CharacterDetailSheet({
             audioFile={word.audioFile}
             fallbackText={word.id}
             label={t("common.playAudio")}
-            variant="neutral"
+            variant="button"
           />
         </div>
 
