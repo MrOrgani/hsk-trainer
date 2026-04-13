@@ -73,6 +73,14 @@ const translations = {
   "study.listen": { en: "Listen", fr: "Ecouter" },
   "study.writeFromMemory": { en: "Write from memory", fr: "Ecrivez de memoire" },
   "study.chooseLevel": { en: "Choose your level", fr: "Choisissez votre niveau" },
+  "study.iKnowThis": { en: "I know this", fr: "Je connais" },
+  "study.perfect": { en: "Perfect!", fr: "Parfait !" },
+  "study.mistakes": { en: "{count} mistakes", fr: "{count} erreurs" },
+  "study.autoGradeEasy": { en: "Easy — review in 4 days", fr: "Facile — revision dans 4 jours" },
+  "study.autoGradeGood": { en: "Good — review tomorrow", fr: "Bien — revision demain" },
+  "study.autoGradeHard": { en: "Hard — review soon", fr: "Difficile — revision prochaine" },
+  "study.autoGradeAgain": { en: "Again — review shortly", fr: "A revoir — revision imminente" },
+  "study.tapToContinue": { en: "Tap to continue", fr: "Appuyez pour continuer" },
 
   // Review page
   "review.nothingToReview": {
@@ -87,6 +95,13 @@ const translations = {
   "review.studied": { en: "studied", fr: "\u00e9tudi\u00e9(s)" },
   "review.wellDone": { en: "Well done", fr: "Bravo" },
   "review.finish": { en: "Finish", fr: "Terminer" },
+  "review.autoGradeEasy": { en: "Perfect! → Easy", fr: "Parfait ! → Facile" },
+  "review.autoGradeGood": { en: "{count} {unit} → Good", fr: "{count} {unit} → Bien" },
+  "review.autoGradeHard": { en: "{count} {unit} → Hard", fr: "{count} {unit} → Difficile" },
+  "review.autoGradeAgain": { en: "{count} {unit} → Again", fr: "{count} {unit} → A revoir" },
+  "review.tapToContinue": { en: "Tap to continue", fr: "Appuyez pour continuer" },
+  "review.mistake": { en: "mistake", fr: "erreur" },
+  "review.mistakes": { en: "mistakes", fr: "erreurs" },
 
   // Prompts
   "prompt.listenAndWrite": {

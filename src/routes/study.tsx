@@ -2,16 +2,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { db } from "@/db/dexie";
 import {
-  introduceNewCard,
+  introduceNewCardWithGrade,
   incrementDailyNew,
 } from "@/engines/srs";
 import { useSettings } from "@/state/settings-store";
 import { useStudyStore } from "@/state/study-store";
-import { DrawingCanvas } from "@/components/DrawingCanvas";
+import { DrawingCanvas, masteryColor } from "@/components/DrawingCanvas";
 import type { CompletedChar } from "@/components/DrawingCanvas";
 import { AudioButton } from "@/components/AudioButton";
 import { chunky } from "@/components/Button";
-import type { Word, HskLevel } from "@/db/schema";
+import type { Word, HskLevel, Grade } from "@/db/schema";
 import { useTranslation, meaningFor } from "@/lib/i18n";
 import { playWordAudio } from "@/lib/audio";
 import { Button } from "@/components/Button";
@@ -21,6 +21,13 @@ export const Route = createFileRoute("/study")({
 });
 
 const HSK_LEVELS: HskLevel[] = [1, 2, 3, 4, 5, 6, 7];
+
+function gradeFromMistakes(totalMistakes: number, allHintsUsed: boolean): Grade {
+  if (allHintsUsed || totalMistakes >= 7) return "again";
+  if (totalMistakes >= 4) return "hard";
+  if (totalMistakes >= 1) return "good";
+  return "easy";
+}
 
 function Study() {
   const settings = useSettings();
@@ -130,8 +137,8 @@ function Study() {
 
   const word = queue[index];
 
-  async function handleCommitCurrent() {
-    await introduceNewCard(word.id, settings!, Date.now());
+  async function handleCommitWithGrade(grade: Grade) {
+    await introduceNewCardWithGrade(word.id, settings!, Date.now(), grade);
     await incrementDailyNew(Date.now());
     commitCurrent();
   }
@@ -157,22 +164,32 @@ function Study() {
         </span>
       </header>
 
-      <AttemptPhase key={word.id} word={word} onDone={handleCommitCurrent} leniency={settings?.leniency ?? "strict"} lang={lang} />
+      <AttemptPhase
+        key={word.id}
+        word={word}
+        onDone={handleCommitWithGrade}
+        onSkip={() => handleCommitWithGrade("easy")}
+        leniency={settings?.leniency ?? "strict"}
+        lang={lang}
+      />
     </div>
   );
 }
 
 const VIEWING_DELAY_MS = 1500;
 const SHRINK_DURATION_MS = 400;
+const REVEAL_AUTO_ADVANCE_MS = 2500;
 
 function AttemptPhase({
   word,
   onDone,
+  onSkip,
   leniency,
   lang,
 }: {
   word: Word;
-  onDone: () => void;
+  onDone: (grade: Grade) => void;
+  onSkip: () => void;
   leniency: "strict" | "lenient-order";
   lang: "en" | "fr";
 }) {
@@ -181,7 +198,9 @@ function AttemptPhase({
   const [charIndex, setCharIndex] = useState(0);
   const [attempts, setAttempts] = useState<{ mistakes: number }[]>([]);
   const [shrinking, setShrinking] = useState(false);
+  const [revealPhase, setRevealPhase] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const revealTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const total = word.characters.length;
   const isMultiChar = total > 1;
@@ -196,14 +215,29 @@ function AttemptPhase({
   useEffect(() => {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
+      if (revealTimerRef.current) clearTimeout(revealTimerRef.current);
     };
   }, []);
 
+  // When all characters drawn, enter reveal phase
   useEffect(() => {
-    if (charIndex >= total) {
-      onDone();
+    if (charIndex >= total && !revealPhase && attempts.length === total) {
+      setRevealPhase(true);
     }
-  }, [charIndex, total, onDone]);
+  }, [charIndex, total, revealPhase, attempts.length]);
+
+  // Auto-advance from reveal after delay
+  useEffect(() => {
+    if (!revealPhase) return;
+    revealTimerRef.current = setTimeout(() => {
+      const totalMistakes = attempts.reduce((sum, a) => sum + a.mistakes, 0);
+      const grade = gradeFromMistakes(totalMistakes, false);
+      onDone(grade);
+    }, REVEAL_AUTO_ADVANCE_MS);
+    return () => {
+      if (revealTimerRef.current) clearTimeout(revealTimerRef.current);
+    };
+  }, [revealPhase, attempts, onDone]);
 
   const advanceChar = useCallback(() => {
     setShrinking(false);
@@ -216,6 +250,7 @@ function AttemptPhase({
     const isLastChar = charIndex >= total - 1;
 
     if (!isMultiChar || isLastChar) {
+      // For last char or single char, short delay then advance (which triggers reveal)
       timerRef.current = setTimeout(() => {
         advanceChar();
       }, VIEWING_DELAY_MS);
@@ -227,11 +262,93 @@ function AttemptPhase({
   }
 
   function handleTransitionEnd(e: React.TransitionEvent) {
-    // Two properties animate (transform + opacity), so transitionend fires twice.
-    // Only react to the first one to avoid advancing charIndex twice.
     if (shrinking && e.propertyName !== "opacity") {
       advanceChar();
     }
+  }
+
+  function handleRevealTap() {
+    if (revealTimerRef.current) clearTimeout(revealTimerRef.current);
+    const totalMistakes = attempts.reduce((sum, a) => sum + a.mistakes, 0);
+    const grade = gradeFromMistakes(totalMistakes, false);
+    onDone(grade);
+  }
+
+  // Reveal phase UI
+  if (revealPhase) {
+    const totalMistakes = attempts.reduce((sum, a) => sum + a.mistakes, 0);
+    const grade = gradeFromMistakes(totalMistakes, false);
+
+    const gradeLabel = (() => {
+      switch (grade) {
+        case "easy": return t("study.autoGradeEasy");
+        case "good": return t("study.autoGradeGood");
+        case "hard": return t("study.autoGradeHard");
+        case "again": return t("study.autoGradeAgain");
+      }
+    })();
+
+    const mistakesLabel = totalMistakes === 0
+      ? t("study.perfect")
+      : t("study.mistakes").replace("{count}", String(totalMistakes));
+
+    const gradeColor = (() => {
+      switch (grade) {
+        case "easy": return "text-jade-600";
+        case "good": return "text-gold-600";
+        case "hard": return "text-orange-500";
+        case "again": return "text-vermillion-500";
+      }
+    })();
+
+    return (
+      <div
+        className="text-center animate-pop-in cursor-pointer select-none"
+        onClick={handleRevealTap}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleRevealTap(); }}
+      >
+        {/* Characters with mastery colors */}
+        <div className="flex items-center justify-center gap-1 mt-4">
+          {word.characters.map((char, i) => (
+            <span
+              key={i}
+              className="font-hanzi font-bold"
+              style={{
+                fontSize: "4rem",
+                lineHeight: 1.1,
+                color: masteryColor(attempts[i]?.mistakes ?? 0),
+              }}
+            >
+              {char}
+            </span>
+          ))}
+        </div>
+
+        <p className="mt-4 text-xl font-bold text-ink-600">
+          {word.pinyin}
+        </p>
+        <p className="mt-1 text-lg font-medium text-ink-400">
+          {meaningFor(word, lang)}
+        </p>
+
+        {/* Mistakes + grade */}
+        <div className="mt-6 space-y-1">
+          <p className={`text-lg font-bold ${gradeColor}`}>
+            {mistakesLabel}
+          </p>
+          <p className="text-sm font-semibold text-ink-400">
+            {gradeLabel}
+          </p>
+        </div>
+
+        {/* Auto-advance hint */}
+        <p className="mt-8 text-xs font-medium text-ink-300 animate-pulse">
+          {t("study.tapToContinue")}
+        </p>
+      </div>
+    );
   }
 
   if (charIndex >= total) return null;
@@ -255,6 +372,17 @@ function AttemptPhase({
 
   return (
     <div className="text-center animate-pop-in">
+      {/* "I know this" skip button */}
+      <div className="flex justify-end mb-2">
+        <button
+          type="button"
+          onClick={onSkip}
+          className="text-xs font-semibold text-ink-300 hover:text-jade-500 transition-colors"
+        >
+          {t("study.iKnowThis")} &rarr;
+        </button>
+      </div>
+
       <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
         {t("study.writeFromMemory")}
       </p>

@@ -126,6 +126,59 @@ export async function introduceNewCard(
   return cards;
 }
 
+export async function introduceNewCardWithGrade(
+  wordId: string,
+  settings: Settings,
+  now: number,
+  grade: Grade
+): Promise<SrsCard[]> {
+  const firstStepMs = settings.learningSteps[0] * MINUTE;
+
+  const cards: SrsCard[] = settings.enabledPromptTypes.map((promptType: PromptType) => {
+    const base = {
+      id: `${wordId}::${promptType}`,
+      wordId,
+      promptType,
+      easeFactor: 2.5,
+      repetitions: 0,
+      lastReview: null,
+      createdAt: now,
+    };
+
+    if (grade === "easy") {
+      return {
+        ...base,
+        state: "review" as const,
+        learningStep: 0,
+        interval: 4,
+        repetitions: 1,
+        dueDate: now + 4 * DAY,
+      };
+    }
+    if (grade === "good") {
+      return {
+        ...base,
+        state: "review" as const,
+        learningStep: 0,
+        interval: 1,
+        repetitions: 1,
+        dueDate: now + DAY,
+      };
+    }
+    // "hard" and "again" — stay in learning, step 0
+    return {
+      ...base,
+      state: "learning" as const,
+      learningStep: 0,
+      interval: 0,
+      dueDate: now + firstStepMs,
+    };
+  });
+
+  await db.srsCards.bulkPut(cards);
+  return cards;
+}
+
 function localDateString(now: number): string {
   const d = new Date(now);
   const y = d.getFullYear();

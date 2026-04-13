@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, cleanup, waitFor, act, fireEvent } from "@testing-library/react";
 import {
   createMemoryHistory,
@@ -56,7 +56,9 @@ describe("/study route", () => {
     ]);
     await loadOrInitSettings();
   });
-  afterEach(() => cleanup());
+  afterEach(() => {
+    cleanup();
+  });
 
   it("goes directly to attempt phase and completes", async () => {
     const client = new QueryClient({
@@ -89,6 +91,23 @@ describe("/study route", () => {
     };
     await act(async () => opts.onComplete?.());
 
+    // After drawing completes, there's a 1500ms viewing delay then reveal phase.
+    // Wait for the reveal phase to appear (with real timers).
+    await waitFor(
+      () => expect(screen.getByText(/tap to continue/i)).toBeInTheDocument(),
+      { timeout: 3000 }
+    );
+
+    // Switch to real timers before clicking, since the click triggers async DB writes
+    // that fail under fake timers (IndexedDB transactions time out).
+    vi.useRealTimers();
+
+    // Click the reveal to advance past it
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: /tap to continue/i }));
+    });
+
+    // Should show "all done" after DB commit
     await waitFor(
       () => expect(screen.getByText(/all done/i)).toBeInTheDocument(),
       { timeout: 3000 }
@@ -96,5 +115,8 @@ describe("/study route", () => {
     const cards = await db.srsCards.toArray();
     expect(cards.length).toBeGreaterThan(0);
     expect(cards[0].wordId).toBe("你");
+    // With 0 mistakes, should be graded "easy" -> review state with 4-day interval
+    expect(cards[0].state).toBe("review");
+    expect(cards[0].interval).toBe(4);
   });
 });
