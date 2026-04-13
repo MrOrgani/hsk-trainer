@@ -5,9 +5,10 @@ export async function seedHskLevel(level: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9): Pr
   const existing = await db.words.where("hskLevel").equals(level).count();
   if (existing > 0) return;
 
-  const res = await fetch(`/data/hsk-${level}.json`);
+  const base = import.meta.env.BASE_URL;
+  const res = await fetch(`${base}data/hsk-${level}.json`);
   if (!res.ok) {
-    throw new Error(`Failed to fetch /data/hsk-${level}.json (${res.status})`);
+    throw new Error(`Failed to fetch ${base}data/hsk-${level}.json (${res.status})`);
   }
   const words = (await res.json()) as Word[];
   await db.words.bulkPut(words);

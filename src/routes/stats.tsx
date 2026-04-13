@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   getWeeklyStats,
   getOverallStats,
@@ -7,8 +7,15 @@ import {
   type OverallStats,
   type LevelProgress,
 } from "@/lib/stats";
-import type { DailyState } from "@/db/schema";
+import type { DailyState, HskLevel } from "@/db/schema";
 import { useTranslation } from "@/lib/i18n";
+import {
+  loadWordsWithState,
+  getMaturity,
+  MATURITY_TILE_COLORS,
+  type WordWithState,
+} from "@/lib/word-state";
+import { CharacterDetailSheet } from "@/components/CharacterDetailSheet";
 
 export const Route = createFileRoute("/stats")({
   component: StatsPage,
@@ -18,6 +25,9 @@ export function StatsPage() {
   const [weekly, setWeekly] = useState<DailyState[]>([]);
   const [overall, setOverall] = useState<OverallStats | null>(null);
   const [progress, setProgress] = useState<LevelProgress[]>([]);
+  const [wordsByLevel, setWordsByLevel] = useState<Map<HskLevel, WordWithState[]>>(new Map());
+  const [expandedLevels, setExpandedLevels] = useState<Set<HskLevel>>(new Set());
+  const [selectedWord, setSelectedWord] = useState<WordWithState | null>(null);
   const { t, lang } = useTranslation();
 
   useEffect(() => {
@@ -25,6 +35,24 @@ export function StatsPage() {
     getWeeklyStats(now).then(setWeekly);
     getOverallStats().then(setOverall);
     getCharacterProgress().then(setProgress);
+    loadWordsWithState().then((words) => {
+      const grouped = new Map<HskLevel, WordWithState[]>();
+      for (const item of words) {
+        const level = item.word.hskLevel as HskLevel;
+        if (!grouped.has(level)) grouped.set(level, []);
+        grouped.get(level)!.push(item);
+      }
+      setWordsByLevel(grouped);
+    });
+  }, []);
+
+  const toggleLevel = useCallback((level: HskLevel) => {
+    setExpandedLevels((prev) => {
+      const next = new Set(prev);
+      if (next.has(level)) next.delete(level);
+      else next.add(level);
+      return next;
+    });
   }, []);
 
   const weekdayLocale = lang === "fr" ? "fr" : "en";
@@ -183,11 +211,54 @@ export function StatsPage() {
                       />
                     )}
                   </div>
+
+                  {/* Toggle + character grid */}
+                  <button
+                    type="button"
+                    onClick={() => toggleLevel(level.hskLevel)}
+                    className="mt-1.5 text-[11px] font-semibold text-ink-300 hover:text-vermillion-500 transition-colors"
+                  >
+                    {expandedLevels.has(level.hskLevel)
+                      ? t("stats.hideCharacters")
+                      : t("stats.showCharacters")}
+                  </button>
+
+                  {expandedLevels.has(level.hskLevel) && (
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {(wordsByLevel.get(level.hskLevel) ?? []).map((item) => {
+                        const maturity = getMaturity(item.bestCard);
+                        return (
+                          <button
+                            key={item.word.id}
+                            type="button"
+                            onClick={() => setSelectedWord(item)}
+                            className={`w-8 h-8 rounded-md font-hanzi font-bold flex items-center justify-center transition-colors hover:ring-2 hover:ring-vermillion-300 text-white/90 ${MATURITY_TILE_COLORS[maturity]} ${
+                              item.word.id.length > 1 ? "text-[10px]" : "text-xs"
+                            }`}
+                            title={`${item.word.id} — ${item.word.pinyin}`}
+                          >
+                            {item.word.id.length > 2
+                              ? item.word.characters[0]
+                              : item.word.id}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               );
             })}
           </div>
         </div>
+      )}
+
+      {selectedWord && (
+        <CharacterDetailSheet
+          word={selectedWord.word}
+          state={selectedWord.state}
+          bestCard={selectedWord.bestCard}
+          onClose={() => setSelectedWord(null)}
+        />
       )}
     </div>
   );

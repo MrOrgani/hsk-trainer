@@ -7,7 +7,6 @@ const translations = {
   // Nav
   "nav.home": { en: "Home", fr: "Accueil" },
   "nav.study": { en: "Study", fr: "Apprendre" },
-  "nav.browse": { en: "Browse", fr: "Parcourir" },
   "nav.stats": { en: "Stats", fr: "Stats" },
   "nav.settings": { en: "Settings", fr: "Param\u00e8tres" },
 
@@ -117,13 +116,24 @@ const translations = {
   "stats.maturityMature": { en: "Mature", fr: "Maîtrisé" },
   "stats.characters": { en: "characters", fr: "caractères" },
 
-  // Browse
-  "browse.title": { en: "Vocabulary", fr: "Vocabulaire" },
-  "browse.searchPlaceholder": {
+  // Search (home page)
+  "search.placeholder": {
     en: "Search by character, pinyin, or meaning...",
     fr: "Rechercher par caract\u00e8re, pinyin ou sens...",
   },
-  "browse.noWordsFound": { en: "No words found.", fr: "Aucun mot trouv\u00e9." },
+  "search.noResults": { en: "No words found.", fr: "Aucun mot trouv\u00e9." },
+
+  // Character detail sheet
+  "detail.nextReview": { en: "Next review", fr: "Prochaine r\u00e9vision" },
+  "detail.interval": { en: "Interval", fr: "Intervalle" },
+  "detail.day": { en: "day", fr: "jour" },
+  "detail.days": { en: "days", fr: "jours" },
+  "detail.today": { en: "Today", fr: "Aujourd'hui" },
+  "detail.overdue": { en: "Overdue", fr: "En retard" },
+
+  // Stats extras
+  "stats.showCharacters": { en: "Show characters", fr: "Voir les caract\u00e8res" },
+  "stats.hideCharacters": { en: "Hide characters", fr: "Masquer les caract\u00e8res" },
 } as const;
 
 export type TranslationKey = keyof typeof translations;

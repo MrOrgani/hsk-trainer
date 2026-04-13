@@ -140,7 +140,7 @@ export function AudioButton({
 
   const play = useCallback(async () => {
     // 1. Try local audio file (if it exists in /audio/)
-    if (await tryAudioElement(`/audio/${audioFile}`)) return;
+    if (await tryAudioElement(`${import.meta.env.BASE_URL}audio/${audioFile}`)) return;
 
     // 2. Use browser speechSynthesis
     speak();
