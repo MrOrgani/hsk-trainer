@@ -24,7 +24,7 @@ interface Props {
   completedChars?: CompletedChar[];
 }
 
-export function DrawingCanvas({ character, onComplete, size = 260, leniency = "strict", showOutline = true, completedChars = [] }: Props) {
+export function DrawingCanvas({ character, onComplete, size = 260, leniency: _leniency = "strict", showOutline = true, completedChars = [] }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const onCompleteRef = useRef(onComplete);
   useEffect(() => {
@@ -76,14 +76,14 @@ export function DrawingCanvas({ character, onComplete, size = 260, leniency = "s
       },
       showHintAfterMisses: 3,
       highlightOnComplete: false,
-      acceptBackwardsStrokes: leniency === "lenient-order",
-      leniency: leniency === "lenient-order" ? 1.2 : 1.0,
+      acceptBackwardsStrokes: true,
+      leniency: 1.5,
     });
 
     return () => {
       writer.cancelQuiz();
     };
-  }, [character, size, leniency, showOutline]);
+  }, [character, size, showOutline]);
 
   return (
     <div

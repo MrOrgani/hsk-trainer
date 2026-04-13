@@ -177,7 +177,6 @@ function Study() {
 }
 
 const VIEWING_DELAY_MS = 1500;
-const SHRINK_DURATION_MS = 400;
 const REVEAL_AUTO_ADVANCE_MS = 2500;
 
 function AttemptPhase({
@@ -197,13 +196,11 @@ function AttemptPhase({
   const settings = useSettings();
   const [charIndex, setCharIndex] = useState(0);
   const [attempts, setAttempts] = useState<{ mistakes: number }[]>([]);
-  const [shrinking, setShrinking] = useState(false);
   const [revealPhase, setRevealPhase] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const revealTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const total = word.characters.length;
-  const isMultiChar = total > 1;
 
   // Auto-play pronunciation when a new word appears
   useEffect(() => {
@@ -240,31 +237,16 @@ function AttemptPhase({
   }, [revealPhase, attempts, onDone]);
 
   const advanceChar = useCallback(() => {
-    setShrinking(false);
     setCharIndex((i) => i + 1);
   }, []);
 
   function handleCharComplete({ mistakes, strokeMistakes: _strokeMistakes }: { mistakes: number; strokeMistakes: number[] }) {
     setAttempts((prev) => [...prev, { mistakes }]);
 
-    const isLastChar = charIndex >= total - 1;
-
-    if (!isMultiChar || isLastChar) {
-      // For last char or single char, short delay then advance (which triggers reveal)
-      timerRef.current = setTimeout(() => {
-        advanceChar();
-      }, VIEWING_DELAY_MS);
-    } else {
-      timerRef.current = setTimeout(() => {
-        setShrinking(true);
-      }, VIEWING_DELAY_MS);
-    }
-  }
-
-  function handleTransitionEnd(e: React.TransitionEvent) {
-    if (shrinking && e.propertyName !== "opacity") {
+    // After viewing delay, advance to next character (or trigger reveal for last)
+    timerRef.current = setTimeout(() => {
       advanceChar();
-    }
+    }, VIEWING_DELAY_MS);
   }
 
   function handleRevealTap() {
@@ -360,16 +342,6 @@ function AttemptPhase({
       mistakes: attempts[i]?.mistakes ?? 0,
     }));
 
-  const canvasSize = 260;
-  const shrinkScale = 0.13;
-  const cornerCharWidth = canvasSize * 0.13;
-  const targetX = 8 + charIndex * (cornerCharWidth + 2);
-  const targetY = 6;
-
-  const shrinkTransform = shrinking
-    ? `scale(${shrinkScale}) translate(${targetX / shrinkScale}px, ${targetY / shrinkScale}px)`
-    : "scale(1) translate(0, 0)";
-
   return (
     <div className="text-center animate-pop-in">
       {/* "I know this" skip button */}
@@ -403,18 +375,7 @@ function AttemptPhase({
       <p className="mt-4 text-xs font-semibold tabular-nums text-ink-300">
         {charIndex + 1} / {total}
       </p>
-      <div
-        className="mt-3"
-        style={{
-          transition: shrinking
-            ? `transform ${SHRINK_DURATION_MS}ms ease-in-out, opacity ${SHRINK_DURATION_MS}ms ease-in-out`
-            : "none",
-          transform: shrinkTransform,
-          transformOrigin: "top left",
-          opacity: shrinking ? 0 : 1,
-        }}
-        onTransitionEnd={handleTransitionEnd}
-      >
+      <div className="mt-3">
         <DrawingCanvas
           key={`${word.id}:${charIndex}`}
           character={word.characters[charIndex]}
