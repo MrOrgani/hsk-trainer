@@ -27,7 +27,6 @@ export function StatsPage() {
     getCharacterProgress().then(setProgress);
   }, []);
 
-  const maxReviews = Math.max(1, ...weekly.map((d) => d.reviewsCompleted));
   const weekdayLocale = lang === "fr" ? "fr" : "en";
 
   return (
@@ -64,40 +63,6 @@ export function StatsPage() {
           </div>
         </div>
       )}
-
-      <div className="rounded-xl card p-5">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-ink-400 mb-4">
-          {t("stats.reviewsThisWeek")}
-        </h2>
-        <div className="flex items-end gap-2 h-32">
-          {weekly.map((day) => {
-            const height =
-              day.reviewsCompleted > 0
-                ? Math.max(8, (day.reviewsCompleted / maxReviews) * 100)
-                : 4;
-            const dayLabel = new Date(
-              day.date + "T00:00:00",
-            ).toLocaleDateString(weekdayLocale, { weekday: "short" });
-            return (
-              <div
-                key={day.date}
-                className="flex-1 flex flex-col items-center gap-1"
-              >
-                <span className="text-[10px] font-bold tabular-nums text-ink-400">
-                  {day.reviewsCompleted > 0 ? day.reviewsCompleted : ""}
-                </span>
-                <div
-                  className={`w-full rounded-t-md transition-all ${day.reviewsCompleted > 0 ? "bg-gradient-to-t from-jade-500 to-jade-400" : "bg-ink-100"}`}
-                  style={{ height: `${height}%` }}
-                />
-                <span className="text-[10px] font-semibold text-ink-300">
-                  {dayLabel}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
 
       {(() => {
         const maxNew = Math.max(

@@ -9,7 +9,6 @@ function RootLayout() {
   const { location } = useRouterState();
   const { t } = useTranslation();
   const onFocused =
-    location.pathname.startsWith("/review") ||
     location.pathname.startsWith("/study");
 
   return (
@@ -40,12 +39,6 @@ function RootLayout() {
                 className="px-3 sm:px-4 py-2 rounded-lg text-sm font-semibold text-ink-400 hover:text-jade-600 hover:bg-jade-50 [&.active]:text-jade-600 [&.active]:bg-jade-50 transition-colors"
               >
                 {t("nav.study")}
-              </Link>
-              <Link
-                to="/review"
-                className="px-3 sm:px-4 py-2 rounded-lg text-sm font-semibold text-ink-400 hover:text-gold-600 hover:bg-gold-50 [&.active]:text-gold-600 [&.active]:bg-gold-50 transition-colors"
-              >
-                {t("nav.review")}
               </Link>
               <Link
                 to="/browse"

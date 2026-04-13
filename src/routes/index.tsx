@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { seedHskLevel } from "@/lib/seed";
-import { getDueCards, getTodayState } from "@/engines/srs";
+import { getTodayState } from "@/engines/srs";
 import { useSettings } from "@/state/settings-store";
 import { chunky } from "@/components/Button";
 import { useTranslation } from "@/lib/i18n";
@@ -28,24 +28,14 @@ function Home() {
     ]).then(() => setSeeded(true));
   }, []);
 
-  const dueQuery = useQuery({
-    queryKey: ["due"],
-    queryFn: () => getDueCards(Date.now()),
-    enabled: seeded,
-    refetchOnWindowFocus: true,
-    refetchInterval: 30_000,
-  });
-
   const todayQuery = useQuery({
     queryKey: ["today"],
     queryFn: () => getTodayState(Date.now()),
     enabled: seeded,
   });
 
-  const dueCount = dueQuery.data?.length ?? 0;
   const newToday = todayQuery.data?.newCardsIntroduced ?? 0;
   const newTarget = settings?.newPerDay ?? 0;
-  const canReview = dueCount > 0;
 
   return (
     <div className="max-w-2xl mx-auto px-5 pt-10 sm:pt-16 pb-16">
@@ -64,23 +54,8 @@ function Home() {
         </p>
       </div>
 
-      {/* Stat pills */}
-      <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4">
-        <div className="rounded-xl card p-4 sm:p-5 text-center">
-          <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-ink-300">
-            {t("home.dueNow")}
-          </p>
-          <p
-            className={`mt-1 text-4xl sm:text-5xl font-black tabular-nums ${
-              dueCount > 0 ? "text-vermillion-500" : "text-ink-200"
-            }`}
-          >
-            {dueCount}
-          </p>
-          <p className="mt-1 text-xs font-medium text-ink-300">
-            {dueCount === 1 ? t("home.character") : t("home.characters")}
-          </p>
-        </div>
+      {/* Stat pill */}
+      <div className="mt-10 max-w-xs mx-auto">
         <div className="rounded-xl card p-4 sm:p-5 text-center">
           <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-ink-300">
             {t("home.newToday")}
@@ -95,40 +70,15 @@ function Home() {
 
       {/* Big CTA card */}
       <div className="mt-8 rounded-2xl card p-6 sm:p-8 text-center">
-        {canReview ? (
-          <>
-            <p className="font-display text-vermillion-500 text-3xl sm:text-4xl mb-2">
-              加油！
-            </p>
-            <p className="text-ink-500 font-medium mb-5">
-              {dueCount} {dueCount === 1 ? t("home.characterIs") : t("home.charactersAre")}
-            </p>
-            <Link to="/review" className={chunky("primary", "w-full")}>
-              {t("home.startLesson")}
-            </Link>
-          </>
-        ) : (
-          <>
-            <p className="font-display text-jade-500 text-3xl sm:text-4xl mb-2">
-              开始吧
-            </p>
-            <p className="text-ink-500 font-medium mb-5">
-              {t("home.noReviewsDue")}
-            </p>
-            <Link to="/study" className={chunky("info", "w-full")}>
-              {t("home.addNewCharacters")}
-            </Link>
-          </>
-        )}
-
-        {canReview && (
-          <Link
-            to="/study"
-            className="mt-3 block w-full text-center text-sm font-semibold text-ink-300 hover:text-jade-500 py-2 transition-colors"
-          >
-            {t("home.addNewCharactersLower")}
-          </Link>
-        )}
+        <p className="font-display text-jade-500 text-3xl sm:text-4xl mb-2">
+          开始吧
+        </p>
+        <p className="text-ink-500 font-medium mb-5">
+          {t("home.addNewCharacters")}
+        </p>
+        <Link to="/study" className={chunky("info", "w-full")}>
+          {t("home.addNewCharacters")}
+        </Link>
       </div>
     </div>
   );

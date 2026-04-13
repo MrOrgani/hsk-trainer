@@ -43,24 +43,6 @@ export interface SrsCard {
   createdAt: number;
 }
 
-export interface ReviewLog {
-  id?: number;                // auto-increment
-  cardId: string;
-  wordId: string;
-  promptType: PromptType;
-  timestamp: number;
-  grade: Grade;
-  timeTakenMs: number;
-  writingDetails?: {
-    perCharacterAccuracy: number[];
-    strokeMistakes: number;
-    leniency: "strict" | "lenient-order";
-  };
-  multipleChoiceDetails?: {
-    wrongSelectionsBeforeCorrect: number;
-  };
-}
-
 export type HskLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export interface Settings {
@@ -68,12 +50,6 @@ export interface Settings {
   uiLanguage: "fr" | "en";
   hskLevel: HskLevel;
   leniency: "strict" | "lenient-order";
-  sessionMix: {
-    recognition: number;
-    writing: number;
-    audioChoice: number;
-  };
-  sessionSize: number;
   newPerDay: number;
   enabledPromptTypes: PromptType[];
   learningSteps: number[];    // minutes
@@ -92,8 +68,6 @@ export const DEFAULT_SETTINGS: Settings = {
   uiLanguage: "en",
   hskLevel: 1,
   leniency: "strict",
-  sessionMix: { recognition: 0.5, writing: 0.25, audioChoice: 0.25 },
-  sessionSize: 20,
   newPerDay: 10,
   enabledPromptTypes: [
     "recognition",

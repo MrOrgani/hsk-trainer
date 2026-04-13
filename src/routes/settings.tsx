@@ -90,28 +90,6 @@ export function SettingsPage() {
         </div>
         <div className="rounded-xl card p-5">
           <label
-            htmlFor="sessionSize"
-            className="block text-sm font-semibold text-ink-500 mb-2"
-          >
-            {t("settings.sessionSize")}
-          </label>
-          <input
-            id="sessionSize"
-            type="number"
-            min={5}
-            max={50}
-            value={settings.sessionSize}
-            onChange={(e) =>
-              setSettings({
-                ...settings,
-                sessionSize: parseInt(e.target.value) || 5,
-              })
-            }
-            className={inputCls}
-          />
-        </div>
-        <div className="rounded-xl card p-5">
-          <label
             htmlFor="uiLanguage"
             className="block text-sm font-semibold text-ink-500 mb-2"
           >
@@ -173,7 +151,6 @@ export function SettingsPage() {
             await Promise.all([
               db.words.clear(),
               db.srsCards.clear(),
-              db.reviewLog.clear(),
               db.settings.clear(),
               db.dailyState.clear(),
             ]);

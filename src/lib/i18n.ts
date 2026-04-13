@@ -7,7 +7,6 @@ const translations = {
   // Nav
   "nav.home": { en: "Home", fr: "Accueil" },
   "nav.study": { en: "Study", fr: "Apprendre" },
-  "nav.review": { en: "Review", fr: "Revoir" },
   "nav.browse": { en: "Browse", fr: "Parcourir" },
   "nav.stats": { en: "Stats", fr: "Stats" },
   "nav.settings": { en: "Settings", fr: "Param\u00e8tres" },
@@ -18,29 +17,11 @@ const translations = {
     en: "A few minutes a day keeps the characters flowing.",
     fr: "Quelques minutes par jour pour ma\u00eetriser les caract\u00e8res.",
   },
-  "home.dueNow": { en: "Due now", fr: "A revoir" },
   "home.newToday": { en: "New today", fr: "Nouveaux aujourd'hui" },
-  "home.character": { en: "character", fr: "caract\u00e8re" },
-  "home.characters": { en: "characters", fr: "caract\u00e8res" },
   "home.introduced": { en: "introduced", fr: "appris" },
-  "home.readyForYou": {
-    en: "{count} {unit} ready for you.",
-    fr: "{count} {unit} vous attendent.",
-  },
-  "home.characterIs": { en: "character is", fr: "caract\u00e8re vous attend" },
-  "home.charactersAre": { en: "characters are", fr: "caract\u00e8res vous attendent" },
-  "home.startLesson": { en: "Start lesson \u2192", fr: "Commencer la le\u00e7on \u2192" },
-  "home.noReviewsDue": {
-    en: "No reviews due. Plant some new characters!",
-    fr: "Rien \u00e0 r\u00e9viser. Apprenez de nouveaux caract\u00e8res !",
-  },
   "home.addNewCharacters": {
     en: "+ Add new characters",
     fr: "+ Ajouter des caract\u00e8res",
-  },
-  "home.addNewCharactersLower": {
-    en: "+ add new characters",
-    fr: "+ ajouter des caract\u00e8res",
   },
 
   // Study page
@@ -82,72 +63,6 @@ const translations = {
   "study.autoGradeAgain": { en: "Again — review shortly", fr: "A revoir — revision imminente" },
   "study.tapToContinue": { en: "Tap to continue", fr: "Appuyez pour continuer" },
 
-  // Review page
-  "review.nothingToReview": {
-    en: "Nothing to review!",
-    fr: "Rien \u00e0 r\u00e9viser !",
-  },
-  "review.comeBackLater": {
-    en: "Come back later or add new characters.",
-    fr: "Revenez plus tard ou ajoutez de nouveaux caract\u00e8res.",
-  },
-  "review.lessonComplete": { en: "Lesson complete!", fr: "Le\u00e7on termin\u00e9e !" },
-  "review.studied": { en: "studied", fr: "\u00e9tudi\u00e9(s)" },
-  "review.wellDone": { en: "Well done", fr: "Bravo" },
-  "review.finish": { en: "Finish", fr: "Terminer" },
-  "review.autoGradeEasy": { en: "Perfect! → Easy", fr: "Parfait ! → Facile" },
-  "review.autoGradeGood": { en: "{count} {unit} → Good", fr: "{count} {unit} → Bien" },
-  "review.autoGradeHard": { en: "{count} {unit} → Hard", fr: "{count} {unit} → Difficile" },
-  "review.autoGradeAgain": { en: "{count} {unit} → Again", fr: "{count} {unit} → A revoir" },
-  "review.tapToContinue": { en: "Tap to continue", fr: "Appuyez pour continuer" },
-  "review.mistake": { en: "mistake", fr: "erreur" },
-  "review.mistakes": { en: "mistakes", fr: "erreurs" },
-
-  // Prompts
-  "prompt.listenAndWrite": {
-    en: "Listen and write it",
-    fr: "Ecoutez et \u00e9crivez",
-  },
-  "prompt.writeTheWord": { en: "Write the word", fr: "Ecrivez le mot" },
-  "prompt.whatDoesThisMean": {
-    en: "What does this mean?",
-    fr: "Que signifie ceci ?",
-  },
-  "prompt.showAnswer": { en: "Show answer", fr: "Voir la r\u00e9ponse" },
-  "prompt.howWellDidYouKnow": {
-    en: "How well did you know it?",
-    fr: "Connaissiez-vous ce mot ?",
-  },
-  "prompt.perfectStrokes": { en: "Perfect strokes!", fr: "Traits parfaits !" },
-  "prompt.strokeMistake": {
-    en: "{count} stroke mistake",
-    fr: "{count} erreur de trait",
-  },
-  "prompt.strokeMistakes": {
-    en: "{count} stroke mistakes",
-    fr: "{count} erreurs de trait",
-  },
-  "prompt.tapToListen": { en: "Tap to listen", fr: "Appuyez pour \u00e9couter" },
-  "prompt.whichOneMeans": {
-    en: "Which one means\u2026",
-    fr: "Lequel signifie\u2026",
-  },
-  "prompt.niceHowWell": {
-    en: "Nice! How well did you know it?",
-    fr: "Bien jou\u00e9 ! Connaissiez-vous ce mot ?",
-  },
-  "prompt.notQuite": {
-    en: "Not quite \u2014 let's try again",
-    fr: "Pas tout \u00e0 fait \u2014 r\u00e9essayons",
-  },
-  "prompt.character": { en: "Character", fr: "Caract\u00e8re" },
-
-  // Grade buttons
-  "grade.again": { en: "Again", fr: "A revoir" },
-  "grade.hard": { en: "Hard", fr: "Difficile" },
-  "grade.good": { en: "Good", fr: "Bien" },
-  "grade.easy": { en: "Easy", fr: "Facile" },
-
   // Common
   "common.backToHome": { en: "Back to home", fr: "Retour \u00e0 l'accueil" },
   "common.loading": { en: "Loading\u2026", fr: "Chargement\u2026" },
@@ -159,7 +74,6 @@ const translations = {
     en: "New cards per day",
     fr: "Nouvelles cartes par jour",
   },
-  "settings.sessionSize": { en: "Session size", fr: "Taille de session" },
   "settings.interfaceLanguage": {
     en: "Interface language",
     fr: "Langue de l'interface",
@@ -175,8 +89,8 @@ const translations = {
   "settings.saveSettings": { en: "Save settings", fr: "Enregistrer" },
   "settings.resetTitle": { en: "Reset all data", fr: "R\u00e9initialiser les donn\u00e9es" },
   "settings.resetDescription": {
-    en: "This will delete all your progress, settings, and review history. This action cannot be undone.",
-    fr: "Cela supprimera toute votre progression, vos param\u00e8tres et votre historique de r\u00e9visions. Cette action est irr\u00e9versible.",
+    en: "This will delete all your progress and settings. This action cannot be undone.",
+    fr: "Cela supprimera toute votre progression et vos param\u00e8tres. Cette action est irr\u00e9versible.",
   },
   "settings.resetButton": { en: "Clear all data", fr: "Effacer toutes les donn\u00e9es" },
   "settings.resetConfirm": {
@@ -189,10 +103,6 @@ const translations = {
   "stats.totalCards": { en: "Total cards", fr: "Total cartes" },
   "stats.learning": { en: "Learning", fr: "En cours" },
   "stats.reviewing": { en: "Reviewing", fr: "En r\u00e9vision" },
-  "stats.reviewsThisWeek": {
-    en: "Reviews this week",
-    fr: "R\u00e9visions cette semaine",
-  },
   "stats.newCardsThisWeek": {
     en: "New cards this week",
     fr: "Nouvelles cartes cette semaine",

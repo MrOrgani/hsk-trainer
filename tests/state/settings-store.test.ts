@@ -27,7 +27,7 @@ describe("updateSettings", () => {
     const updated = await updateSettings({ newPerDay: 20, uiLanguage: "fr" });
     expect(updated.newPerDay).toBe(20);
     expect(updated.uiLanguage).toBe("fr");
-    expect(updated.sessionSize).toBe(20);
+    expect(updated.leniency).toBe("strict");
     const reloaded = await db.settings.get("default");
     expect(reloaded!.newPerDay).toBe(20);
   });
@@ -35,6 +35,6 @@ describe("updateSettings", () => {
   it("initialises settings if none exist before updating", async () => {
     const updated = await updateSettings({ newPerDay: 3 });
     expect(updated.newPerDay).toBe(3);
-    expect(updated.sessionSize).toBe(20);
+    expect(updated.leniency).toBe("strict");
   });
 });
