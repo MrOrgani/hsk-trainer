@@ -115,6 +115,28 @@ export function incrementDailyReviews(now: number): Promise<void> {
   return incrementDailyCounter(now, "reviewsCompleted");
 }
 
+export async function getUpcomingReviews(
+  now: number,
+  level: HskLevel | undefined,
+  limit: number,
+): Promise<Word[]> {
+  const cards = await db.srsCards.where("dueDate").above(now).sortBy("dueDate");
+  const wordIds: string[] = [];
+  const seen = new Set<string>();
+  for (const c of cards) {
+    if (!seen.has(c.wordId)) {
+      seen.add(c.wordId);
+      wordIds.push(c.wordId);
+    }
+  }
+  if (wordIds.length === 0) return [];
+  const rows = await db.words.bulkGet(wordIds);
+  const filtered = rows.filter(
+    (w): w is Word => w !== undefined && (level === undefined || w.hskLevel === level),
+  );
+  return filtered.slice(0, limit);
+}
+
 export async function getDueWords(now: number, level?: HskLevel): Promise<Word[]> {
   const dueCards = await db.srsCards.where("dueDate").belowOrEqual(now).toArray();
   const wordIds = Array.from(new Set(dueCards.map((c) => c.wordId)));

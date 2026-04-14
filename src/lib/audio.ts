@@ -164,11 +164,10 @@ export function unlockAudio(): void {
  */
 export function tryPlayAudioFile(
   audioFile: string,
-  opts?: { onEnded?: () => void; caller?: string },
+  opts?: { onEnded?: () => void },
 ): Promise<boolean> {
   return new Promise((resolve) => {
     const src = `${import.meta.env.BASE_URL}audio/${audioFile}`;
-    const caller = opts?.caller ?? "unknown";
     const el = ensureElement();
     const token = ++playToken;
 
@@ -190,15 +189,8 @@ export function tryPlayAudioFile(
       return;
     }
     p.then(() => {
-      if (import.meta.env.DEV) console.log(`🔊 [${caller}] play OK`, { src });
       resolve(true);
-    }).catch((err: DOMException) => {
-      console.warn(`🔊 [${caller}] play FAIL`, {
-        src,
-        name: err?.name,
-        message: err?.message,
-        readyState: el.readyState,
-      });
+    }).catch(() => {
       if (token === playToken) currentOnEnded = null;
       resolve(false);
     });
@@ -218,21 +210,11 @@ if (typeof document !== "undefined") {
  * Safe to call from a useEffect — silently does nothing if autoplay is blocked.
  */
 export async function playWordAudio(audioFile: string, fallbackText: string): Promise<void> {
-  console.log(`🔊 [playWordAudio] start`, {
-    audioFile,
-    fallbackText,
-    hasUserActivation: navigator.userActivation?.isActive,
-  });
-  if (await tryPlayAudioFile(audioFile, { caller: "playWordAudio" })) return;
-  console.log(`🔊 [playWordAudio] mp3 failed, falling back to TTS`, { fallbackText });
+  if (await tryPlayAudioFile(audioFile)) return;
   try {
     await speakChinese(fallbackText);
-    console.log(`🔊 [playWordAudio] TTS OK`);
-  } catch (err) {
-    console.warn(`🔊 [playWordAudio] TTS FAIL`, {
-      name: (err as Error)?.name,
-      message: (err as Error)?.message,
-    });
+  } catch {
+    // speech synthesis unavailable; silently skip.
   }
 }
 

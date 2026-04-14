@@ -35,14 +35,6 @@ const translations = {
     fr: "Essayez vous-m\u00eame \u2192",
   },
   "study.yourTurn": { en: "Your turn", fr: "A votre tour" },
-  "study.nothingNew": {
-    en: "Nothing new to learn right now.",
-    fr: "Rien de nouveau \u00e0 apprendre pour le moment.",
-  },
-  "study.allStudied": {
-    en: "You've studied all available words!",
-    fr: "Vous avez \u00e9tudi\u00e9 tous les mots disponibles !",
-  },
   "study.allDone": { en: "All done!", fr: "Termin\u00e9 !" },
   "study.newWordsAdded": {
     en: "{count} new {unit} added to your deck.",
@@ -53,7 +45,6 @@ const translations = {
   "study.listen": { en: "Listen", fr: "Ecouter" },
   "study.writeFromMemory": { en: "Write from memory", fr: "Ecrivez de memoire" },
   "study.chooseLevel": { en: "Choose your level", fr: "Choisissez votre niveau" },
-  "study.iKnowThis": { en: "I know this", fr: "Je connais" },
   "study.perfect": { en: "Perfect!", fr: "Parfait !" },
   "study.mistakes": { en: "{count} mistakes", fr: "{count} erreurs" },
   "study.autoGradeEasy": { en: "Easy — review in 4 days", fr: "Facile — revision dans 4 jours" },
@@ -62,7 +53,6 @@ const translations = {
   "study.autoGradeAgain": { en: "Again — review shortly", fr: "A revoir — revision imminente" },
   "study.tapToContinue": { en: "Tap to continue", fr: "Appuyez pour continuer" },
   "study.continue": { en: "Continue", fr: "Continuer" },
-  "study.nothingLeft": { en: "Nothing left for today", fr: "Plus rien pour aujourd'hui" },
   "study.relearnPass": {
     en: "Reviewing the tricky ones",
     fr: "On revoit les plus difficiles",

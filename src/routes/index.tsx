@@ -64,11 +64,11 @@ function Home() {
   const isSearching = search.trim().length > 0;
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-5 pt-6 sm:pt-16 pb-8">
+    <div className="max-w-2xl mx-auto px-4 sm:px-5 pt-4 sm:pt-16 pb-20 sm:pb-8">
       {/* Hero */}
       <div className="text-center animate-pop-in">
-        <div className="seal-stamp h-20 w-20 sm:h-24 sm:w-24 text-vermillion-500 mb-5 animate-stamp-in mx-auto">
-          <span className="font-hanzi text-4xl sm:text-5xl font-black">
+        <div className="seal-stamp h-16 w-16 sm:h-24 sm:w-24 text-vermillion-500 mb-4 sm:mb-5 animate-stamp-in mx-auto">
+          <span className="font-hanzi text-3xl sm:text-5xl font-black">
             學
           </span>
         </div>
@@ -81,7 +81,7 @@ function Home() {
       </div>
 
       {/* Search bar */}
-      <div className="mt-8 max-w-md mx-auto">
+      <div className="mt-6 sm:mt-8 max-w-md mx-auto">
         <input
           type="text"
           placeholder={t("search.placeholder")}
@@ -143,7 +143,7 @@ function Home() {
           </div>
 
           {/* Big CTA card */}
-          <div className="mt-8 rounded-2xl card p-6 sm:p-8 text-center">
+          <div className="mt-6 sm:mt-8 rounded-2xl card p-5 sm:p-8 text-center">
             <p className="font-display text-jade-500 text-3xl sm:text-4xl mb-2">
               开始吧
             </p>

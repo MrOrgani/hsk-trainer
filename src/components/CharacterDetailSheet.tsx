@@ -57,7 +57,10 @@ export function CharacterDetailSheet({
       />
 
       {/* Panel */}
-      <div className="relative w-full sm:max-w-md sm:rounded-2xl rounded-t-2xl bg-paper p-6 pb-8 animate-pop-in max-h-[80vh] overflow-y-auto">
+      <div
+        className="relative w-full sm:max-w-md sm:rounded-2xl rounded-t-2xl bg-paper p-5 sm:p-6 animate-pop-in max-h-[85vh] sm:max-h-[80vh] overflow-y-auto"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 1.5rem)" }}
+      >
         {/* Drag handle (mobile) */}
         <div className="w-10 h-1 rounded-full bg-ink-200 mx-auto mb-5 sm:hidden" />
 

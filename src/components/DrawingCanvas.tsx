@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import HanziWriter from "hanzi-writer";
 import type { StrokeData } from "hanzi-writer";
 
@@ -17,6 +17,7 @@ export function masteryColor(mistakes: number): string {
 interface Props {
   character: string;
   onComplete: (result: { mistakes: number; strokeMistakes: number[] }) => void;
+  /** Max pixel size; canvas will shrink to fit narrow viewports. */
   size?: number;
   leniency?: "strict" | "lenient-order";
   showOutline?: boolean;
@@ -24,9 +25,24 @@ interface Props {
   completedChars?: CompletedChar[];
 }
 
-export function DrawingCanvas({ character, onComplete, size = 260, leniency: _leniency = "strict", showOutline = true, completedChars = [] }: Props) {
+function computeSize(max: number): number {
+  if (typeof window === "undefined") return max;
+  // Leave room for container padding (px-4 on <sm) plus a little breathing gap.
+  const fit = window.innerWidth - 48;
+  return Math.max(200, Math.min(max, fit));
+}
+
+export function DrawingCanvas({ character, onComplete, size: maxSize = 260, leniency: _leniency = "strict", showOutline = true, completedChars = [] }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const onCompleteRef = useRef(onComplete);
+  const [size, setSize] = useState(() => computeSize(maxSize));
+
+  useEffect(() => {
+    const onResize = () => setSize(computeSize(maxSize));
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [maxSize]);
   useEffect(() => {
     onCompleteRef.current = onComplete;
   }, [onComplete]);

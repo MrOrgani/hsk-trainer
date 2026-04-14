@@ -5,8 +5,8 @@ import {
   introduceNewCardWithGrade,
   incrementDailyNew,
   incrementDailyReviews,
-  getTodayState,
   getDueWords,
+  getUpcomingReviews,
   reviewCard,
 } from "@/engines/srs";
 import { useSettings } from "@/state/settings-store";
@@ -16,7 +16,7 @@ import type { CompletedChar } from "@/components/DrawingCanvas";
 import { AudioButton } from "@/components/AudioButton";
 import { playWordAudio, unlockAudio } from "@/lib/audio";
 import { chunky } from "@/components/Button";
-import type { Word, HskLevel, Grade, Settings } from "@/db/schema";
+import type { Word, HskLevel, Grade } from "@/db/schema";
 import { useTranslation, meaningFor } from "@/lib/i18n";
 import { Button } from "@/components/Button";
 
@@ -50,29 +50,27 @@ function interleave(newItems: QueueItem[], reviewItems: QueueItem[]): QueueItem[
   return out;
 }
 
-async function buildBatch(level: HskLevel, settings: Settings): Promise<QueueItem[]> {
+async function buildBatch(level: HskLevel): Promise<QueueItem[]> {
   const now = Date.now();
-  const [today, dueForLevel] = await Promise.all([
-    getTodayState(now),
+  const [dueForLevel, words, allCards] = await Promise.all([
     getDueWords(now, level),
+    db.words.where("hskLevel").equals(level).sortBy("frequency"),
+    db.srsCards.toArray(),
   ]);
 
   const reviews: QueueItem[] = dueForLevel
     .slice(0, MAX_REVIEWS_PER_BATCH)
     .map((word) => ({ word, kind: "review" as const }));
 
-  const newBudget = Math.max(0, settings.newPerDay - today.newCardsIntroduced);
-  let newItems: QueueItem[] = [];
-  if (newBudget > 0) {
-    const [words, allCards] = await Promise.all([
-      db.words.where("hskLevel").equals(level).sortBy("frequency"),
-      db.srsCards.toArray(),
-    ]);
-    const existing = new Set(allCards.map((c) => c.wordId));
-    newItems = words
-      .filter((w) => !existing.has(w.id))
-      .slice(0, Math.min(BATCH_SIZE, newBudget))
-      .map((word) => ({ word, kind: "new" as const }));
+  const existing = new Set(allCards.map((c) => c.wordId));
+  const newItems: QueueItem[] = words
+    .filter((w) => !existing.has(w.id))
+    .slice(0, BATCH_SIZE)
+    .map((word) => ({ word, kind: "new" as const }));
+
+  if (newItems.length === 0 && reviews.length === 0) {
+    const upcoming = await getUpcomingReviews(now, level, BATCH_SIZE);
+    return upcoming.map((word) => ({ word, kind: "review" as const }));
   }
 
   return interleave(newItems, reviews);
@@ -92,19 +90,13 @@ function Study() {
     clear,
   } = useStudyStore();
   const [selectedLevel, setSelectedLevel] = useState<HskLevel | null>(null);
-  const [loading, setLoading] = useState(false);
 
   const loadBatch = useCallback(
     async (level: HskLevel): Promise<number> => {
       if (!settings) return 0;
-      setLoading(true);
-      try {
-        const items = await buildBatch(level, settings);
-        start(items);
-        return items.length;
-      } finally {
-        setLoading(false);
-      }
+      const items = await buildBatch(level);
+      start(items);
+      return items.length;
     },
     [settings, start],
   );
@@ -133,7 +125,7 @@ function Study() {
 
   if (selectedLevel === null && queue.length === 0) {
     return (
-      <div className="max-w-md mx-auto px-6 py-10 sm:py-20 text-center animate-pop-in">
+      <div className="max-w-md mx-auto px-4 sm:px-6 py-6 sm:py-20 text-center animate-pop-in">
         <Link
           to="/"
           aria-label="Exit study"
@@ -141,13 +133,13 @@ function Study() {
         >
           ✕
         </Link>
-        <p className="font-display text-5xl text-ink-300 mb-4">
+        <p className="font-display text-4xl sm:text-5xl text-ink-300 mb-3 sm:mb-4">
           学
         </p>
-        <p className="text-2xl font-bold text-ink-800">
+        <p className="text-xl sm:text-2xl font-bold text-ink-800">
           {t("study.chooseLevel")}
         </p>
-        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
           {HSK_LEVELS.map((level) => (
             <Button
               key={level}
@@ -167,28 +159,10 @@ function Study() {
   }
 
   if (queue.length === 0) {
-    if (loading) {
-      return (
-        <p className="text-center py-20 text-ink-300 font-semibold uppercase tracking-wider text-sm">
-          {t("common.loading")}
-        </p>
-      );
-    }
     return (
-      <div className="max-w-md mx-auto px-6 py-10 sm:py-20 text-center animate-pop-in">
-        <p className="font-display text-5xl text-ink-300 mb-4">
-          等一等
-        </p>
-        <p className="text-2xl font-bold text-ink-800">
-          {t("study.nothingNew")}
-        </p>
-        <p className="mt-2 text-ink-400 font-medium">
-          {t("study.allStudied")}
-        </p>
-        <Link to="/" className={chunky("primary", "mt-8")}>
-          {t("common.backToHome")}
-        </Link>
-      </div>
+      <p className="text-center py-20 text-ink-300 font-semibold uppercase tracking-wider text-sm">
+        {t("common.loading")}
+      </p>
     );
   }
 
@@ -213,8 +187,8 @@ function Study() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-8 pb-16">
-      <header className="flex items-center gap-3 mb-10">
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-4 sm:pt-8 pb-8 sm:pb-16">
+      <header className="flex items-center gap-3 mb-6 sm:mb-10">
         <Link
           to="/"
           aria-label="Exit study"
@@ -244,7 +218,6 @@ function Study() {
         word={word}
         kind={item.kind}
         onDone={handleCommitWithGrade}
-        onSkip={() => handleCommitWithGrade("easy", false)}
         leniency={settings?.leniency ?? "strict"}
         lang={lang}
       />
@@ -263,25 +236,23 @@ function DoneScreen({
 }) {
   const { t } = useTranslation();
   const [checking, setChecking] = useState(false);
-  const [exhausted, setExhausted] = useState(false);
 
   const onContinueClick = async () => {
     if (!level) return;
     setChecking(true);
     try {
       await onContinue(level);
-      if (useStudyStore.getState().queue.length === 0) setExhausted(true);
     } finally {
       setChecking(false);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto px-6 py-10 sm:py-20 text-center animate-pop-in">
-      <div className="seal-stamp h-20 w-20 text-jade-500 mx-auto mb-4 animate-stamp-in">
-        <span className="font-hanzi text-3xl font-black">好</span>
+    <div className="max-w-md mx-auto px-4 sm:px-6 py-6 sm:py-20 text-center animate-pop-in">
+      <div className="seal-stamp h-16 w-16 sm:h-20 sm:w-20 text-jade-500 mx-auto mb-3 sm:mb-4 animate-stamp-in">
+        <span className="font-hanzi text-2xl sm:text-3xl font-black">好</span>
       </div>
-      <p className="text-3xl sm:text-4xl font-bold text-jade-600">
+      <p className="text-2xl sm:text-4xl font-bold text-jade-600">
         {t("study.allDone")}
       </p>
       <p className="mt-2 text-ink-400 font-medium">
@@ -289,14 +260,14 @@ function DoneScreen({
           .replace("{count}", String(completed))
           .replace("{unit}", completed === 1 ? t("study.word") : t("study.words"))}
       </p>
-      <div className="mt-8 grid grid-cols-2 gap-3">
+      <div className="mt-6 sm:mt-8 grid grid-cols-2 gap-2 sm:gap-3">
         <Button
           variant="primary"
           onClick={onContinueClick}
-          disabled={checking || exhausted || !level}
+          disabled={checking || !level}
           className="py-4"
         >
-          {exhausted ? t("study.nothingLeft") : t("study.continue")}
+          {t("study.continue")}
         </Button>
         <Link to="/" className={chunky("neutral", "py-4")}>
           {t("common.backToHome")}
@@ -312,14 +283,12 @@ function AttemptPhase({
   word,
   kind,
   onDone,
-  onSkip,
   leniency,
   lang,
 }: {
   word: Word;
   kind: "new" | "review";
   onDone: (grade: Grade, hadAnyMistake: boolean) => void;
-  onSkip: () => void;
   leniency: "strict" | "lenient-order";
   lang: "en" | "fr";
 }) {
@@ -397,20 +366,13 @@ function AttemptPhase({
         >
           {kind === "review" ? t("study.reviewBadge") : t("study.newBadge")}
         </span>
-        <button
-          type="button"
-          onClick={onSkip}
-          className="text-xs font-semibold text-ink-300 hover:text-jade-500 active:text-jade-500 transition-colors py-2 px-3"
-        >
-          {t("study.iKnowThis")} &rarr;
-        </button>
       </div>
 
       <p className="text-xs font-semibold uppercase tracking-widest text-gold-500">
         {t("study.writeFromMemory")}
       </p>
-      <div className="mt-3 flex items-center justify-center gap-2">
-        <p className="text-2xl font-bold text-ink-700">
+      <div className="mt-2 sm:mt-3 flex items-center justify-center gap-2">
+        <p className="text-xl sm:text-2xl font-bold text-ink-700">
           {word.pinyin}
         </p>
         <AudioButton
@@ -418,19 +380,20 @@ function AttemptPhase({
           fallbackText={word.id}
         />
       </div>
-      <p className="mt-1 text-lg font-medium text-ink-400">
+      <p className="mt-1 text-base sm:text-lg font-medium text-ink-400">
         {meaningFor(word, lang)}
       </p>
-      <p className="mt-4 text-xs font-semibold tabular-nums text-ink-300">
+      <p className="mt-2 sm:mt-4 text-xs font-semibold tabular-nums text-ink-300">
         {charIndex + 1} / {total}
       </p>
-      <div className="mt-3">
+      <div className="mt-2 sm:mt-3">
         <DrawingCanvas
           key={`${word.id}:${charIndex}:${redrawToken}`}
           character={word.characters[charIndex]}
           onComplete={handleCharComplete}
           leniency={leniency}
           completedChars={completedChars}
+          showOutline={kind !== "review"}
         />
       </div>
       {showRedrawHint && (

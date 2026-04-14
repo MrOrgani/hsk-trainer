@@ -58,34 +58,34 @@ export function StatsPage() {
   const weekdayLocale = lang === "fr" ? "fr" : "en";
 
   return (
-    <div className="max-w-2xl mx-auto px-5 pt-10 pb-16">
-      <h1 className="font-display text-3xl sm:text-4xl text-ink-800 mb-8">
+    <div className="max-w-2xl mx-auto px-4 sm:px-5 pt-6 sm:pt-10 pb-20 sm:pb-16">
+      <h1 className="font-display text-3xl sm:text-4xl text-ink-800 mb-6 sm:mb-8">
         {t("stats.title")}
       </h1>
 
       {overall && (
-        <div className="grid grid-cols-3 gap-3 mb-8">
-          <div className="rounded-xl card p-4 text-center">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-300">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 sm:mb-8">
+          <div className="rounded-xl card p-3 sm:p-4 text-center">
+            <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-ink-300">
               {t("stats.totalCards")}
             </p>
-            <p className="mt-1 text-3xl font-black tabular-nums text-ink-800">
+            <p className="mt-1 text-2xl sm:text-3xl font-black tabular-nums text-ink-800">
               {overall.total}
             </p>
           </div>
-          <div className="rounded-xl card p-4 text-center">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-300">
+          <div className="rounded-xl card p-3 sm:p-4 text-center">
+            <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-ink-300">
               {t("stats.learning")}
             </p>
-            <p className="mt-1 text-3xl font-black tabular-nums text-gold-500">
+            <p className="mt-1 text-2xl sm:text-3xl font-black tabular-nums text-gold-500">
               {overall.learning}
             </p>
           </div>
-          <div className="rounded-xl card p-4 text-center">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-300">
+          <div className="rounded-xl card p-3 sm:p-4 text-center">
+            <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-ink-300">
               {t("stats.reviewing")}
             </p>
-            <p className="mt-1 text-3xl font-black tabular-nums text-jade-500">
+            <p className="mt-1 text-2xl sm:text-3xl font-black tabular-nums text-jade-500">
               {overall.review}
             </p>
           </div>

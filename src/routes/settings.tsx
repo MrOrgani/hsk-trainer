@@ -36,11 +36,11 @@ export function SettingsPage() {
   }
 
   const inputCls =
-    "w-full rounded-lg border border-ink-200 bg-paper px-4 py-2.5 text-ink-800 font-semibold focus:outline-none focus:ring-2 focus:ring-vermillion-300";
+    "w-full rounded-lg border border-ink-200 bg-paper px-4 py-3 sm:py-2.5 text-ink-800 font-semibold focus:outline-none focus:ring-2 focus:ring-vermillion-300";
 
   return (
-    <div className="max-w-xl mx-auto px-5 pt-10 pb-16">
-      <h1 className="font-display text-3xl sm:text-4xl text-ink-800 mb-8">
+    <div className="max-w-xl mx-auto px-4 sm:px-5 pt-6 sm:pt-10 pb-20 sm:pb-16">
+      <h1 className="font-display text-3xl sm:text-4xl text-ink-800 mb-6 sm:mb-8">
         {t("settings.title")}
       </h1>
       <div className="space-y-6">
