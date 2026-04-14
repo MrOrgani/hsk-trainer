@@ -1,4 +1,4 @@
-import type { DailyState, Grade, PromptType, Settings, SrsCard } from "@/db/schema";
+import type { DailyState, Grade, PromptType, Settings, SrsCard, Word } from "@/db/schema";
 import { db } from "@/db/dexie";
 
 const MINUTE = 60 * 1000;
@@ -104,5 +104,95 @@ export async function incrementDailyNew(now: number): Promise<void> {
       : { date, newCardsIntroduced: 1, reviewsCompleted: 0 };
     await db.dailyState.put(row);
   });
+}
+
+export async function incrementDailyReviews(now: number): Promise<void> {
+  const date = localDateString(now);
+  await db.transaction("rw", db.dailyState, async () => {
+    const existing = await db.dailyState.get(date);
+    const row: DailyState = existing
+      ? { ...existing, reviewsCompleted: existing.reviewsCompleted + 1 }
+      : { date, newCardsIntroduced: 0, reviewsCompleted: 1 };
+    await db.dailyState.put(row);
+  });
+}
+
+/**
+ * Returns distinct Words that have at least one SrsCard due at or before `now`.
+ */
+export async function getDueWords(now: number): Promise<Word[]> {
+  const dueCards = await db.srsCards.where("dueDate").belowOrEqual(now).toArray();
+  const wordIds = Array.from(new Set(dueCards.map((c) => c.wordId)));
+  if (wordIds.length === 0) return [];
+  const rows = await db.words.bulkGet(wordIds);
+  return rows.filter((w): w is Word => w !== undefined);
+}
+
+/**
+ * Apply SM-2 grading to all SrsCards for a given word.
+ */
+export async function reviewCard(
+  wordId: string,
+  grade: Grade,
+  settings: Settings,
+  now: number,
+): Promise<void> {
+  const firstStepMs = settings.learningSteps[0] * MINUTE;
+  const cards = await db.srsCards.where("wordId").equals(wordId).toArray();
+  if (cards.length === 0) return;
+
+  const updated: SrsCard[] = cards.map((c) => {
+    if (grade === "again") {
+      return {
+        ...c,
+        state: "learning",
+        learningStep: 0,
+        interval: 0,
+        easeFactor: Math.max(1.3, c.easeFactor - 0.2),
+        repetitions: 0,
+        dueDate: now + firstStepMs,
+        lastReview: now,
+      };
+    }
+    if (grade === "hard") {
+      const ease = Math.max(1.3, c.easeFactor - 0.15);
+      const interval = Math.max(1, Math.round(c.interval * 1.2));
+      return {
+        ...c,
+        state: "review",
+        easeFactor: ease,
+        interval,
+        repetitions: c.repetitions + 1,
+        dueDate: now + interval * DAY,
+        lastReview: now,
+      };
+    }
+    if (grade === "good") {
+      const interval = c.repetitions === 0 ? 1 : Math.round(c.interval * c.easeFactor);
+      return {
+        ...c,
+        state: "review",
+        interval,
+        repetitions: c.repetitions + 1,
+        dueDate: now + interval * DAY,
+        lastReview: now,
+      };
+    }
+    // easy
+    const ease = c.easeFactor + 0.15;
+    const interval =
+      c.repetitions === 0 ? 4 : Math.round(c.interval * c.easeFactor * 1.3);
+    return {
+      ...c,
+      state: "review",
+      easeFactor: ease,
+      interval,
+      repetitions: c.repetitions + 1,
+      dueDate: now + interval * DAY,
+      lastReview: now,
+    };
+  });
+
+  await db.srsCards.bulkPut(updated);
 }
 

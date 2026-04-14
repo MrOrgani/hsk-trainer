@@ -87,27 +87,13 @@ describe("/study route", () => {
     // The drawing canvas should be active
     await waitFor(() => expect(fakeWriters.length).toBeGreaterThan(0));
     const opts = fakeWriters[fakeWriters.length - 1].lastQuizOptions as {
-      onComplete?: () => void;
+      onComplete?: (r: { totalMistakes: number }) => void;
     };
-    await act(async () => opts.onComplete?.());
+    await act(async () => opts.onComplete?.({ totalMistakes: 0 }));
 
-    // After drawing completes, there's a 1500ms viewing delay then reveal phase.
-    // Wait for the reveal phase to appear (with real timers).
-    await waitFor(
-      () => expect(screen.getByText(/tap to continue/i)).toBeInTheDocument(),
-      { timeout: 3000 }
-    );
-
-    // Switch to real timers before clicking, since the click triggers async DB writes
-    // that fail under fake timers (IndexedDB transactions time out).
     vi.useRealTimers();
 
-    // Click the reveal to advance past it
-    await act(async () => {
-      fireEvent.click(screen.getByRole("button", { name: /tap to continue/i }));
-    });
-
-    // Should show "all done" after DB commit
+    // Should auto-advance to "all done" after VIEWING_DELAY_MS and DB commit.
     await waitFor(
       () => expect(screen.getByText(/all done/i)).toBeInTheDocument(),
       { timeout: 3000 }

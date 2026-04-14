@@ -1,18 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { db } from "@/db/dexie";
 import {
   introduceNewCardWithGrade,
   incrementDailyNew,
+  incrementDailyReviews,
+  getTodayState,
+  getDueWords,
+  reviewCard,
 } from "@/engines/srs";
 import { useSettings } from "@/state/settings-store";
-import { useStudyStore } from "@/state/study-store";
+import { useStudyStore, type QueueItem } from "@/state/study-store";
 import { DrawingCanvas } from "@/components/DrawingCanvas";
 import type { CompletedChar } from "@/components/DrawingCanvas";
 import { AudioButton } from "@/components/AudioButton";
 import { playWordAudio, unlockAudio } from "@/lib/audio";
 import { chunky } from "@/components/Button";
-import type { Word, HskLevel, Grade } from "@/db/schema";
+import type { Word, HskLevel, Grade, Settings } from "@/db/schema";
 import { useTranslation, meaningFor } from "@/lib/i18n";
 import { Button } from "@/components/Button";
 
@@ -21,6 +25,8 @@ export const Route = createFileRoute("/study")({
 });
 
 const HSK_LEVELS: HskLevel[] = [1, 2, 3, 4, 5, 6, 7];
+const BATCH_SIZE = 10;
+const MAX_REVIEWS_PER_BATCH = 20;
 
 function gradeFromMistakes(totalMistakes: number, allHintsUsed: boolean): Grade {
   if (allHintsUsed || totalMistakes >= 7) return "again";
@@ -29,31 +35,83 @@ function gradeFromMistakes(totalMistakes: number, allHintsUsed: boolean): Grade 
   return "easy";
 }
 
+function interleave(newItems: QueueItem[], reviewItems: QueueItem[]): QueueItem[] {
+  // 2 reviews : 1 new while both available, drain the rest.
+  const out: QueueItem[] = [];
+  let ni = 0;
+  let ri = 0;
+  while (ni < newItems.length && ri < reviewItems.length) {
+    if (ri < reviewItems.length) out.push(reviewItems[ri++]);
+    if (ri < reviewItems.length) out.push(reviewItems[ri++]);
+    if (ni < newItems.length) out.push(newItems[ni++]);
+  }
+  while (ri < reviewItems.length) out.push(reviewItems[ri++]);
+  while (ni < newItems.length) out.push(newItems[ni++]);
+  return out;
+}
+
+async function buildBatch(
+  level: HskLevel,
+  settings: Settings,
+): Promise<QueueItem[]> {
+  const now = Date.now();
+  const today = await getTodayState(now);
+
+  const dueAll = await getDueWords(now);
+  const reviews: QueueItem[] = dueAll
+    .filter((w) => w.hskLevel === level)
+    .slice(0, MAX_REVIEWS_PER_BATCH)
+    .map((word) => ({ word, kind: "review" as const }));
+
+  const newBudget = Math.max(0, settings.newPerDay - today.newCardsIntroduced);
+  let newItems: QueueItem[] = [];
+  if (newBudget > 0) {
+    const words = await db.words.where("hskLevel").equals(level).sortBy("frequency");
+    const existing = new Set((await db.srsCards.toArray()).map((c) => c.wordId));
+    newItems = words
+      .filter((w) => !existing.has(w.id))
+      .slice(0, Math.min(BATCH_SIZE, newBudget))
+      .map((word) => ({ word, kind: "new" as const }));
+  }
+
+  return interleave(newItems, reviews);
+}
+
 function Study() {
   const settings = useSettings();
   const { t, lang } = useTranslation();
-  const { queue, index, start, commitCurrent, clear } =
-    useStudyStore();
+  const {
+    queue,
+    index,
+    start,
+    commitCurrent,
+    enterRelearnPhase,
+    relearn,
+    inRelearn,
+    clear,
+  } = useStudyStore();
   const [selectedLevel, setSelectedLevel] = useState<HskLevel | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const loadBatch = useCallback(
+    async (level: HskLevel) => {
+      if (!settings) return;
+      setLoading(true);
+      try {
+        const items = await buildBatch(level, settings);
+        start(items);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [settings, start],
+  );
 
   useEffect(() => {
     if (!settings || selectedLevel === null) return;
-    (async () => {
-      const BATCH_SIZE = 10;
-      const words = await db.words
-        .where("hskLevel")
-        .equals(selectedLevel)
-        .sortBy("frequency");
-      const existing = new Set(
-        (await db.srsCards.toArray()).map((c) => c.wordId)
-      );
-      const fresh = words
-        .filter((w) => !existing.has(w.id))
-        .slice(0, BATCH_SIZE);
-      start(fresh);
-    })();
+    void loadBatch(selectedLevel);
     return () => clear();
-  }, [settings, selectedLevel, start, clear]);
+  }, [settings, selectedLevel, loadBatch, clear]);
 
   if (!settings) {
     return (
@@ -99,6 +157,13 @@ function Study() {
   }
 
   if (queue.length === 0) {
+    if (loading) {
+      return (
+        <p className="text-center py-20 text-ink-300 font-semibold uppercase tracking-wider text-sm">
+          {t("common.loading")}
+        </p>
+      );
+    }
     return (
       <div className="max-w-md mx-auto px-6 py-10 sm:py-20 text-center animate-pop-in">
         <p className="font-display text-5xl text-ink-300 mb-4">
@@ -117,33 +182,28 @@ function Study() {
     );
   }
 
+  // End of main queue: either flip into relearn pass, or show done screen.
   if (index >= queue.length) {
-    return (
-      <div className="max-w-md mx-auto px-6 py-10 sm:py-20 text-center animate-pop-in">
-        <div className="seal-stamp h-20 w-20 text-jade-500 mx-auto mb-4 animate-stamp-in">
-          <span className="font-hanzi text-3xl font-black">好</span>
-        </div>
-        <p className="text-3xl sm:text-4xl font-bold text-jade-600">
-          {t("study.allDone")}
-        </p>
-        <p className="mt-2 text-ink-400 font-medium">
-          {t("study.newWordsAdded")
-            .replace("{count}", String(queue.length))
-            .replace("{unit}", queue.length === 1 ? t("study.word") : t("study.words"))}
-        </p>
-        <Link to="/" className={chunky("primary", "mt-8 w-full")}>
-          {t("common.backToHome")}
-        </Link>
-      </div>
-    );
+    if (!inRelearn && relearn.length > 0) {
+      enterRelearnPhase();
+      return null;
+    }
+    return <DoneScreen level={selectedLevel} onContinue={loadBatch} completed={queue.length} />;
   }
 
-  const word = queue[index];
+  const item = queue[index];
+  const word = item.word;
 
-  async function handleCommitWithGrade(grade: Grade) {
-    await introduceNewCardWithGrade(word.id, settings!, Date.now(), grade);
-    await incrementDailyNew(Date.now());
-    commitCurrent();
+  async function handleCommitWithGrade(grade: Grade, hadAnyMistake: boolean) {
+    const now = Date.now();
+    if (item.kind === "new") {
+      await introduceNewCardWithGrade(word.id, settings!, now, grade);
+      await incrementDailyNew(now);
+    } else {
+      await reviewCard(word.id, grade, settings!, now);
+      await incrementDailyReviews(now);
+    }
+    commitCurrent({ needsRelearn: hadAnyMistake });
   }
 
   return (
@@ -167,14 +227,75 @@ function Study() {
         </span>
       </header>
 
+      {inRelearn && (
+        <p className="mb-4 text-center text-xs font-semibold uppercase tracking-widest text-vermillion-500">
+          {t("study.relearnPass")}
+        </p>
+      )}
+
       <AttemptPhase
-        key={word.id}
+        key={`${item.kind}:${word.id}:${index}`}
         word={word}
+        kind={item.kind}
         onDone={handleCommitWithGrade}
-        onSkip={() => handleCommitWithGrade("easy")}
+        onSkip={() => handleCommitWithGrade("easy", false)}
         leniency={settings?.leniency ?? "strict"}
         lang={lang}
       />
+    </div>
+  );
+}
+
+function DoneScreen({
+  level,
+  onContinue,
+  completed,
+}: {
+  level: HskLevel | null;
+  onContinue: (level: HskLevel) => Promise<void>;
+  completed: number;
+}) {
+  const { t } = useTranslation();
+  const [checking, setChecking] = useState(false);
+  const [exhausted, setExhausted] = useState(false);
+
+  const onContinueClick = async () => {
+    if (!level) return;
+    setChecking(true);
+    try {
+      await onContinue(level);
+      if (useStudyStore.getState().queue.length === 0) setExhausted(true);
+    } finally {
+      setChecking(false);
+    }
+  };
+
+  return (
+    <div className="max-w-md mx-auto px-6 py-10 sm:py-20 text-center animate-pop-in">
+      <div className="seal-stamp h-20 w-20 text-jade-500 mx-auto mb-4 animate-stamp-in">
+        <span className="font-hanzi text-3xl font-black">好</span>
+      </div>
+      <p className="text-3xl sm:text-4xl font-bold text-jade-600">
+        {t("study.allDone")}
+      </p>
+      <p className="mt-2 text-ink-400 font-medium">
+        {t("study.newWordsAdded")
+          .replace("{count}", String(completed))
+          .replace("{unit}", completed === 1 ? t("study.word") : t("study.words"))}
+      </p>
+      <div className="mt-8 grid grid-cols-2 gap-3">
+        <Button
+          variant="primary"
+          onClick={onContinueClick}
+          disabled={checking || exhausted || !level}
+          className="py-4"
+        >
+          {exhausted ? t("study.nothingLeft") : t("study.continue")}
+        </Button>
+        <Link to="/" className={chunky("neutral", "py-4")}>
+          {t("common.backToHome")}
+        </Link>
+      </div>
     </div>
   );
 }
@@ -183,20 +304,26 @@ const VIEWING_DELAY_MS = 1500;
 
 function AttemptPhase({
   word,
+  kind,
   onDone,
   onSkip,
   leniency,
   lang,
 }: {
   word: Word;
-  onDone: (grade: Grade) => void;
+  kind: "new" | "review";
+  onDone: (grade: Grade, hadAnyMistake: boolean) => void;
   onSkip: () => void;
   leniency: "strict" | "lenient-order";
   lang: "en" | "fr";
 }) {
   const { t } = useTranslation();
   const [charIndex, setCharIndex] = useState(0);
-  const [attempts, setAttempts] = useState<{ mistakes: number }[]>([]);
+  const [redrawToken, setRedrawToken] = useState(0);
+  const [showRedrawHint, setShowRedrawHint] = useState(false);
+  // First-attempt mistake count per char — frozen on first onComplete so redraws
+  // don't distort the SRS grade.
+  const firstAttemptMistakesRef = useRef<number[]>([]);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const onDoneRef = useRef(onDone);
   useEffect(() => { onDoneRef.current = onDone; }, [onDone]);
@@ -214,19 +341,36 @@ function AttemptPhase({
     void playWordAudio(word.audioFile, word.id);
   }, [word.id, word.audioFile]);
 
-  function handleCharComplete({ mistakes, strokeMistakes: _strokeMistakes }: { mistakes: number; strokeMistakes: number[] }) {
-    const newAttempts = [...attempts, { mistakes }];
-    setAttempts(newAttempts);
+  function handleCharComplete({ mistakes }: { mistakes: number; strokeMistakes: number[] }) {
+    // Record first-attempt mistakes only; subsequent redraws don't overwrite.
+    if (firstAttemptMistakesRef.current[charIndex] === undefined) {
+      firstAttemptMistakesRef.current[charIndex] = mistakes;
+    }
 
-    const isLast = newAttempts.length === total;
+    if (mistakes > 0) {
+      // Force redraw of the same character.
+      setShowRedrawHint(true);
+      timerRef.current = setTimeout(() => {
+        setShowRedrawHint(false);
+        setRedrawToken((t) => t + 1);
+      }, 700);
+      return;
+    }
+
+    const isLast = charIndex + 1 === total;
 
     timerRef.current = setTimeout(() => {
       if (isLast) {
-        const totalMistakes = newAttempts.reduce((sum, a) => sum + a.mistakes, 0);
+        const totalMistakes = firstAttemptMistakesRef.current.reduce(
+          (sum, m) => sum + (m ?? 0),
+          0,
+        );
+        const hadAnyMistake = firstAttemptMistakesRef.current.some((m) => (m ?? 0) > 0);
         const grade = gradeFromMistakes(totalMistakes, false);
-        onDoneRef.current(grade);
+        onDoneRef.current(grade, hadAnyMistake);
       } else {
         setCharIndex((i) => i + 1);
+        setRedrawToken(0);
       }
     }, VIEWING_DELAY_MS);
   }
@@ -237,13 +381,21 @@ function AttemptPhase({
     .slice(0, charIndex)
     .map((char, i) => ({
       char,
-      mistakes: attempts[i]?.mistakes ?? 0,
+      mistakes: firstAttemptMistakesRef.current[i] ?? 0,
     }));
 
   return (
     <div className="text-center animate-pop-in">
-      {/* "I know this" skip button */}
-      <div className="flex justify-end mb-2">
+      <div className="flex items-center justify-between mb-2">
+        <span
+          className={`text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded ${
+            kind === "review"
+              ? "bg-jade-50 text-jade-600"
+              : "bg-gold-50 text-gold-600"
+          }`}
+        >
+          {kind === "review" ? t("study.reviewBadge") : t("study.newBadge")}
+        </span>
         <button
           type="button"
           onClick={onSkip}
@@ -273,13 +425,18 @@ function AttemptPhase({
       </p>
       <div className="mt-3">
         <DrawingCanvas
-          key={`${word.id}:${charIndex}`}
+          key={`${word.id}:${charIndex}:${redrawToken}`}
           character={word.characters[charIndex]}
           onComplete={handleCharComplete}
           leniency={leniency}
           completedChars={completedChars}
         />
       </div>
+      {showRedrawHint && (
+        <p className="mt-3 text-sm font-semibold text-vermillion-500 animate-pop-in">
+          {t("study.drawAgain")}
+        </p>
+      )}
     </div>
   );
 }

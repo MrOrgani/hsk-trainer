@@ -146,14 +146,15 @@ export function unlockAudio(): void {
   if (unlocked) return;
   const el = ensureElement();
   el.src = SILENT_MP3;
-  el.play()
-    .then(() => {
+  const p = el.play();
+  if (p && typeof p.then === "function") {
+    p.then(() => {
       el.pause();
       unlocked = true;
-    })
-    .catch(() => {
+    }).catch(() => {
       // Leave unlocked=false so we retry on the next gesture.
     });
+  }
   void speakChinese(" ").catch(() => {});
 }
 
@@ -171,7 +172,11 @@ export function tryPlayAudioFile(
     const el = ensureElement();
     const token = ++playToken;
 
-    el.pause();
+    try {
+      el.pause();
+    } catch {
+      // jsdom throws; ignore.
+    }
     currentOnEnded = opts?.onEnded
       ? () => {
           if (token === playToken) opts.onEnded?.();
@@ -179,21 +184,24 @@ export function tryPlayAudioFile(
       : null;
 
     el.src = src;
-    el.play()
-      .then(() => {
-        if (import.meta.env.DEV) console.log(`🔊 [${caller}] play OK`, { src });
-        resolve(true);
-      })
-      .catch((err: DOMException) => {
-        console.warn(`🔊 [${caller}] play FAIL`, {
-          src,
-          name: err?.name,
-          message: err?.message,
-          readyState: el.readyState,
-        });
-        if (token === playToken) currentOnEnded = null;
-        resolve(false);
+    const p = el.play();
+    if (!p || typeof p.then !== "function") {
+      resolve(false);
+      return;
+    }
+    p.then(() => {
+      if (import.meta.env.DEV) console.log(`🔊 [${caller}] play OK`, { src });
+      resolve(true);
+    }).catch((err: DOMException) => {
+      console.warn(`🔊 [${caller}] play FAIL`, {
+        src,
+        name: err?.name,
+        message: err?.message,
+        readyState: el.readyState,
       });
+      if (token === playToken) currentOnEnded = null;
+      resolve(false);
+    });
   });
 }
 

@@ -61,6 +61,15 @@ const translations = {
   "study.autoGradeHard": { en: "Hard — review soon", fr: "Difficile — revision prochaine" },
   "study.autoGradeAgain": { en: "Again — review shortly", fr: "A revoir — revision imminente" },
   "study.tapToContinue": { en: "Tap to continue", fr: "Appuyez pour continuer" },
+  "study.continue": { en: "Continue", fr: "Continuer" },
+  "study.nothingLeft": { en: "Nothing left for today", fr: "Plus rien pour aujourd'hui" },
+  "study.relearnPass": {
+    en: "Reviewing the tricky ones",
+    fr: "On revoit les plus difficiles",
+  },
+  "study.drawAgain": { en: "Draw it again — cleanly", fr: "Redessinez — proprement" },
+  "study.reviewBadge": { en: "Review", fr: "R\u00e9vision" },
+  "study.newBadge": { en: "New", fr: "Nouveau" },
 
   // Common
   "common.backToHome": { en: "Back to home", fr: "Retour \u00e0 l'accueil" },
