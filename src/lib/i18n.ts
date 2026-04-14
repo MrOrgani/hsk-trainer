@@ -22,6 +22,7 @@ const translations = {
     en: "+ Add new characters",
     fr: "+ Ajouter des caract\u00e8res",
   },
+  "home.startStudying": { en: "Start studying", fr: "Commencer l'\u00e9tude" },
 
   // Study page
   "study.newWord": { en: "New word", fr: "Nouveau mot" },
