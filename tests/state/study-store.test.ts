@@ -40,16 +40,16 @@ describe("study-store", () => {
 
   it("pushes items with mistakes into the relearn queue", () => {
     useStudyStore.getState().start([I1, I2]);
-    useStudyStore.getState().commitCurrent({ needsRelearn: true });
-    useStudyStore.getState().commitCurrent({ needsRelearn: false });
+    useStudyStore.getState().commitCurrent(true);
+    useStudyStore.getState().commitCurrent(false);
     expect(useStudyStore.getState().relearn).toHaveLength(1);
     expect(useStudyStore.getState().relearn[0].word.id).toBe("你");
   });
 
   it("enterRelearnPhase replays the relearn items from index 0", () => {
     useStudyStore.getState().start([I1, I2]);
-    useStudyStore.getState().commitCurrent({ needsRelearn: true });
-    useStudyStore.getState().commitCurrent({ needsRelearn: true });
+    useStudyStore.getState().commitCurrent(true);
+    useStudyStore.getState().commitCurrent(true);
     useStudyStore.getState().enterRelearnPhase();
     const s = useStudyStore.getState();
     expect(s.queue).toHaveLength(2);
@@ -60,9 +60,9 @@ describe("study-store", () => {
 
   it("in relearn mode, needsRelearn does not re-enqueue (one pass cap)", () => {
     useStudyStore.getState().start([I1]);
-    useStudyStore.getState().commitCurrent({ needsRelearn: true });
+    useStudyStore.getState().commitCurrent(true);
     useStudyStore.getState().enterRelearnPhase();
-    useStudyStore.getState().commitCurrent({ needsRelearn: true });
+    useStudyStore.getState().commitCurrent(true);
     expect(useStudyStore.getState().relearn).toHaveLength(0);
   });
 });

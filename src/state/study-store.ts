@@ -15,7 +15,7 @@ interface StudyState {
   relearn: QueueItem[];
   inRelearn: boolean;
   start: (items: QueueItem[]) => void;
-  commitCurrent: (opts?: { needsRelearn?: boolean }) => void;
+  commitCurrent: (needsRelearn?: boolean) => void;
   enterRelearnPhase: () => void;
   isDone: () => boolean;
   clear: () => void;
@@ -29,10 +29,10 @@ export const useStudyStore = create<StudyState>((set, get) => ({
   inRelearn: false,
   start: (items) =>
     set({ queue: items, index: 0, phase: "attempt", relearn: [], inRelearn: false }),
-  commitCurrent: (opts) =>
+  commitCurrent: (needsRelearn) =>
     set((s) => {
       const current = s.queue[s.index];
-      const shouldRelearn = !!opts?.needsRelearn && !s.inRelearn && current !== undefined;
+      const shouldRelearn = !!needsRelearn && !s.inRelearn && current !== undefined;
       return {
         index: s.index + 1,
         phase: "attempt",

@@ -1,4 +1,4 @@
-import type { DailyState, Grade, PromptType, Settings, SrsCard, Word } from "@/db/schema";
+import type { DailyState, Grade, HskLevel, PromptType, Settings, SrsCard, Word } from "@/db/schema";
 import { db } from "@/db/dexie";
 
 const MINUTE = 60 * 1000;
@@ -95,37 +95,34 @@ export async function getTodayState(now: number): Promise<DailyState> {
   return existing ?? { date, newCardsIntroduced: 0, reviewsCompleted: 0 };
 }
 
-export async function incrementDailyNew(now: number): Promise<void> {
+async function incrementDailyCounter(
+  now: number,
+  key: "newCardsIntroduced" | "reviewsCompleted",
+): Promise<void> {
   const date = localDateString(now);
   await db.transaction("rw", db.dailyState, async () => {
     const existing = await db.dailyState.get(date);
-    const row: DailyState = existing
-      ? { ...existing, newCardsIntroduced: existing.newCardsIntroduced + 1 }
-      : { date, newCardsIntroduced: 1, reviewsCompleted: 0 };
-    await db.dailyState.put(row);
+    const base: DailyState = existing ?? { date, newCardsIntroduced: 0, reviewsCompleted: 0 };
+    await db.dailyState.put({ ...base, [key]: base[key] + 1 });
   });
 }
 
-export async function incrementDailyReviews(now: number): Promise<void> {
-  const date = localDateString(now);
-  await db.transaction("rw", db.dailyState, async () => {
-    const existing = await db.dailyState.get(date);
-    const row: DailyState = existing
-      ? { ...existing, reviewsCompleted: existing.reviewsCompleted + 1 }
-      : { date, newCardsIntroduced: 0, reviewsCompleted: 1 };
-    await db.dailyState.put(row);
-  });
+export function incrementDailyNew(now: number): Promise<void> {
+  return incrementDailyCounter(now, "newCardsIntroduced");
 }
 
-/**
- * Returns distinct Words that have at least one SrsCard due at or before `now`.
- */
-export async function getDueWords(now: number): Promise<Word[]> {
+export function incrementDailyReviews(now: number): Promise<void> {
+  return incrementDailyCounter(now, "reviewsCompleted");
+}
+
+export async function getDueWords(now: number, level?: HskLevel): Promise<Word[]> {
   const dueCards = await db.srsCards.where("dueDate").belowOrEqual(now).toArray();
   const wordIds = Array.from(new Set(dueCards.map((c) => c.wordId)));
   if (wordIds.length === 0) return [];
   const rows = await db.words.bulkGet(wordIds);
-  return rows.filter((w): w is Word => w !== undefined);
+  return rows.filter(
+    (w): w is Word => w !== undefined && (level === undefined || w.hskLevel === level),
+  );
 }
 
 /**

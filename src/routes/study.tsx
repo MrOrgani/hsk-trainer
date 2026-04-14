@@ -35,39 +35,40 @@ function gradeFromMistakes(totalMistakes: number, allHintsUsed: boolean): Grade 
   return "easy";
 }
 
+// 2 reviews : 1 new while both available, drain the remainder.
 function interleave(newItems: QueueItem[], reviewItems: QueueItem[]): QueueItem[] {
-  // 2 reviews : 1 new while both available, drain the rest.
   const out: QueueItem[] = [];
   let ni = 0;
   let ri = 0;
   while (ni < newItems.length && ri < reviewItems.length) {
+    out.push(reviewItems[ri++]);
     if (ri < reviewItems.length) out.push(reviewItems[ri++]);
-    if (ri < reviewItems.length) out.push(reviewItems[ri++]);
-    if (ni < newItems.length) out.push(newItems[ni++]);
+    out.push(newItems[ni++]);
   }
   while (ri < reviewItems.length) out.push(reviewItems[ri++]);
   while (ni < newItems.length) out.push(newItems[ni++]);
   return out;
 }
 
-async function buildBatch(
-  level: HskLevel,
-  settings: Settings,
-): Promise<QueueItem[]> {
+async function buildBatch(level: HskLevel, settings: Settings): Promise<QueueItem[]> {
   const now = Date.now();
-  const today = await getTodayState(now);
+  const [today, dueForLevel] = await Promise.all([
+    getTodayState(now),
+    getDueWords(now, level),
+  ]);
 
-  const dueAll = await getDueWords(now);
-  const reviews: QueueItem[] = dueAll
-    .filter((w) => w.hskLevel === level)
+  const reviews: QueueItem[] = dueForLevel
     .slice(0, MAX_REVIEWS_PER_BATCH)
     .map((word) => ({ word, kind: "review" as const }));
 
   const newBudget = Math.max(0, settings.newPerDay - today.newCardsIntroduced);
   let newItems: QueueItem[] = [];
   if (newBudget > 0) {
-    const words = await db.words.where("hskLevel").equals(level).sortBy("frequency");
-    const existing = new Set((await db.srsCards.toArray()).map((c) => c.wordId));
+    const [words, allCards] = await Promise.all([
+      db.words.where("hskLevel").equals(level).sortBy("frequency"),
+      db.srsCards.toArray(),
+    ]);
+    const existing = new Set(allCards.map((c) => c.wordId));
     newItems = words
       .filter((w) => !existing.has(w.id))
       .slice(0, Math.min(BATCH_SIZE, newBudget))
@@ -94,12 +95,13 @@ function Study() {
   const [loading, setLoading] = useState(false);
 
   const loadBatch = useCallback(
-    async (level: HskLevel) => {
-      if (!settings) return;
+    async (level: HskLevel): Promise<number> => {
+      if (!settings) return 0;
       setLoading(true);
       try {
         const items = await buildBatch(level, settings);
         start(items);
+        return items.length;
       } finally {
         setLoading(false);
       }
@@ -112,6 +114,14 @@ function Study() {
     void loadBatch(selectedLevel);
     return () => clear();
   }, [settings, selectedLevel, loadBatch, clear]);
+
+  const atEnd = index >= queue.length;
+  const needsRelearnTransition =
+    queue.length > 0 && atEnd && !inRelearn && relearn.length > 0;
+
+  useEffect(() => {
+    if (needsRelearnTransition) enterRelearnPhase();
+  }, [needsRelearnTransition, enterRelearnPhase]);
 
   if (!settings) {
     return (
@@ -182,12 +192,8 @@ function Study() {
     );
   }
 
-  // End of main queue: either flip into relearn pass, or show done screen.
-  if (index >= queue.length) {
-    if (!inRelearn && relearn.length > 0) {
-      enterRelearnPhase();
-      return null;
-    }
+  if (atEnd) {
+    if (needsRelearnTransition) return null;
     return <DoneScreen level={selectedLevel} onContinue={loadBatch} completed={queue.length} />;
   }
 
@@ -203,7 +209,7 @@ function Study() {
       await reviewCard(word.id, grade, settings!, now);
       await incrementDailyReviews(now);
     }
-    commitCurrent({ needsRelearn: hadAnyMistake });
+    commitCurrent(hadAnyMistake);
   }
 
   return (
@@ -252,7 +258,7 @@ function DoneScreen({
   completed,
 }: {
   level: HskLevel | null;
-  onContinue: (level: HskLevel) => Promise<void>;
+  onContinue: (level: HskLevel) => Promise<number>;
   completed: number;
 }) {
   const { t } = useTranslation();
@@ -321,8 +327,6 @@ function AttemptPhase({
   const [charIndex, setCharIndex] = useState(0);
   const [redrawToken, setRedrawToken] = useState(0);
   const [showRedrawHint, setShowRedrawHint] = useState(false);
-  // First-attempt mistake count per char — frozen on first onComplete so redraws
-  // don't distort the SRS grade.
   const firstAttemptMistakesRef = useRef<number[]>([]);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const onDoneRef = useRef(onDone);
@@ -336,19 +340,16 @@ function AttemptPhase({
     };
   }, []);
 
-  // Autoplay word pronunciation when a new word appears
   useEffect(() => {
     void playWordAudio(word.audioFile, word.id);
   }, [word.id, word.audioFile]);
 
   function handleCharComplete({ mistakes }: { mistakes: number; strokeMistakes: number[] }) {
-    // Record first-attempt mistakes only; subsequent redraws don't overwrite.
     if (firstAttemptMistakesRef.current[charIndex] === undefined) {
       firstAttemptMistakesRef.current[charIndex] = mistakes;
     }
 
     if (mistakes > 0) {
-      // Force redraw of the same character.
       setShowRedrawHint(true);
       timerRef.current = setTimeout(() => {
         setShowRedrawHint(false);
