@@ -28,10 +28,18 @@ const HSK_LEVELS: HskLevel[] = [1, 2, 3, 4, 5, 6, 7];
 const BATCH_SIZE = 10;
 const MAX_REVIEWS_PER_BATCH = 20;
 
-function gradeFromMistakes(totalMistakes: number, allHintsUsed: boolean): Grade {
-  if (allHintsUsed || totalMistakes >= 7) return "again";
-  if (totalMistakes >= 4) return "hard";
-  if (totalMistakes >= 1) return "good";
+function gradeFromPenalty(
+  totalMistakes: number,
+  totalHints: number,
+  anyFullReveal: boolean,
+): Grade {
+  if (anyFullReveal) return "again";
+  // Each hint weighted as 2 mistakes so a hinted-but-drawn char grades worse
+  // than one drawn unaided with a single stumble.
+  const penalty = totalMistakes + totalHints * 2;
+  if (penalty >= 7) return "again";
+  if (penalty >= 4) return "hard";
+  if (penalty >= 1) return "good";
   return "easy";
 }
 
@@ -296,9 +304,13 @@ function AttemptPhase({
   const [charIndex, setCharIndex] = useState(0);
   const [redrawToken, setRedrawToken] = useState(0);
   const [showRedrawHint, setShowRedrawHint] = useState(false);
+  const [charCompleted, setCharCompleted] = useState(false);
   const firstAttemptMistakesRef = useRef<number[]>([]);
+  const firstAttemptHintsRef = useRef<number[]>([]);
+  const anyFullRevealRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const onDoneRef = useRef(onDone);
+  const lastAudioIdRef = useRef<string | null>(null);
   useEffect(() => { onDoneRef.current = onDone; }, [onDone]);
 
   const total = word.characters.length;
@@ -310,15 +322,38 @@ function AttemptPhase({
   }, []);
 
   useEffect(() => {
+    // StrictMode re-invokes effects in dev; guard against firing twice for the same word.
+    if (lastAudioIdRef.current === word.id) return;
+    lastAudioIdRef.current = word.id;
     void playWordAudio(word.audioFile, word.id);
   }, [word.id, word.audioFile]);
 
-  function handleCharComplete({ mistakes }: { mistakes: number; strokeMistakes: number[] }) {
+  useEffect(() => {
+    setCharCompleted(false);
+  }, [charIndex, redrawToken]);
+
+  function handleCharComplete({
+    mistakes,
+    hintsUsed,
+    fullRevealUsed,
+  }: {
+    mistakes: number;
+    strokeMistakes: number[];
+    hintsUsed: number;
+    fullRevealUsed: boolean;
+  }) {
     if (firstAttemptMistakesRef.current[charIndex] === undefined) {
       firstAttemptMistakesRef.current[charIndex] = mistakes;
+      firstAttemptHintsRef.current[charIndex] = hintsUsed;
+      if (fullRevealUsed) anyFullRevealRef.current = true;
     }
 
-    if (mistakes > 0) {
+    setCharCompleted(true);
+
+    if (timerRef.current) clearTimeout(timerRef.current);
+
+    // Inkstone behavior: only a full reveal forces a redraw; accept-with-penalty otherwise.
+    if (fullRevealUsed) {
       setShowRedrawHint(true);
       timerRef.current = setTimeout(() => {
         setShowRedrawHint(false);
@@ -335,9 +370,12 @@ function AttemptPhase({
           (sum, m) => sum + (m ?? 0),
           0,
         );
-        const hadAnyMistake = firstAttemptMistakesRef.current.some((m) => (m ?? 0) > 0);
-        const grade = gradeFromMistakes(totalMistakes, false);
-        onDoneRef.current(grade, hadAnyMistake);
+        const totalHints = firstAttemptHintsRef.current.reduce(
+          (sum, h) => sum + (h ?? 0),
+          0,
+        );
+        const grade = gradeFromPenalty(totalMistakes, totalHints, anyFullRevealRef.current);
+        onDoneRef.current(grade, grade !== "easy");
       } else {
         setCharIndex((i) => i + 1);
         setRedrawToken(0);
@@ -393,11 +431,13 @@ function AttemptPhase({
           onComplete={handleCharComplete}
           leniency={leniency}
           completedChars={completedChars}
-          showOutline={kind !== "review"}
         />
       </div>
+      <p className="mt-3 text-xs text-ink-300 font-medium">
+        {charCompleted && !showRedrawHint ? t("study.replay") : t("study.tapHints")}
+      </p>
       {showRedrawHint && (
-        <p className="mt-3 text-sm font-semibold text-vermillion-500 animate-pop-in">
+        <p className="mt-1 text-sm font-semibold text-vermillion-500 animate-pop-in">
           {t("study.drawAgain")}
         </p>
       )}

@@ -8,34 +8,65 @@ export interface CompletedChar {
   mistakes: number;
 }
 
+export interface CharResult {
+  mistakes: number;
+  strokeMistakes: number[];
+  hintsUsed: number;
+  fullRevealUsed: boolean;
+}
+
 export function masteryColor(mistakes: number): string {
-  if (mistakes === 0) return "#0d9373"; // jade-500
-  if (mistakes <= 2) return "#c8951a"; // gold-500
-  return "#c93545"; // vermillion-500
+  if (mistakes === 0) return "#0d9373";
+  if (mistakes <= 2) return "#c8951a";
+  return "#c93545";
 }
 
 interface Props {
   character: string;
-  onComplete: (result: { mistakes: number; strokeMistakes: number[] }) => void;
-  /** Max pixel size; canvas will shrink to fit narrow viewports. */
+  onComplete: (result: CharResult) => void;
   size?: number;
   leniency?: "strict" | "lenient-order";
-  showOutline?: boolean;
-  /** Previously completed characters — shown small in the top-left corner */
   completedChars?: CompletedChar[];
 }
 
 function computeSize(max: number): number {
   if (typeof window === "undefined") return max;
-  // Leave room for container padding (px-4 on <sm) plus a little breathing gap.
   const fit = window.innerWidth - 48;
   return Math.max(200, Math.min(max, fit));
 }
 
-export function DrawingCanvas({ character, onComplete, size: maxSize = 260, leniency: _leniency = "strict", showOutline = true, completedChars = [] }: Props) {
+function leniencyScalar(mode: "strict" | "lenient-order"): number {
+  return mode === "strict" ? 1.5 : 2.5;
+}
+
+// Pointer movement under this (in px) counts as a stationary tap rather than a stroke.
+const TAP_MOVE_THRESHOLD_PX = 8;
+const TAP_MAX_DURATION_MS = 300;
+const DOUBLE_TAP_MS = 300;
+
+export function DrawingCanvas({
+  character,
+  onComplete,
+  size: maxSize = 260,
+  leniency = "strict",
+  completedChars = [],
+}: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const onCompleteRef = useRef(onComplete);
   const [size, setSize] = useState(() => computeSize(maxSize));
+  const [completed, setCompleted] = useState(false);
+  const writerRef = useRef<HanziWriter | null>(null);
+  const currentStrokeRef = useRef(0);
+  const hintsUsedRef = useRef(0);
+  const fullRevealRef = useRef(false);
+  const completedRef = useRef(false);
+  const replayingRef = useRef(false);
+
+  // Tap-detection state.
+  const tapStartRef = useRef<{ x: number; y: number; t: number } | null>(null);
+  const tapMovedRef = useRef(false);
+  const lastTapAtRef = useRef(0);
+  const pendingSingleTapRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const onResize = () => setSize(computeSize(maxSize));
@@ -51,6 +82,11 @@ export function DrawingCanvas({ character, onComplete, size: maxSize = 260, leni
     const target = containerRef.current;
     if (!target) return;
     target.replaceChildren();
+    setCompleted(false);
+    completedRef.current = false;
+    currentStrokeRef.current = 0;
+    hintsUsedRef.current = 0;
+    fullRevealRef.current = false;
 
     let mistakes = 0;
     const strokeMistakes: number[] = [];
@@ -59,15 +95,16 @@ export function DrawingCanvas({ character, onComplete, size: maxSize = 260, leni
       height: size,
       padding: 10,
       showCharacter: false,
-      showOutline,
+      showOutline: false,
       strokeAnimationSpeed: 1,
       delayBetweenStrokes: 50,
-      strokeColor: "#1c1917",    // ink-900 — true ink black
-      outlineColor: "#d6cdbf",   // ink-200 — warm gray outline
-      highlightColor: "#00c0ff", // cyan — Inkstone-style hint color
-      drawingColor: "#999999",   // soft gray while drawing
-      drawingWidth: 50,          // bold brush-like strokes (coordinate space is 1024 units)
+      strokeColor: "#1c1917",
+      outlineColor: "#d6cdbf",
+      highlightColor: "#00c0ff",
+      drawingColor: "#999999",
+      drawingWidth: 50,
     });
+    writerRef.current = writer;
 
     writer.quiz({
       onMistake: () => {
@@ -75,38 +112,125 @@ export function DrawingCanvas({ character, onComplete, size: maxSize = 260, leni
       },
       onCorrectStroke: (strokeData: StrokeData) => {
         strokeMistakes.push(strokeData.mistakesOnStroke);
+        currentStrokeRef.current = strokeData.strokeNum + 1;
       },
       onComplete: () => {
         const color = masteryColor(mistakes);
-        // Color ALL stroke layers so the entire character shows the mastery color.
-        // radicalColor must also be updated: hanzi-writer uses radicalColor for
-        // strokes marked as part of the radical (e.g. 父 in 爸). Without this,
-        // those strokes stay their original color while the rest change.
         const totalUpdates = 4;
         let done = 0;
-        const finish = () => { if (++done >= totalUpdates) onCompleteRef.current({ mistakes, strokeMistakes }); };
-        writer.updateColor('strokeColor', color, { duration: 300, onComplete: finish });
-        writer.updateColor('radicalColor', color, { duration: 300, onComplete: finish });
-        writer.updateColor('drawingColor', color, { duration: 300, onComplete: finish });
-        writer.updateColor('outlineColor', color, { duration: 300, onComplete: finish });
+        const finish = () => {
+          if (++done >= totalUpdates) {
+            setCompleted(true);
+            completedRef.current = true;
+            onCompleteRef.current({
+              mistakes,
+              strokeMistakes,
+              hintsUsed: hintsUsedRef.current,
+              fullRevealUsed: fullRevealRef.current,
+            });
+          }
+        };
+        writer.updateColor("strokeColor", color, { duration: 300, onComplete: finish });
+        writer.updateColor("radicalColor", color, { duration: 300, onComplete: finish });
+        writer.updateColor("drawingColor", color, { duration: 300, onComplete: finish });
+        writer.updateColor("outlineColor", color, { duration: 300, onComplete: finish });
       },
-      showHintAfterMisses: 3,
+      showHintAfterMisses: false,
       highlightOnComplete: false,
       acceptBackwardsStrokes: true,
-      leniency: 1.5,
+      leniency: leniencyScalar(leniency),
     });
 
     return () => {
       writer.cancelQuiz();
+      writerRef.current = null;
+      if (pendingSingleTapRef.current) {
+        clearTimeout(pendingSingleTapRef.current);
+        pendingSingleTapRef.current = null;
+      }
     };
-  }, [character, size, showOutline]);
+  }, [character, size, leniency]);
+
+  function fireHint() {
+    const writer = writerRef.current;
+    if (!writer || completedRef.current) return;
+    hintsUsedRef.current += 1;
+    void writer.highlightStroke(currentStrokeRef.current);
+  }
+
+  function fireReveal() {
+    const writer = writerRef.current;
+    if (!writer || completedRef.current) return;
+    if (hintsUsedRef.current === 0 || fullRevealRef.current) return;
+    fullRevealRef.current = true;
+    void writer.showOutline({ duration: 300 });
+    void writer.highlightStroke(currentStrokeRef.current);
+  }
+
+  function fireReplay() {
+    const writer = writerRef.current;
+    if (!writer || !completedRef.current || replayingRef.current) return;
+    replayingRef.current = true;
+    void writer.animateCharacter({
+      onComplete: () => {
+        replayingRef.current = false;
+      },
+    });
+  }
+
+  function onPointerDown(e: React.PointerEvent) {
+    tapStartRef.current = { x: e.clientX, y: e.clientY, t: Date.now() };
+    tapMovedRef.current = false;
+  }
+
+  function onPointerMove(e: React.PointerEvent) {
+    const start = tapStartRef.current;
+    if (!start || tapMovedRef.current) return;
+    const dx = e.clientX - start.x;
+    const dy = e.clientY - start.y;
+    if (dx * dx + dy * dy > TAP_MOVE_THRESHOLD_PX * TAP_MOVE_THRESHOLD_PX) {
+      tapMovedRef.current = true;
+    }
+  }
+
+  function onPointerUp() {
+    const start = tapStartRef.current;
+    tapStartRef.current = null;
+    if (!start || tapMovedRef.current) return;
+    if (Date.now() - start.t > TAP_MAX_DURATION_MS) return;
+
+    // Post-completion: taps replay the character; no hint/reveal escalation.
+    if (completedRef.current) {
+      fireReplay();
+      return;
+    }
+
+    const now = Date.now();
+    const isDouble = now - lastTapAtRef.current < DOUBLE_TAP_MS;
+    lastTapAtRef.current = now;
+
+    if (isDouble) {
+      if (pendingSingleTapRef.current) {
+        clearTimeout(pendingSingleTapRef.current);
+        pendingSingleTapRef.current = null;
+      }
+      // Inkstone: double-tap reveals only after the single-tap budget has been burned.
+      fireReveal();
+      return;
+    }
+
+    // Defer the hint so a trailing tap can upgrade to a double-tap reveal.
+    pendingSingleTapRef.current = setTimeout(() => {
+      pendingSingleTapRef.current = null;
+      fireHint();
+    }, DOUBLE_TAP_MS);
+  }
 
   return (
     <div
       className="relative mx-auto rounded-xl hanzi-grid"
       style={{ width: size, height: size }}
     >
-      {/* Previously completed characters — small in top-left corner */}
       {completedChars.length > 0 && (
         <div className="absolute top-1.5 left-2 flex gap-0.5 z-10 pointer-events-none">
           {completedChars.map((c, i) => (
@@ -128,7 +252,16 @@ export function DrawingCanvas({ character, onComplete, size: maxSize = 260, leni
       <div
         ref={containerRef}
         aria-label={`Draw the character ${character}`}
-        style={{ width: size, height: size, touchAction: "none" }}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => { tapStartRef.current = null; }}
+        style={{
+          width: size,
+          height: size,
+          touchAction: "none",
+          cursor: completed ? "pointer" : "default",
+        }}
       />
     </div>
   );

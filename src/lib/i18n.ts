@@ -60,6 +60,11 @@ const translations = {
   "study.drawAgain": { en: "Draw it again — cleanly", fr: "Redessinez — proprement" },
   "study.reviewBadge": { en: "Review", fr: "R\u00e9vision" },
   "study.newBadge": { en: "New", fr: "Nouveau" },
+  "study.tapHints": {
+    en: "Tap for a hint · double-tap to reveal",
+    fr: "Touchez pour un indice · double-touche pour révéler",
+  },
+  "study.replay": { en: "Tap the character to replay", fr: "Touchez le caractère pour rejouer" },
 
   // Common
   "common.backToHome": { en: "Back to home", fr: "Retour \u00e0 l'accueil" },
