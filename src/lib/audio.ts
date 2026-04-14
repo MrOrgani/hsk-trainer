@@ -98,6 +98,56 @@ export function findChineseVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesi
   return candidates[0];
 }
 
+// ---------------------------------------------------------------------------
+// In-memory audio cache: url -> HTMLAudioElement (already loaded & decodable)
+// ---------------------------------------------------------------------------
+const audioCache = new Map<string, HTMLAudioElement>();
+
+/**
+ * Try playing a local mp3 from public/audio via HTMLAudioElement.
+ * Resolves true on successful playback start, false on any failure
+ * (missing file, autoplay blocked, decode error, etc.).
+ */
+export function tryPlayAudioFile(
+  audioFile: string,
+  opts?: { onEnded?: () => void },
+): Promise<boolean> {
+  return new Promise((resolve) => {
+    const src = `${import.meta.env.BASE_URL}audio/${audioFile}`;
+    const cached = audioCache.get(src);
+    if (cached) {
+      const clone = cached.cloneNode() as HTMLAudioElement;
+      if (opts?.onEnded) clone.addEventListener("ended", opts.onEnded, { once: true });
+      clone.play().then(() => resolve(true)).catch(() => resolve(false));
+      return;
+    }
+
+    const audio = new Audio(src);
+    audio.crossOrigin = "anonymous";
+    audio.addEventListener("error", () => resolve(false), { once: true });
+    audio.addEventListener(
+      "canplaythrough",
+      () => audioCache.set(src, audio),
+      { once: true },
+    );
+    if (opts?.onEnded) audio.addEventListener("ended", opts.onEnded, { once: true });
+    audio.play().then(() => resolve(true)).catch(() => resolve(false));
+  });
+}
+
+/**
+ * Play word audio: local mp3 first, fall back to TTS.
+ * Safe to call from a useEffect — silently does nothing if autoplay is blocked.
+ */
+export async function playWordAudio(audioFile: string, fallbackText: string): Promise<void> {
+  if (await tryPlayAudioFile(audioFile)) return;
+  try {
+    await speakChinese(fallbackText);
+  } catch {
+    // ignore — browser may block autoplay without user gesture
+  }
+}
+
 /**
  * Speak the given Chinese text. Initializes easy-speech on first call.
  * Returns a promise that resolves when speech ends.

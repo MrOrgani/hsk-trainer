@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { speakChinese } from "@/lib/audio";
+import { speakChinese, tryPlayAudioFile } from "@/lib/audio";
 
 type AudioState = "idle" | "speaking" | "error" | "unavailable";
 
@@ -10,12 +10,6 @@ interface Props {
   variant?: "inline" | "button";
 }
 
-// ---------------------------------------------------------------------------
-// In-memory audio cache: url -> HTMLAudioElement (already loaded & decodable)
-// ---------------------------------------------------------------------------
-const audioCache = new Map<string, HTMLAudioElement>();
-
-
 export function AudioButton({
   audioFile,
   fallbackText,
@@ -25,69 +19,18 @@ export function AudioButton({
   const [state, setState] = useState<AudioState>("idle");
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
 
-  /**
-   * Try playing audio via an HTMLAudioElement (local file).
-   * Returns true if playback started, false otherwise.
-   */
-  const tryAudioElement = useCallback(
-    (src: string): Promise<boolean> =>
-      new Promise((resolve) => {
-        const cached = audioCache.get(src);
-        if (cached) {
-          const clone = cached.cloneNode() as HTMLAudioElement;
-          clone.addEventListener("ended", () => setState("idle"), { once: true });
-          setState("speaking");
-          clone
-            .play()
-            .then(() => resolve(true))
-            .catch(() => {
-              setState("idle");
-              resolve(false);
-            });
-          return;
-        }
-
-        const audio = new Audio(src);
-        audio.crossOrigin = "anonymous";
-
-        const fail = () => {
-          setState("idle");
-          resolve(false);
-        };
-
-        audio.addEventListener("error", fail, { once: true });
-
-        audio.addEventListener(
-          "canplaythrough",
-          () => {
-            audioCache.set(src, audio);
-          },
-          { once: true },
-        );
-
-        audio.addEventListener("ended", () => setState("idle"), { once: true });
-
-        setState("speaking");
-        audio.play().then(() => resolve(true)).catch(fail);
-      }),
-    [],
-  );
-
   const play = useCallback(async () => {
     if (state === "speaking") return;
-
-    // 1. Try local audio file
-    if (await tryAudioElement(`${import.meta.env.BASE_URL}audio/${audioFile}`)) return;
-
-    // 2. Use easy-speech (handles iOS Safari workarounds)
     setState("speaking");
+
+    if (await tryPlayAudioFile(audioFile, { onEnded: () => setState("idle") })) return;
+
     try {
       await speakChinese(fallbackText);
       setState("idle");
@@ -95,7 +38,7 @@ export function AudioButton({
       setState("error");
       timeoutRef.current = setTimeout(() => setState("idle"), 2000);
     }
-  }, [audioFile, tryAudioElement, fallbackText, state]);
+  }, [audioFile, fallbackText, state]);
 
   const isDisabled = state === "unavailable";
 

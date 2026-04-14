@@ -10,6 +10,7 @@ import { useStudyStore } from "@/state/study-store";
 import { DrawingCanvas } from "@/components/DrawingCanvas";
 import type { CompletedChar } from "@/components/DrawingCanvas";
 import { AudioButton } from "@/components/AudioButton";
+import { playWordAudio } from "@/lib/audio";
 import { chunky } from "@/components/Button";
 import type { Word, HskLevel, Grade } from "@/db/schema";
 import { useTranslation, meaningFor } from "@/lib/i18n";
@@ -204,6 +205,11 @@ function AttemptPhase({
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, []);
+
+  // Autoplay word pronunciation when a new word appears
+  useEffect(() => {
+    void playWordAudio(word.audioFile, word.id);
+  }, [word.id, word.audioFile]);
 
   function handleCharComplete({ mistakes, strokeMistakes: _strokeMistakes }: { mistakes: number; strokeMistakes: number[] }) {
     const newAttempts = [...attempts, { mistakes }];
