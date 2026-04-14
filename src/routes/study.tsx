@@ -10,7 +10,7 @@ import { useStudyStore } from "@/state/study-store";
 import { DrawingCanvas } from "@/components/DrawingCanvas";
 import type { CompletedChar } from "@/components/DrawingCanvas";
 import { AudioButton } from "@/components/AudioButton";
-import { playWordAudio } from "@/lib/audio";
+import { playWordAudio, unlockAudio } from "@/lib/audio";
 import { chunky } from "@/components/Button";
 import type { Word, HskLevel, Grade } from "@/db/schema";
 import { useTranslation, meaningFor } from "@/lib/i18n";
@@ -85,7 +85,10 @@ function Study() {
               key={level}
               variant={level === settings.hskLevel ? "primary" : "neutral"}
               className="text-lg py-4"
-              onClick={() => setSelectedLevel(level)}
+              onClick={() => {
+                unlockAudio();
+                setSelectedLevel(level);
+              }}
             >
               HSK {level}
             </Button>

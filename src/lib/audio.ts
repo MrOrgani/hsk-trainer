@@ -99,39 +99,109 @@ export function findChineseVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesi
 }
 
 // ---------------------------------------------------------------------------
-// In-memory audio cache: url -> HTMLAudioElement (already loaded & decodable)
+// Persistent audio element — unlocked once inside a user gesture, then reused
+// by swapping `src` for every subsequent play. Required for iOS Safari / PWA
+// where per-element transient activation does not survive await boundaries.
 // ---------------------------------------------------------------------------
-const audioCache = new Map<string, HTMLAudioElement>();
+
+// 100ms silent MP3 (base64). iOS decodes real MP3; WAV/empty buffers fail.
+const SILENT_MP3 =
+  "data:audio/mpeg;base64,//uQxAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAACcQCA" +
+  "gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA" +
+  "gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgP////////////////////////////////" +
+  "//////////////////////////////////////////////////////8AAAA5TEFNRTMuMTAw" +
+  "AZYAAAAALkAAABRGJAJAQgAARgAAAnGMHbcMAAAAAAD/+xDEAAPAAAGkAAAAIAAANIAAAARMQU1F" +
+  "My4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" +
+  "VVVV//sQxFODwAABpAAAACAAADSAAAAEVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" +
+  "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/+xDEph8AAAGkAAAAIAAA" +
+  "NIAAAARVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" +
+  "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVU=";
+
+let sharedAudio: HTMLAudioElement | null = null;
+let unlocked = false;
+let playToken = 0;
+let currentOnEnded: (() => void) | null = null;
+
+function ensureElement(): HTMLAudioElement {
+  if (!sharedAudio) {
+    const el = new Audio();
+    el.preload = "auto";
+    el.setAttribute("playsinline", "");
+    // No crossOrigin — mp3s are same-origin; setting it can break SW cache hits.
+    el.addEventListener("ended", () => {
+      currentOnEnded?.();
+      currentOnEnded = null;
+    });
+    sharedAudio = el;
+  }
+  return sharedAudio;
+}
 
 /**
- * Try playing a local mp3 from public/audio via HTMLAudioElement.
- * Resolves true on successful playback start, false on any failure
- * (missing file, autoplay blocked, decode error, etc.).
+ * Must be called from within a user-gesture handler (click/touchend).
+ * Primes the shared <audio> element and easy-speech for later gesture-free
+ * playback. Safe to call multiple times.
+ */
+export function unlockAudio(): void {
+  if (unlocked) return;
+  const el = ensureElement();
+  el.src = SILENT_MP3;
+  el.play()
+    .then(() => {
+      el.pause();
+      unlocked = true;
+    })
+    .catch(() => {
+      // Leave unlocked=false so we retry on the next gesture.
+    });
+  void speakChinese(" ").catch(() => {});
+}
+
+/**
+ * Try playing a local mp3 from public/audio via the shared audio element.
+ * Resolves true on successful playback start, false on any failure.
  */
 export function tryPlayAudioFile(
   audioFile: string,
-  opts?: { onEnded?: () => void },
+  opts?: { onEnded?: () => void; caller?: string },
 ): Promise<boolean> {
   return new Promise((resolve) => {
     const src = `${import.meta.env.BASE_URL}audio/${audioFile}`;
-    const cached = audioCache.get(src);
-    if (cached) {
-      const clone = cached.cloneNode() as HTMLAudioElement;
-      if (opts?.onEnded) clone.addEventListener("ended", opts.onEnded, { once: true });
-      clone.play().then(() => resolve(true)).catch(() => resolve(false));
-      return;
-    }
+    const caller = opts?.caller ?? "unknown";
+    const el = ensureElement();
+    const token = ++playToken;
 
-    const audio = new Audio(src);
-    audio.crossOrigin = "anonymous";
-    audio.addEventListener("error", () => resolve(false), { once: true });
-    audio.addEventListener(
-      "canplaythrough",
-      () => audioCache.set(src, audio),
-      { once: true },
-    );
-    if (opts?.onEnded) audio.addEventListener("ended", opts.onEnded, { once: true });
-    audio.play().then(() => resolve(true)).catch(() => resolve(false));
+    el.pause();
+    currentOnEnded = opts?.onEnded
+      ? () => {
+          if (token === playToken) opts.onEnded?.();
+        }
+      : null;
+
+    el.src = src;
+    el.play()
+      .then(() => {
+        if (import.meta.env.DEV) console.log(`🔊 [${caller}] play OK`, { src });
+        resolve(true);
+      })
+      .catch((err: DOMException) => {
+        console.warn(`🔊 [${caller}] play FAIL`, {
+          src,
+          name: err?.name,
+          message: err?.message,
+          readyState: el.readyState,
+        });
+        if (token === playToken) currentOnEnded = null;
+        resolve(false);
+      });
+  });
+}
+
+// Re-unlock on PWA resume: iOS can invalidate the audio session when the app
+// is backgrounded. Reset the flag so the next gesture re-primes the element.
+if (typeof document !== "undefined") {
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") unlocked = false;
   });
 }
 
@@ -140,11 +210,21 @@ export function tryPlayAudioFile(
  * Safe to call from a useEffect — silently does nothing if autoplay is blocked.
  */
 export async function playWordAudio(audioFile: string, fallbackText: string): Promise<void> {
-  if (await tryPlayAudioFile(audioFile)) return;
+  console.log(`🔊 [playWordAudio] start`, {
+    audioFile,
+    fallbackText,
+    hasUserActivation: navigator.userActivation?.isActive,
+  });
+  if (await tryPlayAudioFile(audioFile, { caller: "playWordAudio" })) return;
+  console.log(`🔊 [playWordAudio] mp3 failed, falling back to TTS`, { fallbackText });
   try {
     await speakChinese(fallbackText);
-  } catch {
-    // ignore — browser may block autoplay without user gesture
+    console.log(`🔊 [playWordAudio] TTS OK`);
+  } catch (err) {
+    console.warn(`🔊 [playWordAudio] TTS FAIL`, {
+      name: (err as Error)?.name,
+      message: (err as Error)?.message,
+    });
   }
 }
 
